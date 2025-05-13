@@ -1,0 +1,81 @@
+﻿@{
+    List<WebApp.Models.DilOkulu_KonaklamaKategorileri> konaklamaKategorileri = null;
+    if (ViewBag.KonaklamaKategorileri != null)
+    {
+        konaklamaKategorileri = (List<WebApp.Models.DilOkulu_KonaklamaKategorileri>)ViewBag.KonaklamaKategorileri;
+    }
+
+}
+<table cellpadding="0" cellspacing="0" class="OrtaMenu">
+    <tr>
+        <td class="OrtaMenuRow">
+            <table cellpadding="0" cellspacing="0" class="fiyatTable">
+                <tr>
+                    <td class="baslik">
+                        Konaklama Kategorisi<span class="SpanZorunluAlan">*</span>
+                    </td>
+                    <td colspan="2">
+                        <select id="konaklamaKategorisi" name="konaklamaKategorisi" class="DropDownList">
+                            <option value="">Seçin...</option>
+                            @foreach (var item in konaklamaKategorileri)
+                            {
+                            <option value="@item.Id">@item.Baslik</option>
+                            }
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="baslik">
+                        Konaklama Tipi<span class="SpanZorunluAlan">*</span>
+                    </td>
+                    <td colspan="2">
+                        <input id="baslik" name="baslik" type="text" style="width:300px;" />
+                    </td>
+                </tr>
+                <tr>
+                    <td class="baslik">
+                        Başlangıç Tarihi
+                    </td>
+                    <td>
+                        <input id="konaklamaTipiBasTarihHerPazartesi" class="konaklamaTipiTarih" name="konaklamaTipiTarih" value="yilBoyu" type="radio" checked="checked" />
+                        <label for="konaklamaTipiBasTarihHerPazartesi">Yıl Boyu</label>
+                        <input id="konaklamaTipiOzelTarih" class="konaklamaTipiTarih" name="konaklamaTipiTarih" value="ozel" type="radio" />
+                        <label for="konaklamaTipiOzelTarih">Özel Tarih</label>
+
+                    </td>
+                    <td>
+                        <div id="divKonaklamaTipiOzelTarih" style="display:none;">
+                            ->
+                            <input id="konaklamaTipiOzelTarihGiris" name="konaklamaTipiOzelTarihGiris" class="TextBox" style="width:60px;" type="text" />
+                            <input id="konaklamaTipiOzelTarihBitis" name="konaklamaTipiOzelTarihBitis" class="TextBox" style="width:60px;" type="text" />
+                            <input id="btnTarihEkle" type="button" value="Ekle" />
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="baslik">Özel Tarih Listesi</td>
+                    <td colspan="2">
+                        <div id="divOzelTarihListesi">
+
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="baslik">
+                        Açıklama
+                    </td>
+                    <td colspan="2">
+                        <textarea id="konaklamaTipiAciklama" name="konaklamaTipiAciklama" type="text" class="TextBox" style="width:300px;height:60px;"></textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="3">
+                        <input id="okulId" name="okulId" type="hidden" value="@ViewBag.OkulId" />
+                        <input id="ozelTarihListesi" name="ozelTarihListesi" type="hidden" value="" />
+                        <input id="btnKaydet" type="button" value="Kaydet" />
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>

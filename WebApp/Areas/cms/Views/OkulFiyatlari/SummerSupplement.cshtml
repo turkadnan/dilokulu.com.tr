@@ -1,0 +1,198 @@
+﻿@using WebApp.Models
+@model  List<DilOkulu_KursTipiEkUcretleri>
+@{
+
+    List<DilOkulu_KursTipleri> kursTipleri = null;
+    if (ViewBag.KursTipleri != null)
+    {
+        kursTipleri = (List<DilOkulu_KursTipleri>)ViewBag.KursTipleri;
+    }
+}
+
+@{
+    ViewBag.Title = "Summer Supplement";
+    Layout = "~/Areas/cms/Views/Shared/_CMSLayout.cshtml";
+}
+
+@section HeaderWithContentPage{
+    <link href="@Url.Content("~/Areas/cms/Assets/css/smoothness/jquery-ui-1.11.4.css")" rel="stylesheet" />
+    <script src="@Url.Content("~/Areas/cms/Assets/js/jquery-1.10.2.js")"></script>
+    <script src="@Url.Content("~/Areas/cms/Assets/js/jquery-ui-1.11.4.js")"></script>
+    <script src="@Url.Content("~/Areas/cms/Assets/js/datepicker-tr.js")"></script>
+    <script src="~/Areas/cms/Assets/js/dilokulu.js"></script>
+    <script src="@Url.Content("~/Areas/cms/Assets/js/fiyat_girisleri.js")"></script>
+    <!-- Add mousewheel plugin (this is optional) -->
+    <script src="@Url.Content("~/Areas/cms/Assets/fancybox/lib/jquery.mousewheel-3.0.6.pack.js")"></script>
+    <!-- Add fancyBox -->
+    <link rel="stylesheet" href="@Url.Content("~/Areas/cms/Assets/fancybox/source/jquery.fancybox.css?v=2.1.5")" type="text/css" media="screen" />
+    <script type="text/javascript" src="@Url.Content("~/Areas/cms/Assets/fancybox/source/jquery.fancybox.pack.js?v=2.1.5")"></script>
+
+
+    <script type="text/javascript">
+        $(function () {
+            var ProcessStatus = '@Html.Raw(ViewBag.Status)';
+
+            if (ProcessStatus == "ok") {
+                GeneralObj.DilokuluMessageBox.init({ status: 'ok', message: 'Kayıt işlemi gerçekleşti.' });
+            }
+
+            $('.fancybox').fancybox({
+                width: 420,
+                height: 590,
+                fitToView: false,
+                autoSize: false,
+                afterClose: function () {
+
+                    // location.reload();
+                },
+                helpers: {
+                    overlay: { closeClick: false } // prevents closing when clicking OUTSIDE fancybox
+                }
+
+            });
+        })
+    </script>
+}
+
+@section SectionBeforeWrapper{
+    @Html.Partial("_Modals")
+}
+
+<div id="divStatusBox" style="">
+    <span id="spanMessageText"></span>
+</div>
+<table cellpadding="0" cellspacing="0" style="width: 100%;">
+    <tr>
+        <td class="MasterRow3_Column1">
+            @Html.Partial("_OkullarMunu")
+        </td>
+
+        <td class="MasterRow3_Column2">
+            @Html.Action("_OkulOzetBilgileri")
+            @Html.Partial("_FiyatMenu")
+
+            <table cellpadding="0" cellspacing="0" class="OrtaMenu">
+                <tr>
+                    <td class="OrtaMenuRow">
+                        <table cellpadding="0" border="0" cellspacing="0" class="fiyatTable">
+                            @using (Html.BeginForm("SummerSupplement", "OkulFiyatlari", new { okulId = ViewBag.OkulId, kursTipiId = ViewBag.KursTipiId }, FormMethod.Post))
+                            {
+                                <tr>
+                                    <td class="baslik">
+                                        Kurs Tipleri<span class="SpanZorunluAlan">*</span>
+                                    </td>
+                                    <td>
+                                        <select id="kursTipi" name="kursTipi" class="DropDownList">
+                                            <option value="">Seçin...</option>
+                                            @foreach (var item in kursTipleri)
+                                            {
+                                                <option value="@item.Id" @(ViewBag.kursTipiId == item.Id ? "selected" : "")>@item.Baslik</option>
+                                            }
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">
+                                        <table cellpadding="0" border="0" cellspacing="0">
+                                            <tr>
+                                                <td class="baslik">
+                                                    Başlangıç Tarihi<span class="SpanZorunluAlan">*</span>
+                                                </td>
+
+                                                <td class="baslik">
+                                                    Bitiş Tarihi<span class="SpanZorunluAlan">*</span>
+                                                </td>
+                                                <td class="baslik">
+                                                    Maks. Hafta
+                                                </td>
+
+                                                <td class="baslik">
+                                                    Haftalık Ek Ücret<span class="SpanZorunluAlan">*</span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <input id="BaslangicTarihi" name="BaslangicTarihi" value="" type="text" style="width:80px;" />
+                                                </td>
+
+                                                <td>
+                                                    <input id="BititisTarihi" name="BititisTarihi" value="" type="text" style="width:80px;" />
+                                                </td>
+                                                <td>
+                                                    <select id="MaksimunHafta" name="MaksimunHafta" class="DropDownList">
+                                                        <option value="52">Seçin...</option>
+                                                        @for (int i = 1; i <= 52; i++)
+                                                        {
+                                                            <option value="@i.ToString()">@i.ToString() Hafta</option>
+                                                        }
+                                                    </select>
+                                                </td>
+                                                <td>
+                                                    <input id="Fiyat" name="Fiyat" value="" type="text" style="width:80px;" />
+                                                    <input id="okulId" name="okulId" type="hidden" value="@ViewBag.OkulId" />
+                                                    <input id="btnSummerSupplementEkle" type="submit" value="Ekle" />
+                                                    @if (Model != null && Model.Count > 0)
+                                                    {
+                                                        <input type="button" id="btnSummerSupplement_Kopyala" href="@Url.Action("SummerSupplementKopyala", "OkulFiyatlari", new { kursTipiId = Model[0].DilOkulu_KursTipleri.Id, merkezId = Model[0].DilOkulu_KursTipleri.DilOkulu_Okullar.MerkezId, okulId = Model[0].DilOkulu_KursTipleri.OkulId })" class="fancybox fancybox.iframe" data-promosyontipiid="1" value="Kopyala">
+                                                    }
+
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+
+                            }
+                            <tr>
+                                <td class="baslik" colspan="2">
+                                    Ek Ücret Listesi
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+                                    @if (Model != null && Model.Count > 0)
+                                    {
+                                    <table id="hor-zebra" class="tblHavaAlanlari" style="width:100%;margin: 0px !important;">
+                                        <thead><tr><th>BAŞLANGIÇ TARİHİ</th><th>BİTİŞ TARİHİ</th><th>MAKS. HAFTA</th><th>FİYAT</th><th>#</th></tr></thead>
+                                        <tbody>
+                                            @foreach (var item in Model)
+                                                {
+                                                <tr>
+                                                    <td class="baslik">@String.Format("{0:dd.MM.yyyy}", item.BaslangicTarihi)</td>
+                                                    <td class="baslik">@String.Format("{0:dd.MM.yyyy}", item.BititisTarihi)</td>
+                                                    <td class="baslik">@item.MaksimumHafta</td>
+                                                    <td>@item.Fiyat</td>
+                                                    <td><a href="javascript:;" onclick="summerSupplement.ucretSil('@item.Id')">Sil</a></td>
+                                                </tr>
+                                                }
+                                        </tbody>
+                                    </table>
+                                    }
+
+                                </td>
+                            </tr>
+                        </table>
+                        <div>
+                            <hr>
+                            <b>Nasıl Kullanılır?</b><br>
+                            2 tarih arasına denk gelen bir kurs seçimi var ise, kurs ücretine ilave fark eklenilmektedir. Maksimum Hafta alanı ise, eğer 2 tarih arasında örn maks 10 hafta seçilmiş ise ve maks hafta 9 olarak girilmiş ise fark fiyat uygulanmayacağı ifade edilmiş oluyor. Her hangi bir hafta belirtilmez ise sadece 2 tarih arası dikkate alınmaktadır.
+                        </div>
+                    </td>
+                </tr>
+            </table>
+
+        </td>
+    </tr>
+</table>
+<script type="text/javascript">
+    $(function () {
+
+        $(function () {
+            kursTipi.tarihGoster('BaslangicTarihi');
+            kursTipi.tarihGoster('BititisTarihi');
+
+            summerSupplement.kursTipiChange('@Url.Action("SummerSupplement", "OkulFiyatlari", new { okulId = ViewBag.OkulId })');
+        })
+    })
+
+</script>

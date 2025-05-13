@@ -1,0 +1,82 @@
+﻿@model WebApp.Models.AramaViewModel
+
+<script type="text/javascript">
+
+    $(function () {
+        globalParameters.language.init({ controlName: '#Diller', controlName1: '#Ulkeler', controlName2: '#Sehirler' });
+        globalParameters.country.init({ controlName: '#Ulkeler', controlName1: '#Sehirler' })
+
+        $('#btnAra').on("click", function () {
+            var dil = $('#Diller option:selected').text();
+            var ulke = $('#Ulkeler option:selected').text();
+            var sehir = $('#Sehirler option:selected').text();
+
+            dil = (dil == 'Dil Seçin' ? '' : dil);
+            ulke = (ulke == 'Ülke Seçin' ? '' : ulke);
+            sehir = (sehir == 'Şehir Seçin' ? '' : sehir);
+
+            $('#Diller option:selected').val(dil);
+            $('#Ulkeler option:selected').val(ulke);
+            $('#Sehirler option:selected').val(sehir);
+
+            if (dil == '' && ulke == '' && sehir == '') {
+                alert("Lütfen arama işlemi için 'Dil' seçimi yapın!");
+                return false;
+            } else {
+                return true;
+            }
+
+        })
+
+        $('#Merkezler').on('change', function () {
+            var url = $(this).val();
+            if (url != '') {
+                location = '/' + url;
+            }
+        })
+
+    })
+</script>
+
+<h2><p id="aramayap">YURTDIŞI DİL OKULU ARA</p></h2>
+@using (Html.BeginForm("arama", "okullar", FormMethod.Post, new { id = "form1" }))
+{
+    <select class="focus input" name="Diller" id="Diller">
+        <option value="">Dil Seçin</option>
+        @if (Model != null && Model.Diller != null && Model.Diller.Count > 0)
+        {
+            foreach (var item in Model.Diller)
+            {
+                <option value="@item.Id">@item.Baslik</option>
+            }
+        }
+
+    </select>
+    <select class="focus input" name="Ulkeler" id="Ulkeler">
+        <option value="">Ülke Seçin</option>
+    </select>
+    <select class="focus input" name="Sehirler" id="Sehirler">
+        <option value="">Şehir Seçin</option>
+    </select>
+
+    <input class="submit" type="submit" id="btnAra" name="btnAra" value="Ara" />
+
+    <select class="focus input" name="Merkezler" id="Merkezler">
+        <option value="">Ya da Aradığınız Okulu Seçin</option>
+        @if (Model != null && Model.Merkezler != null && Model.Merkezler.Count > 0)
+        {
+            string merkezBaslik = "";
+
+            foreach (var item in Model.Merkezler)
+            {
+                merkezBaslik = WebApp.Core.Tools.ReplaceTitle(item.Baslik) + "-dil-okulu";
+                <option value="@(merkezBaslik)">@(item.Baslik)</option>
+            }
+        }
+    </select>
+    <br />
+}
+
+
+
+

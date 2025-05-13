@@ -1,0 +1,101 @@
+﻿@model List<WebApp.Models.DilOkulu_Subeler>
+@{
+    ViewBag.Title = "Yurtdışı Dil Okulları Danışmanlığı İletişim | Dilokulu.com.tr";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@{
+
+    string seo_Keywords = "";
+    string seo_Descriptions = "";
+
+    if (Model != null)
+    {
+        //seo_Descriptions = Model.Seo_Descriptions;
+        //seo_Keywords = Model.Seo_Keywords;
+    }
+}
+
+@section metatags{
+    <meta name="keywords" content="@seo_Keywords" />
+    <meta name="description" content="@seo_Descriptions" />
+
+    <!-- Facebook Conversion Code for dilokulu.com.tr-İletişim -->
+    <script>
+        (function () {
+            var _fbq = window._fbq || (window._fbq = []);
+            if (!_fbq.loaded) {
+                var fbds = document.createElement('script');
+                fbds.async = true;
+                fbds.src = '//connect.facebook.net/en_US/fbds.js';
+                var s = document.getElementsByTagName('script')[0];
+                s.parentNode.insertBefore(fbds, s);
+                _fbq.loaded = true;
+            }
+        })();
+        window._fbq = window._fbq || [];
+        window._fbq.push(['track', '6016514725966', { 'value': '0.00', 'currency': 'TRY' }]);
+    </script>
+    <noscript><img height="1" width="1" alt="" style="display:none" src="https://www.facebook.com/tr?ev=6016514725966&amp;cd[value]=0.00&amp;cd[currency]=TRY&amp;noscript=1" /></noscript>
+}
+
+@section PageTitle{
+    <div class="topImg clearfix">
+        <img src="@Url.Content("~/Assets/img/headers/header_2.jpg")" alt="Vize Rehberi" />
+        <h1><p><strong>İletişim</strong></p></h1>
+    </div>
+}
+
+
+<div class="blog column c-67 clearfix" style="min-height: 400px;">
+    <div class="box">
+        <div class="boxInfo examInfo" style="border:none;">
+            <div>
+                <div class="iletisimsayfasi">
+                    @foreach (var item in Model.OrderBy(i => i.Oncelik))
+                    {
+                        <div class="sube">
+                            <span class="subeadi">@item.Baslik</span>
+
+
+                            @if (!string.IsNullOrEmpty(item.Adres))
+                            {
+                                <span><strong>A:&nbsp;</strong>@item.Adres</span>
+                            }
+                            @if (!string.IsNullOrEmpty(item.Telefon))
+                            {
+                                <span><strong>T:&nbsp;</strong>@item.Telefon</span>
+                            }
+                            @if (!string.IsNullOrEmpty(item.Fax))
+                            {
+                                <span><strong>F:&nbsp;</strong>@item.Fax</span>
+                            }
+                            @if (!string.IsNullOrEmpty(item.EPosta))
+                            {
+                                <span><strong>E:&nbsp;</strong><a href="mailto:@item.EPosta">@item.EPosta</a></span>
+                            }
+                            
+                            @if (!string.IsNullOrEmpty(item.Icerik))
+                            {
+                                <span>@Html.Raw(item.Icerik)</span>
+                            }
+
+                            @if (!string.IsNullOrEmpty(item.KrokiLink))
+                            {
+                                <span class="krokibaslik">Kroki</span>
+                                @Html.Raw(item.KrokiLink)
+                            }
+                        </div>
+                    }
+
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+
+@Html.Partial("_RightColumn")

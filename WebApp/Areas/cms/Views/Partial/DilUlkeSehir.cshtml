@@ -1,0 +1,127 @@
+﻿@model List<WebApp.Models.DilOkulu_Diller>
+
+<script type="text/javascript">
+    $(function () {
+        //param1 UlkeID alanı için kullanılacak ve trigger tetiklendiğinde değer atanacak
+        //param2 SehirID için kullanılacak Ulke trigger ı çalıştırıldığında kullanılacak
+        $('#DilId').on("change", function (event, param1,param2) {
+
+            var DilId = $(this).val();
+            var Url = "@Url.Action("UlkeListesi", "Ajax", new { DilId = "replace" })";
+            Url = Url.replace("replace", DilId);
+
+            $.ajax({
+                type: "GET",
+                url: Url,
+                dataType: "json",
+                success: function (data) {
+                    if (data != null) {
+
+                        $('#SehirId option').remove();
+                        $('#SehirId').append('<option value="0">Seçin...</option>');
+
+                        $('#UlkeId option').remove();
+                        $('#UlkeId').append('<option value="0">Seçin...</option>');
+
+
+                        $.each(data.ulkeler, function (key, obj) {
+
+                            $('#UlkeId').append('<option value="' + obj.Key + '">' + obj.Value + '</option>');
+                        });
+
+                        if (param1 != undefined) {
+                            $('#UlkeId').val(param1)
+
+                            $('#UlkeId').trigger("change", [param2]);
+                        }
+
+                    }
+                    else {
+                        $('#UlkeId option').remove();
+                        $('#UlkeId').append('<option value="0">Seçin...</option>');
+                    }
+                }
+            });
+        })
+
+        //param1 SehirID alanı için kullanılacak ve trigger tetiklendiğinde değer atanacak
+        $('#UlkeId').on("change", function (event,param1) {
+
+            var UlkeId = $(this).val();
+            var Url = "@Url.Action("SehirlerListesi", "Ajax", new { UlkeId = "replace" })";
+            Url = Url.replace("replace", UlkeId);
+
+            if (UlkeId != "0") {
+                $.ajax({
+                    type: "GET",
+                    url: Url,
+                    dataType: "json",
+                    success: function (data) {
+                        if (data != null) {
+
+                            $('#SehirId option').remove();
+                            $('#SehirId').append('<option value="0">Seçin...</option>');
+
+                            $.each(data.sehirler, function (key, obj) {
+
+                                $('#SehirId').append('<option value="' + obj.Key + '">' + obj.Value + '</option>');
+                            });
+
+                            if (param1 != undefined) {
+                                $('#SehirId').val(param1)
+                                closeModal();
+                            }
+                        }
+                        else {
+                            $('#SehirId option').remove();
+                            $('#SehirId').append('<option value="0">Seçin...</option>');
+                        }
+                    }
+                });
+            } else {
+                $('#SehirId option').remove();
+                $('#SehirId').append('<option value="0">Seçin...</option>');
+            }
+        })
+    })
+
+</script>
+
+
+<tr>
+    <td class="OrtaMenuRowC1">Diller<span class="SpanZorunluAlan">*</span>
+    </td>
+    <td class="OrtaMenuRowC2">
+        <select class="DropDownList" id="DilId" name="DilId" style="width: 300px;">
+            <option value="0">Seçin...</option>
+            @if (Model != null && Model.Count > 0)
+            {
+                foreach (var item in Model)
+                {
+                <option value="@item.Id">@item.Baslik</option>    
+                }
+            }
+        </select>
+
+    </td>
+</tr>
+<tr>
+    <td class="OrtaMenuRowC1">Ülkeler<span class="SpanZorunluAlan">*</span>
+    </td>
+    <td class="OrtaMenuRowC2">
+        <select class="DropDownList" id="UlkeId" name="UlkeId" style="width: 300px;">
+            <option value="0">Seçin...</option>
+        </select>
+
+    </td>
+</tr>
+<tr>
+    <td class="OrtaMenuRowC1">Şehirler<span class="SpanZorunluAlan">*</span>
+    </td>
+    <td class="OrtaMenuRowC2">
+        <select class="DropDownList" id="SehirId" name="SehirId" style="width: 300px;">
+            <option value="0">Seçin...</option>
+        </select>
+
+    </td>
+</tr>

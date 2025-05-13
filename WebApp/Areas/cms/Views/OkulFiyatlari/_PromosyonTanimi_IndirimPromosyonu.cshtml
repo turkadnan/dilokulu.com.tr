@@ -1,0 +1,86 @@
+﻿@model List<WebApp.Models.DilOkulu_KursTipiPromosyonTanimlari>
+<table id="standartHafta">
+    <tr>
+        <td class="baslik">Min.<br />  Hafta</td>
+        <td class="baslik">Max.<br />  Hafta</td>
+        <td class="baslik">İndirim<br />  Oranı</td>
+        <td class="baslik">Promosyon<br /> Bitiş Tarihi</td>
+        <td class="baslik">Kurs Baş.<br />  Tarihi</td>
+        <td class="baslik">Kurs Bit.<br /> Tarihi </td>
+        <td></td>
+    </tr>
+    <tr>
+        <td><input type="text" class="TextBox" id="IndirimPromosyonu_Hafta" style="width:30px;" /></td>
+        <td><input type="text" class="TextBox" id="IndirimPromosyonu_HaftaMax" style="width:30px;" /></td>
+        <td><input type="text" class="TextBox" id="IndirimPromosyonu_Oran" style="width:35px;" /></td>
+        <td><input type="text" class="TextBox promosyonBitisTarihi" id="PromosyonBitisTarihi" style="width:60px;" /></td>
+        <td><input type="text" class="TextBox promosyonBitisTarihi" id="KursTarihiBaslangic" style="width:60px;" /></td>
+        <td><input type="text" class="TextBox promosyonBitisTarihi" id="KursTarihiBitis" style="width:60px;" /></td>
+        <td>
+            <input type="button" id="btnIndirimPromosyonu_Ekle" data-promosyontipiid="2" value="Ekle" />
+
+            @if (Model != null && Model.Count > 0)
+            {
+                <input type="button" id="btnIndirimPromosyonu_Kopyala" href="@Url.Action("PromosyonKopyala", "OkulFiyatlari", new { kursTipiId = Model[0].DilOkulu_KursTipleri.Id, merkezId = Model[0].DilOkulu_KursTipleri.DilOkulu_Okullar.MerkezId, okulId = Model[0].DilOkulu_KursTipleri.OkulId, promosyonTipiId = 2 })" class="fancybox fancybox.iframe" data-promosyontipiid="2" value="Kopyala" />
+            }
+        </td>
+    </tr>
+
+    @if (Model != null && Model.Count > 0)
+    {
+        foreach (var item in Model)
+        {
+            <tr class="fieldset">
+                <td>
+
+                    <input type="text" id="txtIndirimPromosyonu_Hafta" class="TextBox" value="@item.IndirimPromosyonu_Hafta" style="width:30px;" />
+
+                </td>
+                <td>
+                    <input type="text" id="txtIndirimPromosyonu_HaftaMax" class="TextBox" value="@item.IndirimPromosyonu_HaftaMax" style="width:30px;" />
+                </td>
+                <td>
+                    <input type="text" class="TextBox" id="txtIndirimPromosyonu_Oran" value="@item.IndirimPromosyonu_Oran" style="width:35px;" />
+                </td>
+                <td>
+                    <input type="text" class="TextBox" id="txtPromosyonBitisTarihi" value="@(string.Format("{0:dd.MM.yyyy}", item.PromosyonBitisTarihi))" style="width:60px;" />
+                </td>
+                <td>
+                    <input type="text" class="TextBox" id="txtKursTarihiBaslangic" value="@(string.Format("{0:dd.MM.yyyy}", item.KursTarihiBaslangic))" style="width:60px;" />
+                </td>
+                <td>
+                    <input type="text" class="TextBox" id="txtKursTarihiBitis" value="@(string.Format("{0:dd.MM.yyyy}", item.KursTarihiBitis))" style="width:60px;" />
+
+                </td>
+                <td>
+                    <input id="hfId" value="@item.Id" type="hidden" />
+                    <a href="javascript:;" onclick="KursTipiPromosyonSil(this)" data-promosyontipiid="2" data-fiyatid="@item.Id">
+                        <img src="/areas/CMS/assets/Images/delete_icon.png" style="width: 16px; height: 16px;" />
+                    </a>
+                </td>
+            </tr>
+        }
+
+        <tr>
+            <td colspan="7">
+                <input type="button" id="btnYuzdeselIndirimPromosyon_Guncelle" data-promosyontipiid="2" value="Güncelle" />
+            </td>
+        </tr>
+
+    }
+    else
+    {
+        <tr><td colspan="3"><strong>Henüz tanımlama yapılmamış!</strong></td></tr>
+    }
+</table>
+<i><b>Not:</b> yüzde onbeş (%15) için girilecek <b>oran</b> 15 olmalıdır.</i>
+<hr />
+<b>Nasıl Kullanılır?</b><br />
+Bu promosyon modeli belirli hafta aralıkları için birim fiyat üzerinden verilen yüzdesel indirimler için kullanılmalıdır. Örneğin; 0-12 hafta arası %15 indirim, 13-24 hafta arası %20, 25-52 hafta arası %25 gibi…
+<br /><br />
+<ul>
+    <li>Eğer promosyon belirli bir tarihten önce başlayan kurslara uygulanacaksa yalnızca Kurs Baş.Tarihi alanına ilgili tarih girilir.</li>
+    <li>Eğer promosyon belirli bir tarihten sonra başlayan kurslara uygulanacaksa yalnızca Kurs Bit.Tarihi alanına ilgili tarih girilir.</li>
+    <li>Eğer promosyon belirli iki tarih arasına uygulanacaksa Kurs Baş.Tarihi ve Kurs Bit. Tarihi alanlarına ilgili tarihler girilir.</li>
+
+</ul>

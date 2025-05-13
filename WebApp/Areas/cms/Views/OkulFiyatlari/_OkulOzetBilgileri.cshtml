@@ -1,0 +1,90 @@
+﻿@model WebApp.Models.DilOkulu_Okullar
+<table cellpadding="0" cellspacing="0" class="OrtaMenu">
+    <tr>
+        <td class="OrtaMenuRowTitle">
+            <img src="@Url.Content("~/areas/CMS/assets/Images/Genel/b-settings.png")" style="width: 18px; height: 18px"
+                 align="absmiddle" /><span class="islemBaslik">Kurs Tipi Fiyat Girişleri</span>
+        </td>
+    </tr>
+    <tr>
+        <td class="OrtaMenuRow">
+            <form id="promosyonPdfForm" enctype="multipart/form-data">
+                <table cellpadding="0" cellspacing="0" style="width: 100%;">
+                    <tr>
+                        <td class="OrtaMenuRowC1">
+                            Mrkz-Dil-Ülke-Şehir
+                        </td>
+                        <td class="OrtaMenuRowC2">
+                            <span class="TextBox" style="width: 400px;display:block;">@Model.DilOkulu_Merkez.Baslik / @Model.DilOkulu_Diller.Baslik / @Model.DilOkulu_Ulkeler.Baslik / @Model.DilOkulu_Sehirler.Baslik</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="OrtaMenuRowC1" style="">
+                            Okul
+                        </td>
+                        <td class="OrtaMenuRowC2" style="">
+                            <span class="TextBox" style="width: 300px;display:block" id="spanOzelBilgiOkul">@Model.Baslik</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="OrtaMenuRowC1" style="border:none;"></td>
+                        <td class="OrtaMenuRowC2" style="border:none;">
+                            <h3>Promosyon</h3>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="OrtaMenuRowC1" style="border:none;">
+                            Paket Pdf
+                        </td>
+                        <td class="OrtaMenuRowC2" style="border:none;">
+                            <input id="promosyonPdfFile" name="promosyonPdfFile" type="file" />
+
+                            <div id="divPromosyonPdf" style="display:@(!string.IsNullOrEmpty(Model.PromosyonPdf)?"block":"none");">
+                                <a id="anchorPromosyonPdf" href="@Model.PromosyonPdf" target="_blank">Göster</a> 
+                                &nbsp;&nbsp;|&nbsp;&nbsp; <a id="anchorPromosyonPdfSil" href="javascript:;" onclick="kursTipi.promosyonPDFDelete('@Model.Id');">[x]</a>
+                                &nbsp;&nbsp;|&nbsp;&nbsp; <a  href="@Url.Action("PromosyonPaketPDFKopyala", "OkulFiyatlari", new { @merkezId = Model.MerkezId, @okulId = Model.Id })" class="fancybox fancybox.iframe">Kopyala</a>
+                            </div>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="OrtaMenuRowC1" style="border:none;">
+                            Bitiş Tarihi
+                        </td>
+                        <td class="OrtaMenuRowC2" style="border:none;">
+                            <input id="promostonBtsTarihi" class="TextBox" style="width:60px;" name="promostonBtsTarihi" type="text" value="@(!string.IsNullOrEmpty(Model.PromosyonBitisTarihi.ToString())?Convert.ToDateTime(Model.PromosyonBitisTarihi).ToShortDateString():"")" /><br /><br />
+                            <input id="btnPromosyonPdfKaydet" name="btnPromosyonPdfKaydet" type="button" value="Kaydet" />
+                        </td>
+                    </tr>
+
+                </table>
+                <input id="hfOkulId" name="hfOkulId" value="@Model.Id" type="hidden" />
+            </form>
+        </td>
+    </tr>
+</table>
+
+<script type="text/javascript">
+    $(function () {
+
+        kursTipi.tarihGoster('promostonBtsTarihi');
+        kursTipi.promosyonPDFForm('promosyonPdfForm', 'btnPromosyonPdfKaydet', 'promosyonPdfFile');
+
+
+        $('.fancybox').fancybox({
+            width: 420,
+            height: 590,
+            fitToView: false,
+            autoSize: false,
+            afterClose: function () {
+
+                // location.reload();
+            },
+            helpers: {
+                overlay: { closeClick: false } // prevents closing when clicking OUTSIDE fancybox
+            }
+
+        });
+    })
+
+</script>

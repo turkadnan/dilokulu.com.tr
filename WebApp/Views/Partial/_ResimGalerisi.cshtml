@@ -1,0 +1,62 @@
+﻿@model WebApp.Models.DilOkulu_Galeriler
+<!-- Add fancyBox main JS and CSS files -->
+<script type="text/javascript" src="@Url.Content("~/assets/FancyBox/jquery.fancybox.js?v=2.1.5")"></script>
+<link rel="stylesheet" type="text/css" href="@Url.Content("~/assets/FancyBox/jquery.fancybox.css?v=2.1.5")" media="screen" />
+
+<!-- Add Thumbnail helper (this is optional) -->
+<link rel="stylesheet" type="text/css" href="@Url.Content("~/assets/FancyBox/jquery.fancybox-thumbs.css?v=1.0.7")" />
+<script type="text/javascript" src="@Url.Content("~/assets/FancyBox/jquery.fancybox-thumbs.js?v=1.0.7")"></script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        /*
+         *  Thumbnail helper. Disable animations, hide close button, arrows and slide to next gallery item if clicked
+         */
+
+        $('.fancybox-thumbs').fancybox({
+            prevEffect: 'none',
+            nextEffect: 'none',
+
+            closeBtn: true,
+            arrows: false,
+            nextClick: true,
+
+            helpers: {
+                thumbs: {
+                    width: 50,
+                    height: 50
+                }
+            }
+        });
+    });
+</script>
+
+@if (Model != null)
+{
+    if (Model.DilOkulu_GaleriDosyalari != null && Model.DilOkulu_GaleriDosyalari.Count > 0)
+    {
+        var dosyalar = Model.DilOkulu_GaleriDosyalari.Where(gd => gd.Durumu == (int)WebApp.Core.GeneralVariables.Durum.Aktif).ToList();
+        if (dosyalar != null && dosyalar.Count > 0)
+        {
+            <div class="flickr clearfix">
+                <div class="box">
+                    <h4>Resimler</h4>
+
+                    <div class="boxInfo flickrList">
+                        @{
+            int counter = 1;
+                        }
+                        @foreach (var item in dosyalar)
+                        {
+                            var imagePath = item.DosyaPath.Replace(System.IO.Path.GetFileName(item.DosyaPath), "tn_" + System.IO.Path.GetFileName(item.DosyaPath));
+                            <a class="fancybox-thumbs" data-fancybox-group="thumb" style="height:60px;overflow:hidden;" href="@("/" + item.DosyaPath)" title="@(item.DilOkulu_Galeriler.Baslik+" Resimleri "+counter)"><img class="imgFrame" src="@Url.Content("~/" + imagePath)" alt="@(item.DilOkulu_Galeriler.Baslik+" Resimleri "+counter)"></a>
+                            counter++;
+                        }
+                    </div>
+                </div>
+            </div>
+        }
+
+    }
+}

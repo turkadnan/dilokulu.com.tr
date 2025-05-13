@@ -1,0 +1,172 @@
+﻿@model List<WebApp.Models.DilOkulu_Okullar>
+
+@{
+    string listeTipi = ViewBag.ListeTipi;
+    string baslik = (!string.IsNullOrEmpty(ViewBag.Baslik) ? ViewBag.Baslik : "");
+    string aciklama = (!string.IsNullOrEmpty(ViewBag.Aciklama) ? ViewBag.Aciklama : "");
+
+    string vizeBilgileri = (!string.IsNullOrEmpty(ViewBag.VizeBilgileri) ? ViewBag.VizeBilgileri : "");
+    string calismaIzni = (!string.IsNullOrEmpty(ViewBag.CalismaIzni) ? ViewBag.CalismaIzni : "");
+    string yasamGiderleri = (!string.IsNullOrEmpty(ViewBag.YasamGiderleri) ? ViewBag.YasamGiderleri : "");
+    string ulasim = (!string.IsNullOrEmpty(ViewBag.Ulasim) ? ViewBag.Ulasim : "");
+    string saglikSistemi = (!string.IsNullOrEmpty(ViewBag.SaglikSistemi) ? ViewBag.SaglikSistemi : "");
+
+
+    string resim = (!string.IsNullOrEmpty(ViewBag.Resim) ? ViewBag.Resim : "");
+    string merkezBaslik = "";
+    string okulBaslik = "";
+
+    if (!string.IsNullOrEmpty(listeTipi))
+    {
+        switch (listeTipi)
+        {
+            case "Sehir":
+                break;
+            case "Ulke":
+                break;
+        }
+    }
+
+}
+
+@{
+    ViewBag.Title = baslik + " Dil Okulları ve Dil Eğitimi | Dilokulu.com.tr";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+@section PageTitle{
+    <div class="topImg clearfix">
+        <img src="@Url.Content("~/Assets/img/headers/header_3.jpg")" alt="About Us" />
+        <h1><p><strong>@(baslik) Dil Okulları</strong></p></h1>
+    </div>
+}
+
+@section metatags{
+    <meta name="keywords" content="@ViewBag.SeoKeywords" />
+    <meta name="description" content="@ViewBag.Description" />
+}
+
+<div class="course column c-67 clearfix">
+    <div class="box detaybox">
+        <div class="boxInfo examInfo">
+            <ul class="breadcrumb">
+                <li class="exm"><a href="@Url.Action("index","home")">Anasayfa</a></li>
+                <li class="exm">></li>
+                <li class="exm">@(baslik) Dil Okulları</li>
+            </ul>
+            @if (!string.IsNullOrEmpty(aciklama))
+            {
+                <h2 class="title"><strong>@(baslik) Dil Okulları Hakkında Genel Bilgi</strong></h2>
+                <div>
+                    @if (!string.IsNullOrEmpty(resim))
+                    {
+                        <img class="fwidth2" src="@Url.Content(resim).Replace("tn_","")" alt="@(baslik) Dil Eğitimi" />
+                    }
+                    @Html.Raw(aciklama)
+                </div>
+
+            }
+
+
+            <div class="">
+                @if (!string.IsNullOrEmpty(vizeBilgileri))
+                {
+                    <div class="ulkesehirbox">
+                        <h2><strong>Vize Bilgileri</strong></h2>
+                        <div class="boxInfo" style="padding: 0px;">
+                            <p>
+                                @Html.Raw(vizeBilgileri)
+                            </p>
+                        </div>
+                    </div>
+                }
+                @if (!string.IsNullOrEmpty(calismaIzni))
+                {
+                    <div class="ulkesehirbox">
+                        <h2><strong>Çalışma İzni</strong></h2>
+                        <div class="boxInfo" style="padding: 0px;">
+                            <p>
+                                @Html.Raw(calismaIzni)
+                            </p>
+                        </div>
+                    </div>
+                }
+                @if (!string.IsNullOrEmpty(yasamGiderleri))
+                {
+                    <div class="ulkesehirbox">
+                        <h2><strong>Yaşam Giderleri</strong></h2>
+                        <div class="boxInfo" style="padding: 0px;">
+                            <p>
+                                @Html.Raw(yasamGiderleri)
+                            </p>
+                        </div>
+                    </div>
+                }
+                @if (!string.IsNullOrEmpty(ulasim))
+                {
+                    <div class="ulkesehirbox">
+                        <h2><strong>Ulaşım</strong></h2>
+                        <div class="boxInfo" style="padding: 0px;">
+                            <p>
+                                @Html.Raw(ulasim)
+                            </p>
+                        </div>
+                    </div>
+                }
+                @if (!string.IsNullOrEmpty(saglikSistemi))
+                {
+                    <div class="ulkesehirbox">
+                        <h2><strong>Sağlık Sistemi</strong></h2>
+                        <div class="boxInfo" style="padding: 0px;">
+                            <p>
+                                @Html.Raw(saglikSistemi)
+                            </p>
+                        </div>
+                    </div>
+                }
+            </div>
+
+
+
+            <h2 class="title"><strong>@(baslik) Dil Okulları</strong></h2>
+
+            @if (Model != null && Model.Count > 0)
+            {
+
+                var sehirler = Model.Select(o => o.DilOkulu_Sehirler).OrderBy(s => s.Baslik).ToList().Distinct();
+                foreach (var item in sehirler)
+                {
+                    <div class="okulsubeleri">
+                        <h3><span class="okulsubebaslik"><a href="@Url.Action("UlkeSehir", "Okullar", new { url=item.Url})" style="color: #9bb70d !important;">@item.Baslik</a></span></h3>
+                        @{
+                    var sehirOkullar = Model.Where(o => o.SehirId == item.Id).OrderBy(o => o.DilOkulu_Merkez.Baslik).ToList();
+                    if (sehirOkullar != null && sehirOkullar.Count > 0)
+                    {
+
+                        <ul>
+                            @foreach (var itemOkul in sehirOkullar)
+                            {
+                                merkezBaslik = WebApp.Core.Tools.ReplaceTitle(itemOkul.DilOkulu_Merkez.Baslik);
+                                okulBaslik = WebApp.Core.Tools.ReplaceTitle(itemOkul.Baslik);
+                                <li class="icdekili"><a href="@Url.Action("detay", "okullar", new { merkez = merkezBaslik, url = okulBaslik })">@itemOkul.DilOkulu_Merkez.Baslik - @itemOkul.Baslik</a></li>
+                            }
+                            <li class="sonlibg"></li>
+                        </ul>
+                    }
+
+                        }
+                    </div>
+                }
+
+            }
+            else
+            {
+                <strong>İçerik bulunamadı...</strong>
+            }
+        </div>
+    </div>
+</div>
+
+@Html.Partial("_RightColumn")

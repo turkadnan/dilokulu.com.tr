@@ -1,0 +1,319 @@
+﻿@model WebApp.Models.DilOkulu_Okullar
+
+@{
+    string baslik = "Dil okulu detay";
+    string merkezAdi = "";
+    string seo_Keywords = "";
+    string seo_Descriptions = "";
+
+    if (Model != null)
+    {
+        baslik = (!String.IsNullOrEmpty(Model.Baslik) ? Model.Baslik : "Dil okulu detay");
+        merkezAdi = (!String.IsNullOrEmpty(Model.DilOkulu_Merkez.Baslik) ? Model.DilOkulu_Merkez.Baslik : "");
+        seo_Descriptions = Model.Seo_Descriptions;
+        seo_Keywords = Model.Seo_Keywords;
+        //Set Gezinti Cookie
+        WebApp.Helpers.CookieHelper.WriteCookie(merkezAdi + " - " + baslik);
+    }
+}
+
+@{
+    ViewBag.Title = merkezAdi + " | " + baslik;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section PageTitle{
+    <div class="topImg clearfix">
+        <img src="@Url.Content("~/Assets/img/headers/header_2.jpg")" alt="About Us" />
+        <p><strong>@(merkezAdi + " - " + Model.Baslik)</strong></p>
+    </div>
+}
+
+@section metatags{
+    @*<meta name="keywords" content="@seo_Keywords" />*@
+    <meta name="description" content="@seo_Descriptions" />
+
+    <meta property="og:url" content="@Request.Url.ToString()" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="@ViewBag.Title" />
+    <meta property="og:description" content="@seo_Descriptions" />
+
+@if (!string.IsNullOrEmpty(Model.DilOkulu_Merkez.Logo))
+    {
+    <meta property="og:image" content="@Url.Content("http://dilokulu.com.tr/content/uploads/"+Model.DilOkulu_Merkez.Logo)" />
+}
+
+<script type="text/javascript" src="//platform-api.sharethis.com/js/sharethis.js#property=58cd0e93a754310012fd3659&product=inline-share-buttons"></script>
+
+}
+
+<div class="blog column c-67 clearfix">
+    <div class="box detaybox">
+        <div class="boxInfo examInfo">
+            <ul class="breadcrumb">
+                <li class="exm"><a href="@Url.Action("index","home")">Anasayfa</a></li>
+                <li class="exm">></li>
+                <li class="exm"><a href="@Url.Action("dil", "okullar", new { url = WebApp.Core.Tools.ReplaceTitle(Model.DilOkulu_Diller.Baslik) })">@Model.DilOkulu_Diller.Baslik</a></li>
+                <li class="exm">></li>
+                <li class="exm"><a href="@Url.Action("UlkeSehir", "okullar", new { url = WebApp.Core.Tools.ReplaceTitle(Model.DilOkulu_Ulkeler.Baslik) })">@Model.DilOkulu_Ulkeler.Baslik</a></li>
+                <li class="exm">></li>
+                <li class="exm"><a href="@Url.Action("UlkeSehir", "okullar", new { url = WebApp.Core.Tools.ReplaceTitle(Model.DilOkulu_Sehirler.Baslik) })">@Model.DilOkulu_Sehirler.Baslik</a></li>
+                <li class="exm">></li>
+                <li class="exm"><a href="@Url.Action("MerkezDetay", "okullar", new { url = Model.DilOkulu_Merkez.Url })">@Model.DilOkulu_Merkez.Baslik</a></li>
+                <li class="exm">></li>
+                <li class="exm">@Model.Baslik</li>
+            </ul>
+            <div>
+                <div class="okulustbilgi2">
+                    @if (!string.IsNullOrEmpty(Model.DilOkulu_Merkez.Logo))
+                    {
+                        <div class="oubimg"><img src="@Url.Content("~/content/uploads/"+Model.DilOkulu_Merkez.Logo)" alt="@(merkezAdi +" - "+baslik)" /></div>
+                    }
+                    <div class="oubotext"><div class="okuladhead">@(merkezAdi + " - " + Model.Baslik)</div></div>
+                    @if (!string.IsNullOrEmpty(Model.OkulTipi))
+                    {
+                        <div class="oubotext"><strong>Okul Tipi:</strong> @(Model.OkulTipi).</div>
+                    }
+
+                    @if (!string.IsNullOrEmpty(Model.OkulKapasitesi))
+                    {
+                        <div class="oubotext"><strong>Okul Kapasitesi:</strong> @(Model.OkulKapasitesi)</div>
+                    }
+
+                    @if (!string.IsNullOrEmpty(Model.SinifKapasitesi))
+                    {
+                        <div class="oubotext"><strong>Sınıf Kapasitesi:</strong> @(Model.SinifKapasitesi)</div>
+                    }
+                </div>
+                <p><strong>"&nbsp;</strong>@Html.Raw(Model.DilOkulu_Merkez.Ozet)<strong>&nbsp;"</strong></p>
+
+                @Html.Raw(Model.Icerik)
+
+                <div class="okulustbilgi2alt">
+                    @if (!string.IsNullOrEmpty(Model.SunulanProgramlar))
+                    {
+                        string[] arrSunulanProgramlar = Model.SunulanProgramlar.Split(',');
+                        <div style="margin-bottom:15px;width:100%;float:left">
+                            <strong>Sunulan Programlar:</strong><br />
+                            <ul>
+                                @for (int i = 0; i < arrSunulanProgramlar.Length; i++)
+                                {
+                                    <li><a href="@Url.Action("index", "programtipi", new { baslik = Server.UrlEncode(arrSunulanProgramlar[i].Split('|')[1]) })">@(arrSunulanProgramlar[i].Split('|')[1])</a></li>
+                                }
+                            </ul>
+                        </div>
+
+                    }
+
+                    @if (!string.IsNullOrEmpty(Model.KonaklamaTurleri))
+                    {
+                        string[] arrKonaklama = Model.KonaklamaTurleri.Split(',');
+                        <div style="margin-bottom:15px;;width:100%;float:left">
+                            <strong>Konaklama Türleri:</strong><br />
+                            <ul>
+                                @for (int i = 0; i < arrKonaklama.Length; i++)
+                                {
+                                    <li>@(arrKonaklama[i])</li>
+                                }
+                            </ul>
+                        </div>
+                    }
+
+                    @if (!string.IsNullOrEmpty(Model.OkulOlanaklari))
+                    {
+                        <div style="margin-bottom:15px;;width:100%;float:left">
+                            <strong>Okul Olanakları:</strong><br />@Model.OkulOlanaklari
+                        </div>
+                    }
+                    @if (!string.IsNullOrEmpty(Model.SosyalAktiviteler))
+                    {
+                        <strong>Sosyal Aktiviteler:</strong><br />@Model.SosyalAktiviteler<br />
+                    }
+
+
+                </div>
+
+                <div class="clearfix okulDetayMobilePdf" style="display:none;">
+                    <div class="box">
+                        <h4 id="pdftext"><strong><a href="javascript:void(0)">Broşür</a></strong></h4>
+                        <h4 id="pdftexto"><strong><a href="javascript:void(0)">Fiyat Listesi</a></strong></h4>
+                        <h4 id="pdftextr"><strong><a href="javascript:void(0)">Promosyonlar</a></strong></h4>
+                        <div class="boxInfo">
+                            <div id="pdficon"><a href="@Url.Content("~/content/uploads/" + Model.DilOkulu_Merkez.Brosur)" target="_blank" title="@(Model.DilOkulu_Merkez.Baslik) Broşürü"><img src="@Url.Content("~/assets/img/pdf_icon.png")" /></a></div>
+                            <div id="pdficono"><a href="@Url.Content("~/content/uploads/" + Model.DilOkulu_Merkez.FiyatListesi)" target="_blank" title="@(Model.DilOkulu_Merkez.Baslik) Fiyat Listesi"><img src="@Url.Content("~/assets/img/pdf_icon.png")" /></a></div>
+                            <div id="pdficon2"><a href="@Url.Content("~/content/uploads/" + Model.DilOkulu_Merkez.Promosyonlar)" target="_blank" title="@(Model.DilOkulu_Merkez.Baslik) Promosyonları"><img src="@Url.Content("~/assets/img/pdf_icon.png")" /></a></div>
+                        </div>
+                    </div>
+                </div>
+                @if (!string.IsNullOrEmpty(Model.StreetView))
+                {
+                    <div class="box" style="margin-top:15px">
+                        <h4><strong>Street View</strong></h4>
+                        <div class="boxInfo">
+                            @Html.Raw(Model.StreetView)
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    <div class="box" style="margin-top:15px">
+                        <h4><strong>Harita</strong></h4>
+                        <div class="boxInfo">
+                            @Html.Raw(Model.Harita)
+                        </div>
+                    </div>
+                }
+
+                <div class="box" style="margin-top:15px">
+                    <h4><strong>Paylaş</strong></h4>
+                    <div class="boxInfo">
+                        <p style="clear:both;">
+                            <div class="sharethis-inline-share-buttons"></div>
+                        </p>
+                    </div>
+                </div>
+
+                @{
+                    List<WebApp.Models.DilOkulu_Okullar> benzerOkullar = (List<WebApp.Models.DilOkulu_Okullar>)ViewBag.BenzerOkullar;
+                    if (benzerOkullar != null && benzerOkullar.Count > 0)
+                    {
+                        string merkezBaslik = "";
+                        string okulBaslik = "";
+
+                        <div class="event c-67 clearfix ambiti" style="width: 100%; margin-bottom: 0px !important; margin-top: 5px !important;height: 140px !important;">
+                            <h4 style="margin-left:0px !important;margin-top:15px !important;"><strong>Diğer "@Model.DilOkulu_Sehirler.Baslik" Dil Okulları</strong></h4>
+                            <div class="arrows"></div>
+                            <div class="cContent clearfix rotator" style="width: 100%; margin-bottom:0px !important">
+                                <ul class="slides" style="height: 95px !important">
+                                    <li style="display:none !important;">
+
+                                    </li>
+                                    @foreach (var item in benzerOkullar)
+                                    {
+                                        merkezBaslik = WebApp.Core.Tools.ReplaceTitle(item.DilOkulu_Merkez.Baslik);
+                                        okulBaslik = WebApp.Core.Tools.ReplaceTitle(item.Baslik);
+                                        <li>
+                                            <a href="@Url.Action("detay", "okullar", new { merkez = merkezBaslik, url = okulBaslik })" title="@(item.DilOkulu_Merkez.Baslik+" - "+item.Baslik)">
+                                                <div style="height:75px;margin-bottom:3px;">
+                                                    <img src="@Url.Content("~/content/uploads/"+item.DilOkulu_Merkez.Logo)" alt="@(item.DilOkulu_Merkez.Baslik+" - "+item.Baslik)" style="width:100px;max-height:100px;" />
+                                                </div>
+
+                                                <span class="essekSpaniOkulDetaySlider">@(item.DilOkulu_Merkez.Baslik + " - " + item.Baslik)</span>
+                                            </a>
+                                        </li>
+                                    }
+                                </ul>
+
+                            </div>
+                        </div>
+                    }
+                }
+                <div class="boxInfoPage">
+
+                    <div class="searchCourse searchCoursePage clearfix">
+                        @Html.Action("arama", "partial")
+                    </div>
+
+                    <div class="kampanyaPage" style="margin-top:10px;margin-left:10px;width:295px;">
+                        @Html.Partial("_Banner300x250")
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="sidebar" class="column c-33 clearfix">
+    @Html.Partial("_SizeUlasalimFormu")
+
+    <div class="clearfix okulDetayDesktop">
+        <div class="box">
+            <h4 id="pdftext"><strong><a href="javascript:void(0)">Broşür</a></strong></h4>
+            <h4 id="pdftexto"><strong><a href="javascript:void(0)">Fiyat Listesi</a></strong></h4>
+            <h4 id="pdftextr"><strong><a href="javascript:void(0)">Promosyonlar</a></strong></h4>
+            <div class="boxInfo">
+
+                @if (!string.IsNullOrEmpty(Model.DilOkulu_Merkez.Brosur))
+                {
+                <div id="pdficon"><a href="@Url.Content("~/content/uploads/" + Model.DilOkulu_Merkez.Brosur)" target="_blank" title="@(Model.DilOkulu_Merkez.Baslik) Broşürü"><img src="@Url.Content("~/assets/img/pdf_icon.png")" /></a></div>
+                }
+                else
+                {
+                <div id="pdficon"><img src="@Url.Content("~/assets/img/pdf_icon_sb.png")" /></div>
+                }
+                @if (!string.IsNullOrEmpty(Model.DilOkulu_Merkez.FiyatListesi))
+                {
+                <div id="pdficono"><a href="@Url.Content("~/content/uploads/" + Model.DilOkulu_Merkez.FiyatListesi)" target="_blank" title="@(Model.DilOkulu_Merkez.Baslik) Fiyat Listesi"><img src="@Url.Content("~/assets/img/pdf_icon.png")" /></a></div>
+                }
+                else
+                {
+                <div id="pdficono"><img src="@Url.Content("~/assets/img/pdf_icon_sb.png")" /></div>
+                }
+                @if (!string.IsNullOrEmpty(Model.DilOkulu_Merkez.Promosyonlar))
+                {
+                <div id="pdficon2"><a href="@Url.Content("~/content/uploads/" + Model.DilOkulu_Merkez.Promosyonlar)" target="_blank" title="@(Model.DilOkulu_Merkez.Baslik) Promosyonları"><img src="@Url.Content("~/assets/img/pdf_icon.png")" /></a></div>
+                }
+                else
+                {
+                <div id="pdficon2"><img src="@Url.Content("~/assets/img/pdf_icon_sb.png")" /></div>
+                }
+            </div>
+        </div>
+    </div>
+    @Html.Action("ResimGalerisi", "partial", new { id = (Model.GaleriId != null ? Model.GaleriId : 0) })
+    <div class="clearfix">
+        <div class="box tour course">
+            <h4><strong>Video</strong></h4>
+            <div class="boxInfo clearfix">
+                @Html.Raw(Model.VideoUrl)
+            </div>
+        </div>
+    </div>
+
+    <div class="clearfix">
+        <div class="box">
+            <h4><strong>Harita</strong></h4>
+            <div class="boxInfo" style="display:none;">
+                @Html.Raw(Model.Harita)
+            </div>
+        </div>
+
+        <div class="box" style="margin-top:15px">
+            <h4><strong>Paylaş</strong></h4>
+            <div class="boxInfo">
+                <p style="clear:both;">
+                    <div class="sharethis-inline-share-buttons"></div>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="clearfix">
+        <div class="box">
+            <h4 id="sosyalmedya"><strong>Sosyal Medya Hesapları</strong></h4>
+            <div class="boxInfo">
+                @if (!string.IsNullOrEmpty(Model.DilOkulu_Merkez.OkulSiteLink))
+                {
+                <a href="@Model.DilOkulu_Merkez.OkulSiteLink" class="sosyalmedya website" target="_blank" rel="nofollow"><img src="@Url.Content("~/assets/img/website.png")"></a>
+                }
+                @if (!string.IsNullOrEmpty(Model.DilOkulu_Merkez.FacebookLink))
+                {
+                <a href="@Model.DilOkulu_Merkez.FacebookLink" class="sosyalmedya" target="_blank" rel="nofollow"><img src="@Url.Content("~/assets/img/facebook.png")"></a>
+                }
+                @if (!string.IsNullOrEmpty(Model.DilOkulu_Merkez.TwitterLink))
+                {
+                <a href="@Model.DilOkulu_Merkez.TwitterLink" class="sosyalmedya" target="_blank" rel="nofollow"><img src="@Url.Content("~/assets/img/twitter2.png")"></a>
+                }
+                @if (!string.IsNullOrEmpty(Model.DilOkulu_Merkez.YoutubeLink))
+                {
+                <a href="@Model.DilOkulu_Merkez.YoutubeLink" class="sosyalmedya" target="_blank" rel="nofollow"><img src="@Url.Content("~/assets/img/youtube.png")"></a>
+                }
+            </div>
+        </div>
+    </div>
+
+    @Html.Action("EnSonZiyaretEdilenOkullar", "partial")
+
+    @Html.Action("etiketler", "partial", new { okulId = Model.Id })
+
+
+</div>

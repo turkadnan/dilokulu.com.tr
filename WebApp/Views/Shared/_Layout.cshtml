@@ -1,0 +1,97 @@
+﻿<!DOCTYPE html>
+<!--[if IE 8]>         <html class="no-js ie ie8"> <![endif]-->
+<!--[if IE 9]>         <html class="no-js ie ie9"> <![endif]-->
+<!--[if gt IE 9]><!-->
+<html class="no-js">
+<!--<![endif]-->
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <title>@ViewBag.Title</title>
+    <meta name="designer" content="M. Yavuz ATILA" />
+    @RenderSection("metatags", required: false)
+    <meta name="format-detection" content="telephone=no">
+    <link rel="stylesheet" href="@Url.Content("~/assets/css/main.css")">
+    <link rel="shortcut icon" type="image/x-icon" href="@Url.Content("~/assets/img/favicon.ico")" />
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
+    <script src="@Url.Content("~/Assets/js/DilOkulu.js")"></script>
+    <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-20126823-34', 'auto');
+  ga('send', 'pageview');
+
+    </script>
+</head>
+<body>
+    <!-- SITE CONTENT -->
+    <!-- Menu -->
+    @Html.Action("MainMenu", "Partial")
+
+    <!-- CONTENT -->
+
+    <div id="contentBk" class="clearfix">
+        <div id="content">
+            @RenderSection("PageTitle", false)
+            @RenderSection("HomePageSlider", false)
+
+            <div class="wrapper">
+                @RenderBody()
+            </div>
+
+
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+
+    <footer>
+        <div class="stripe clearfix" style="display:none;">
+            <div class="twitter">
+                <img src="@Url.Content("~/assets/img/twitter.png")" alt="">
+                <div class="twitterList" data-user="academixnews"></div>
+            </div>
+        </div>
+        <div class="mail">
+            <div>
+                <div class="mailInfo">
+                    <a href="@Url.Action("index","BilgiIstekFormu")" title="Bilgi İstek Formu">
+                        <img src="@Url.Content("~/assets/img/mail.png")" alt="Bilgi İstek Formu">
+                        <p> BİLGİ İSTEK FORMU</p>
+                    </a>
+                </div>
+
+                @*<div class="mailInfo">
+                    <a href="javascript:;" onclick="ps1QOoow();" title="Canlı Destek">
+                        <img src="@Url.Content("~/assets/img/canlidestek.png")" alt="Canlı Destek" />
+                        <p> CANLI DESTEK</p>
+                    </a>
+                </div>*@
+                <span class="triangle">triangle</span> <span class="element rightElement"></span>
+            </div>
+        </div>
+        <div id="footerContent">
+            <section>
+                <div id="bottomFooter">
+                    <p style="color:#CCC">
+                        <a href="http://dilokulu.com.tr/" title="Yurtdışında Dil Okulları">Yurtdışında Dil Okulları</a>&nbsp;|&nbsp;<a href="http://dilokulu.com.tr/xml/sitemap" target="_blank" title="Sitemap">Sitemap</a>&nbsp;|&nbsp;© 2014 Dilokulu.com.tr
+                    </p>
+                    <div>
+                        <ul id="social">
+                            <li><a href="https://twitter.com/dilokulu_comtr" target="_blank" id="finalTwitter" rel="nofollow" title="Twitter'da takip et">twitter</a></li>
+                            <li><a href="http://www.facebook.com/dilokulucomtr" target="_blank" id="finalFacebook" rel="nofollow" title="Facebook'ta beğen">facebook</a></li>
+                            <li><a href="http://dilokulu.com.tr" id="finalRss">website</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </footer>
+
+    <!-- END SITE CONTENT -->
+    <script src="@Url.Content("~/assets/js/jquery.flexslider-min.js")"></script>
+    <script src="@Url.Content("~/assets/js/scripts.js?v=1")"></script>
+</body>
+</html>

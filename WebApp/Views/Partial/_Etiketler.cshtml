@@ -1,0 +1,25 @@
+﻿@model List<WebApp.Models.DilOkulu_Etiketler>
+@if (Model != null && Model.Count > 0)
+{
+    int counter = 0;
+    <div class="blogPost clearfix">
+        <div class="box">
+            <ul class="tabs">
+                <li class="selected"><a href="javascript:;">Etiketler</a></li>
+            </ul>
+            <ul class="content clearfix">
+                <li class="selected">
+                    <div class="boxInfo etiketler" style="overflow: auto; height: 120px; overflow-x: hidden;">
+
+                        @foreach (var item in Model)
+                        {
+                            counter++;
+                            <a href="@Url.Action("index", "etiket", new { baslik = Server.UrlEncode(item.Baslik.Replace("Ã¼n","ü")) })">@(item.Baslik.Replace("Ã¼n", "ü"))</a>@(counter < Model.Count ? "," : "")
+                        }
+
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+}

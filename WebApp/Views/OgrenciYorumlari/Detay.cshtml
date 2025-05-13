@@ -1,0 +1,46 @@
+﻿@model WebApp.Models.DilOkulu_Makaleler
+@{
+    ViewBag.Title = Model.Baslik+ " | Dilokulu.com.tr";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section PageTitle{
+    <div class="topImg clearfix">
+        <img src="@Url.Content("~/Assets/img/headers/header_2.jpg")" alt="Öğrenci Yorumları" />
+        <p><strong>Öğreni Yorumları</strong></p>
+    </div>
+}
+
+@if (Model != null)
+{
+    <div class="blog column c-67 clearfix">
+
+        <div class="box">
+            <h4>@Model.Baslik</h4>
+            <div class="boxInfo examInfo">
+                <ul class="breadcrumb">
+                    <li class="exm"><a href="@Url.Action("index","home")">Anasayfa</a></li>
+                    <li class="exm">></li>
+                    <li class="exm"><a href="@Url.Action("index", "OgrenciYorumlari")">Öğrenci Yorumları</a></li>
+                    <li class="exm">></li>
+                    <li class="exm"><a href="@Url.Action("detay", "OgrenciYorumlari", new { title = Model.Url })">@Model.Baslik</a></li>
+                </ul>
+                <div>
+                    @if (!string.IsNullOrEmpty(Model.ResimUrl))
+                    {
+                        <img class="fwidth2" src="@Url.Content(Model.ResimUrl)" alt="@Model.Baslik">
+                    }
+                    <p>
+                        @Html.Raw(Model.Icerik)
+                    </p>
+                </div>
+                <ul style="font-size: 13px; font-weight: 700;">
+                    <li class="proExm">@Model.DilOkulu_Yazarlar.AdSoyad</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    @Html.Partial("_RightColumn")
+
+}

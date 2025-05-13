@@ -1,0 +1,160 @@
+﻿@model List<WebApp.Models.DilOkulu_Okullar>
+@{
+    ViewBag.Title = "Okullar Listesi | dilokulu cms";
+    Layout = "~/Areas/cms/Views/Shared/_CMSLayout.cshtml";
+}
+
+@section HeaderWithContentPage{
+
+    <!-- Add mousewheel plugin (this is optional) -->
+    <script src="@Url.Content("~/Areas/cms/Assets/fancybox/lib/jquery.mousewheel-3.0.6.pack.js")"></script>
+    <!-- Add fancyBox -->
+    <link rel="stylesheet" href="@Url.Content("~/Areas/cms/Assets/fancybox/source/jquery.fancybox.css?v=2.1.5")" type="text/css" media="screen" />
+    <script type="text/javascript" src="@Url.Content("~/Areas/cms/Assets/fancybox/source/jquery.fancybox.pack.js?v=2.1.5")"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $('.fancybox').fancybox({
+                width: 600,
+                height: 300,
+                fitToView: false,
+                autoSize: false,
+                afterClose: function () {
+    
+                    location.reload();
+                },
+
+                helpers: {
+                    overlay: { closeClick: false } // prevents closing when clicking OUTSIDE fancybox
+                }
+
+            });
+
+        });
+    </script>
+
+
+}
+<table cellpadding="0" cellspacing="0" style="width: 100%;">
+    <tr>
+        <td class="MasterRow3_Column1">
+            @Html.Partial("_OkullarMunu")
+        </td>
+        <td class="MasterRow3_Column2">
+            <table cellpadding="0" cellspacing="0" class="OrtaMenu">
+                <tr>
+                    <td class="OrtaMenuRowTitle">
+                        <img src="@Url.Content("~/areas/CMS/assets/Images/Genel/b-settings.png")" style="width: 18px; height: 18px"
+                             align="absmiddle" />Okullar Listesi
+                    </td>
+                </tr>
+                <tr>
+                    <td class="OrtaMenuRow">
+                        @using (Html.BeginForm("index", "okullar", FormMethod.Post, new { id = "form1" }))
+                        {
+                            <table cellpadding="0" cellspacing="0" style="width: 100%;">
+                                <tr>
+                                    <td class="OrtaMenuRowC1">
+                                        Okul Merkezleri<span class="SpanZorunluAlan">*</span>
+                                    </td>
+                                    <td class="OrtaMenuRowC2">
+                                        <select id="SelectMerkez" name="SelectMerkez" class="DropDownList" style="width: 300px;">
+                                            <option value="0">Seçin...</option>
+                                            @if (ViewBag.Merkezler != null)
+                                            {
+                                                var merkezler = (List<WebApp.Models.DilOkulu_Merkez>)ViewBag.Merkezler;
+                                                if (merkezler != null && merkezler.Count > 0)
+                                                {
+                                                    foreach (var item in merkezler)
+                                                    {
+                                                        <option value="@item.Id" @(ViewBag.MerkezId != null && ViewBag.MerkezId == item.Id ? "selected" : "")>@item.Baslik</option>
+                                                    }
+                                                }
+                                            }
+                                        </select>
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="OrtaMenuRowC1"></td>
+                                    <td class="OrtaMenuRowC2">
+                                        <input id="btnListele" type="submit" class="Button" value="Listele" style="width: 50px;" />
+                                    </td>
+                                </tr>
+                            </table>
+                        }
+                    </td>
+                </tr>
+                <tr>
+                    <td class="OrtaMenuRow">
+                        <table id="hor-zebra" style="width: 780px; margin: 0px;">
+                            <thead>
+                                <tr>
+                                    <th scope="col">
+                                        OKUL
+                                    </th>
+                                    <th scope="col">MERKEZ</th>
+                                    <th scope="col"></th>
+                                    <th scope="col"></th>
+                                    <th scope="col">DURUMU</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                @if (Model != null && Model != null && Model.Count > 0)
+                                {
+                                    int Counter = 2;
+                                    foreach (var item in Model)
+                                    {
+                                        <tr @(Counter % 2 == 0 ? "class=odd" : "")>
+                                            <td>
+                                                <a href="@Url.Action("detay", "okullar", new { @id = item.Id })">@item.Baslik</a>
+                                            </td>
+
+                                            <td>
+                                                @item.DilOkulu_Merkez.Baslik
+                                            </td>
+                                            <td>
+                                                <a href="@Url.Action("KursTipi", "OkulFiyatlari", new { @okulId = item.Id })" target="_blank">Fiyat Girişleri</a>
+
+                                                @if (item.DilOkulu_KursTipleri.Count > 0)
+                                                {
+                                                    <a href="@Url.Action("Kopyala", "OkulFiyatlari", new { @okulId = item.Id })" class="fancybox fancybox.iframe" style="color:green;">Kopyala</a>
+                                                }
+                                            </td>
+                                            <td>
+                                                <a href="@Url.Action("KonaklamaTipi", "KonaklamaFiyatlari", new { @okulId = item.Id })" target="_blank">Konaklama Girişleri</a>
+                                                @*@if (item.DilOkulu_KonaklamaTipleri.Count > 0)
+                                                {
+                                                    <a href="@Url.Action("Kopyala", "KonaklamaFiyatlari", new { @okulId = item.Id })" class="fancybox fancybox.iframe" style="color:green;">Kopyala</a>
+                                                }*@
+                                            </td>
+                                            <td>
+                                                @if (item.Durumu == 1)
+                                                {
+                                                    <img src="@Url.Content("~/areas/CMS/assets/Images/ok.png")" style="width: 16px; height: 16px;cursor:pointer;" />
+                                                }
+                                                else
+                                                {
+                                                    <img src="@Url.Content("~/areas/CMS/assets/Images/delete_icon.png")" style="width: 16px; height: 16px;cursor:pointer;" />
+                                                }
+                                            </td>
+                                        </tr>
+                                                Counter++;
+                                    }
+                                }
+                                else
+                                {
+                                    @*<tr><td colspan="3"><strong>Kayıt bulunamadı...</strong></td></tr>*@
+                                }
+
+                            </tbody>
+                        </table>
+
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>

@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<settings>
+    <save url="upload.axd" />
+    <multiSelect>true</multiSelect>
+    <thumbnail active="true" folder="/Content/Galeri/Thumb/" width="100" height="100" bgColor="0xffffff" />
+    <image folder="/Content/Galeri/" width="800" height="600" bgColor="0xffffff" />
+</settings>

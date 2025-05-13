@@ -1,0 +1,51 @@
+﻿@model WebApp.Models.DilOkulu_StatikSayfalar
+@{
+    ViewBag.Title = "Acenta";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@{
+
+    string seo_Keywords = "";
+    string seo_Descriptions = "";
+
+    if (Model != null)
+    {
+        seo_Descriptions = Model.Seo_Descriptions;
+        seo_Keywords = Model.Seo_Keywords;
+    }
+}
+
+@section metatags{
+    <meta name="keywords" content="@seo_Keywords" />
+    <meta name="description" content="@seo_Descriptions" />
+}
+
+@section PageTitle{
+    <div class="topImg clearfix">
+        <img src="@Url.Content("~/Assets/img/headers/header_2.jpg")" alt="Vize Rehberi" />
+        <h1><p><strong>Acenta</strong></p></h1>
+    </div>
+}
+
+
+<div class="blog column c-67 clearfix" style="min-height: 400px;">
+    <div class="box">
+        <div class="boxInfo examInfo" style="border:none;">
+            <div>
+                @if (Model != null)
+                {
+                    <p>
+                        @Html.Raw(Model.Icerik)
+                    </p>
+
+                }
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+
+@Html.Partial("_RightColumn")

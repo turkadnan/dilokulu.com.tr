@@ -1,0 +1,28 @@
+﻿@model string[]
+@if (Model != null && Model.Count() > 0)
+{
+    <div class="news column clearfix" style="padding: 13px; border: 1px solid #E0E0E0; width: 29.8%; margin-left: 10px; margin-top:10px;">
+
+
+        <h2 class="colonbaslik">En Son İncelediğiniz Okullar</h2>
+
+        <div style="">
+            <ul>
+                @for (int i = 0; i < Model.Count(); i++)
+                {
+                    if (i < 5)
+                    {
+                        <li style="font-size: 13px; margin-top: 4px; width: 98%; list-style:circle; margin-left: 17px;"><a href="@WebApp.Core.Tools.ReplaceTitle(Model[i])">@Model[i]</a></li>
+                    }
+                    else
+                    {
+                        break;
+                    }
+
+                }
+            </ul>
+        </div>
+
+</div>
+
+        }

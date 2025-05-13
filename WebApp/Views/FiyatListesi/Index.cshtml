@@ -1,0 +1,102 @@
+﻿@model List<WebApp.Models.DilOkulu_Merkez>
+@{
+    ViewBag.Title = "Yurtdışı Dil Okulları Fiyat Listesi | Dilokulu.com.tr";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section metatags{
+    <meta name="keywords" content="yurtdışı dil eğitimi fiyatları, yurtdışı dil eğitimi fiyat listesi, yurtdışı dil okulları fiyatları, yurtdışı dil okulları fiyat listesi, ingiltere dil okulu fiyatları, amerika dil okulu fiyatları" />
+    <meta name="description" content="Yurtdışı Dil Okulları Fiyat Listeleri - İngiltere, Amerika, Kanada, Malta, Avustralya Dil Okulları, dil eğitimi ücretleri, indirimleri ve promosyonları. " />
+
+    <style>
+        table td {
+padding-left: 20px;
+font-size: 12px;
+color: #949699;
+border: 1px dashed #E8E9EB !important;
+}
+
+        table th {
+    background-color: #738391;
+    color: #ffffff;
+    font-weight: 600;
+    padding-left: 20px;
+    font-size: 12px;
+    border-left: 1px dashed #455563;
+}
+
+
+    </style>
+    
+}
+
+@section PageTitle{
+    <div class="topImg clearfix">
+        <img src="@Url.Content("~/Assets/img/headers/header_2.jpg")" alt="Vize Rehberi" />
+        <h1><p><strong>Yurtdışı Dil Okulu Fiyat Listesi</strong></p></h1>
+    </div>
+}
+
+<div class="blog column c-67 clearfix" style="min-height: 400px;">
+    <div class="detaybox">
+        <div class="boxInfo examInfo" style="font-size:12px;border:none;padding:0px;">
+            <p style="margin-top:0px !important;">
+                Yurtdışında dil eğitimi fiyatları oldukça geniş bir aralıkta değişmektedir. Her öğrencinin bütçesine uygun bir dil okulu bulmak mümkündür. yurtdışı dil okullarının fiyatları bulunduğu ülkeye ve şehre, sunulan eğitimin kalitesine ve yoğunluğuna, okulun sunduğu imkanlara ve olanaklara göre değişkenlik göstermektedir.
+                <br /><br />
+                Aşağıda <a href="http://dilokulu.com.tr">dilokulu.com.tr</a> olarak çalıştığımız dil okullarının broşürlerini, fiyat listelerini ve güncel promosyonlarını bulabilirsiniz. Dilerseniz bu bilgileri kullanarak istediğiniz dil okulunun ve dil programının toplam maliyetini kendi kendinize hesaplayabileceğiniz gibi Yurtdışı Dil Okulları Bilgi İstek Formu‘muzu doldurarak sizin için dil okulu fiyat teklifleri hazırlamamızı talep edebilirsiniz. Teklif almak için hemen <a href="/bilgi-istek-formu" title="Bilgi İstek Formu">tıklayınız.</a>
+                <br /><br />
+            </p>
+        </div>
+    </div>
+    <div class="box">
+        <div class="boxInfo examInfo" style="border:none;">
+            <div>
+                @if (Model != null && Model.Count > 0)
+                {
+                    <table>
+                        <tr>
+                            <th>OKUL ADI</th>
+                            <th>BROŞÜR</th>
+                            <th>FİYATLAR</th>
+                            <th>PROMOSYONLAR</th>
+                        </tr>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td><a href="@Url.Action("MerkezDetay", "okullar", new { url = item.Url })" title="@item.Baslik">@item.Baslik</a></td>
+                                <td>
+                                    @if (!string.IsNullOrEmpty(item.Brosur))
+                                    {
+                                        <a href="@Url.Content("~/content/uploads/" + item.Brosur)" target="_blank" title="@(item.Baslik) Broşürü"><img src="@Url.Content("~/assets/img/pdf_icon.png")" class="ListeEkraniIconu1" style="width:30px;" /></a>
+                                    }
+                                </td>
+                                <td>
+                                    @if (!string.IsNullOrEmpty(item.FiyatListesi))
+                                    {
+                                        <a href="@Url.Content("~/content/uploads/" + item.FiyatListesi)" target="_blank" title="@(item.Baslik) Fiyat Listesi"><img src="@Url.Content("~/assets/img/pdf_icon.png")" class="ListeEkraniIconu2" style="width:30px;" /></a>
+                                    }
+                                </td>
+                                <td>
+                                    @if (!string.IsNullOrEmpty(item.Promosyonlar))
+                                    {
+                                        <a href="@Url.Content("~/content/uploads/" + item.Promosyonlar)" target="_blank" title="@(item.Baslik) Promosyonları"><img src="@Url.Content("~/assets/img/pdf_icon.png")" class="ListeEkraniIconu3" style="width:30px;" /></a>
+                                    }
+                                </td>
+                            </tr>
+                        }
+                    </table>
+
+                    <ul></ul>
+                }
+            </div>
+        </div>
+
+    </div>
+
+</div>
+@Html.Partial("_RightColumn")
+
+
+
+
+

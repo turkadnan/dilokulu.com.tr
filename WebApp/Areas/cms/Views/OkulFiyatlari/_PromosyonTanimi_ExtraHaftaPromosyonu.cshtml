@@ -1,0 +1,50 @@
+﻿@model List<WebApp.Models.DilOkulu_KursTipiPromosyonTanimlari>
+<table id="standartHafta">
+    <tr><td class="baslik">Minimum Hafta</td><td class="baslik">Ücretsiz Hafta Sayısı</td><td class="baslik">Promosyon Bitiş Tarihi</td></tr>
+    <tr>
+        <td><input type="text" class="TextBox" id="ExtraHafta_MinimumHafta" style="width:110px;" /></td>
+        <td><input type="text" class="TextBox" id="ExtraHafta_UcretsizHaftaSayisi" style="width:110px;" /></td>
+        <td><input type="text" class="TextBox promosyonBitisTarihi" id="PromosyonBitisTarihi" style="width:110px;" /></td>
+        <td>
+            <input type="button" id="btnExtraHafta_Ekle" data-promosyontipiid="1" value="Ekle" />
+
+            @if (Model != null && Model.Count > 0)
+            {
+                <input type="button" id="btnExtraHaftaPromosyonu_Kopyala" href="@Url.Action("PromosyonKopyala", "OkulFiyatlari", new { kursTipiId = Model[0].DilOkulu_KursTipleri.Id, merkezId = Model[0].DilOkulu_KursTipleri.DilOkulu_Okullar.MerkezId, okulId = Model[0].DilOkulu_KursTipleri.OkulId, promosyonTipiId = 1 })" class="fancybox fancybox.iframe" data-promosyontipiid="1" value="Kopyala" />
+            }
+        </td>
+    </tr>
+
+    @if (Model != null && Model.Count > 0)
+    {
+        foreach (var item in Model)
+        {
+    <tr class="fieldset">
+
+
+        <td><input type="text" class="TextBox" id="txtExtraHafta_MinimumHafta" value="@item.ExtraHafta_MinimumHafta" style="width:110px;" /></td>
+        <td><input type="text" class="TextBox" id="txtExtraHafta_UcretsizHaftaSayisi" value="@item.ExtraHafta_UcretsizHaftaSayisi" style="width:110px;" /></td>
+        <td><input type="text" class="TextBox" id="txtPromosyonBitisTarihi" value="@(string.Format("{0:dd.MM.yyyy}", item.PromosyonBitisTarihi))" style="width:110px;" /></td>
+        <td>
+            <input id="hfId" value="@item.Id" type="hidden" />
+            <a href="javascript:;" onclick="KursTipiPromosyonSil(this)" data-promosyontipiid="1" data-fiyatid="@item.Id">
+                <img src="/areas/CMS/assets/Images/delete_icon.png" style="width: 16px; height: 16px;" />
+            </a>
+        </td>
+    </tr>
+        }
+        <tr>
+            <td colspan="4">
+                <input type="button" id="btnEkstraHaftaPromosyonu_Guncelle" data-promosyontipiid="1" value="Güncelle" />
+            </td>
+        </tr>
+
+    }
+    else
+    {
+        <tr><td colspan="3"><strong>Henüz tanımlama yapılmamış!</strong></td></tr>
+    }
+</table>
+<hr />
+<b>Nasıl Kullanılır?</b><br />
+Bu promosyon modeli belirlenen minimum hafta sayısı kadar eğitim alınması durumunda, ücretsiz olarak verilecek olan ilave haftalar için kullanılmalıdır. Örneğin; 12 hafta eğitim alın, 2 hafta ücretsiz daha ücretsiz okuyun!

@@ -1,0 +1,51 @@
+﻿@{
+    ViewBag.Title = "Bilgi İstek Formu";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section metatags{
+    <meta name="keywords" content="yurtdışı eğitim bilgi istek formu, yurtdışı eğitim bilgi talebi, yurtdışı eğitim hakkında bilgi,  yurtdışı eğitimi hakkında bilgi" />
+    <meta name="description" content="Ücretsiz Yurtdışı Eğitim ve Dil Okulları Danışmanlığı Bilgi İstek Formu" />
+
+    <!-- Facebook Conversion Code for dilokulu.com.tr-Bilgi İstek Formu -->
+    <script>
+        (function () {
+            var _fbq = window._fbq || (window._fbq = []);
+            if (!_fbq.loaded) {
+                var fbds = document.createElement('script');
+                fbds.async = true;
+                fbds.src = '//connect.facebook.net/en_US/fbds.js';
+                var s = document.getElementsByTagName('script')[0];
+                s.parentNode.insertBefore(fbds, s);
+                _fbq.loaded = true;
+            }
+        })();
+        window._fbq = window._fbq || [];
+        window._fbq.push(['track', '6016514774366', { 'value': '0.00', 'currency': 'TRY' }]);
+    </script>
+    <noscript><img height="1" width="1" alt="" style="display:none" src="https://www.facebook.com/tr?ev=6016514774366&amp;cd[value]=0.00&amp;cd[currency]=TRY&amp;noscript=1" /></noscript>
+}
+
+@section PageTitle{
+    <div class="topImg clearfix">
+        <img src="@Url.Content("~/Assets/img/headers/header_2.jpg")" alt="Vize Rehberi" />
+        <h1><p><strong>Bilgi İstek Formu</strong></p></h1>
+    </div>
+}
+
+<div class="blog column c-67 clearfix" style="min-height: 400px;">
+
+    <div class="box">
+        <div class="boxInfo examInfo" style="border:none;">
+            <div>
+                <iframe id="ifIletisimFormuDetayli" src="http://form.academix.com.tr/Formlar/bilgi-istek-formu-responsive-dilokulu.aspx?ilgialan=1&amp;SiteAdi=dilokulu.com.tr&amp;defaultilgi=0" style="display: block; width: 100%; height: 913px; border: none;" scrolling="no" frameborder="0"></iframe>
+            </div>
+
+
+        </div>
+
+    </div>
+
+</div>
+
+@Html.Partial("_RightColumn")

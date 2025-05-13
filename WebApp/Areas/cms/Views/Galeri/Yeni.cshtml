@@ -1,0 +1,109 @@
+﻿@model  WebApp.Models.UlkeSehirViewModel
+@{
+    ViewBag.Title = "Galeri | dilokulu cms";
+    Layout = "~/Areas/cms/Views/Shared/_CMSLayout.cshtml";
+}
+
+@using WebApp.Helpers
+
+@section HeaderWithContentPage{
+
+    <script src="~/Areas/cms/Assets/js/dilokulu.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            var ProcessStatus = '@Html.Raw(ViewBag.Status)';
+
+            if (ProcessStatus == "ok") {
+                GeneralObj.DilokuluMessageBox.init({ status: 'ok', message: 'Kayıt yapıldı.' });
+            }
+
+            $('#btnSave').click(function () {
+                Loader();
+
+                $("html, body").animate({ scrollTop: "0px" });
+                var Baslik = $('#Baslik').val();
+
+                $.ajax({
+                    type: "POST",
+                    url: "@Url.Action("GaleriVarMi", "Ajax")",
+                    data: { Baslik: Baslik },
+                    dataType: "json",
+                    success: function (data) {
+                        if (data.status == "ok") {
+                            $('#submit').trigger("click");
+                        } else {
+                            GeneralObj.DilokuluMessageBox.init({ status: 'error', message: data.mesaj });
+                            closeModal();
+                        }
+                    }
+                });
+                return false;
+            })
+        })
+    </script>
+
+}
+
+@section SectionBeforeWrapper{
+    @Html.Partial("_Modals")
+}
+<div id="divStatusBox" style="">
+    <span id="spanMessageText"></span>
+</div>
+<table cellpadding="0" cellspacing="0" style="width: 100%;">
+    <tr>
+        <td class="MasterRow3_Column1">
+            @Html.Partial("_GaleriMunu")
+        </td>
+        <td class="MasterRow3_Column2">
+            <table cellpadding="0" cellspacing="0" class="OrtaMenu">
+                <tr>
+                    <td class="OrtaMenuRowTitle">
+                        <img src="@Url.Content("~/areas/CMS/assets/Images/Genel/b-settings.png")" style="width: 18px; height: 18px"
+                             align="absmiddle" />Yeni Galeri
+                    </td>
+                </tr>
+                <tr>
+                    <td class="OrtaMenuRow">
+                        @using (Html.BeginForm("yeni", "galeri", FormMethod.Post, new { id = "form1", enctype = "multipart/form-data" }))
+                        {
+                            <table cellpadding="0" cellspacing="0" style="width: 100%;">
+                                <tr>
+                                    <td class="OrtaMenuRowC1">
+                                        Başlık<span class="SpanZorunluAlan">*</span>
+                                    </td>
+                                    <td class="OrtaMenuRowC2">
+                                        <input class="TextBox" id="Baslik" name="Baslik" style="width: 300px">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="OrtaMenuRowC1">
+                                        Yayın durumu?
+                                    </td>
+                                    <td class="OrtaMenuRowC2">
+                                        <select id="selectDurum" name="selectDurum" class="DropDownList">
+                                            <option value="1" selected="selected">Evet</option>
+                                            <option value="0">Hayır</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="OrtaMenuRowC1" style="border: none;">
+                                        &nbsp;
+                                    </td>
+                                    <td class="OrtaMenuRowC2" style="border: none;">
+                                        <div class="error validation-summary-errors" style="display: none; padding: 5px;">
+                                        </div>
+                                        <input id="btnSave" type="submit" class="Button" value="Kaydet" />
+                                        <input id="submit" type="submit" value="Kaydet" style="display: none" />
+                                    </td>
+                                </tr>
+                            </table>
+                            <i><strong>Not: (<span class="SpanZorunluAlan">*</span> ) alanlar zorunludur!</strong></i>
+                        }
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>

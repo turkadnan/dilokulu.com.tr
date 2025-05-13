@@ -1,0 +1,409 @@
+﻿@using WebApp.Models
+@model DilOkulu_Okullar
+@{
+    ViewBag.Title = "Okul Ek Ücretler";
+    Layout = "~/Areas/cms/Views/Shared/_CMSLayout.cshtml";
+}
+@section HeaderWithContentPage{
+    <link href="@Url.Content("~/Areas/cms/Assets/css/smoothness/jquery-ui-1.11.4.css")" rel="stylesheet" />
+    <script src="@Url.Content("~/Areas/cms/Assets/js/jquery-1.10.2.js")"></script>
+    <script src="@Url.Content("~/Areas/cms/Assets/js/jquery-ui-1.11.4.js")"></script>
+    <script src="@Url.Content("~/Areas/cms/Assets/js/datepicker-tr.js")"></script>
+    <script src="~/Areas/cms/Assets/js/dilokulu.js"></script>
+    <script src="@Url.Content("~/Areas/cms/Assets/js/fiyat_girisleri.js")"></script>
+
+    <!-- Add mousewheel plugin (this is optional) -->
+    <script src="@Url.Content("~/Areas/cms/Assets/fancybox/lib/jquery.mousewheel-3.0.6.pack.js")"></script>
+    <!-- Add fancyBox -->
+    <link rel="stylesheet" href="@Url.Content("~/Areas/cms/Assets/fancybox/source/jquery.fancybox.css?v=2.1.5")" type="text/css" media="screen" />
+    <script type="text/javascript" src="@Url.Content("~/Areas/cms/Assets/fancybox/source/jquery.fancybox.pack.js?v=2.1.5")"></script>
+
+    <script type="text/javascript">
+        $(function () {
+            var ProcessStatus = '@Html.Raw(ViewBag.Status)';
+
+            if (ProcessStatus == "ok") {
+                GeneralObj.DilokuluMessageBox.init({ status: 'ok', message: 'Kayıt işlemi gerçekleşti.' });
+            }
+        })
+    </script>
+
+
+
+}
+
+
+@section SectionBeforeWrapper{
+    @Html.Partial("_Modals")
+}
+
+
+<div id="divStatusBox" style="">
+    <span id="spanMessageText"></span>
+</div>
+<table cellpadding="0" cellspacing="0" style="width: 100%;">
+    <tr>
+        <td class="MasterRow3_Column1">
+            @Html.Partial("_OkullarMunu")
+        </td>
+
+        <td class="MasterRow3_Column2">
+            @Html.Action("_OkulOzetBilgileri")
+            @Html.Partial("_FiyatMenu")
+
+            @using (Html.BeginForm("OkulEkUcretler", "OkulFiyatlari", new { okulId = ViewBag.OkulId }, FormMethod.Post))
+            {
+                <table cellpadding="0" cellspacing="0" class="OrtaMenu">
+                    <tr>
+                        <td class="OrtaMenuRow">
+                            <table cellpadding="0" border="0" cellspacing="0" class="fiyatTable">
+                                <tr style="display:none;">
+                                    <td class="baslik">
+                                        Okul Kayit Ücreti
+                                    </td>
+                                    <td colspan="3">
+                                        <input id="Ucretler_OkulKayitUcreti" name="Ucretler_OkulKayitUcreti" value="@Model.Ucretler_OkulKayitUcreti" type="text" style="width:150px;" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="baslik" style="vertical-align:top;">
+                                        Okul Kayit Ücreti
+                                    </td>
+                                    <td colspan="3">
+                                        <table style="border:1px dashed silver;margin-bottom:10px;">
+                                            <tr>
+                                                <td>
+                                                    <label style="width:100%;display:block" class="baslik">Başlangıç</label>
+                                                    <input id="Ucretler_OkulKayitUcretiArray_Baslangic" name="Ucretler_OkulKayitUcretiArray_Baslangic" type="text" style="width:50px;" />
+                                                </td>
+                                                <td>
+                                                    <label style="width:100%;display:block" class="baslik">Bitiş</label>
+                                                    <input id="Ucretler_OkulKayitUcretiArray_Bitis" name="Ucretler_OkulKayitUcretiArray_Bitis" type="text" style="width:50px;" />
+                                                </td>
+                                                <td>
+                                                    <label style="width:100%;display:block" class="baslik">Fiyat</label>
+                                                    <input id="Ucretler_OkulKayitUcretiArray_Fiyat" name="Ucretler_OkulKayitUcretiArray_Fiyat" type="text" style="width:50px;" />
+                                                </td>
+                                                <td style="padding-top:15px;"><input id="btnUcretler_OkulKayitUcretiEkle" type="button" value="Ekle" /></td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="4">
+                                                    <table id="hor-zebra" class="tblOkulKayitUcretleri" style="width:217px;margin: 0px !important;">
+                                                        <tbody></tbody>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                        </table>
+
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="baslik" style="vertical-align:top;">
+                                        Okul Kayit Ek Ücret
+                                    </td>
+                                    <td colspan="3">
+                                        <table style="border:1px dashed silver;margin-bottom:10px;">
+                                            <tr>
+                                                <td>
+                                                    <label style="width:100%;display:block" class="baslik">Baş. Tarih</label>
+                                                    <input id="Ucretler_OkulKayitEkUcretArray_Baslangic" name="Ucretler_OkulKayitEkUcretArray_Baslangic" type="text" style="width:70px;" />
+                                                </td>
+                                                <td>
+                                                    <label style="width:100%;display:block" class="baslik">Bit. Tarih</label>
+                                                    <input id="Ucretler_OkulKayitEkUcretArray_Bitis" name="Ucretler_OkulKayitEkUcretArray_Bitis" type="text" style="width:70px;" />
+                                                </td>
+                                                <td>
+                                                    <label style="width:100%;display:block" class="baslik">Fiyat</label>
+                                                    <input id="Ucretler_OkulKayitEkUcretArray_Fiyat" name="Ucretler_OkulKayitEkUcretArray_Fiyat" type="text" style="width:50px;" />
+                                                </td>
+                                                <td style="padding-top:15px;"><input id="btnUcretler_OkulKayitEkUcretArrayEkle" type="button" value="Ekle" /></td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="4">
+                                                    <table id="hor-zebra" class="tblOkulKayitEkUcretler" style="width:251px;margin: 0px !important;">
+                                                        <tbody></tbody>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                        </table>
+
+
+                                    </td>
+                                </tr>
+                                <tr style="display:none;">
+                                    <td class="baslik">
+                                        Konaklama Ayarlama Ücreti
+                                    </td>
+                                    <td colspan="3">
+                                        <input id="Ucretler_KonaklamaAyarlamaUcreti" name="Ucretler_KonaklamaAyarlamaUcreti" value="@Model.Ucretler_KonaklamaAyarlamaUcreti" type="text" style="width:150px;" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="baslik" style="vertical-align:top;">
+                                        Konaklama Ayarlama Ücreti
+                                    </td>
+                                    <td colspan="3">
+                                        <table style="border:1px dashed silver;margin-bottom:10px;">
+                                            <tr>
+                                                <td>
+                                                    <label style="width:100%;display:block" class="baslik">Başlangıç</label>
+                                                    <input id="Ucretler_KonaklamaAyarlamaUcretiArray_Baslangic" name="Ucretler_KonaklamaAyarlamaUcretiArray_Baslangic" type="text" style="width:50px;" />
+                                                </td>
+                                                <td>
+                                                    <label style="width:100%;display:block" class="baslik">Bitiş</label>
+                                                    <input id="Ucretler_KonaklamaAyarlamaUcretiArray_Bitis" name="Ucretler_KonaklamaAyarlamaUcretiArray_Bitis" type="text" style="width:50px;" />
+                                                </td>
+                                                <td>
+                                                    <label style="width:100%;display:block" class="baslik">Fiyat</label>
+                                                    <input id="Ucretler_KonaklamaAyarlamaUcretiArray_Fiyat" name="Ucretler_KonaklamaAyarlamaUcretiArray_Fiyat" type="text" style="width:50px;" />
+                                                </td>
+                                                <td style="padding-top:15px;"><input id="btnUcretler_KonaklamaAyarlamaUcretiEkle" type="button" value="Ekle" /></td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="4">
+                                                    <table id="hor-zebra" class="tblKonaklamaAyarlamaUcretleri" style="width:217px;margin: 0px !important;">
+                                                        <tbody></tbody>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="baslik" style="vertical-align:top;">
+                                        Konaklama Ayarlama Ek Ücret
+                                    </td>
+                                    <td colspan="3">
+                                        <table style="border:1px dashed silver;margin-bottom:10px;">
+                                            <tr>
+                                                <td>
+                                                    <label style="width:100%;display:block" class="baslik">Baş. Tarih</label>
+                                                    <input id="Ucretler_KonaklamaAyarlamaEkUcretArray_Baslangic" name="Ucretler_KonaklamaAyarlamaEkUcretArray_Baslangic" type="text" style="width:70px;" />
+                                                </td>
+                                                <td>
+                                                    <label style="width:100%;display:block" class="baslik">Bit. Tarih</label>
+                                                    <input id="Ucretler_KonaklamaAyarlamaEkUcretArray_Bitis" name="Ucretler_KonaklamaAyarlamaEkUcretArray_Bitis" type="text" style="width:70px;" />
+                                                </td>
+                                                <td>
+                                                    <label style="width:100%;display:block" class="baslik">Fiyat</label>
+                                                    <input id="Ucretler_KonaklamaAyarlamaEkUcretArray_Fiyat" name="Ucretler_KonaklamaAyarlamaEkUcretArray_Fiyat" type="text" style="width:50px;" />
+                                                </td>
+                                                <td style="padding-top:15px;"><input id="btnUcretler_KonaklamaAyarlamaEkUcretArrayEkle" type="button" value="Ekle" /></td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="4">
+                                                    <table id="hor-zebra" class="tblKonaklamaAyarlamaEkUcretler" style="width:251px;margin: 0px !important;">
+                                                        <tbody></tbody>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                        </table>
+
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="baslik">
+                                        Kargo Ücreti
+                                    </td>
+                                    <td colspan="3">
+                                        <input id="Ucretler_KargoUcreti" name="Ucretler_KargoUcreti" value="@Model.Ucretler_KargoUcreti" type="text" style="width:150px;" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="baslik" style="vertical-align:top;">
+                                        Kargo Hesaplanmayacak Kurslar
+                                    </td>
+                                    <td colspan="3">
+                                        <table style="border:1px dashed silver;margin-bottom:10px;">
+                                            <tr>
+                                                <td>
+                                                    @if (ViewBag.KursTipleri != null)
+                                                    {
+                                                        foreach (var item in (List<WebApp.Models.DilOkulu_KursTipleri>)ViewBag.KursTipleri)
+                                                        {
+                                                            <div style="float:left;margin-right:10px;"><input id="cbxKursTipi_@item.Id" data-id="@item.Id" data-okulid="@item.OkulId" type="checkbox" class="kargoHaricKurslar" value="@item.Id" /><label for="cbxKursTipi_@item.Id">@item.Baslik</label></div>
+                                                        }
+                                                    }
+                                                </td>
+
+                                            </tr>
+                                        </table>
+
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="baslik">
+                                        Materyal Ücreti
+                                    </td>
+                                    <td>
+                                        <input id="Ucretler_MateryalUcreti" name="Ucretler_MateryalUcreti" value="@Model.Ucretler_MateryalUcreti" type="text" style="width:150px;" />
+                                    </td>
+                                    <td class="baslik">Tahsilat Tipi</td>
+                                    <td>
+                                        <select class="DropDownList" id="Ucretler_MateryalTahsilatTipi" name="Ucretler_MateryalTahsilatTipi" style="width:150px;">
+                                            <option @(Model.Ucretler_MateryalTahsilatTipi == "TekSefer" ? "selected" : "") value="TekSefer">Tek Sefer</option>
+                                            <option @(Model.Ucretler_MateryalTahsilatTipi == "Haftalik" ? "selected" : "") value="Haftalik">Haftalık</option>
+                                            <option @(Model.Ucretler_MateryalTahsilatTipi == "Aylik" ? "selected" : "") value="Aylik">Aylık</option>
+                                            <option @(Model.Ucretler_MateryalTahsilatTipi == "HaftaAralikli" ? "selected" : "") value="HaftaAralikli">Hafta Aralıklı</option>
+                                        </select>
+
+                                    </td>
+                                </tr>
+                                <tr id="trMateryalUcretiTablo" style="display:none;">
+                                    <td class="baslik" style="vertical-align:top;"></td>
+                                    <td colspan="3">
+                                        <table style="border:1px dashed silver;margin-bottom:10px;">
+                                            <tr>
+                                                <td>
+                                                    <label style="width:100%;display:block" class="baslik">Başlangıç</label>
+                                                    <input id="Ucretler_MateryalUcretiArray_Baslangic" name="Ucretler_MateryalUcretiArray_Baslangic" type="text" style="width:50px;" />
+                                                </td>
+                                                <td>
+                                                    <label style="width:100%;display:block" class="baslik">Bitiş</label>
+                                                    <input id="Ucretler_MateryalUcretiArray_Bitis" name="Ucretler_MateryalUcretiArray_Bitis" type="text" style="width:50px;" />
+                                                </td>
+                                                <td>
+                                                    <label style="width:100%;display:block" class="baslik">Fiyat</label>
+                                                    <input id="Ucretler_MateryalUcretiArray_Fiyat" name="Ucretler_MateryalUcretiArray_Fiyat" type="text" style="width:50px;" />
+                                                </td>
+                                                <td style="padding-top:15px;"><input id="btnUcretler_MateryalUcretiEkle" type="button" value="Ekle" /></td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="4">
+                                                    <table id="hor-zebra" class="tblMateryalUcretleri" style="width:217px;margin: 0px !important;">
+                                                        <tbody></tbody>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="baslik">
+                                        Sağlık Sigortası
+                                    </td>
+                                    <td>
+                                        <input id="Ucretler_SaglikSigortasi" name="Ucretler_SaglikSigortasi" value="@Model.Ucretler_SaglikSigortasi" type="text" style="width:150px;" />
+                                    </td>
+                                    <td class="baslik">Tahsilat Tipi</td>
+                                    <td>
+                                        <div style="float:left;">
+                                            <select class="DropDownList" id="Ucretler_SaglikSigortasiTahsilatTipi" name="Ucretler_SaglikSigortasiTahsilatTipi" style="width:150px;">
+                                                <option @(Model.Ucretler_SaglikSigortasiTahsilatTipi == "TekSefer" ? "selected" : "") value="TekSefer">Tek Sefer</option>
+                                                <option @(Model.Ucretler_SaglikSigortasiTahsilatTipi == "Haftalik" ? "selected" : "") value="Haftalik">Haftalık</option>
+                                                <option @(Model.Ucretler_SaglikSigortasiTahsilatTipi == "Aylik" ? "selected" : "") value="Aylik">Aylık</option>
+                                                <option @(Model.Ucretler_SaglikSigortasiTahsilatTipi == "HaftaAralikli" ? "selected" : "") value="HaftaAralikli">Hafta Aralıklı</option>
+                                            </select>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr id="trSaglikSigortasiUcretleriTablo" style="display:none;">
+                                    <td class="baslik" style="vertical-align:top;"></td>
+                                    <td colspan="3">
+                                        <table style="border:1px dashed silver;margin-bottom:10px;">
+                                            <tr>
+                                                <td>
+                                                    <label style="width:100%;display:block" class="baslik">Başlangıç</label>
+                                                    <input id="Ucretler_SaglikSigortasiArray_Baslangic" name="Ucretler_SaglikSigortasiArray_Baslangic" type="text" style="width:50px;" />
+                                                </td>
+                                                <td>
+                                                    <label style="width:100%;display:block" class="baslik">Bitiş</label>
+                                                    <input id="Ucretler_SaglikSigortasiArray_Bitis" name="Ucretler_SaglikSigortasiArray_Bitis" type="text" style="width:50px;" />
+                                                </td>
+                                                <td>
+                                                    <label style="width:100%;display:block" class="baslik">Fiyat</label>
+                                                    <input id="Ucretler_SaglikSigortasiArray_Fiyat" name="Ucretler_SaglikSigortasiArray_Fiyat" type="text" style="width:50px;" />
+                                                </td>
+                                                <td style="padding-top:15px;"><input id="btnUcretler_SaglikSigortasiUcretiEkle" type="button" value="Ekle" /></td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="4">
+                                                    <table id="hor-zebra" class="tblSaglikSigortasiUcretleri" style="width:217px;margin: 0px !important;">
+                                                        <tbody></tbody>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="baslik" colspan="4">
+                                        Hava Alanı Karşılama (Tek Yön)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="baslik" align="right">
+                                        Hava Alanı Adı
+                                    </td>
+                                    <td>
+                                        <input id="Ucretler_HavaAlaniAdi" name="Ucretler_HavaAlaniAdi" value="" type="text" style="width:150px;" />
+                                    </td>
+                                    <td class="baslik">
+                                        Ücreti
+                                    </td>
+                                    <td>
+                                        <input id="Ucretler_HavaAlaniUcreti" name="Ucretler_HavaAlaniUcreti" value="" type="text" style="width:150px;" />
+                                        <input id="btnHavaAlaniEkle" type="button" value="Ekle" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="baslik" colspan="4">
+                                        Hava Alanı Listesi
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="4">
+                                        <table id="hor-zebra" class="tblHavaAlanlari" style="width:100%;margin: 0px !important;"></table>
+                                    </td>
+
+                                </tr>
+                                <tr>
+                                    <td colspan="4">
+                                        <input id="okulId" name="okulId" type="hidden" value="@ViewBag.OkulId" />
+                                        <input id="Ucretler_HavaAlaniKarsilama" name="Ucretler_HavaAlaniKarsilama" type="hidden" value="@Model.Ucretler_HavaAlaniKarsilama" />
+                                        <input id="Ucretler_OkulKayitUcretiArray" name="Ucretler_OkulKayitUcretiArray" type="hidden" value="@Model.Ucretler_OkulKayitUcretiArray" />
+                                        <input id="Ucretler_KonaklamaAyarlamaUcretiArray" name="Ucretler_KonaklamaAyarlamaUcretiArray" type="hidden" value="@Model.Ucretler_KonaklamaAyarlamaUcretiArray" />
+                                        <input id="Ucretler_MateryalUcretiArray" name="Ucretler_MateryalUcretiArray" type="hidden" value="@Model.Ucretler_MateryalUcretiArray" />
+                                        <input id="Ucretler_SaglikSigortasiArray" name="Ucretler_SaglikSigortasiArray" type="hidden" value="@Model.Ucretler_SaglikSigortasiArray" />
+                                        <input id="Ucretler_OkulKayitEkUcretArray" name="Ucretler_OkulKayitEkUcretArray" type="hidden" value="@Model.Ucretler_OkulKayitEkUcretArray" />
+                                        <input id="Ucretler_KonaklamaAyarlamaEkUcretArray" name="Ucretler_KonaklamaAyarlamaEkUcretArray" type="hidden" value="@Model.Ucretler_KonaklamaAyarlamaEkUcretArray" />
+                                        <input id="Ucretler_KargoHariciKurslar" name="Ucretler_KargoHariciKurslar" type="hidden" value="@ViewBag.KargoHariclerIcinKursTipleri" />
+                                        <input id="btnKaydet" type="submit" value="Kaydet" />
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+            }
+
+        </td>
+    </tr>
+
+</table>
+
+<script type="text/javascript">
+    $(function () {
+        okulEkUcretler.init();
+
+        okulEkUcretler.okulEkUcretAta();
+        okulEkUcretler.okulKayitEkUcretAta();
+
+        okulEkUcretler.okulEkUcretKonaklamaAta();
+        okulEkUcretler.okulEkUcretKonaklamaEkUcretAta();
+
+        okulEkUcretler.okulEkUcretMateryalUcretleriniAta();
+        okulEkUcretler.okulEkUcretSaglikSigortasiUcretleriniAta();
+        okulEkUcretler.havaAlaniKarsilamaAta();
+
+        kursTipi.tarihGoster('Ucretler_OkulKayitEkUcretArray_Baslangic');
+        kursTipi.tarihGoster('Ucretler_OkulKayitEkUcretArray_Bitis');
+
+        kursTipi.tarihGoster('Ucretler_KonaklamaAyarlamaEkUcretArray_Baslangic');
+        kursTipi.tarihGoster('Ucretler_KonaklamaAyarlamaEkUcretArray_Bitis');
+    });
+
+</script>

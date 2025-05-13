@@ -1,0 +1,56 @@
+﻿@{
+
+    List<WebApp.Models.DilOkulu_KursTipleri> kursTipleri = null;
+    if (ViewBag.KursTipleri != null)
+    {
+        kursTipleri = (List<WebApp.Models.DilOkulu_KursTipleri>)ViewBag.KursTipleri;
+    }
+}
+<table cellpadding="0" cellspacing="0" class="OrtaMenu">
+    <tr>
+        <td class="OrtaMenuRow">
+            <table cellpadding="0" cellspacing="0" class="fiyatTable">
+                <tr>
+                    <td class="baslik">
+                        Kurs Tipleri<span class="SpanZorunluAlan">*</span>
+                    </td>
+                    <td colspan="2">
+                        <select id="kursTipi" name="kursTipi" class="DropDownList">
+                            <option value="">Seçin...</option>
+                            @foreach (var item in kursTipleri)
+                            {
+                                <option value="@item.Id" @(ViewBag.KursTipiId == item.Id ? "selected" : "")>@item.Baslik</option>
+                            }
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="baslik">
+                        Promosyon Modelleri<span class="SpanZorunluAlan">*</span>
+                    </td>
+                    <td colspan="2">
+                        <select id="promosyonTipi" name="promosyonTipi" class="DropDownList">
+                            <option value="">Seçin...</option>
+                            <option value="1">Ekstra Hafta Promosyonu</option>
+                            <option value="2">Yüzdesel İndirim</option><!--Eski Deger: İndirim Promosyonu-->
+                            <option value="3">Fiyat Bazlı İndirim</option><!--Eski Deger: Kurs Bazlı Promosyon-->
+                            <option value="4">İndirimli Birim Fiyat</option><!--İndirimli Birim Fiyat Promosyonu-->
+
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        <!--Ajax ile dolacak ( promosyonTanimi.init();)-->
+                        <div id="promosyonTanimiHaftaTanimlari"></div>
+
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>
+<script>
+
+</script>

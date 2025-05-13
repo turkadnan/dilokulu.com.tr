@@ -1,0 +1,609 @@
+﻿body {
+    font-family: Tahoma;
+    font-size: 11px;
+    color: #000000;
+    text-decoration: none;
+    font-weight: normal;
+    font-style: normal;
+    margin: 0px 0px 0px 0px;
+}
+
+.MasterTable {
+    width: 1000px;
+    overflow: hidden;
+}
+
+.MasterRow1 {
+    width: 100%;
+    height: 50px;
+}
+
+.MasterRow2 {
+    width: 100%;
+}
+
+.MasterRow1_Column1 {
+    height: 50px;
+    text-align: left;
+    padding: 15px 0px 15px 15px;
+    width: 40%;
+}
+
+.MasterRow1_Column2 {
+    height: 50px;
+    text-align: right;
+    padding: 15px 15px 15px 0px;
+    width: 40%;
+}
+
+.MasterRow3_Column1 {
+    width: 185px;
+    vertical-align: top;
+    text-align: left;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 15px;
+    background-image: url(../Images/MasterPages/YanBack.jpg);
+    background-repeat: repeat-x;
+    height: 600px;
+}
+
+.MasterRow3_Column2 {
+    vertical-align: top;
+    text-align: left;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 15px;
+}
+
+.YanMenu {
+    width: 185px;
+}
+
+.YanMenuRowTitle {
+    width: 185px;
+    height: 25px;
+    font-size: 12px;
+    font-weight: bold;
+    color: Green;
+    vertical-align: middle;
+    border-bottom: solid 1px #c0c0c0;
+}
+
+.YanMenuRow {
+    width: 185px;
+    padding: 3px 0px 3px 0px;
+    vertical-align: middle;
+}
+
+    .YanMenuRow .Aktif {
+        font-weight: bold;
+        color: Navy;
+        text-decoration: none;
+    }
+
+    .YanMenuRow .Pasif {
+        color: Navy;
+        text-decoration: none;
+    }
+
+    .YanMenuRow a:hover {
+        color: Navy;
+        text-decoration: underline;
+    }
+
+.DropDownList {
+    font-family: Tahoma;
+    font-size: 11px;
+    color: Navy;
+    padding: 3px 3px 3px 3px;
+    border: solid 1px #c0c0c0;
+}
+
+.TextBox {
+    font-family: Tahoma;
+    font-size: 11px;
+    color: Navy;
+    border: solid 1px #c0c0c0;
+    padding: 3px 3px 3px 3px;
+}
+
+.Button {
+    font-family: Tahoma;
+    font-size: 11px;
+    color: Navy;
+    background-color: #e8e8e8;
+    border: solid 1px #c0c0c0;
+    padding: 3px 3px 3px 3px;
+    font-weight: bold;
+}
+
+.CheckBox {
+    font-family: Tahoma;
+    font-size: 11px;
+    color: Navy;
+}
+
+.OrtaMenu {
+    width: 100%;
+}
+
+.OrtaMenuRowTitle {
+    width: 100%;
+    height: 25px;
+    font-size: 12px;
+    font-weight: bold;
+    color: Navy;
+    vertical-align: middle;
+    border-bottom: solid 1px #e8e8e8;
+}
+
+.OrtaMenuRow {
+    width: 100%;
+    vertical-align: top;
+}
+
+.OrtaMenuRowC1 {
+    width: 120px;
+    padding: 10px 0px 5px 0px;
+    vertical-align: top;
+    text-align: left;
+    font-weight: bold;
+    color: Maroon;
+    border-bottom: solid 1px #e8e8e8;
+}
+
+.OrtaMenuRowC2 {
+    padding: 7px 0px 7px 0px;
+    vertical-align: top;
+    text-align: left;
+    border-bottom: solid 1px #e8e8e8;
+    margin-left: 40px;
+}
+/* Menü */
+#Menu {
+    float: left;
+    list-style-type: none;
+}
+
+    #Menu .Aktif {
+        float: left;
+        margin-left: 5px;
+        display: block;
+        background-color: #e8e8e8;
+        height: 15px;
+        padding: 5px 15px 5px 15px;
+        color: #666666;
+        font-weight: bold;
+        text-decoration: none;
+    }
+
+    #Menu .Pasif {
+        float: left;
+        margin-left: 5px;
+        display: block;
+        background-color: #C0C0C0;
+        height: 15px;
+        padding: 5px 15px 5px 15px;
+        color: #666666;
+        font-weight: bold;
+        text-decoration: none;
+    }
+
+        #Menu .Pasif:hover {
+            float: left;
+            margin-left: 5px;
+            display: block;
+            background-color: #808080;
+            height: 15px;
+            padding: 5px 15px 5px 15px;
+            color: White;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+#Cikis {
+    margin-right: 15px;
+    display: block;
+    background-color: #e8e8e8;
+    height: 15px;
+    padding: 5px 15px 5px 15px;
+    color: #990000;
+    font-weight: bold;
+    text-decoration: none;
+    float: right;
+}
+
+    #Cikis a {
+        text-decoration: none;
+        color: #990000;
+    }
+
+.MenuWindow {
+    border-bottom: solid 5px #e8e8e8;
+    height: 25px;
+    padding-left: 10px;
+}
+/* Menü */
+
+.HaberListeTitle1 {
+    width: 150px;
+    height: 25px;
+    background-color: #666666;
+    vertical-align: middle;
+    border-left: solid 1px #666666;
+    text-align: left;
+    padding-left: 5px;
+    color: #FFFFFF;
+    font-weight: bold;
+    border-bottom: solid 1px #666666;
+    border-top: solid 1px #666666;
+}
+
+.HaberListeTitle2 {
+    height: 25px;
+    background-color: #666666;
+    vertical-align: middle;
+    text-align: left;
+    padding-left: 5px;
+    color: #FFFFFF;
+    font-weight: bold;
+    border-bottom: solid 1px #666666;
+    border-right: solid 1px #666666;
+    border-top: solid 1px #666666;
+    border-left: solid 1px #666666;
+}
+
+.HaberListeTitle3 {
+    width: 100px;
+    height: 25px;
+    background-color: #666666;
+    vertical-align: middle;
+    text-align: left;
+    padding-left: 5px;
+    color: #FFFFFF;
+    font-weight: bold;
+    border-bottom: solid 1px #666666;
+    border-right: solid 1px #666666;
+    border-top: solid 1px #666666;
+}
+
+.HaberListeTitle4 {
+    width: 75px;
+    height: 25px;
+    background-color: #666666;
+    vertical-align: middle;
+    text-align: left;
+    padding-left: 5px;
+    color: #FFFFFF;
+    font-weight: bold;
+    border-bottom: solid 1px #666666;
+    border-right: solid 1px #666666;
+    border-top: solid 1px #666666;
+}
+
+.HaberListeTitle5 {
+    width: 25px;
+    height: 25px;
+    background-color: #666666;
+    vertical-align: middle;
+    text-align: left;
+    padding-left: 5px;
+    color: #FFFFFF;
+    font-weight: bold;
+    border-bottom: solid 1px #666666;
+    border-right: solid 1px #666666;
+    border-top: solid 1px #666666;
+}
+
+.HaberListeRowC1 {
+    width: 150px;
+    height: 23px;
+    vertical-align: middle;
+    text-align: left;
+    padding-left: 5px;
+    border-bottom: solid 1px #e8e8e8;
+    border-left: solid 1px #e8e8e8;
+}
+
+.HaberListeRowC2 {
+    height: 23px;
+    vertical-align: middle;
+    text-align: left;
+    padding-left: 5px;
+    border-bottom: solid 1px #e8e8e8;
+    border-right: solid 1px #e8e8e8;
+    border-left: solid 1px #e8e8e8;
+}
+
+.HaberListeRowC3 {
+    width: 100px;
+    height: 23px;
+    vertical-align: middle;
+    text-align: left;
+    padding-left: 5px;
+    border-bottom: solid 1px #e8e8e8;
+    border-right: solid 1px #e8e8e8;
+}
+
+.HaberListeRowC4 {
+    width: 75px;
+    height: 23px;
+    vertical-align: middle;
+    text-align: left;
+    padding-left: 5px;
+    border-bottom: solid 1px #e8e8e8;
+    border-right: solid 1px #e8e8e8;
+}
+
+.HaberListeRowC5 {
+    width: 25px;
+    height: 23px;
+    vertical-align: middle;
+    text-align: left;
+    padding-left: 5px;
+    border-bottom: solid 1px #e8e8e8;
+    border-right: solid 1px #e8e8e8;
+}
+
+.Column1 {
+    width: 21px;
+}
+
+.Column2 {
+    width: 96px;
+    overflow-x: auto;
+    word-wrap: break-word;
+}
+
+.Column3 {
+    width: 96px;
+    overflow-x: auto;
+    word-wrap: break-word;
+}
+
+.Column4 {
+    width: 196px;
+    overflow-x: auto;
+    word-wrap: break-word;
+}
+
+.Column5 {
+    width: 96px;
+    overflow-x: auto;
+    word-wrap: break-word;
+}
+
+.Column6 {
+    width: 78px;
+    overflow-x: auto;
+    word-wrap: break-word;
+}
+
+.Column7 {
+    width: 150px;
+    overflow-x: auto;
+    word-wrap: break-word;
+}
+
+.Column8 {
+    width: 80px;
+    overflow-x: auto;
+    word-wrap: break-word;
+}
+
+.Column9 {
+    width: 60px;
+    overflow-x: auto;
+    word-wrap: break-word;
+}
+
+.Column10 {
+    width: 100px;
+    overflow-x: auto;
+    word-wrap: break-word;
+}
+
+.tableList td {
+    /* border:1px solid silver*/
+    vertical-align: top;
+    padding-left: 5px;
+}
+
+.tableList odd {
+    background-color: blue;
+}
+
+#gallery-navigator {
+    float: left;
+    width: 420px;
+    margin: 0 120px 20px 0px;
+    position: relative;
+}
+
+    #gallery-navigator a {
+        text-align: center;
+        font-family: Verdana;
+        ;
+        color: #853532;
+        text-decoration: none;
+        font-size: 14px;
+        font-weight: 700;
+    }
+
+    #gallery-navigator .gallery-back {
+        float: left;
+    }
+
+    #gallery-navigator .gallery-next {
+        float: right;
+    }
+
+    #gallery-navigator ul {
+        float: left;
+        margin: 0px 40px;
+        list-style-type: none;
+    }
+
+        #gallery-navigator ul li {
+            float: left;
+        }
+
+            #gallery-navigator ul li a {
+                float: left;
+                padding: 0 10px;
+            }
+
+            #gallery-navigator ul li .active {
+                float: left;
+                padding: 0 10px;
+            }
+
+.SpanZorunluAlan {
+    margin-left: 5px;
+    color: red;
+    font-weight: 700;
+}
+
+.divErrBox {
+    width: 100%;
+    background-color: rgba(255, 0, 0, 0.75);
+    color: white;
+    display: inline-block;
+    padding: 10px;
+    position: fixed;
+    top: 0px;
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+    line-height: 20px;
+    height: 74px;
+}
+
+.divSuccesBox {
+    width: 100%;
+    background-color: rgba(0, 255, 52, 0.75);
+    color: white;
+    display: inline-block;
+    padding: 10px;
+    position: fixed;
+    top: 0px;
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+    line-height: 20px;
+    height: 74px;
+}
+
+#spanMessageText {
+    display: block;
+}
+
+
+
+/*overlay*/
+div#overlay {
+    display: none;
+    z-index: 2;
+    background: #000;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0px;
+    left: 0px;
+    text-align: center;
+}
+
+div#Loader {
+    display: none;
+    position: relative;
+    z-index: 3;
+    margin: 150px auto 0px auto;
+    width: 300px;
+    height: 300px;
+    background-color: transparent;
+    color: #000;
+}
+
+div#wrapper {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+}
+/*overlay*/
+/*Fiyat Modülü*/
+.fiyatTable {
+    margin-top: 5px;
+}
+
+    .fiyatTable .baslik {
+        font-weight: bold;
+        color: Maroon;
+    }
+
+    .fiyatTable td {
+        height: 30px;
+        padding: 0px 5px 0px 5px;
+        vertical-align: middle;
+    }
+
+    .fiyatTable .borderRight {
+        border-right: 1px dashed silver;
+    }
+
+    .fiyatTable label {
+        margin-top: 0;
+        vertical-align: top;
+    }
+
+    .fiyatTable input[type="radio"] {
+        margin-top: 0;
+    }
+
+.fiyatTab {
+    clear: both;
+    border-bottom: solid 5px silver;
+    margin-top: 15px;
+    height: 26px;
+}
+
+    .fiyatTab a {
+        width: 135px;
+        height: 21px;
+        padding-top: 5px;
+        border: 1px solid silver;
+        margin-left: 10px;
+        display: inline-block;
+        overflow: hidden;
+        text-decoration: none;
+        font-size: 11px;
+        text-align: center;
+        vertical-align: bottom;
+        color: #666666;
+        float: left;
+        font-weight: bold;
+    }
+
+        .fiyatTab a:hover {
+            background-color: #808080 !important;
+            color: #fff;
+        }
+
+        .fiyatTab a.active {
+            background-color: silver !important;
+            color: #666666;
+        }
+/*Fiyat Modülü*/
+
+.activeImage {
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+
+}
+
+.passiveImage {
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+}

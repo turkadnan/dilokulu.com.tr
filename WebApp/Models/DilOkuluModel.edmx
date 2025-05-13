@@ -1,0 +1,2379 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="DB110129183811Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2005" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityType Name="DilOkulu_Diller">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Baslik" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Seo_Keywords" Type="nvarchar" MaxLength="250" />
+          <Property Name="Seo_Descriptions" Type="nvarchar" MaxLength="250" />
+          <Property Name="Aciklama" Type="nvarchar(max)" />
+          <Property Name="Resim" Type="nvarchar" MaxLength="300" />
+          <Property Name="Url" Type="nvarchar" MaxLength="300" />
+          <Property Name="Oncelik" Type="tinyint" />
+          <Property Name="KayitTarihi" Type="datetime" Nullable="false" />
+          <Property Name="Durumu" Type="tinyint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DilOkulu_EtiketIliskileri">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EtiketId" Type="int" Nullable="false" />
+          <Property Name="EtiketTipi" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="IcerikId" Type="int" Nullable="false" />
+          <Property Name="KayitTarihi" Type="datetime" Nullable="false" />
+          <Property Name="Durumu" Type="tinyint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DilOkulu_Etiketler">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Baslik" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="KayitTarihi" Type="datetime" Nullable="false" />
+          <Property Name="Durumu" Type="tinyint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DilOkulu_GaleriDosyalari">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="GaleriId" Type="int" Nullable="false" />
+          <Property Name="DosyaPath" Type="nvarchar" MaxLength="350" />
+          <Property Name="KayitTarihi" Type="datetime" Nullable="false" />
+          <Property Name="Durumu" Type="tinyint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DilOkulu_Galeriler">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Baslik" Type="nvarchar" MaxLength="350" />
+          <Property Name="KayitTarihi" Type="datetime" Nullable="false" />
+          <Property Name="Durumu" Type="tinyint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DilOkulu_Haberler">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Baslik" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="Seo_Keywords" Type="nvarchar" MaxLength="250" />
+          <Property Name="Seo_Descriptions" Type="nvarchar" MaxLength="250" />
+          <Property Name="Ozet" Type="nvarchar" MaxLength="900" />
+          <Property Name="Icerik" Type="nvarchar(max)" />
+          <Property Name="ResimUrl" Type="nvarchar" MaxLength="250" />
+          <Property Name="ResimThumbUrl" Type="nvarchar" MaxLength="250" />
+          <Property Name="Url" Type="nvarchar" MaxLength="300" />
+          <Property Name="KayitTarihi" Type="datetime" Nullable="false" />
+          <Property Name="Oncelik" Type="int" Nullable="false" />
+          <Property Name="Durumu" Type="tinyint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DilOkulu_KonaklamaKategorileri">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Baslik" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="KayitTarihi" Type="datetime" Nullable="false" />
+          <Property Name="Durumu" Type="tinyint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DilOkulu_KonaklamaTipiEkUcretleri">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="KonaklamaTipId" Type="int" Nullable="false" />
+          <Property Name="BaslangicTarihi" Type="datetime" Nullable="false" />
+          <Property Name="BititisTarihi" Type="datetime" Nullable="false" />
+          <Property Name="MaksimumHafta" Type="int" />
+          <Property Name="Fiyat" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="KayitTarihi" Type="datetime" Nullable="false" />
+          <Property Name="Durumu" Type="tinyint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DilOkulu_KonaklamaTipiFiyatlandirmalari">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="KonaklamaTipiId" Type="int" Nullable="false" />
+          <Property Name="FiyatlandirmaModelId" Type="tinyint" Nullable="false" />
+          <Property Name="StandartHafta_HaftaSayisi" Type="int" />
+          <Property Name="HerHaftayaOzel_Hafta" Type="int" />
+          <Property Name="HaftaBazliBirimFiyatli_HaftaBaslangic" Type="int" />
+          <Property Name="HaftaBazliBirimFiyatli_HaftaBitis" Type="int" />
+          <Property Name="Fiyat" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="KayitTarihi" Type="datetime" Nullable="false" />
+          <Property Name="Durumu" Type="tinyint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DilOkulu_KonaklamaTipiPromosyonTanimlari">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="KonaklamaTipiId" Type="int" Nullable="false" />
+          <Property Name="PromosyonModelId" Type="tinyint" Nullable="false" />
+          <Property Name="ExtraHafta_MinimumHafta" Type="int" />
+          <Property Name="ExtraHafta_UcretsizHaftaSayisi" Type="int" />
+          <Property Name="IndirimPromosyonu_Hafta" Type="int" />
+          <Property Name="IndirimPromosyonu_HaftaMax" Type="int" />
+          <Property Name="IndirimPromosyonu_Oran" Type="int" />
+          <Property Name="IndirimPromosyonu_BirimFiyat" Type="int" />
+          <Property Name="KonaklamaBazli_Hafta" Type="int" />
+          <Property Name="KonaklamaBazli_Fiyat" Type="int" />
+          <Property Name="PromosyonBitisTarihi" Type="datetime" />
+          <Property Name="KalisTarihiBaslangic" Type="datetime" />
+          <Property Name="KalisTarihiBitis" Type="datetime" />
+          <Property Name="KayitTarihi" Type="datetime" Nullable="false" />
+          <Property Name="Durumu" Type="tinyint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DilOkulu_KonaklamaTipleri">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="OkulId" Type="int" Nullable="false" />
+          <Property Name="KonaklamaKategoriId" Type="int" Nullable="false" />
+          <Property Name="Baslik" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="BasTarihiYilBoyu" Type="bit" />
+          <Property Name="BasTarihiOzel" Type="bit" />
+          <Property Name="OzelTarihListesi" Type="nvarchar" MaxLength="250" />
+          <Property Name="Aciklama" Type="nvarchar" MaxLength="900" />
+          <Property Name="KayitTarihi" Type="datetime" Nullable="false" />
+          <Property Name="Durumu" Type="tinyint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DilOkulu_Kullanicilar">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AdSoyad" Type="nvarchar" MaxLength="80" Nullable="false" />
+          <Property Name="KullaniciAdi" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="Sifre" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="KayitTarihi" Type="datetime" Nullable="false" />
+          <Property Name="Durumu" Type="tinyint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DilOkulu_KursKategorileri">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Baslik" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="DilId" Type="int" />
+          <Property Name="KayitTarihi" Type="datetime" Nullable="false" />
+          <Property Name="Durumu" Type="tinyint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DilOkulu_KursTipiEkUcretleri">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="KursTipId" Type="int" Nullable="false" />
+          <Property Name="BaslangicTarihi" Type="datetime" Nullable="false" />
+          <Property Name="BititisTarihi" Type="datetime" Nullable="false" />
+          <Property Name="MaksimumHafta" Type="int" />
+          <Property Name="Fiyat" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="KayitTarihi" Type="datetime" Nullable="false" />
+          <Property Name="Durumu" Type="tinyint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DilOkulu_KursTipiFiyatlandirmalari">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="KursTipiId" Type="int" Nullable="false" />
+          <Property Name="FiyatlandirmaModelId" Type="tinyint" Nullable="false" />
+          <Property Name="StandartHafta_HaftaSayisi" Type="int" />
+          <Property Name="HerHaftayaOzel_Hafta" Type="int" />
+          <Property Name="HaftaBazliBirimFiyatli_HaftaBaslangic" Type="int" />
+          <Property Name="HaftaBazliBirimFiyatli_HaftaBitis" Type="int" />
+          <Property Name="Fiyat" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="KayitTarihi" Type="datetime" Nullable="false" />
+          <Property Name="Durumu" Type="tinyint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DilOkulu_KursTipiKargoHaricler">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="OkulId" Type="int" Nullable="false" />
+          <Property Name="KursTipiId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DilOkulu_KursTipiPromosyonTanimlari">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="KursTipiId" Type="int" Nullable="false" />
+          <Property Name="PromosyonModelId" Type="tinyint" Nullable="false" />
+          <Property Name="ExtraHafta_MinimumHafta" Type="int" />
+          <Property Name="ExtraHafta_UcretsizHaftaSayisi" Type="int" />
+          <Property Name="IndirimPromosyonu_Hafta" Type="int" />
+          <Property Name="IndirimPromosyonu_HaftaMax" Type="int" />
+          <Property Name="IndirimPromosyonu_Oran" Type="int" />
+          <Property Name="IndirimPromosyonu_BirimFiyat" Type="int" />
+          <Property Name="KursBazli_Hafta" Type="int" />
+          <Property Name="KursBazli_Fiyat" Type="int" />
+          <Property Name="PromosyonBitisTarihi" Type="datetime" />
+          <Property Name="KursTarihiBaslangic" Type="datetime" />
+          <Property Name="KursTarihiBitis" Type="datetime" />
+          <Property Name="KayitTarihi" Type="datetime" Nullable="false" />
+          <Property Name="Durumu" Type="tinyint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DilOkulu_KursTipleri">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="OkulId" Type="int" Nullable="false" />
+          <Property Name="KursKategoriId" Type="int" Nullable="false" />
+          <Property Name="Baslik" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="BasTarihiHerPazartesi" Type="bit" />
+          <Property Name="BasTarihiOzel" Type="bit" />
+          <Property Name="OzelTarihListesi" Type="nvarchar" MaxLength="800" />
+          <Property Name="Aciklama" Type="nvarchar" MaxLength="900" />
+          <Property Name="KayitTarihi" Type="datetime" Nullable="false" />
+          <Property Name="Durumu" Type="tinyint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DilOkulu_Makaleler">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="YazarId" Type="int" Nullable="false" />
+          <Property Name="KategoriId" Type="int" Nullable="false" />
+          <Property Name="Baslik" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="Seo_Keywords" Type="nvarchar" MaxLength="250" />
+          <Property Name="Seo_Descriptions" Type="nvarchar" MaxLength="250" />
+          <Property Name="Ozet" Type="nvarchar" MaxLength="900" />
+          <Property Name="Icerik" Type="nvarchar(max)" />
+          <Property Name="ResimUrl" Type="nvarchar" MaxLength="250" />
+          <Property Name="Url" Type="nvarchar" MaxLength="300" />
+          <Property Name="ResimThumbUrl" Type="nvarchar" MaxLength="250" />
+          <Property Name="KayitTarihi" Type="datetime" Nullable="false" />
+          <Property Name="Durumu" Type="tinyint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DilOkulu_Merkez">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Baslik" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="Ozet" Type="nvarchar(max)" />
+          <Property Name="GenelBilgi" Type="nvarchar(max)" />
+          <Property Name="Seo_Keywords" Type="nvarchar" MaxLength="250" />
+          <Property Name="Seo_Descriptions" Type="nvarchar" MaxLength="250" />
+          <Property Name="KurulusTarihi" Type="nvarchar" MaxLength="15" />
+          <Property Name="Logo" Type="nvarchar" MaxLength="250" />
+          <Property Name="Url" Type="nvarchar" MaxLength="300" />
+          <Property Name="OkulSiteLink" Type="nvarchar" MaxLength="250" />
+          <Property Name="FacebookLink" Type="nvarchar" MaxLength="250" />
+          <Property Name="YoutubeLink" Type="nvarchar" MaxLength="250" />
+          <Property Name="TwitterLink" Type="nvarchar" MaxLength="250" />
+          <Property Name="FiyatListesi" Type="nvarchar" MaxLength="250" />
+          <Property Name="Akreditasyonlar" Type="nvarchar" MaxLength="500" />
+          <Property Name="Promosyonlar" Type="nvarchar" MaxLength="250" />
+          <Property Name="Brosur" Type="nvarchar" MaxLength="250" />
+          <Property Name="KayitTarihi" Type="datetime" Nullable="false" />
+          <Property Name="Oncelik" Type="int" Nullable="false" />
+          <Property Name="Durumu" Type="tinyint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DilOkulu_Okullar">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MerkezId" Type="int" Nullable="false" />
+          <Property Name="DilId" Type="int" Nullable="false" />
+          <Property Name="UlkeId" Type="int" Nullable="false" />
+          <Property Name="SehirId" Type="int" Nullable="false" />
+          <Property Name="Baslik" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="Seo_Keywords" Type="nvarchar" MaxLength="250" />
+          <Property Name="Seo_Descriptions" Type="nvarchar" MaxLength="250" />
+          <Property Name="OkulTipi" Type="nvarchar" MaxLength="500" />
+          <Property Name="OkulKapasitesi" Type="nvarchar" MaxLength="50" />
+          <Property Name="SinifKapasitesi" Type="nvarchar" MaxLength="50" />
+          <Property Name="KonaklamaTurleri" Type="nvarchar" MaxLength="500" />
+          <Property Name="OkulOlanaklari" Type="nvarchar" MaxLength="500" />
+          <Property Name="SosyalAktiviteler" Type="nvarchar" MaxLength="500" />
+          <Property Name="SunulanProgramlar" Type="nvarchar" MaxLength="500" />
+          <Property Name="Icerik" Type="nvarchar(max)" />
+          <Property Name="Harita" Type="nvarchar(max)" />
+          <Property Name="StreetView" Type="nvarchar(max)" />
+          <Property Name="VideoUrl" Type="nvarchar(max)" />
+          <Property Name="OnecikanOkul" Type="bit" />
+          <Property Name="GaleriId" Type="int" />
+          <Property Name="Url" Type="nvarchar" MaxLength="300" />
+          <Property Name="Ucretler_OkulKayitUcreti" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="Ucretler_OkulKayitUcretiArray" Type="nvarchar" MaxLength="800" />
+          <Property Name="Ucretler_OkulKayitEkUcretArray" Type="nvarchar" MaxLength="800" />
+          <Property Name="Ucretler_KonaklamaAyarlamaUcreti" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="Ucretler_KonaklamaAyarlamaUcretiArray" Type="nvarchar" MaxLength="900" />
+          <Property Name="Ucretler_KonaklamaAyarlamaEkUcretArray" Type="nvarchar" MaxLength="900" />
+          <Property Name="Ucretler_KargoUcreti" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="Ucretler_MateryalUcreti" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="Ucretler_MateryalUcretiArray" Type="nvarchar" MaxLength="900" />
+          <Property Name="Ucretler_MateryalTahsilatTipi" Type="nvarchar" MaxLength="20" />
+          <Property Name="Ucretler_HavaAlaniKarsilama" Type="nvarchar" MaxLength="900" />
+          <Property Name="Ucretler_SaglikSigortasi" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="Ucretler_SaglikSigortasiTahsilatTipi" Type="nvarchar" MaxLength="20" />
+          <Property Name="Ucretler_SaglikSigortasiArray" Type="nvarchar" MaxLength="900" />
+          <Property Name="PromosyonPdf" Type="nvarchar" MaxLength="250" />
+          <Property Name="PromosyonBitisTarihi" Type="datetime" />
+          <Property Name="KayitTarihi" Type="datetime" Nullable="false" />
+          <Property Name="Durumu" Type="tinyint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DilOkulu_ParaBirimleri">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Birim" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="Oncelik" Type="int" Nullable="false" />
+          <Property Name="Durumu" Type="tinyint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DilOkulu_Sehirler">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UlkeId" Type="int" Nullable="false" />
+          <Property Name="Baslik" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Seo_Keywords" Type="nvarchar" MaxLength="250" />
+          <Property Name="Seo_Descriptions" Type="nvarchar" MaxLength="250" />
+          <Property Name="Aciklama" Type="nvarchar(max)" />
+          <Property Name="Resim" Type="nvarchar" MaxLength="250" />
+          <Property Name="SehirProfili" Type="nvarchar" MaxLength="250" />
+          <Property Name="Oncelik" Type="tinyint" Nullable="false" />
+          <Property Name="Url" Type="nvarchar" MaxLength="300" />
+          <Property Name="KayitTarihi" Type="datetime" Nullable="false" />
+          <Property Name="Durumu" Type="tinyint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DilOkulu_Slider">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Baslik" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="Ozet" Type="nvarchar" MaxLength="900" />
+          <Property Name="PageLink" Type="nvarchar" MaxLength="900" />
+          <Property Name="ResimUrl" Type="nvarchar" MaxLength="250" />
+          <Property Name="ResimThumbUrl" Type="nvarchar" MaxLength="250" />
+          <Property Name="KayitTarihi" Type="datetime" Nullable="false" />
+          <Property Name="Oncelik" Type="int" Nullable="false" />
+          <Property Name="Durumu" Type="tinyint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DilOkulu_StatikLinkler">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Baslik" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="Link" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="LinkTipi" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Oncelik" Type="int" Nullable="false" />
+          <Property Name="KayitTarihi" Type="datetime" Nullable="false" />
+          <Property Name="Durumu" Type="tinyint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DilOkulu_StatikSayfalar">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Baslik" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="Seo_Title" Type="nvarchar" MaxLength="150" />
+          <Property Name="Seo_Keywords" Type="nvarchar" MaxLength="500" />
+          <Property Name="Seo_Descriptions" Type="nvarchar" MaxLength="500" />
+          <Property Name="Icerik" Type="nvarchar(max)" />
+          <Property Name="KayitTarihi" Type="datetime" Nullable="false" />
+          <Property Name="Durumu" Type="tinyint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DilOkulu_Subeler">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Baslik" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Telefon" Type="nvarchar" MaxLength="20" />
+          <Property Name="Fax" Type="nvarchar" MaxLength="20" />
+          <Property Name="Adres" Type="nvarchar" MaxLength="500" />
+          <Property Name="EPosta" Type="nvarchar" MaxLength="150" />
+          <Property Name="Icerik" Type="nvarchar(max)" />
+          <Property Name="KrokiLink" Type="nvarchar(max)" />
+          <Property Name="Url" Type="nvarchar" MaxLength="300" />
+          <Property Name="Oncelik" Type="int" />
+          <Property Name="KayitTarihi" Type="datetime" Nullable="false" />
+          <Property Name="Durumu" Type="tinyint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DilOkulu_SubeSayfalar">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SubeId" Type="int" Nullable="false" />
+          <Property Name="Keywords" Type="nvarchar" MaxLength="900" />
+          <Property Name="Description" Type="nvarchar" MaxLength="2000" />
+          <Property Name="Url" Type="nvarchar" MaxLength="300" />
+          <Property Name="Icerik" Type="nvarchar(max)" />
+          <Property Name="KayitTarihi" Type="datetime" Nullable="false" />
+          <Property Name="Durumu" Type="tinyint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DilOkulu_SunulanProgramlar">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Baslik" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="UstProgramId" Type="int" Nullable="false" />
+          <Property Name="KayitTarihi" Type="datetime" Nullable="false" />
+          <Property Name="Durumu" Type="tinyint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DilOkulu_Ulkeler">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DilId" Type="int" Nullable="false" />
+          <Property Name="Baslik" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Seo_Keywords" Type="nvarchar" MaxLength="250" />
+          <Property Name="Seo_Descriptions" Type="nvarchar" MaxLength="250" />
+          <Property Name="Aciklama" Type="nvarchar(max)" />
+          <Property Name="VizeBilgileri" Type="nvarchar(max)" />
+          <Property Name="CalismaIzni" Type="nvarchar(max)" />
+          <Property Name="YasamGiderleri" Type="nvarchar(max)" />
+          <Property Name="Ulasim" Type="nvarchar(max)" />
+          <Property Name="SaglikSistemi" Type="nvarchar(max)" />
+          <Property Name="Resim" Type="nvarchar" MaxLength="250" />
+          <Property Name="ParaBirimId" Type="int" />
+          <Property Name="VizeUcreti1" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="KacAyaKadar1" Type="int" />
+          <Property Name="VizeUcreti2" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="KacAyaKadar2" Type="int" />
+          <Property Name="VizeUcreti3" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="KacAyaKadar3" Type="int" />
+          <Property Name="Oncelik" Type="tinyint" Nullable="false" />
+          <Property Name="Url" Type="nvarchar" MaxLength="300" />
+          <Property Name="KayitTarihi" Type="datetime" Nullable="false" />
+          <Property Name="Durumu" Type="tinyint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DilOkulu_VizeRehberi">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Baslik" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="Seo_Keywords" Type="nvarchar" MaxLength="250" />
+          <Property Name="Seo_Descriptions" Type="nvarchar" MaxLength="250" />
+          <Property Name="Icerik" Type="nvarchar(max)" />
+          <Property Name="ResimUrl" Type="nvarchar" MaxLength="250" />
+          <Property Name="Url" Type="nvarchar" MaxLength="300" />
+          <Property Name="KayitTarihi" Type="datetime" Nullable="false" />
+          <Property Name="Oncelik" Type="int" Nullable="false" />
+          <Property Name="Durumu" Type="tinyint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DilOkulu_Yazarlar">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AdSoyad" Type="nvarchar" MaxLength="40" Nullable="false" />
+          <Property Name="YazarTipi" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Pozisyon" Type="nvarchar" MaxLength="250" />
+          <Property Name="Telefon" Type="nvarchar" MaxLength="100" />
+          <Property Name="EPosta" Type="nvarchar" MaxLength="150" />
+          <Property Name="Aciklama" Type="nvarchar" MaxLength="900" />
+          <Property Name="ResimUrl" Type="nvarchar" MaxLength="250" />
+          <Property Name="KayitTarihi" Type="datetime" Nullable="false" />
+          <Property Name="Durumu" Type="tinyint" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_DilOkulu_EtiketIliskileri_DilOkulu_Etiketler">
+          <End Role="DilOkulu_Etiketler" Type="Self.DilOkulu_Etiketler" Multiplicity="1" />
+          <End Role="DilOkulu_EtiketIliskileri" Type="Self.DilOkulu_EtiketIliskileri" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DilOkulu_Etiketler">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DilOkulu_EtiketIliskileri">
+              <PropertyRef Name="EtiketId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DilOkulu_GaleriDosyalari_DilOkulu_Galeriler">
+          <End Role="DilOkulu_Galeriler" Type="Self.DilOkulu_Galeriler" Multiplicity="1" />
+          <End Role="DilOkulu_GaleriDosyalari" Type="Self.DilOkulu_GaleriDosyalari" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DilOkulu_Galeriler">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DilOkulu_GaleriDosyalari">
+              <PropertyRef Name="GaleriId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DilOkulu_KonaklamaTipiEkUcretleri_DilOkulu_KonaklamaTipleri">
+          <End Role="DilOkulu_KonaklamaTipleri" Type="Self.DilOkulu_KonaklamaTipleri" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="DilOkulu_KonaklamaTipiEkUcretleri" Type="Self.DilOkulu_KonaklamaTipiEkUcretleri" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DilOkulu_KonaklamaTipleri">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DilOkulu_KonaklamaTipiEkUcretleri">
+              <PropertyRef Name="KonaklamaTipId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DilOkulu_KonaklamaTipiFiyatlandirmalari_DilOkulu_KonaklamaTipleri">
+          <End Role="DilOkulu_KonaklamaTipleri" Type="Self.DilOkulu_KonaklamaTipleri" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="DilOkulu_KonaklamaTipiFiyatlandirmalari" Type="Self.DilOkulu_KonaklamaTipiFiyatlandirmalari" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DilOkulu_KonaklamaTipleri">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DilOkulu_KonaklamaTipiFiyatlandirmalari">
+              <PropertyRef Name="KonaklamaTipiId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DilOkulu_KonaklamaTipiPromosyonTanimlari_DilOkulu_KonaklamaTipleri">
+          <End Role="DilOkulu_KonaklamaTipleri" Type="Self.DilOkulu_KonaklamaTipleri" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="DilOkulu_KonaklamaTipiPromosyonTanimlari" Type="Self.DilOkulu_KonaklamaTipiPromosyonTanimlari" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DilOkulu_KonaklamaTipleri">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DilOkulu_KonaklamaTipiPromosyonTanimlari">
+              <PropertyRef Name="KonaklamaTipiId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DilOkulu_KonaklamaTipleri_DilOkulu_KonaklamaKategorileri">
+          <End Role="DilOkulu_KonaklamaKategorileri" Type="Self.DilOkulu_KonaklamaKategorileri" Multiplicity="1" />
+          <End Role="DilOkulu_KonaklamaTipleri" Type="Self.DilOkulu_KonaklamaTipleri" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DilOkulu_KonaklamaKategorileri">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DilOkulu_KonaklamaTipleri">
+              <PropertyRef Name="KonaklamaKategoriId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DilOkulu_KonaklamaTipleri_DilOkulu_Okullar">
+          <End Role="DilOkulu_Okullar" Type="Self.DilOkulu_Okullar" Multiplicity="1" />
+          <End Role="DilOkulu_KonaklamaTipleri" Type="Self.DilOkulu_KonaklamaTipleri" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DilOkulu_Okullar">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DilOkulu_KonaklamaTipleri">
+              <PropertyRef Name="OkulId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DilOkulu_KursKategorileri_DilOkulu_Diller">
+          <End Role="DilOkulu_Diller" Type="Self.DilOkulu_Diller" Multiplicity="0..1" />
+          <End Role="DilOkulu_KursKategorileri" Type="Self.DilOkulu_KursKategorileri" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DilOkulu_Diller">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DilOkulu_KursKategorileri">
+              <PropertyRef Name="DilId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DilOkulu_KursTipiEkUcretleri_DilOkulu_KursTipleri">
+          <End Role="DilOkulu_KursTipleri" Type="Self.DilOkulu_KursTipleri" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="DilOkulu_KursTipiEkUcretleri" Type="Self.DilOkulu_KursTipiEkUcretleri" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DilOkulu_KursTipleri">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DilOkulu_KursTipiEkUcretleri">
+              <PropertyRef Name="KursTipId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DilOkulu_KursTipiFiyatlandirmalari_DilOkulu_KursTipleri">
+          <End Role="DilOkulu_KursTipleri" Type="Self.DilOkulu_KursTipleri" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="DilOkulu_KursTipiFiyatlandirmalari" Type="Self.DilOkulu_KursTipiFiyatlandirmalari" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DilOkulu_KursTipleri">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DilOkulu_KursTipiFiyatlandirmalari">
+              <PropertyRef Name="KursTipiId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DilOkulu_KursTipiKargoHaricler_DilOkulu_KursTipleri">
+          <End Role="DilOkulu_KursTipleri" Type="Self.DilOkulu_KursTipleri" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="DilOkulu_KursTipiKargoHaricler" Type="Self.DilOkulu_KursTipiKargoHaricler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DilOkulu_KursTipleri">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DilOkulu_KursTipiKargoHaricler">
+              <PropertyRef Name="KursTipiId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DilOkulu_KursTipiKargoHaricler_DilOkulu_Okullar">
+          <End Role="DilOkulu_Okullar" Type="Self.DilOkulu_Okullar" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="DilOkulu_KursTipiKargoHaricler" Type="Self.DilOkulu_KursTipiKargoHaricler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DilOkulu_Okullar">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DilOkulu_KursTipiKargoHaricler">
+              <PropertyRef Name="OkulId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DilOkulu_KursTipiPromosyonTanimlari_DilOkulu_KursTipleri">
+          <End Role="DilOkulu_KursTipleri" Type="Self.DilOkulu_KursTipleri" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="DilOkulu_KursTipiPromosyonTanimlari" Type="Self.DilOkulu_KursTipiPromosyonTanimlari" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DilOkulu_KursTipleri">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DilOkulu_KursTipiPromosyonTanimlari">
+              <PropertyRef Name="KursTipiId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DilOkulu_KursTipleri_DilOkulu_KursKategorileri">
+          <End Role="DilOkulu_KursKategorileri" Type="Self.DilOkulu_KursKategorileri" Multiplicity="1" />
+          <End Role="DilOkulu_KursTipleri" Type="Self.DilOkulu_KursTipleri" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DilOkulu_KursKategorileri">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DilOkulu_KursTipleri">
+              <PropertyRef Name="KursKategoriId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DilOkulu_KursTipleri_DilOkulu_Okullar">
+          <End Role="DilOkulu_Okullar" Type="Self.DilOkulu_Okullar" Multiplicity="1" />
+          <End Role="DilOkulu_KursTipleri" Type="Self.DilOkulu_KursTipleri" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DilOkulu_Okullar">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DilOkulu_KursTipleri">
+              <PropertyRef Name="OkulId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DilOkulu_Makaleler_DilOkulu_Yazarlar">
+          <End Role="DilOkulu_Yazarlar" Type="Self.DilOkulu_Yazarlar" Multiplicity="1" />
+          <End Role="DilOkulu_Makaleler" Type="Self.DilOkulu_Makaleler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DilOkulu_Yazarlar">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DilOkulu_Makaleler">
+              <PropertyRef Name="YazarId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DilOkulu_Sehirler_DilOkulu_Ulkeler">
+          <End Role="DilOkulu_Ulkeler" Type="Self.DilOkulu_Ulkeler" Multiplicity="1" />
+          <End Role="DilOkulu_Sehirler" Type="Self.DilOkulu_Sehirler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DilOkulu_Ulkeler">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DilOkulu_Sehirler">
+              <PropertyRef Name="UlkeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DilOkulu_SubeSayfalar_DilOkulu_Subeler">
+          <End Role="DilOkulu_Subeler" Type="Self.DilOkulu_Subeler" Multiplicity="1" />
+          <End Role="DilOkulu_SubeSayfalar" Type="Self.DilOkulu_SubeSayfalar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DilOkulu_Subeler">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DilOkulu_SubeSayfalar">
+              <PropertyRef Name="SubeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DilOkulu_Ulkeler_DilOkulu_Diller">
+          <End Role="DilOkulu_Diller" Type="Self.DilOkulu_Diller" Multiplicity="1" />
+          <End Role="DilOkulu_Ulkeler" Type="Self.DilOkulu_Ulkeler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DilOkulu_Diller">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DilOkulu_Ulkeler">
+              <PropertyRef Name="DilId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DilOkulu_Ulkeler_DilOkulu_ParaBirimleri">
+          <End Role="DilOkulu_ParaBirimleri" Type="Self.DilOkulu_ParaBirimleri" Multiplicity="0..1" />
+          <End Role="DilOkulu_Ulkeler" Type="Self.DilOkulu_Ulkeler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DilOkulu_ParaBirimleri">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DilOkulu_Ulkeler">
+              <PropertyRef Name="ParaBirimId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DB110129183811ModelStoreContainer">
+          <EntitySet Name="DilOkulu_Diller" EntityType="Self.DilOkulu_Diller" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DilOkulu_EtiketIliskileri" EntityType="Self.DilOkulu_EtiketIliskileri" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DilOkulu_Etiketler" EntityType="Self.DilOkulu_Etiketler" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DilOkulu_GaleriDosyalari" EntityType="Self.DilOkulu_GaleriDosyalari" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DilOkulu_Galeriler" EntityType="Self.DilOkulu_Galeriler" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DilOkulu_Haberler" EntityType="Self.DilOkulu_Haberler" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DilOkulu_KonaklamaKategorileri" EntityType="Self.DilOkulu_KonaklamaKategorileri" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DilOkulu_KonaklamaTipiEkUcretleri" EntityType="Self.DilOkulu_KonaklamaTipiEkUcretleri" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DilOkulu_KonaklamaTipiFiyatlandirmalari" EntityType="Self.DilOkulu_KonaklamaTipiFiyatlandirmalari" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DilOkulu_KonaklamaTipiPromosyonTanimlari" EntityType="Self.DilOkulu_KonaklamaTipiPromosyonTanimlari" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DilOkulu_KonaklamaTipleri" EntityType="Self.DilOkulu_KonaklamaTipleri" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DilOkulu_Kullanicilar" EntityType="Self.DilOkulu_Kullanicilar" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DilOkulu_KursKategorileri" EntityType="Self.DilOkulu_KursKategorileri" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DilOkulu_KursTipiEkUcretleri" EntityType="Self.DilOkulu_KursTipiEkUcretleri" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DilOkulu_KursTipiFiyatlandirmalari" EntityType="Self.DilOkulu_KursTipiFiyatlandirmalari" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DilOkulu_KursTipiKargoHaricler" EntityType="Self.DilOkulu_KursTipiKargoHaricler" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DilOkulu_KursTipiPromosyonTanimlari" EntityType="Self.DilOkulu_KursTipiPromosyonTanimlari" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DilOkulu_KursTipleri" EntityType="Self.DilOkulu_KursTipleri" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DilOkulu_Makaleler" EntityType="Self.DilOkulu_Makaleler" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DilOkulu_Merkez" EntityType="Self.DilOkulu_Merkez" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DilOkulu_Okullar" EntityType="Self.DilOkulu_Okullar" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DilOkulu_ParaBirimleri" EntityType="Self.DilOkulu_ParaBirimleri" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DilOkulu_Sehirler" EntityType="Self.DilOkulu_Sehirler" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DilOkulu_Slider" EntityType="Self.DilOkulu_Slider" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DilOkulu_StatikLinkler" EntityType="Self.DilOkulu_StatikLinkler" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DilOkulu_StatikSayfalar" EntityType="Self.DilOkulu_StatikSayfalar" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DilOkulu_Subeler" EntityType="Self.DilOkulu_Subeler" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DilOkulu_SubeSayfalar" EntityType="Self.DilOkulu_SubeSayfalar" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DilOkulu_SunulanProgramlar" EntityType="Self.DilOkulu_SunulanProgramlar" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DilOkulu_Ulkeler" EntityType="Self.DilOkulu_Ulkeler" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DilOkulu_VizeRehberi" EntityType="Self.DilOkulu_VizeRehberi" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DilOkulu_Yazarlar" EntityType="Self.DilOkulu_Yazarlar" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_DilOkulu_EtiketIliskileri_DilOkulu_Etiketler" Association="Self.FK_DilOkulu_EtiketIliskileri_DilOkulu_Etiketler">
+            <End Role="DilOkulu_Etiketler" EntitySet="DilOkulu_Etiketler" />
+            <End Role="DilOkulu_EtiketIliskileri" EntitySet="DilOkulu_EtiketIliskileri" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DilOkulu_GaleriDosyalari_DilOkulu_Galeriler" Association="Self.FK_DilOkulu_GaleriDosyalari_DilOkulu_Galeriler">
+            <End Role="DilOkulu_Galeriler" EntitySet="DilOkulu_Galeriler" />
+            <End Role="DilOkulu_GaleriDosyalari" EntitySet="DilOkulu_GaleriDosyalari" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DilOkulu_KonaklamaTipiEkUcretleri_DilOkulu_KonaklamaTipleri" Association="Self.FK_DilOkulu_KonaklamaTipiEkUcretleri_DilOkulu_KonaklamaTipleri">
+            <End Role="DilOkulu_KonaklamaTipleri" EntitySet="DilOkulu_KonaklamaTipleri" />
+            <End Role="DilOkulu_KonaklamaTipiEkUcretleri" EntitySet="DilOkulu_KonaklamaTipiEkUcretleri" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DilOkulu_KonaklamaTipiFiyatlandirmalari_DilOkulu_KonaklamaTipleri" Association="Self.FK_DilOkulu_KonaklamaTipiFiyatlandirmalari_DilOkulu_KonaklamaTipleri">
+            <End Role="DilOkulu_KonaklamaTipleri" EntitySet="DilOkulu_KonaklamaTipleri" />
+            <End Role="DilOkulu_KonaklamaTipiFiyatlandirmalari" EntitySet="DilOkulu_KonaklamaTipiFiyatlandirmalari" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DilOkulu_KonaklamaTipiPromosyonTanimlari_DilOkulu_KonaklamaTipleri" Association="Self.FK_DilOkulu_KonaklamaTipiPromosyonTanimlari_DilOkulu_KonaklamaTipleri">
+            <End Role="DilOkulu_KonaklamaTipleri" EntitySet="DilOkulu_KonaklamaTipleri" />
+            <End Role="DilOkulu_KonaklamaTipiPromosyonTanimlari" EntitySet="DilOkulu_KonaklamaTipiPromosyonTanimlari" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DilOkulu_KonaklamaTipleri_DilOkulu_KonaklamaKategorileri" Association="Self.FK_DilOkulu_KonaklamaTipleri_DilOkulu_KonaklamaKategorileri">
+            <End Role="DilOkulu_KonaklamaKategorileri" EntitySet="DilOkulu_KonaklamaKategorileri" />
+            <End Role="DilOkulu_KonaklamaTipleri" EntitySet="DilOkulu_KonaklamaTipleri" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DilOkulu_KonaklamaTipleri_DilOkulu_Okullar" Association="Self.FK_DilOkulu_KonaklamaTipleri_DilOkulu_Okullar">
+            <End Role="DilOkulu_Okullar" EntitySet="DilOkulu_Okullar" />
+            <End Role="DilOkulu_KonaklamaTipleri" EntitySet="DilOkulu_KonaklamaTipleri" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DilOkulu_KursKategorileri_DilOkulu_Diller" Association="Self.FK_DilOkulu_KursKategorileri_DilOkulu_Diller">
+            <End Role="DilOkulu_Diller" EntitySet="DilOkulu_Diller" />
+            <End Role="DilOkulu_KursKategorileri" EntitySet="DilOkulu_KursKategorileri" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DilOkulu_KursTipiEkUcretleri_DilOkulu_KursTipleri" Association="Self.FK_DilOkulu_KursTipiEkUcretleri_DilOkulu_KursTipleri">
+            <End Role="DilOkulu_KursTipleri" EntitySet="DilOkulu_KursTipleri" />
+            <End Role="DilOkulu_KursTipiEkUcretleri" EntitySet="DilOkulu_KursTipiEkUcretleri" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DilOkulu_KursTipiFiyatlandirmalari_DilOkulu_KursTipleri" Association="Self.FK_DilOkulu_KursTipiFiyatlandirmalari_DilOkulu_KursTipleri">
+            <End Role="DilOkulu_KursTipleri" EntitySet="DilOkulu_KursTipleri" />
+            <End Role="DilOkulu_KursTipiFiyatlandirmalari" EntitySet="DilOkulu_KursTipiFiyatlandirmalari" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DilOkulu_KursTipiKargoHaricler_DilOkulu_KursTipleri" Association="Self.FK_DilOkulu_KursTipiKargoHaricler_DilOkulu_KursTipleri">
+            <End Role="DilOkulu_KursTipleri" EntitySet="DilOkulu_KursTipleri" />
+            <End Role="DilOkulu_KursTipiKargoHaricler" EntitySet="DilOkulu_KursTipiKargoHaricler" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DilOkulu_KursTipiKargoHaricler_DilOkulu_Okullar" Association="Self.FK_DilOkulu_KursTipiKargoHaricler_DilOkulu_Okullar">
+            <End Role="DilOkulu_Okullar" EntitySet="DilOkulu_Okullar" />
+            <End Role="DilOkulu_KursTipiKargoHaricler" EntitySet="DilOkulu_KursTipiKargoHaricler" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DilOkulu_KursTipiPromosyonTanimlari_DilOkulu_KursTipleri" Association="Self.FK_DilOkulu_KursTipiPromosyonTanimlari_DilOkulu_KursTipleri">
+            <End Role="DilOkulu_KursTipleri" EntitySet="DilOkulu_KursTipleri" />
+            <End Role="DilOkulu_KursTipiPromosyonTanimlari" EntitySet="DilOkulu_KursTipiPromosyonTanimlari" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DilOkulu_KursTipleri_DilOkulu_KursKategorileri" Association="Self.FK_DilOkulu_KursTipleri_DilOkulu_KursKategorileri">
+            <End Role="DilOkulu_KursKategorileri" EntitySet="DilOkulu_KursKategorileri" />
+            <End Role="DilOkulu_KursTipleri" EntitySet="DilOkulu_KursTipleri" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DilOkulu_KursTipleri_DilOkulu_Okullar" Association="Self.FK_DilOkulu_KursTipleri_DilOkulu_Okullar">
+            <End Role="DilOkulu_Okullar" EntitySet="DilOkulu_Okullar" />
+            <End Role="DilOkulu_KursTipleri" EntitySet="DilOkulu_KursTipleri" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DilOkulu_Makaleler_DilOkulu_Yazarlar" Association="Self.FK_DilOkulu_Makaleler_DilOkulu_Yazarlar">
+            <End Role="DilOkulu_Yazarlar" EntitySet="DilOkulu_Yazarlar" />
+            <End Role="DilOkulu_Makaleler" EntitySet="DilOkulu_Makaleler" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DilOkulu_Sehirler_DilOkulu_Ulkeler" Association="Self.FK_DilOkulu_Sehirler_DilOkulu_Ulkeler">
+            <End Role="DilOkulu_Ulkeler" EntitySet="DilOkulu_Ulkeler" />
+            <End Role="DilOkulu_Sehirler" EntitySet="DilOkulu_Sehirler" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DilOkulu_SubeSayfalar_DilOkulu_Subeler" Association="Self.FK_DilOkulu_SubeSayfalar_DilOkulu_Subeler">
+            <End Role="DilOkulu_Subeler" EntitySet="DilOkulu_Subeler" />
+            <End Role="DilOkulu_SubeSayfalar" EntitySet="DilOkulu_SubeSayfalar" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DilOkulu_Ulkeler_DilOkulu_Diller" Association="Self.FK_DilOkulu_Ulkeler_DilOkulu_Diller">
+            <End Role="DilOkulu_Diller" EntitySet="DilOkulu_Diller" />
+            <End Role="DilOkulu_Ulkeler" EntitySet="DilOkulu_Ulkeler" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DilOkulu_Ulkeler_DilOkulu_ParaBirimleri" Association="Self.FK_DilOkulu_Ulkeler_DilOkulu_ParaBirimleri">
+            <End Role="DilOkulu_ParaBirimleri" EntitySet="DilOkulu_ParaBirimleri" />
+            <End Role="DilOkulu_Ulkeler" EntitySet="DilOkulu_Ulkeler" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DB110129183811Model" Alias="Self" xmlns="http://schemas.microsoft.com/ado/2008/09/edm" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation">
+        <EntityContainer Name="DilOkuluEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="DilOkulu_Kullanicilar" EntityType="DB110129183811Model.DilOkulu_Kullanicilar" />
+          <EntitySet Name="DilOkulu_Makaleler" EntityType="DB110129183811Model.DilOkulu_Makaleler" />
+          <EntitySet Name="DilOkulu_Yazarlar" EntityType="DB110129183811Model.DilOkulu_Yazarlar" />
+          <AssociationSet Name="FK_DilOkulu_Makaleler_DilOkulu_Yazarlar" Association="DB110129183811Model.FK_DilOkulu_Makaleler_DilOkulu_Yazarlar">
+            <End Role="DilOkulu_Yazarlar" EntitySet="DilOkulu_Yazarlar" />
+            <End Role="DilOkulu_Makaleler" EntitySet="DilOkulu_Makaleler" />
+          </AssociationSet>
+          <EntitySet Name="DilOkulu_Haberler" EntityType="DB110129183811Model.DilOkulu_Haberler" />
+          <EntitySet Name="DilOkulu_Slider" EntityType="DB110129183811Model.DilOkulu_Slider" />
+          <EntitySet Name="DilOkulu_VizeRehberi" EntityType="DB110129183811Model.DilOkulu_VizeRehberi" />
+          <EntitySet Name="DilOkulu_GaleriDosyalari" EntityType="DB110129183811Model.DilOkulu_GaleriDosyalari" />
+          <EntitySet Name="DilOkulu_Galeriler" EntityType="DB110129183811Model.DilOkulu_Galeriler" />
+          <AssociationSet Name="FK_DilOkulu_GaleriDosyalari_DilOkulu_Galeriler" Association="DB110129183811Model.FK_DilOkulu_GaleriDosyalari_DilOkulu_Galeriler">
+            <End Role="DilOkulu_Galeriler" EntitySet="DilOkulu_Galeriler" />
+            <End Role="DilOkulu_GaleriDosyalari" EntitySet="DilOkulu_GaleriDosyalari" />
+          </AssociationSet>
+          <EntitySet Name="DilOkulu_EtiketIliskileri" EntityType="DB110129183811Model.DilOkulu_EtiketIliskileri" />
+          <EntitySet Name="DilOkulu_Etiketler" EntityType="DB110129183811Model.DilOkulu_Etiketler" />
+          <AssociationSet Name="FK_DilOkulu_EtiketIliskileri_DilOkulu_Etiketler" Association="DB110129183811Model.FK_DilOkulu_EtiketIliskileri_DilOkulu_Etiketler">
+            <End Role="DilOkulu_Etiketler" EntitySet="DilOkulu_Etiketler" />
+            <End Role="DilOkulu_EtiketIliskileri" EntitySet="DilOkulu_EtiketIliskileri" />
+          </AssociationSet>
+          <EntitySet Name="DilOkulu_StatikSayfalar" EntityType="DB110129183811Model.DilOkulu_StatikSayfalar" />
+          <EntitySet Name="DilOkulu_Diller" EntityType="DB110129183811Model.DilOkulu_Diller" />
+          <EntitySet Name="DilOkulu_Merkez" EntityType="DB110129183811Model.DilOkulu_Merkez" />
+          <EntitySet Name="DilOkulu_Sehirler" EntityType="DB110129183811Model.DilOkulu_Sehirler" />
+          <EntitySet Name="DilOkulu_StatikLinkler" EntityType="DB110129183811Model.DilOkulu_StatikLinkler" />
+          <EntitySet Name="DilOkulu_SunulanProgramlar" EntityType="DB110129183811Model.DilOkulu_SunulanProgramlar" />
+          <EntitySet Name="DilOkulu_Subeler" EntityType="DB110129183811Model.DilOkulu_Subeler" />
+          <EntitySet Name="DilOkulu_SubeSayfalar" EntityType="DB110129183811Model.DilOkulu_SubeSayfalar" />
+          <AssociationSet Name="FK_DilOkulu_SubeSayfalar_DilOkulu_Subeler" Association="DB110129183811Model.FK_DilOkulu_SubeSayfalar_DilOkulu_Subeler">
+            <End Role="DilOkulu_Subeler" EntitySet="DilOkulu_Subeler" />
+            <End Role="DilOkulu_SubeSayfalar" EntitySet="DilOkulu_SubeSayfalar" />
+          </AssociationSet>
+          <EntitySet Name="DilOkulu_ParaBirimleri" EntityType="DB110129183811Model.DilOkulu_ParaBirimleri" />
+          <EntitySet Name="DilOkulu_Ulkeler" EntityType="DB110129183811Model.DilOkulu_Ulkeler" />
+          <AssociationSet Name="FK_DilOkulu_Ulkeler_DilOkulu_Diller" Association="DB110129183811Model.FK_DilOkulu_Ulkeler_DilOkulu_Diller">
+            <End Role="DilOkulu_Diller" EntitySet="DilOkulu_Diller" />
+            <End Role="DilOkulu_Ulkeler" EntitySet="DilOkulu_Ulkeler" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DilOkulu_Ulkeler_DilOkulu_ParaBirimleri" Association="DB110129183811Model.FK_DilOkulu_Ulkeler_DilOkulu_ParaBirimleri">
+            <End Role="DilOkulu_ParaBirimleri" EntitySet="DilOkulu_ParaBirimleri" />
+            <End Role="DilOkulu_Ulkeler" EntitySet="DilOkulu_Ulkeler" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DilOkulu_Sehirler_DilOkulu_Ulkeler" Association="DB110129183811Model.FK_DilOkulu_Sehirler_DilOkulu_Ulkeler">
+            <End Role="DilOkulu_Ulkeler" EntitySet="DilOkulu_Ulkeler" />
+            <End Role="DilOkulu_Sehirler" EntitySet="DilOkulu_Sehirler" />
+          </AssociationSet>
+          <EntitySet Name="DilOkulu_KonaklamaKategorileri" EntityType="DB110129183811Model.DilOkulu_KonaklamaKategorileri" />
+          <EntitySet Name="DilOkulu_KursTipleri" EntityType="DB110129183811Model.DilOkulu_KursTipleri" />
+          <EntitySet Name="DilOkulu_KursTipiFiyatlandirmalari" EntityType="DB110129183811Model.DilOkulu_KursTipiFiyatlandirmalari" />
+          <AssociationSet Name="FK_DilOkulu_KursTipiFiyatlandirmalari_DilOkulu_KursTipleri" Association="DB110129183811Model.FK_DilOkulu_KursTipiFiyatlandirmalari_DilOkulu_KursTipleri">
+            <End Role="DilOkulu_KursTipleri" EntitySet="DilOkulu_KursTipleri" />
+            <End Role="DilOkulu_KursTipiFiyatlandirmalari" EntitySet="DilOkulu_KursTipiFiyatlandirmalari" />
+          </AssociationSet>
+          <EntitySet Name="DilOkulu_KursTipiPromosyonTanimlari" EntityType="DB110129183811Model.DilOkulu_KursTipiPromosyonTanimlari" />
+          <AssociationSet Name="FK_DilOkulu_KursTipiPromosyonTanimlari_DilOkulu_KursTipleri" Association="DB110129183811Model.FK_DilOkulu_KursTipiPromosyonTanimlari_DilOkulu_KursTipleri">
+            <End Role="DilOkulu_KursTipleri" EntitySet="DilOkulu_KursTipleri" />
+            <End Role="DilOkulu_KursTipiPromosyonTanimlari" EntitySet="DilOkulu_KursTipiPromosyonTanimlari" />
+          </AssociationSet>
+          <EntitySet Name="DilOkulu_KonaklamaTipiFiyatlandirmalari" EntityType="DB110129183811Model.DilOkulu_KonaklamaTipiFiyatlandirmalari" />
+          <EntitySet Name="DilOkulu_KonaklamaTipiPromosyonTanimlari" EntityType="DB110129183811Model.DilOkulu_KonaklamaTipiPromosyonTanimlari" />
+          <EntitySet Name="DilOkulu_KonaklamaTipleri" EntityType="DB110129183811Model.DilOkulu_KonaklamaTipleri" />
+          <AssociationSet Name="FK_DilOkulu_KonaklamaTipleri_DilOkulu_KonaklamaKategorileri" Association="DB110129183811Model.FK_DilOkulu_KonaklamaTipleri_DilOkulu_KonaklamaKategorileri">
+            <End Role="DilOkulu_KonaklamaKategorileri" EntitySet="DilOkulu_KonaklamaKategorileri" />
+            <End Role="DilOkulu_KonaklamaTipleri" EntitySet="DilOkulu_KonaklamaTipleri" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DilOkulu_KonaklamaTipiFiyatlandirmalari_DilOkulu_KonaklamaTipleri" Association="DB110129183811Model.FK_DilOkulu_KonaklamaTipiFiyatlandirmalari_DilOkulu_KonaklamaTipleri">
+            <End Role="DilOkulu_KonaklamaTipleri" EntitySet="DilOkulu_KonaklamaTipleri" />
+            <End Role="DilOkulu_KonaklamaTipiFiyatlandirmalari" EntitySet="DilOkulu_KonaklamaTipiFiyatlandirmalari" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DilOkulu_KonaklamaTipiPromosyonTanimlari_DilOkulu_KonaklamaTipleri" Association="DB110129183811Model.FK_DilOkulu_KonaklamaTipiPromosyonTanimlari_DilOkulu_KonaklamaTipleri">
+            <End Role="DilOkulu_KonaklamaTipleri" EntitySet="DilOkulu_KonaklamaTipleri" />
+            <End Role="DilOkulu_KonaklamaTipiPromosyonTanimlari" EntitySet="DilOkulu_KonaklamaTipiPromosyonTanimlari" />
+          </AssociationSet>
+          <EntitySet Name="DilOkulu_Okullar" EntityType="DB110129183811Model.DilOkulu_Okullar" />
+          <AssociationSet Name="FK_DilOkulu_Okullar_DilOkulu_Diller" Association="DB110129183811Model.FK_DilOkulu_Okullar_DilOkulu_Diller">
+            <End Role="DilOkulu_Diller" EntitySet="DilOkulu_Diller" />
+            <End Role="DilOkulu_Okullar" EntitySet="DilOkulu_Okullar" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DilOkulu_KonaklamaTipleri_DilOkulu_Okullar" Association="DB110129183811Model.FK_DilOkulu_KonaklamaTipleri_DilOkulu_Okullar">
+            <End Role="DilOkulu_Okullar" EntitySet="DilOkulu_Okullar" />
+            <End Role="DilOkulu_KonaklamaTipleri" EntitySet="DilOkulu_KonaklamaTipleri" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DilOkulu_KursTipleri_DilOkulu_Okullar" Association="DB110129183811Model.FK_DilOkulu_KursTipleri_DilOkulu_Okullar">
+            <End Role="DilOkulu_Okullar" EntitySet="DilOkulu_Okullar" />
+            <End Role="DilOkulu_KursTipleri" EntitySet="DilOkulu_KursTipleri" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DilOkulu_Okullar_DilOkulu_Merkez" Association="DB110129183811Model.FK_DilOkulu_Okullar_DilOkulu_Merkez">
+            <End Role="DilOkulu_Merkez" EntitySet="DilOkulu_Merkez" />
+            <End Role="DilOkulu_Okullar" EntitySet="DilOkulu_Okullar" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DilOkulu_Okullar_DilOkulu_Sehirler" Association="DB110129183811Model.FK_DilOkulu_Okullar_DilOkulu_Sehirler">
+            <End Role="DilOkulu_Sehirler" EntitySet="DilOkulu_Sehirler" />
+            <End Role="DilOkulu_Okullar" EntitySet="DilOkulu_Okullar" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DilOkulu_Okullar_DilOkulu_Ulkeler" Association="DB110129183811Model.FK_DilOkulu_Okullar_DilOkulu_Ulkeler">
+            <End Role="DilOkulu_Ulkeler" EntitySet="DilOkulu_Ulkeler" />
+            <End Role="DilOkulu_Okullar" EntitySet="DilOkulu_Okullar" />
+          </AssociationSet>
+          <EntitySet Name="DilOkulu_KonaklamaTipiEkUcretleri" EntityType="DB110129183811Model.DilOkulu_KonaklamaTipiEkUcretleri" />
+          <AssociationSet Name="FK_DilOkulu_KonaklamaTipiEkUcretleri_DilOkulu_KonaklamaTipleri" Association="DB110129183811Model.FK_DilOkulu_KonaklamaTipiEkUcretleri_DilOkulu_KonaklamaTipleri">
+            <End Role="DilOkulu_KonaklamaTipleri" EntitySet="DilOkulu_KonaklamaTipleri" />
+            <End Role="DilOkulu_KonaklamaTipiEkUcretleri" EntitySet="DilOkulu_KonaklamaTipiEkUcretleri" />
+          </AssociationSet>
+          <EntitySet Name="DilOkulu_KursTipiEkUcretleri" EntityType="DB110129183811Model.DilOkulu_KursTipiEkUcretleri" />
+          <AssociationSet Name="FK_DilOkulu_KursTipiEkUcretleri_DilOkulu_KursTipleri" Association="DB110129183811Model.FK_DilOkulu_KursTipiEkUcretleri_DilOkulu_KursTipleri">
+            <End Role="DilOkulu_KursTipleri" EntitySet="DilOkulu_KursTipleri" />
+            <End Role="DilOkulu_KursTipiEkUcretleri" EntitySet="DilOkulu_KursTipiEkUcretleri" />
+          </AssociationSet>
+          <EntitySet Name="DilOkulu_KursKategorileri" EntityType="DB110129183811Model.DilOkulu_KursKategorileri" />
+          <AssociationSet Name="FK_DilOkulu_KursKategorileri_DilOkulu_Diller" Association="DB110129183811Model.FK_DilOkulu_KursKategorileri_DilOkulu_Diller">
+            <End Role="DilOkulu_Diller" EntitySet="DilOkulu_Diller" />
+            <End Role="DilOkulu_KursKategorileri" EntitySet="DilOkulu_KursKategorileri" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DilOkulu_KursTipleri_DilOkulu_KursKategorileri" Association="DB110129183811Model.FK_DilOkulu_KursTipleri_DilOkulu_KursKategorileri">
+            <End Role="DilOkulu_KursKategorileri" EntitySet="DilOkulu_KursKategorileri" />
+            <End Role="DilOkulu_KursTipleri" EntitySet="DilOkulu_KursTipleri" />
+          </AssociationSet>
+          <EntitySet Name="DilOkulu_KursTipiKargoHaricler" EntityType="DB110129183811Model.DilOkulu_KursTipiKargoHaricler" />
+          <AssociationSet Name="FK_DilOkulu_KursTipiKargoHaricler_DilOkulu_KursTipleri" Association="DB110129183811Model.FK_DilOkulu_KursTipiKargoHaricler_DilOkulu_KursTipleri">
+            <End Role="DilOkulu_KursTipleri" EntitySet="DilOkulu_KursTipleri" />
+            <End Role="DilOkulu_KursTipiKargoHaricler" EntitySet="DilOkulu_KursTipiKargoHaricler" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DilOkulu_KursTipiKargoHaricler_DilOkulu_Okullar" Association="DB110129183811Model.FK_DilOkulu_KursTipiKargoHaricler_DilOkulu_Okullar">
+            <End Role="DilOkulu_Okullar" EntitySet="DilOkulu_Okullar" />
+            <End Role="DilOkulu_KursTipiKargoHaricler" EntitySet="DilOkulu_KursTipiKargoHaricler" />
+          </AssociationSet>
+          </EntityContainer>
+        <EntityType Name="DilOkulu_Kullanicilar">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="AdSoyad" Nullable="false" MaxLength="80" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="KullaniciAdi" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Sifre" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Type="DateTime" Name="KayitTarihi" Nullable="false" Precision="3" />
+          <Property Type="Byte" Name="Durumu" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DilOkulu_Makaleler">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="YazarId" Nullable="false" />
+          <Property Type="Int32" Name="KategoriId" Nullable="false" />
+          <Property Type="String" Name="Baslik" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Seo_Keywords" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Seo_Descriptions" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Ozet" MaxLength="900" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Icerik" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="DateTime" Name="KayitTarihi" Nullable="false" Precision="3" />
+          <Property Type="Byte" Name="Durumu" Nullable="false" />
+          <NavigationProperty Name="DilOkulu_Yazarlar" Relationship="DB110129183811Model.FK_DilOkulu_Makaleler_DilOkulu_Yazarlar" FromRole="DilOkulu_Makaleler" ToRole="DilOkulu_Yazarlar" />
+          <Property Type="String" Name="ResimUrl" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="ResimThumbUrl" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Url" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="DilOkulu_Yazarlar">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="AdSoyad" Nullable="false" MaxLength="40" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="YazarTipi" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Aciklama" MaxLength="900" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="ResimUrl" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Type="DateTime" Name="KayitTarihi" Nullable="false" Precision="3" />
+          <Property Type="Byte" Name="Durumu" Nullable="false" />
+          <NavigationProperty Name="DilOkulu_Makaleler" Relationship="DB110129183811Model.FK_DilOkulu_Makaleler_DilOkulu_Yazarlar" FromRole="DilOkulu_Yazarlar" ToRole="DilOkulu_Makaleler" />
+          <Property Name="Pozisyon" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Telefon" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="EPosta" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <Association Name="FK_DilOkulu_Makaleler_DilOkulu_Yazarlar">
+          <End Type="DB110129183811Model.DilOkulu_Yazarlar" Role="DilOkulu_Yazarlar" Multiplicity="1" />
+          <End Type="DB110129183811Model.DilOkulu_Makaleler" Role="DilOkulu_Makaleler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DilOkulu_Yazarlar">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DilOkulu_Makaleler">
+              <PropertyRef Name="YazarId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="DilOkulu_Haberler">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Baslik" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Seo_Keywords" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Seo_Descriptions" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Ozet" Type="String" MaxLength="900" FixedLength="false" Unicode="true" />
+          <Property Name="Icerik" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ResimUrl" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="ResimThumbUrl" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="KayitTarihi" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Oncelik" Type="Int32" Nullable="false" />
+          <Property Name="Durumu" Type="Byte" Nullable="false" />
+          <Property Name="Url" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="DilOkulu_Slider">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Baslik" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Ozet" Type="String" MaxLength="900" FixedLength="false" Unicode="true" />
+          <Property Name="PageLink" Type="String" MaxLength="900" FixedLength="false" Unicode="true" />
+          <Property Name="ResimUrl" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="ResimThumbUrl" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="KayitTarihi" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Oncelik" Type="Int32" Nullable="false" />
+          <Property Name="Durumu" Type="Byte" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DilOkulu_VizeRehberi">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Baslik" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Seo_Keywords" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Seo_Descriptions" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Icerik" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ResimUrl" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="KayitTarihi" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Oncelik" Type="Int32" Nullable="false" />
+          <Property Name="Durumu" Type="Byte" Nullable="false" />
+          <Property Name="Url" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="DilOkulu_GaleriDosyalari">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GaleriId" Type="Int32" Nullable="false" />
+          <Property Name="DosyaPath" Type="String" MaxLength="350" FixedLength="false" Unicode="true" />
+          <Property Name="KayitTarihi" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Durumu" Type="Byte" Nullable="false" />
+          <NavigationProperty Name="DilOkulu_Galeriler" Relationship="DB110129183811Model.FK_DilOkulu_GaleriDosyalari_DilOkulu_Galeriler" FromRole="DilOkulu_GaleriDosyalari" ToRole="DilOkulu_Galeriler" />
+        </EntityType>
+        <EntityType Name="DilOkulu_Galeriler">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Baslik" Type="String" MaxLength="350" FixedLength="false" Unicode="true" />
+          <Property Name="KayitTarihi" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Durumu" Type="Byte" Nullable="false" />
+          <NavigationProperty Name="DilOkulu_GaleriDosyalari" Relationship="DB110129183811Model.FK_DilOkulu_GaleriDosyalari_DilOkulu_Galeriler" FromRole="DilOkulu_Galeriler" ToRole="DilOkulu_GaleriDosyalari" />
+        </EntityType>
+        <Association Name="FK_DilOkulu_GaleriDosyalari_DilOkulu_Galeriler">
+          <End Type="DB110129183811Model.DilOkulu_Galeriler" Role="DilOkulu_Galeriler" Multiplicity="1" />
+          <End Type="DB110129183811Model.DilOkulu_GaleriDosyalari" Role="DilOkulu_GaleriDosyalari" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DilOkulu_Galeriler">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DilOkulu_GaleriDosyalari">
+              <PropertyRef Name="GaleriId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="DilOkulu_EtiketIliskileri">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EtiketId" Type="Int32" Nullable="false" />
+          <Property Name="EtiketTipi" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="IcerikId" Type="Int32" Nullable="false" />
+          <Property Name="KayitTarihi" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Durumu" Type="Byte" Nullable="false" />
+          <NavigationProperty Name="DilOkulu_Etiketler" Relationship="DB110129183811Model.FK_DilOkulu_EtiketIliskileri_DilOkulu_Etiketler" FromRole="DilOkulu_EtiketIliskileri" ToRole="DilOkulu_Etiketler" />
+        </EntityType>
+        <EntityType Name="DilOkulu_Etiketler">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Baslik" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="KayitTarihi" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Durumu" Type="Byte" Nullable="false" />
+          <NavigationProperty Name="DilOkulu_EtiketIliskileri" Relationship="DB110129183811Model.FK_DilOkulu_EtiketIliskileri_DilOkulu_Etiketler" FromRole="DilOkulu_Etiketler" ToRole="DilOkulu_EtiketIliskileri" />
+        </EntityType>
+        <Association Name="FK_DilOkulu_EtiketIliskileri_DilOkulu_Etiketler">
+          <End Type="DB110129183811Model.DilOkulu_Etiketler" Role="DilOkulu_Etiketler" Multiplicity="1" />
+          <End Type="DB110129183811Model.DilOkulu_EtiketIliskileri" Role="DilOkulu_EtiketIliskileri" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DilOkulu_Etiketler">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DilOkulu_EtiketIliskileri">
+              <PropertyRef Name="EtiketId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="DilOkulu_StatikSayfalar">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Baslik" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Icerik" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="KayitTarihi" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Durumu" Type="Byte" Nullable="false" />
+          <Property Name="Seo_Keywords" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Seo_Descriptions" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Seo_Title" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="DilOkulu_Diller">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Baslik" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Aciklama" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Resim" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="Url" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="KayitTarihi" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Durumu" Type="Byte" Nullable="false" />
+          <Property Name="Seo_Keywords" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Seo_Descriptions" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="DilOkulu_Ulkeler" Relationship="DB110129183811Model.FK_DilOkulu_Ulkeler_DilOkulu_Diller" FromRole="DilOkulu_Diller" ToRole="DilOkulu_Ulkeler" />
+          <NavigationProperty Name="DilOkulu_Okullar" Relationship="DB110129183811Model.FK_DilOkulu_Okullar_DilOkulu_Diller" FromRole="DilOkulu_Diller" ToRole="DilOkulu_Okullar" />
+          <NavigationProperty Name="DilOkulu_KursKategorileri" Relationship="DB110129183811Model.FK_DilOkulu_KursKategorileri_DilOkulu_Diller" FromRole="DilOkulu_Diller" ToRole="DilOkulu_KursKategorileri" />
+          <Property Name="Oncelik" Type="Byte" />
+        </EntityType>
+        <EntityType Name="DilOkulu_Merkez">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Baslik" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="GenelBilgi" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Logo" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Url" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="OkulSiteLink" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="FacebookLink" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="YoutubeLink" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="TwitterLink" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="FiyatListesi" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Promosyonlar" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="KayitTarihi" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Oncelik" Type="Int32" Nullable="false" />
+          <Property Name="Durumu" Type="Byte" Nullable="false" />
+          <Property Name="Seo_Keywords" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Seo_Descriptions" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Brosur" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Ozet" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="KurulusTarihi" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="Akreditasyonlar" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="DilOkulu_Okullar" Relationship="DB110129183811Model.FK_DilOkulu_Okullar_DilOkulu_Merkez" FromRole="DilOkulu_Merkez" ToRole="DilOkulu_Okullar" />
+        </EntityType>
+        <EntityType Name="DilOkulu_Sehirler">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UlkeId" Type="Int32" Nullable="false" />
+          <Property Name="Baslik" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Seo_Keywords" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Seo_Descriptions" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Aciklama" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Resim" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Oncelik" Type="Byte" Nullable="false" />
+          <Property Name="Url" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="KayitTarihi" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Durumu" Type="Byte" Nullable="false" />
+          <NavigationProperty Name="DilOkulu_Ulkeler" Relationship="DB110129183811Model.FK_DilOkulu_Sehirler_DilOkulu_Ulkeler" FromRole="DilOkulu_Sehirler" ToRole="DilOkulu_Ulkeler" />
+          <NavigationProperty Name="DilOkulu_Okullar" Relationship="DB110129183811Model.FK_DilOkulu_Okullar_DilOkulu_Sehirler" FromRole="DilOkulu_Sehirler" ToRole="DilOkulu_Okullar" />
+          <Property Name="SehirProfili" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="DilOkulu_StatikLinkler">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Baslik" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Link" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="LinkTipi" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="KayitTarihi" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Durumu" Type="Byte" Nullable="false" />
+          <Property Name="Oncelik" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DilOkulu_SunulanProgramlar">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Baslik" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="UstProgramId" Type="Int32" Nullable="false" />
+          <Property Name="KayitTarihi" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Durumu" Type="Byte" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DilOkulu_Subeler">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Baslik" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Telefon" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Fax" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Adres" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="EPosta" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Icerik" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="KrokiLink" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Url" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="Oncelik" Type="Int32" />
+          <Property Name="KayitTarihi" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Durumu" Type="Byte" Nullable="false" />
+          <NavigationProperty Name="DilOkulu_SubeSayfalar" Relationship="DB110129183811Model.FK_DilOkulu_SubeSayfalar_DilOkulu_Subeler" FromRole="DilOkulu_Subeler" ToRole="DilOkulu_SubeSayfalar" />
+        </EntityType>
+        <EntityType Name="DilOkulu_SubeSayfalar">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SubeId" Type="Int32" Nullable="false" />
+          <Property Name="Keywords" Type="String" MaxLength="900" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" />
+          <Property Name="Url" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="Icerik" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="KayitTarihi" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Durumu" Type="Byte" Nullable="false" />
+          <NavigationProperty Name="DilOkulu_Subeler" Relationship="DB110129183811Model.FK_DilOkulu_SubeSayfalar_DilOkulu_Subeler" FromRole="DilOkulu_SubeSayfalar" ToRole="DilOkulu_Subeler" />
+        </EntityType>
+        <Association Name="FK_DilOkulu_SubeSayfalar_DilOkulu_Subeler">
+          <End Type="DB110129183811Model.DilOkulu_Subeler" Role="DilOkulu_Subeler" Multiplicity="1" />
+          <End Type="DB110129183811Model.DilOkulu_SubeSayfalar" Role="DilOkulu_SubeSayfalar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DilOkulu_Subeler">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DilOkulu_SubeSayfalar">
+              <PropertyRef Name="SubeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="DilOkulu_ParaBirimleri">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Birim" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Oncelik" Type="Int32" Nullable="false" />
+          <Property Name="Durumu" Type="Byte" Nullable="false" />
+          <NavigationProperty Name="DilOkulu_Ulkeler" Relationship="DB110129183811Model.FK_DilOkulu_Ulkeler_DilOkulu_ParaBirimleri" FromRole="DilOkulu_ParaBirimleri" ToRole="DilOkulu_Ulkeler" />
+        </EntityType>
+        <EntityType Name="DilOkulu_Ulkeler">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DilId" Type="Int32" Nullable="false" />
+          <Property Name="Baslik" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Seo_Keywords" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Seo_Descriptions" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Aciklama" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="VizeBilgileri" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CalismaIzni" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="YasamGiderleri" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Ulasim" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SaglikSistemi" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Resim" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="ParaBirimId" Type="Int32" />
+          <Property Name="VizeUcreti1" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="KacAyaKadar1" Type="Int32" />
+          <Property Name="VizeUcreti2" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="KacAyaKadar2" Type="Int32" />
+          <Property Name="VizeUcreti3" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="KacAyaKadar3" Type="Int32" />
+          <Property Name="Oncelik" Type="Byte" Nullable="false" />
+          <Property Name="Url" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="KayitTarihi" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Durumu" Type="Byte" Nullable="false" />
+          <NavigationProperty Name="DilOkulu_Diller" Relationship="DB110129183811Model.FK_DilOkulu_Ulkeler_DilOkulu_Diller" FromRole="DilOkulu_Ulkeler" ToRole="DilOkulu_Diller" />
+          <NavigationProperty Name="DilOkulu_ParaBirimleri" Relationship="DB110129183811Model.FK_DilOkulu_Ulkeler_DilOkulu_ParaBirimleri" FromRole="DilOkulu_Ulkeler" ToRole="DilOkulu_ParaBirimleri" />
+          <NavigationProperty Name="DilOkulu_Sehirler" Relationship="DB110129183811Model.FK_DilOkulu_Sehirler_DilOkulu_Ulkeler" FromRole="DilOkulu_Ulkeler" ToRole="DilOkulu_Sehirler" />
+          <NavigationProperty Name="DilOkulu_Okullar" Relationship="DB110129183811Model.FK_DilOkulu_Okullar_DilOkulu_Ulkeler" FromRole="DilOkulu_Ulkeler" ToRole="DilOkulu_Okullar" />
+        </EntityType>
+        <Association Name="FK_DilOkulu_Ulkeler_DilOkulu_Diller">
+          <End Type="DB110129183811Model.DilOkulu_Diller" Role="DilOkulu_Diller" Multiplicity="1" />
+          <End Type="DB110129183811Model.DilOkulu_Ulkeler" Role="DilOkulu_Ulkeler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DilOkulu_Diller">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DilOkulu_Ulkeler">
+              <PropertyRef Name="DilId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DilOkulu_Ulkeler_DilOkulu_ParaBirimleri">
+          <End Type="DB110129183811Model.DilOkulu_ParaBirimleri" Role="DilOkulu_ParaBirimleri" Multiplicity="0..1" />
+          <End Type="DB110129183811Model.DilOkulu_Ulkeler" Role="DilOkulu_Ulkeler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DilOkulu_ParaBirimleri">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DilOkulu_Ulkeler">
+              <PropertyRef Name="ParaBirimId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DilOkulu_Sehirler_DilOkulu_Ulkeler">
+          <End Type="DB110129183811Model.DilOkulu_Ulkeler" Role="DilOkulu_Ulkeler" Multiplicity="1" />
+          <End Type="DB110129183811Model.DilOkulu_Sehirler" Role="DilOkulu_Sehirler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DilOkulu_Ulkeler">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DilOkulu_Sehirler">
+              <PropertyRef Name="UlkeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="DilOkulu_KonaklamaKategorileri">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Baslik" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="KayitTarihi" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Durumu" Type="Byte" Nullable="false" />
+          <NavigationProperty Name="DilOkulu_KonaklamaTipleri" Relationship="DB110129183811Model.FK_DilOkulu_KonaklamaTipleri_DilOkulu_KonaklamaKategorileri" FromRole="DilOkulu_KonaklamaKategorileri" ToRole="DilOkulu_KonaklamaTipleri" />
+        </EntityType>
+        <EntityType Name="DilOkulu_KursTipleri">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OkulId" Type="Int32" Nullable="false" />
+          <Property Name="KursKategoriId" Type="Int32" Nullable="false" />
+          <Property Name="Baslik" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="BasTarihiHerPazartesi" Type="Boolean" />
+          <Property Name="BasTarihiOzel" Type="Boolean" />
+          <Property Name="OzelTarihListesi" Type="String" MaxLength="800" Unicode="true" FixedLength="false" />
+          <Property Name="Aciklama" Type="String" MaxLength="900" FixedLength="false" Unicode="true" />
+          <Property Name="KayitTarihi" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Durumu" Type="Byte" Nullable="false" />
+          <NavigationProperty Name="DilOkulu_KursTipiFiyatlandirmalari" Relationship="DB110129183811Model.FK_DilOkulu_KursTipiFiyatlandirmalari_DilOkulu_KursTipleri" FromRole="DilOkulu_KursTipleri" ToRole="DilOkulu_KursTipiFiyatlandirmalari" />
+          <NavigationProperty Name="DilOkulu_KursTipiPromosyonTanimlari" Relationship="DB110129183811Model.FK_DilOkulu_KursTipiPromosyonTanimlari_DilOkulu_KursTipleri" FromRole="DilOkulu_KursTipleri" ToRole="DilOkulu_KursTipiPromosyonTanimlari" />
+          <NavigationProperty Name="DilOkulu_Okullar" Relationship="DB110129183811Model.FK_DilOkulu_KursTipleri_DilOkulu_Okullar" FromRole="DilOkulu_KursTipleri" ToRole="DilOkulu_Okullar" />
+          <NavigationProperty Name="DilOkulu_KursTipiEkUcretleri" Relationship="DB110129183811Model.FK_DilOkulu_KursTipiEkUcretleri_DilOkulu_KursTipleri" FromRole="DilOkulu_KursTipleri" ToRole="DilOkulu_KursTipiEkUcretleri" />
+          <NavigationProperty Name="DilOkulu_KursKategorileri" Relationship="DB110129183811Model.FK_DilOkulu_KursTipleri_DilOkulu_KursKategorileri" FromRole="DilOkulu_KursTipleri" ToRole="DilOkulu_KursKategorileri" />
+          <NavigationProperty Name="DilOkulu_KursTipiKargoHaricler" Relationship="DB110129183811Model.FK_DilOkulu_KursTipiKargoHaricler_DilOkulu_KursTipleri" FromRole="DilOkulu_KursTipleri" ToRole="DilOkulu_KursTipiKargoHaricler" />
+        </EntityType>
+        <EntityType Name="DilOkulu_KursTipiFiyatlandirmalari">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="KursTipiId" Type="Int32" Nullable="false" />
+          <Property Name="FiyatlandirmaModelId" Type="Byte" Nullable="false" />
+          <Property Name="StandartHafta_HaftaSayisi" Type="Int32" />
+          <Property Name="HerHaftayaOzel_Hafta" Type="Int32" />
+          <Property Name="HaftaBazliBirimFiyatli_HaftaBaslangic" Type="Int32" />
+          <Property Name="HaftaBazliBirimFiyatli_HaftaBitis" Type="Int32" />
+          <Property Name="Fiyat" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="KayitTarihi" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Durumu" Type="Byte" Nullable="false" />
+          <NavigationProperty Name="DilOkulu_KursTipleri" Relationship="DB110129183811Model.FK_DilOkulu_KursTipiFiyatlandirmalari_DilOkulu_KursTipleri" FromRole="DilOkulu_KursTipiFiyatlandirmalari" ToRole="DilOkulu_KursTipleri" />
+        </EntityType>
+        <Association Name="FK_DilOkulu_KursTipiFiyatlandirmalari_DilOkulu_KursTipleri">
+          <End Type="DB110129183811Model.DilOkulu_KursTipleri" Role="DilOkulu_KursTipleri" Multiplicity="1" />
+          <End Type="DB110129183811Model.DilOkulu_KursTipiFiyatlandirmalari" Role="DilOkulu_KursTipiFiyatlandirmalari" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DilOkulu_KursTipleri">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DilOkulu_KursTipiFiyatlandirmalari">
+              <PropertyRef Name="KursTipiId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="DilOkulu_KursTipiPromosyonTanimlari">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="KursTipiId" Type="Int32" Nullable="false" />
+          <Property Name="PromosyonModelId" Type="Byte" Nullable="false" />
+          <Property Name="ExtraHafta_MinimumHafta" Type="Int32" />
+          <Property Name="ExtraHafta_UcretsizHaftaSayisi" Type="Int32" />
+          <Property Name="IndirimPromosyonu_Hafta" Type="Int32" />
+          <Property Name="IndirimPromosyonu_Oran" Type="Int32" />
+          <Property Name="KursBazli_Hafta" Type="Int32" />
+          <Property Name="KursBazli_Fiyat" Type="Int32" />
+          <Property Name="PromosyonBitisTarihi" Type="DateTime" Precision="3" />
+          <Property Name="KayitTarihi" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Durumu" Type="Byte" Nullable="false" />
+          <NavigationProperty Name="DilOkulu_KursTipleri" Relationship="DB110129183811Model.FK_DilOkulu_KursTipiPromosyonTanimlari_DilOkulu_KursTipleri" FromRole="DilOkulu_KursTipiPromosyonTanimlari" ToRole="DilOkulu_KursTipleri" />
+          <Property Name="KursTarihiBaslangic" Type="DateTime" Precision="3" />
+          <Property Name="KursTarihiBitis" Type="DateTime" Precision="3" />
+          <Property Name="IndirimPromosyonu_HaftaMax" Type="Int32" />
+          <Property Name="IndirimPromosyonu_BirimFiyat" Type="Int32" />
+        </EntityType>
+        <Association Name="FK_DilOkulu_KursTipiPromosyonTanimlari_DilOkulu_KursTipleri">
+          <End Type="DB110129183811Model.DilOkulu_KursTipleri" Role="DilOkulu_KursTipleri" Multiplicity="1" />
+          <End Type="DB110129183811Model.DilOkulu_KursTipiPromosyonTanimlari" Role="DilOkulu_KursTipiPromosyonTanimlari" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DilOkulu_KursTipleri">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DilOkulu_KursTipiPromosyonTanimlari">
+              <PropertyRef Name="KursTipiId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="DilOkulu_KonaklamaTipiFiyatlandirmalari">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="KonaklamaTipiId" Type="Int32" Nullable="false" />
+          <Property Name="FiyatlandirmaModelId" Type="Byte" Nullable="false" />
+          <Property Name="StandartHafta_HaftaSayisi" Type="Int32" />
+          <Property Name="HerHaftayaOzel_Hafta" Type="Int32" />
+          <Property Name="HaftaBazliBirimFiyatli_HaftaBaslangic" Type="Int32" />
+          <Property Name="HaftaBazliBirimFiyatli_HaftaBitis" Type="Int32" />
+          <Property Name="Fiyat" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="KayitTarihi" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Durumu" Type="Byte" Nullable="false" />
+          <NavigationProperty Name="DilOkulu_KonaklamaTipleri" Relationship="DB110129183811Model.FK_DilOkulu_KonaklamaTipiFiyatlandirmalari_DilOkulu_KonaklamaTipleri" FromRole="DilOkulu_KonaklamaTipiFiyatlandirmalari" ToRole="DilOkulu_KonaklamaTipleri" />
+        </EntityType>
+        <EntityType Name="DilOkulu_KonaklamaTipiPromosyonTanimlari">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="KonaklamaTipiId" Type="Int32" Nullable="false" />
+          <Property Name="PromosyonModelId" Type="Byte" Nullable="false" />
+          <Property Name="ExtraHafta_MinimumHafta" Type="Int32" />
+          <Property Name="ExtraHafta_UcretsizHaftaSayisi" Type="Int32" />
+          <Property Name="IndirimPromosyonu_Hafta" Type="Int32" />
+          <Property Name="IndirimPromosyonu_Oran" Type="Int32" />
+          <Property Name="KonaklamaBazli_Hafta" Type="Int32" />
+          <Property Name="KonaklamaBazli_Fiyat" Type="Int32" />
+          <Property Name="PromosyonBitisTarihi" Type="DateTime" Precision="3" />
+          <Property Name="KayitTarihi" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Durumu" Type="Byte" Nullable="false" />
+          <NavigationProperty Name="DilOkulu_KonaklamaTipleri" Relationship="DB110129183811Model.FK_DilOkulu_KonaklamaTipiPromosyonTanimlari_DilOkulu_KonaklamaTipleri" FromRole="DilOkulu_KonaklamaTipiPromosyonTanimlari" ToRole="DilOkulu_KonaklamaTipleri" />
+          <Property Name="KalisTarihiBaslangic" Type="DateTime" Precision="3" />
+          <Property Name="KalisTarihiBitis" Type="DateTime" Precision="3" />
+          <Property Type="Int32" Name="IndirimPromosyonu_HaftaMax" />
+          <Property Type="Int32" Name="IndirimPromosyonu_BirimFiyat" />
+        </EntityType>
+        <EntityType Name="DilOkulu_KonaklamaTipleri">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OkulId" Type="Int32" Nullable="false" />
+          <Property Name="KonaklamaKategoriId" Type="Int32" Nullable="false" />
+          <Property Name="Baslik" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="BasTarihiYilBoyu" Type="Boolean" />
+          <Property Name="BasTarihiOzel" Type="Boolean" />
+          <Property Name="OzelTarihListesi" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Aciklama" Type="String" MaxLength="900" FixedLength="false" Unicode="true" />
+          <Property Name="KayitTarihi" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Durumu" Type="Byte" Nullable="false" />
+          <NavigationProperty Name="DilOkulu_KonaklamaKategorileri" Relationship="DB110129183811Model.FK_DilOkulu_KonaklamaTipleri_DilOkulu_KonaklamaKategorileri" FromRole="DilOkulu_KonaklamaTipleri" ToRole="DilOkulu_KonaklamaKategorileri" />
+          <NavigationProperty Name="DilOkulu_KonaklamaTipiFiyatlandirmalari" Relationship="DB110129183811Model.FK_DilOkulu_KonaklamaTipiFiyatlandirmalari_DilOkulu_KonaklamaTipleri" FromRole="DilOkulu_KonaklamaTipleri" ToRole="DilOkulu_KonaklamaTipiFiyatlandirmalari" />
+          <NavigationProperty Name="DilOkulu_KonaklamaTipiPromosyonTanimlari" Relationship="DB110129183811Model.FK_DilOkulu_KonaklamaTipiPromosyonTanimlari_DilOkulu_KonaklamaTipleri" FromRole="DilOkulu_KonaklamaTipleri" ToRole="DilOkulu_KonaklamaTipiPromosyonTanimlari" />
+          <NavigationProperty Name="DilOkulu_Okullar" Relationship="DB110129183811Model.FK_DilOkulu_KonaklamaTipleri_DilOkulu_Okullar" FromRole="DilOkulu_KonaklamaTipleri" ToRole="DilOkulu_Okullar" />
+          <NavigationProperty Name="DilOkulu_KonaklamaTipiEkUcretleri" Relationship="DB110129183811Model.FK_DilOkulu_KonaklamaTipiEkUcretleri_DilOkulu_KonaklamaTipleri" FromRole="DilOkulu_KonaklamaTipleri" ToRole="DilOkulu_KonaklamaTipiEkUcretleri" />
+        </EntityType>
+        <Association Name="FK_DilOkulu_KonaklamaTipleri_DilOkulu_KonaklamaKategorileri">
+          <End Type="DB110129183811Model.DilOkulu_KonaklamaKategorileri" Role="DilOkulu_KonaklamaKategorileri" Multiplicity="1" />
+          <End Type="DB110129183811Model.DilOkulu_KonaklamaTipleri" Role="DilOkulu_KonaklamaTipleri" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DilOkulu_KonaklamaKategorileri">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DilOkulu_KonaklamaTipleri">
+              <PropertyRef Name="KonaklamaKategoriId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DilOkulu_KonaklamaTipiFiyatlandirmalari_DilOkulu_KonaklamaTipleri">
+          <End Type="DB110129183811Model.DilOkulu_KonaklamaTipleri" Role="DilOkulu_KonaklamaTipleri" Multiplicity="1" />
+          <End Type="DB110129183811Model.DilOkulu_KonaklamaTipiFiyatlandirmalari" Role="DilOkulu_KonaklamaTipiFiyatlandirmalari" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DilOkulu_KonaklamaTipleri">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DilOkulu_KonaklamaTipiFiyatlandirmalari">
+              <PropertyRef Name="KonaklamaTipiId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DilOkulu_KonaklamaTipiPromosyonTanimlari_DilOkulu_KonaklamaTipleri">
+          <End Type="DB110129183811Model.DilOkulu_KonaklamaTipleri" Role="DilOkulu_KonaklamaTipleri" Multiplicity="1" />
+          <End Type="DB110129183811Model.DilOkulu_KonaklamaTipiPromosyonTanimlari" Role="DilOkulu_KonaklamaTipiPromosyonTanimlari" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DilOkulu_KonaklamaTipleri">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DilOkulu_KonaklamaTipiPromosyonTanimlari">
+              <PropertyRef Name="KonaklamaTipiId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="DilOkulu_Okullar">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MerkezId" Type="Int32" Nullable="false" />
+          <Property Name="DilId" Type="Int32" Nullable="false" />
+          <Property Name="UlkeId" Type="Int32" Nullable="false" />
+          <Property Name="SehirId" Type="Int32" Nullable="false" />
+          <Property Name="Baslik" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Seo_Keywords" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Seo_Descriptions" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="OkulTipi" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="OkulKapasitesi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SinifKapasitesi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="KonaklamaTurleri" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="OkulOlanaklari" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="SosyalAktiviteler" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="SunulanProgramlar" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Icerik" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Harita" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="VideoUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="OnecikanOkul" Type="Boolean" />
+          <Property Name="GaleriId" Type="Int32" />
+          <Property Name="Url" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="Ucretler_OkulKayitUcreti" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Ucretler_KonaklamaAyarlamaUcreti" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Ucretler_MateryalUcreti" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Ucretler_MateryalTahsilatTipi" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Ucretler_HavaAlaniKarsilama" Type="String" MaxLength="900" FixedLength="false" Unicode="true" />
+          <Property Name="Ucretler_SaglikSigortasi" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Ucretler_SaglikSigortasiTahsilatTipi" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="KayitTarihi" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Durumu" Type="Byte" Nullable="false" />
+          <NavigationProperty Name="DilOkulu_Diller" Relationship="DB110129183811Model.FK_DilOkulu_Okullar_DilOkulu_Diller" FromRole="DilOkulu_Okullar" ToRole="DilOkulu_Diller" />
+          <NavigationProperty Name="DilOkulu_KonaklamaTipleri" Relationship="DB110129183811Model.FK_DilOkulu_KonaklamaTipleri_DilOkulu_Okullar" FromRole="DilOkulu_Okullar" ToRole="DilOkulu_KonaklamaTipleri" />
+          <NavigationProperty Name="DilOkulu_KursTipleri" Relationship="DB110129183811Model.FK_DilOkulu_KursTipleri_DilOkulu_Okullar" FromRole="DilOkulu_Okullar" ToRole="DilOkulu_KursTipleri" />
+          <NavigationProperty Name="DilOkulu_Merkez" Relationship="DB110129183811Model.FK_DilOkulu_Okullar_DilOkulu_Merkez" FromRole="DilOkulu_Okullar" ToRole="DilOkulu_Merkez" />
+          <NavigationProperty Name="DilOkulu_Sehirler" Relationship="DB110129183811Model.FK_DilOkulu_Okullar_DilOkulu_Sehirler" FromRole="DilOkulu_Okullar" ToRole="DilOkulu_Sehirler" />
+          <NavigationProperty Name="DilOkulu_Ulkeler" Relationship="DB110129183811Model.FK_DilOkulu_Okullar_DilOkulu_Ulkeler" FromRole="DilOkulu_Okullar" ToRole="DilOkulu_Ulkeler" />
+          <Property Name="Ucretler_KargoUcreti" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Ucretler_OkulKayitUcretiArray" Type="String" MaxLength="800" FixedLength="false" Unicode="true" />
+          <Property Name="Ucretler_KonaklamaAyarlamaUcretiArray" Type="String" MaxLength="900" FixedLength="false" Unicode="true" />
+          <Property Name="Ucretler_MateryalUcretiArray" Type="String" MaxLength="900" FixedLength="false" Unicode="true" />
+          <Property Name="Ucretler_SaglikSigortasiArray" Type="String" MaxLength="900" FixedLength="false" Unicode="true" />
+          <Property Name="Ucretler_OkulKayitEkUcretArray" Type="String" MaxLength="800" FixedLength="false" Unicode="true" />
+          <Property Name="Ucretler_KonaklamaAyarlamaEkUcretArray" Type="String" MaxLength="900" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="DilOkulu_KursTipiKargoHaricler" Relationship="DB110129183811Model.FK_DilOkulu_KursTipiKargoHaricler_DilOkulu_Okullar" FromRole="DilOkulu_Okullar" ToRole="DilOkulu_KursTipiKargoHaricler" />
+          <Property Name="StreetView" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PromosyonPdf" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="PromosyonBitisTarihi" Type="DateTime" Precision="3" />
+        </EntityType>
+        <Association Name="FK_DilOkulu_Okullar_DilOkulu_Diller">
+          <End Type="DB110129183811Model.DilOkulu_Diller" Role="DilOkulu_Diller" Multiplicity="1" />
+          <End Type="DB110129183811Model.DilOkulu_Okullar" Role="DilOkulu_Okullar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DilOkulu_Diller">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DilOkulu_Okullar">
+              <PropertyRef Name="DilId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DilOkulu_KonaklamaTipleri_DilOkulu_Okullar">
+          <End Type="DB110129183811Model.DilOkulu_Okullar" Role="DilOkulu_Okullar" Multiplicity="1" />
+          <End Type="DB110129183811Model.DilOkulu_KonaklamaTipleri" Role="DilOkulu_KonaklamaTipleri" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DilOkulu_Okullar">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DilOkulu_KonaklamaTipleri">
+              <PropertyRef Name="OkulId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DilOkulu_KursTipleri_DilOkulu_Okullar">
+          <End Type="DB110129183811Model.DilOkulu_Okullar" Role="DilOkulu_Okullar" Multiplicity="1" />
+          <End Type="DB110129183811Model.DilOkulu_KursTipleri" Role="DilOkulu_KursTipleri" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DilOkulu_Okullar">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DilOkulu_KursTipleri">
+              <PropertyRef Name="OkulId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DilOkulu_Okullar_DilOkulu_Merkez">
+          <End Type="DB110129183811Model.DilOkulu_Merkez" Role="DilOkulu_Merkez" Multiplicity="1" />
+          <End Type="DB110129183811Model.DilOkulu_Okullar" Role="DilOkulu_Okullar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DilOkulu_Merkez">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DilOkulu_Okullar">
+              <PropertyRef Name="MerkezId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DilOkulu_Okullar_DilOkulu_Sehirler">
+          <End Type="DB110129183811Model.DilOkulu_Sehirler" Role="DilOkulu_Sehirler" Multiplicity="1" />
+          <End Type="DB110129183811Model.DilOkulu_Okullar" Role="DilOkulu_Okullar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DilOkulu_Sehirler">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DilOkulu_Okullar">
+              <PropertyRef Name="SehirId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DilOkulu_Okullar_DilOkulu_Ulkeler">
+          <End Type="DB110129183811Model.DilOkulu_Ulkeler" Role="DilOkulu_Ulkeler" Multiplicity="1" />
+          <End Type="DB110129183811Model.DilOkulu_Okullar" Role="DilOkulu_Okullar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DilOkulu_Ulkeler">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DilOkulu_Okullar">
+              <PropertyRef Name="UlkeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="DilOkulu_KonaklamaTipiEkUcretleri">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="KonaklamaTipId" Type="Int32" Nullable="false" />
+          <Property Name="BaslangicTarihi" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="BititisTarihi" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Fiyat" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="KayitTarihi" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Durumu" Type="Byte" Nullable="false" />
+          <NavigationProperty Name="DilOkulu_KonaklamaTipleri" Relationship="DB110129183811Model.FK_DilOkulu_KonaklamaTipiEkUcretleri_DilOkulu_KonaklamaTipleri" FromRole="DilOkulu_KonaklamaTipiEkUcretleri" ToRole="DilOkulu_KonaklamaTipleri" />
+          <Property Name="MaksimumHafta" Type="Int32" />
+        </EntityType>
+        <Association Name="FK_DilOkulu_KonaklamaTipiEkUcretleri_DilOkulu_KonaklamaTipleri">
+          <End Type="DB110129183811Model.DilOkulu_KonaklamaTipleri" Role="DilOkulu_KonaklamaTipleri" Multiplicity="1" />
+          <End Type="DB110129183811Model.DilOkulu_KonaklamaTipiEkUcretleri" Role="DilOkulu_KonaklamaTipiEkUcretleri" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DilOkulu_KonaklamaTipleri">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DilOkulu_KonaklamaTipiEkUcretleri">
+              <PropertyRef Name="KonaklamaTipId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="DilOkulu_KursTipiEkUcretleri">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="KursTipId" Type="Int32" Nullable="false" />
+          <Property Name="BaslangicTarihi" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="BititisTarihi" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Fiyat" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="KayitTarihi" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Durumu" Type="Byte" Nullable="false" />
+          <NavigationProperty Name="DilOkulu_KursTipleri" Relationship="DB110129183811Model.FK_DilOkulu_KursTipiEkUcretleri_DilOkulu_KursTipleri" FromRole="DilOkulu_KursTipiEkUcretleri" ToRole="DilOkulu_KursTipleri" />
+          <Property Name="MaksimumHafta" Type="Int32" />
+        </EntityType>
+        <Association Name="FK_DilOkulu_KursTipiEkUcretleri_DilOkulu_KursTipleri">
+          <End Type="DB110129183811Model.DilOkulu_KursTipleri" Role="DilOkulu_KursTipleri" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="DB110129183811Model.DilOkulu_KursTipiEkUcretleri" Role="DilOkulu_KursTipiEkUcretleri" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DilOkulu_KursTipleri">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DilOkulu_KursTipiEkUcretleri">
+              <PropertyRef Name="KursTipId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="DilOkulu_KursKategorileri">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Baslik" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="DilId" Type="Int32" />
+          <Property Name="KayitTarihi" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Durumu" Type="Byte" Nullable="false" />
+          <NavigationProperty Name="DilOkulu_Diller" Relationship="DB110129183811Model.FK_DilOkulu_KursKategorileri_DilOkulu_Diller" FromRole="DilOkulu_KursKategorileri" ToRole="DilOkulu_Diller" />
+          <NavigationProperty Name="DilOkulu_KursTipleri" Relationship="DB110129183811Model.FK_DilOkulu_KursTipleri_DilOkulu_KursKategorileri" FromRole="DilOkulu_KursKategorileri" ToRole="DilOkulu_KursTipleri" />
+        </EntityType>
+        <Association Name="FK_DilOkulu_KursKategorileri_DilOkulu_Diller">
+          <End Type="DB110129183811Model.DilOkulu_Diller" Role="DilOkulu_Diller" Multiplicity="0..1" />
+          <End Type="DB110129183811Model.DilOkulu_KursKategorileri" Role="DilOkulu_KursKategorileri" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DilOkulu_Diller">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DilOkulu_KursKategorileri">
+              <PropertyRef Name="DilId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DilOkulu_KursTipleri_DilOkulu_KursKategorileri">
+          <End Type="DB110129183811Model.DilOkulu_KursKategorileri" Role="DilOkulu_KursKategorileri" Multiplicity="1" />
+          <End Type="DB110129183811Model.DilOkulu_KursTipleri" Role="DilOkulu_KursTipleri" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DilOkulu_KursKategorileri">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DilOkulu_KursTipleri">
+              <PropertyRef Name="KursKategoriId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="DilOkulu_KursTipiKargoHaricler">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OkulId" Type="Int32" Nullable="false" />
+          <Property Name="KursTipiId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="DilOkulu_KursTipleri" Relationship="DB110129183811Model.FK_DilOkulu_KursTipiKargoHaricler_DilOkulu_KursTipleri" FromRole="DilOkulu_KursTipiKargoHaricler" ToRole="DilOkulu_KursTipleri" />
+          <NavigationProperty Name="DilOkulu_Okullar" Relationship="DB110129183811Model.FK_DilOkulu_KursTipiKargoHaricler_DilOkulu_Okullar" FromRole="DilOkulu_KursTipiKargoHaricler" ToRole="DilOkulu_Okullar" />
+        </EntityType>
+        <Association Name="FK_DilOkulu_KursTipiKargoHaricler_DilOkulu_KursTipleri">
+          <End Type="DB110129183811Model.DilOkulu_KursTipleri" Role="DilOkulu_KursTipleri" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="DB110129183811Model.DilOkulu_KursTipiKargoHaricler" Role="DilOkulu_KursTipiKargoHaricler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DilOkulu_KursTipleri">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DilOkulu_KursTipiKargoHaricler">
+              <PropertyRef Name="KursTipiId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DilOkulu_KursTipiKargoHaricler_DilOkulu_Okullar">
+          <End Type="DB110129183811Model.DilOkulu_Okullar" Role="DilOkulu_Okullar" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="DB110129183811Model.DilOkulu_KursTipiKargoHaricler" Role="DilOkulu_KursTipiKargoHaricler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DilOkulu_Okullar">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DilOkulu_KursTipiKargoHaricler">
+              <PropertyRef Name="OkulId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DB110129183811ModelStoreContainer" CdmEntityContainer="DilOkuluEntities">
+          <EntitySetMapping Name="DilOkulu_Kullanicilar">
+            <EntityTypeMapping TypeName="DB110129183811Model.DilOkulu_Kullanicilar">
+              <MappingFragment StoreEntitySet="DilOkulu_Kullanicilar">
+                <ScalarProperty Name="Durumu" ColumnName="Durumu" />
+                <ScalarProperty Name="KayitTarihi" ColumnName="KayitTarihi" />
+                <ScalarProperty Name="Sifre" ColumnName="Sifre" />
+                <ScalarProperty Name="KullaniciAdi" ColumnName="KullaniciAdi" />
+                <ScalarProperty Name="AdSoyad" ColumnName="AdSoyad" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DilOkulu_Makaleler">
+            <EntityTypeMapping TypeName="DB110129183811Model.DilOkulu_Makaleler">
+              <MappingFragment StoreEntitySet="DilOkulu_Makaleler">
+                <ScalarProperty Name="Url" ColumnName="Url" />
+                <ScalarProperty Name="ResimThumbUrl" ColumnName="ResimThumbUrl" />
+                <ScalarProperty Name="ResimUrl" ColumnName="ResimUrl" />
+                <ScalarProperty Name="Durumu" ColumnName="Durumu" />
+                <ScalarProperty Name="KayitTarihi" ColumnName="KayitTarihi" />
+                <ScalarProperty Name="Icerik" ColumnName="Icerik" />
+                <ScalarProperty Name="Ozet" ColumnName="Ozet" />
+                <ScalarProperty Name="Seo_Descriptions" ColumnName="Seo_Descriptions" />
+                <ScalarProperty Name="Seo_Keywords" ColumnName="Seo_Keywords" />
+                <ScalarProperty Name="Baslik" ColumnName="Baslik" />
+                <ScalarProperty Name="KategoriId" ColumnName="KategoriId" />
+                <ScalarProperty Name="YazarId" ColumnName="YazarId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DilOkulu_Yazarlar">
+            <EntityTypeMapping TypeName="DB110129183811Model.DilOkulu_Yazarlar">
+              <MappingFragment StoreEntitySet="DilOkulu_Yazarlar">
+                <ScalarProperty Name="EPosta" ColumnName="EPosta" />
+                <ScalarProperty Name="Telefon" ColumnName="Telefon" />
+                <ScalarProperty Name="Pozisyon" ColumnName="Pozisyon" />
+                <ScalarProperty Name="Durumu" ColumnName="Durumu" />
+                <ScalarProperty Name="KayitTarihi" ColumnName="KayitTarihi" />
+                <ScalarProperty Name="ResimUrl" ColumnName="ResimUrl" />
+                <ScalarProperty Name="Aciklama" ColumnName="Aciklama" />
+                <ScalarProperty Name="YazarTipi" ColumnName="YazarTipi" />
+                <ScalarProperty Name="AdSoyad" ColumnName="AdSoyad" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DilOkulu_Haberler">
+            <EntityTypeMapping TypeName="DB110129183811Model.DilOkulu_Haberler">
+              <MappingFragment StoreEntitySet="DilOkulu_Haberler">
+                <ScalarProperty Name="Url" ColumnName="Url" />
+                <ScalarProperty Name="Durumu" ColumnName="Durumu" />
+                <ScalarProperty Name="Oncelik" ColumnName="Oncelik" />
+                <ScalarProperty Name="KayitTarihi" ColumnName="KayitTarihi" />
+                <ScalarProperty Name="ResimThumbUrl" ColumnName="ResimThumbUrl" />
+                <ScalarProperty Name="ResimUrl" ColumnName="ResimUrl" />
+                <ScalarProperty Name="Icerik" ColumnName="Icerik" />
+                <ScalarProperty Name="Ozet" ColumnName="Ozet" />
+                <ScalarProperty Name="Seo_Descriptions" ColumnName="Seo_Descriptions" />
+                <ScalarProperty Name="Seo_Keywords" ColumnName="Seo_Keywords" />
+                <ScalarProperty Name="Baslik" ColumnName="Baslik" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DilOkulu_Slider">
+            <EntityTypeMapping TypeName="DB110129183811Model.DilOkulu_Slider">
+              <MappingFragment StoreEntitySet="DilOkulu_Slider">
+                <ScalarProperty Name="Durumu" ColumnName="Durumu" />
+                <ScalarProperty Name="Oncelik" ColumnName="Oncelik" />
+                <ScalarProperty Name="KayitTarihi" ColumnName="KayitTarihi" />
+                <ScalarProperty Name="ResimThumbUrl" ColumnName="ResimThumbUrl" />
+                <ScalarProperty Name="ResimUrl" ColumnName="ResimUrl" />
+                <ScalarProperty Name="PageLink" ColumnName="PageLink" />
+                <ScalarProperty Name="Ozet" ColumnName="Ozet" />
+                <ScalarProperty Name="Baslik" ColumnName="Baslik" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DilOkulu_VizeRehberi">
+            <EntityTypeMapping TypeName="DB110129183811Model.DilOkulu_VizeRehberi">
+              <MappingFragment StoreEntitySet="DilOkulu_VizeRehberi">
+                <ScalarProperty Name="Url" ColumnName="Url" />
+                <ScalarProperty Name="Durumu" ColumnName="Durumu" />
+                <ScalarProperty Name="Oncelik" ColumnName="Oncelik" />
+                <ScalarProperty Name="KayitTarihi" ColumnName="KayitTarihi" />
+                <ScalarProperty Name="ResimUrl" ColumnName="ResimUrl" />
+                <ScalarProperty Name="Icerik" ColumnName="Icerik" />
+                <ScalarProperty Name="Seo_Descriptions" ColumnName="Seo_Descriptions" />
+                <ScalarProperty Name="Seo_Keywords" ColumnName="Seo_Keywords" />
+                <ScalarProperty Name="Baslik" ColumnName="Baslik" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DilOkulu_GaleriDosyalari">
+            <EntityTypeMapping TypeName="DB110129183811Model.DilOkulu_GaleriDosyalari">
+              <MappingFragment StoreEntitySet="DilOkulu_GaleriDosyalari">
+                <ScalarProperty Name="Durumu" ColumnName="Durumu" />
+                <ScalarProperty Name="KayitTarihi" ColumnName="KayitTarihi" />
+                <ScalarProperty Name="DosyaPath" ColumnName="DosyaPath" />
+                <ScalarProperty Name="GaleriId" ColumnName="GaleriId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DilOkulu_Galeriler">
+            <EntityTypeMapping TypeName="DB110129183811Model.DilOkulu_Galeriler">
+              <MappingFragment StoreEntitySet="DilOkulu_Galeriler">
+                <ScalarProperty Name="Durumu" ColumnName="Durumu" />
+                <ScalarProperty Name="KayitTarihi" ColumnName="KayitTarihi" />
+                <ScalarProperty Name="Baslik" ColumnName="Baslik" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DilOkulu_EtiketIliskileri">
+            <EntityTypeMapping TypeName="DB110129183811Model.DilOkulu_EtiketIliskileri">
+              <MappingFragment StoreEntitySet="DilOkulu_EtiketIliskileri">
+                <ScalarProperty Name="Durumu" ColumnName="Durumu" />
+                <ScalarProperty Name="KayitTarihi" ColumnName="KayitTarihi" />
+                <ScalarProperty Name="IcerikId" ColumnName="IcerikId" />
+                <ScalarProperty Name="EtiketTipi" ColumnName="EtiketTipi" />
+                <ScalarProperty Name="EtiketId" ColumnName="EtiketId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DilOkulu_Etiketler">
+            <EntityTypeMapping TypeName="DB110129183811Model.DilOkulu_Etiketler">
+              <MappingFragment StoreEntitySet="DilOkulu_Etiketler">
+                <ScalarProperty Name="Durumu" ColumnName="Durumu" />
+                <ScalarProperty Name="KayitTarihi" ColumnName="KayitTarihi" />
+                <ScalarProperty Name="Baslik" ColumnName="Baslik" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DilOkulu_StatikSayfalar">
+            <EntityTypeMapping TypeName="DB110129183811Model.DilOkulu_StatikSayfalar">
+              <MappingFragment StoreEntitySet="DilOkulu_StatikSayfalar">
+                <ScalarProperty Name="Seo_Title" ColumnName="Seo_Title" />
+                <ScalarProperty Name="Seo_Descriptions" ColumnName="Seo_Descriptions" />
+                <ScalarProperty Name="Seo_Keywords" ColumnName="Seo_Keywords" />
+                <ScalarProperty Name="Durumu" ColumnName="Durumu" />
+                <ScalarProperty Name="KayitTarihi" ColumnName="KayitTarihi" />
+                <ScalarProperty Name="Icerik" ColumnName="Icerik" />
+                <ScalarProperty Name="Baslik" ColumnName="Baslik" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DilOkulu_Diller">
+            <EntityTypeMapping TypeName="DB110129183811Model.DilOkulu_Diller">
+              <MappingFragment StoreEntitySet="DilOkulu_Diller">
+                <ScalarProperty Name="Oncelik" ColumnName="Oncelik" />
+                <ScalarProperty Name="Seo_Descriptions" ColumnName="Seo_Descriptions" />
+                <ScalarProperty Name="Seo_Keywords" ColumnName="Seo_Keywords" />
+                <ScalarProperty Name="Durumu" ColumnName="Durumu" />
+                <ScalarProperty Name="KayitTarihi" ColumnName="KayitTarihi" />
+                <ScalarProperty Name="Url" ColumnName="Url" />
+                <ScalarProperty Name="Resim" ColumnName="Resim" />
+                <ScalarProperty Name="Aciklama" ColumnName="Aciklama" />
+                <ScalarProperty Name="Baslik" ColumnName="Baslik" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DilOkulu_Merkez">
+            <EntityTypeMapping TypeName="DB110129183811Model.DilOkulu_Merkez">
+              <MappingFragment StoreEntitySet="DilOkulu_Merkez">
+                <ScalarProperty Name="Akreditasyonlar" ColumnName="Akreditasyonlar" />
+                <ScalarProperty Name="KurulusTarihi" ColumnName="KurulusTarihi" />
+                <ScalarProperty Name="Ozet" ColumnName="Ozet" />
+                <ScalarProperty Name="Brosur" ColumnName="Brosur" />
+                <ScalarProperty Name="Seo_Descriptions" ColumnName="Seo_Descriptions" />
+                <ScalarProperty Name="Seo_Keywords" ColumnName="Seo_Keywords" />
+                <ScalarProperty Name="Durumu" ColumnName="Durumu" />
+                <ScalarProperty Name="Oncelik" ColumnName="Oncelik" />
+                <ScalarProperty Name="KayitTarihi" ColumnName="KayitTarihi" />
+                <ScalarProperty Name="Promosyonlar" ColumnName="Promosyonlar" />
+                <ScalarProperty Name="FiyatListesi" ColumnName="FiyatListesi" />
+                <ScalarProperty Name="TwitterLink" ColumnName="TwitterLink" />
+                <ScalarProperty Name="YoutubeLink" ColumnName="YoutubeLink" />
+                <ScalarProperty Name="FacebookLink" ColumnName="FacebookLink" />
+                <ScalarProperty Name="OkulSiteLink" ColumnName="OkulSiteLink" />
+                <ScalarProperty Name="Url" ColumnName="Url" />
+                <ScalarProperty Name="Logo" ColumnName="Logo" />
+                <ScalarProperty Name="GenelBilgi" ColumnName="GenelBilgi" />
+                <ScalarProperty Name="Baslik" ColumnName="Baslik" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DilOkulu_Sehirler">
+            <EntityTypeMapping TypeName="DB110129183811Model.DilOkulu_Sehirler">
+              <MappingFragment StoreEntitySet="DilOkulu_Sehirler">
+                <ScalarProperty Name="SehirProfili" ColumnName="SehirProfili" />
+                <ScalarProperty Name="Durumu" ColumnName="Durumu" />
+                <ScalarProperty Name="KayitTarihi" ColumnName="KayitTarihi" />
+                <ScalarProperty Name="Url" ColumnName="Url" />
+                <ScalarProperty Name="Oncelik" ColumnName="Oncelik" />
+                <ScalarProperty Name="Resim" ColumnName="Resim" />
+                <ScalarProperty Name="Aciklama" ColumnName="Aciklama" />
+                <ScalarProperty Name="Seo_Descriptions" ColumnName="Seo_Descriptions" />
+                <ScalarProperty Name="Seo_Keywords" ColumnName="Seo_Keywords" />
+                <ScalarProperty Name="Baslik" ColumnName="Baslik" />
+                <ScalarProperty Name="UlkeId" ColumnName="UlkeId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DilOkulu_StatikLinkler">
+            <EntityTypeMapping TypeName="DB110129183811Model.DilOkulu_StatikLinkler">
+              <MappingFragment StoreEntitySet="DilOkulu_StatikLinkler">
+                <ScalarProperty Name="Oncelik" ColumnName="Oncelik" />
+                <ScalarProperty Name="Durumu" ColumnName="Durumu" />
+                <ScalarProperty Name="KayitTarihi" ColumnName="KayitTarihi" />
+                <ScalarProperty Name="LinkTipi" ColumnName="LinkTipi" />
+                <ScalarProperty Name="Link" ColumnName="Link" />
+                <ScalarProperty Name="Baslik" ColumnName="Baslik" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DilOkulu_SunulanProgramlar">
+            <EntityTypeMapping TypeName="DB110129183811Model.DilOkulu_SunulanProgramlar">
+              <MappingFragment StoreEntitySet="DilOkulu_SunulanProgramlar">
+                <ScalarProperty Name="Durumu" ColumnName="Durumu" />
+                <ScalarProperty Name="KayitTarihi" ColumnName="KayitTarihi" />
+                <ScalarProperty Name="UstProgramId" ColumnName="UstProgramId" />
+                <ScalarProperty Name="Baslik" ColumnName="Baslik" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DilOkulu_Subeler">
+            <EntityTypeMapping TypeName="DB110129183811Model.DilOkulu_Subeler">
+              <MappingFragment StoreEntitySet="DilOkulu_Subeler">
+                <ScalarProperty Name="Durumu" ColumnName="Durumu" />
+                <ScalarProperty Name="KayitTarihi" ColumnName="KayitTarihi" />
+                <ScalarProperty Name="Oncelik" ColumnName="Oncelik" />
+                <ScalarProperty Name="Url" ColumnName="Url" />
+                <ScalarProperty Name="KrokiLink" ColumnName="KrokiLink" />
+                <ScalarProperty Name="Icerik" ColumnName="Icerik" />
+                <ScalarProperty Name="EPosta" ColumnName="EPosta" />
+                <ScalarProperty Name="Adres" ColumnName="Adres" />
+                <ScalarProperty Name="Fax" ColumnName="Fax" />
+                <ScalarProperty Name="Telefon" ColumnName="Telefon" />
+                <ScalarProperty Name="Baslik" ColumnName="Baslik" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DilOkulu_SubeSayfalar">
+            <EntityTypeMapping TypeName="DB110129183811Model.DilOkulu_SubeSayfalar">
+              <MappingFragment StoreEntitySet="DilOkulu_SubeSayfalar">
+                <ScalarProperty Name="Durumu" ColumnName="Durumu" />
+                <ScalarProperty Name="KayitTarihi" ColumnName="KayitTarihi" />
+                <ScalarProperty Name="Icerik" ColumnName="Icerik" />
+                <ScalarProperty Name="Url" ColumnName="Url" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Keywords" ColumnName="Keywords" />
+                <ScalarProperty Name="SubeId" ColumnName="SubeId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DilOkulu_ParaBirimleri">
+            <EntityTypeMapping TypeName="DB110129183811Model.DilOkulu_ParaBirimleri">
+              <MappingFragment StoreEntitySet="DilOkulu_ParaBirimleri">
+                <ScalarProperty Name="Durumu" ColumnName="Durumu" />
+                <ScalarProperty Name="Oncelik" ColumnName="Oncelik" />
+                <ScalarProperty Name="Birim" ColumnName="Birim" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DilOkulu_Ulkeler">
+            <EntityTypeMapping TypeName="DB110129183811Model.DilOkulu_Ulkeler">
+              <MappingFragment StoreEntitySet="DilOkulu_Ulkeler">
+                <ScalarProperty Name="Durumu" ColumnName="Durumu" />
+                <ScalarProperty Name="KayitTarihi" ColumnName="KayitTarihi" />
+                <ScalarProperty Name="Url" ColumnName="Url" />
+                <ScalarProperty Name="Oncelik" ColumnName="Oncelik" />
+                <ScalarProperty Name="KacAyaKadar3" ColumnName="KacAyaKadar3" />
+                <ScalarProperty Name="VizeUcreti3" ColumnName="VizeUcreti3" />
+                <ScalarProperty Name="KacAyaKadar2" ColumnName="KacAyaKadar2" />
+                <ScalarProperty Name="VizeUcreti2" ColumnName="VizeUcreti2" />
+                <ScalarProperty Name="KacAyaKadar1" ColumnName="KacAyaKadar1" />
+                <ScalarProperty Name="VizeUcreti1" ColumnName="VizeUcreti1" />
+                <ScalarProperty Name="ParaBirimId" ColumnName="ParaBirimId" />
+                <ScalarProperty Name="Resim" ColumnName="Resim" />
+                <ScalarProperty Name="SaglikSistemi" ColumnName="SaglikSistemi" />
+                <ScalarProperty Name="Ulasim" ColumnName="Ulasim" />
+                <ScalarProperty Name="YasamGiderleri" ColumnName="YasamGiderleri" />
+                <ScalarProperty Name="CalismaIzni" ColumnName="CalismaIzni" />
+                <ScalarProperty Name="VizeBilgileri" ColumnName="VizeBilgileri" />
+                <ScalarProperty Name="Aciklama" ColumnName="Aciklama" />
+                <ScalarProperty Name="Seo_Descriptions" ColumnName="Seo_Descriptions" />
+                <ScalarProperty Name="Seo_Keywords" ColumnName="Seo_Keywords" />
+                <ScalarProperty Name="Baslik" ColumnName="Baslik" />
+                <ScalarProperty Name="DilId" ColumnName="DilId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DilOkulu_KonaklamaKategorileri">
+            <EntityTypeMapping TypeName="DB110129183811Model.DilOkulu_KonaklamaKategorileri">
+              <MappingFragment StoreEntitySet="DilOkulu_KonaklamaKategorileri">
+                <ScalarProperty Name="Durumu" ColumnName="Durumu" />
+                <ScalarProperty Name="KayitTarihi" ColumnName="KayitTarihi" />
+                <ScalarProperty Name="Baslik" ColumnName="Baslik" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DilOkulu_KursTipleri">
+            <EntityTypeMapping TypeName="DB110129183811Model.DilOkulu_KursTipleri">
+              <MappingFragment StoreEntitySet="DilOkulu_KursTipleri">
+                <ScalarProperty Name="Durumu" ColumnName="Durumu" />
+                <ScalarProperty Name="KayitTarihi" ColumnName="KayitTarihi" />
+                <ScalarProperty Name="Aciklama" ColumnName="Aciklama" />
+                <ScalarProperty Name="OzelTarihListesi" ColumnName="OzelTarihListesi" />
+                <ScalarProperty Name="BasTarihiOzel" ColumnName="BasTarihiOzel" />
+                <ScalarProperty Name="BasTarihiHerPazartesi" ColumnName="BasTarihiHerPazartesi" />
+                <ScalarProperty Name="Baslik" ColumnName="Baslik" />
+                <ScalarProperty Name="KursKategoriId" ColumnName="KursKategoriId" />
+                <ScalarProperty Name="OkulId" ColumnName="OkulId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DilOkulu_KursTipiFiyatlandirmalari">
+            <EntityTypeMapping TypeName="DB110129183811Model.DilOkulu_KursTipiFiyatlandirmalari">
+              <MappingFragment StoreEntitySet="DilOkulu_KursTipiFiyatlandirmalari">
+                <ScalarProperty Name="Durumu" ColumnName="Durumu" />
+                <ScalarProperty Name="KayitTarihi" ColumnName="KayitTarihi" />
+                <ScalarProperty Name="Fiyat" ColumnName="Fiyat" />
+                <ScalarProperty Name="HaftaBazliBirimFiyatli_HaftaBitis" ColumnName="HaftaBazliBirimFiyatli_HaftaBitis" />
+                <ScalarProperty Name="HaftaBazliBirimFiyatli_HaftaBaslangic" ColumnName="HaftaBazliBirimFiyatli_HaftaBaslangic" />
+                <ScalarProperty Name="HerHaftayaOzel_Hafta" ColumnName="HerHaftayaOzel_Hafta" />
+                <ScalarProperty Name="StandartHafta_HaftaSayisi" ColumnName="StandartHafta_HaftaSayisi" />
+                <ScalarProperty Name="FiyatlandirmaModelId" ColumnName="FiyatlandirmaModelId" />
+                <ScalarProperty Name="KursTipiId" ColumnName="KursTipiId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DilOkulu_KursTipiPromosyonTanimlari">
+            <EntityTypeMapping TypeName="DB110129183811Model.DilOkulu_KursTipiPromosyonTanimlari">
+              <MappingFragment StoreEntitySet="DilOkulu_KursTipiPromosyonTanimlari">
+                <ScalarProperty Name="IndirimPromosyonu_BirimFiyat" ColumnName="IndirimPromosyonu_BirimFiyat" />
+                <ScalarProperty Name="IndirimPromosyonu_HaftaMax" ColumnName="IndirimPromosyonu_HaftaMax" />
+                <ScalarProperty Name="KursTarihiBitis" ColumnName="KursTarihiBitis" />
+                <ScalarProperty Name="KursTarihiBaslangic" ColumnName="KursTarihiBaslangic" />
+                <ScalarProperty Name="Durumu" ColumnName="Durumu" />
+                <ScalarProperty Name="KayitTarihi" ColumnName="KayitTarihi" />
+                <ScalarProperty Name="PromosyonBitisTarihi" ColumnName="PromosyonBitisTarihi" />
+                <ScalarProperty Name="KursBazli_Fiyat" ColumnName="KursBazli_Fiyat" />
+                <ScalarProperty Name="KursBazli_Hafta" ColumnName="KursBazli_Hafta" />
+                <ScalarProperty Name="IndirimPromosyonu_Oran" ColumnName="IndirimPromosyonu_Oran" />
+                <ScalarProperty Name="IndirimPromosyonu_Hafta" ColumnName="IndirimPromosyonu_Hafta" />
+                <ScalarProperty Name="ExtraHafta_UcretsizHaftaSayisi" ColumnName="ExtraHafta_UcretsizHaftaSayisi" />
+                <ScalarProperty Name="ExtraHafta_MinimumHafta" ColumnName="ExtraHafta_MinimumHafta" />
+                <ScalarProperty Name="PromosyonModelId" ColumnName="PromosyonModelId" />
+                <ScalarProperty Name="KursTipiId" ColumnName="KursTipiId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DilOkulu_KonaklamaTipiFiyatlandirmalari">
+            <EntityTypeMapping TypeName="DB110129183811Model.DilOkulu_KonaklamaTipiFiyatlandirmalari">
+              <MappingFragment StoreEntitySet="DilOkulu_KonaklamaTipiFiyatlandirmalari">
+                <ScalarProperty Name="Durumu" ColumnName="Durumu" />
+                <ScalarProperty Name="KayitTarihi" ColumnName="KayitTarihi" />
+                <ScalarProperty Name="Fiyat" ColumnName="Fiyat" />
+                <ScalarProperty Name="HaftaBazliBirimFiyatli_HaftaBitis" ColumnName="HaftaBazliBirimFiyatli_HaftaBitis" />
+                <ScalarProperty Name="HaftaBazliBirimFiyatli_HaftaBaslangic" ColumnName="HaftaBazliBirimFiyatli_HaftaBaslangic" />
+                <ScalarProperty Name="HerHaftayaOzel_Hafta" ColumnName="HerHaftayaOzel_Hafta" />
+                <ScalarProperty Name="StandartHafta_HaftaSayisi" ColumnName="StandartHafta_HaftaSayisi" />
+                <ScalarProperty Name="FiyatlandirmaModelId" ColumnName="FiyatlandirmaModelId" />
+                <ScalarProperty Name="KonaklamaTipiId" ColumnName="KonaklamaTipiId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DilOkulu_KonaklamaTipiPromosyonTanimlari">
+            <EntityTypeMapping TypeName="DB110129183811Model.DilOkulu_KonaklamaTipiPromosyonTanimlari">
+              <MappingFragment StoreEntitySet="DilOkulu_KonaklamaTipiPromosyonTanimlari">
+                <ScalarProperty Name="IndirimPromosyonu_BirimFiyat" ColumnName="IndirimPromosyonu_BirimFiyat" />
+                <ScalarProperty Name="IndirimPromosyonu_HaftaMax" ColumnName="IndirimPromosyonu_HaftaMax" />
+                <ScalarProperty Name="KalisTarihiBitis" ColumnName="KalisTarihiBitis" />
+                <ScalarProperty Name="KalisTarihiBaslangic" ColumnName="KalisTarihiBaslangic" />
+                <ScalarProperty Name="Durumu" ColumnName="Durumu" />
+                <ScalarProperty Name="KayitTarihi" ColumnName="KayitTarihi" />
+                <ScalarProperty Name="PromosyonBitisTarihi" ColumnName="PromosyonBitisTarihi" />
+                <ScalarProperty Name="KonaklamaBazli_Fiyat" ColumnName="KonaklamaBazli_Fiyat" />
+                <ScalarProperty Name="KonaklamaBazli_Hafta" ColumnName="KonaklamaBazli_Hafta" />
+                <ScalarProperty Name="IndirimPromosyonu_Oran" ColumnName="IndirimPromosyonu_Oran" />
+                <ScalarProperty Name="IndirimPromosyonu_Hafta" ColumnName="IndirimPromosyonu_Hafta" />
+                <ScalarProperty Name="ExtraHafta_UcretsizHaftaSayisi" ColumnName="ExtraHafta_UcretsizHaftaSayisi" />
+                <ScalarProperty Name="ExtraHafta_MinimumHafta" ColumnName="ExtraHafta_MinimumHafta" />
+                <ScalarProperty Name="PromosyonModelId" ColumnName="PromosyonModelId" />
+                <ScalarProperty Name="KonaklamaTipiId" ColumnName="KonaklamaTipiId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DilOkulu_KonaklamaTipleri">
+            <EntityTypeMapping TypeName="DB110129183811Model.DilOkulu_KonaklamaTipleri">
+              <MappingFragment StoreEntitySet="DilOkulu_KonaklamaTipleri">
+                <ScalarProperty Name="Durumu" ColumnName="Durumu" />
+                <ScalarProperty Name="KayitTarihi" ColumnName="KayitTarihi" />
+                <ScalarProperty Name="Aciklama" ColumnName="Aciklama" />
+                <ScalarProperty Name="OzelTarihListesi" ColumnName="OzelTarihListesi" />
+                <ScalarProperty Name="BasTarihiOzel" ColumnName="BasTarihiOzel" />
+                <ScalarProperty Name="BasTarihiYilBoyu" ColumnName="BasTarihiYilBoyu" />
+                <ScalarProperty Name="Baslik" ColumnName="Baslik" />
+                <ScalarProperty Name="KonaklamaKategoriId" ColumnName="KonaklamaKategoriId" />
+                <ScalarProperty Name="OkulId" ColumnName="OkulId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DilOkulu_Okullar">
+            <EntityTypeMapping TypeName="DB110129183811Model.DilOkulu_Okullar">
+              <MappingFragment StoreEntitySet="DilOkulu_Okullar">
+                <ScalarProperty Name="PromosyonBitisTarihi" ColumnName="PromosyonBitisTarihi" />
+                <ScalarProperty Name="PromosyonPdf" ColumnName="PromosyonPdf" />
+                <ScalarProperty Name="StreetView" ColumnName="StreetView" />
+                <ScalarProperty Name="Ucretler_KonaklamaAyarlamaEkUcretArray" ColumnName="Ucretler_KonaklamaAyarlamaEkUcretArray" />
+                <ScalarProperty Name="Ucretler_OkulKayitEkUcretArray" ColumnName="Ucretler_OkulKayitEkUcretArray" />
+                <ScalarProperty Name="Ucretler_SaglikSigortasiArray" ColumnName="Ucretler_SaglikSigortasiArray" />
+                <ScalarProperty Name="Ucretler_MateryalUcretiArray" ColumnName="Ucretler_MateryalUcretiArray" />
+                <ScalarProperty Name="Ucretler_KonaklamaAyarlamaUcretiArray" ColumnName="Ucretler_KonaklamaAyarlamaUcretiArray" />
+                <ScalarProperty Name="Ucretler_OkulKayitUcretiArray" ColumnName="Ucretler_OkulKayitUcretiArray" />
+                <ScalarProperty Name="Ucretler_KargoUcreti" ColumnName="Ucretler_KargoUcreti" />
+                <ScalarProperty Name="Durumu" ColumnName="Durumu" />
+                <ScalarProperty Name="KayitTarihi" ColumnName="KayitTarihi" />
+                <ScalarProperty Name="Ucretler_SaglikSigortasiTahsilatTipi" ColumnName="Ucretler_SaglikSigortasiTahsilatTipi" />
+                <ScalarProperty Name="Ucretler_SaglikSigortasi" ColumnName="Ucretler_SaglikSigortasi" />
+                <ScalarProperty Name="Ucretler_HavaAlaniKarsilama" ColumnName="Ucretler_HavaAlaniKarsilama" />
+                <ScalarProperty Name="Ucretler_MateryalTahsilatTipi" ColumnName="Ucretler_MateryalTahsilatTipi" />
+                <ScalarProperty Name="Ucretler_MateryalUcreti" ColumnName="Ucretler_MateryalUcreti" />
+                <ScalarProperty Name="Ucretler_KonaklamaAyarlamaUcreti" ColumnName="Ucretler_KonaklamaAyarlamaUcreti" />
+                <ScalarProperty Name="Ucretler_OkulKayitUcreti" ColumnName="Ucretler_OkulKayitUcreti" />
+                <ScalarProperty Name="Url" ColumnName="Url" />
+                <ScalarProperty Name="GaleriId" ColumnName="GaleriId" />
+                <ScalarProperty Name="OnecikanOkul" ColumnName="OnecikanOkul" />
+                <ScalarProperty Name="VideoUrl" ColumnName="VideoUrl" />
+                <ScalarProperty Name="Harita" ColumnName="Harita" />
+                <ScalarProperty Name="Icerik" ColumnName="Icerik" />
+                <ScalarProperty Name="SunulanProgramlar" ColumnName="SunulanProgramlar" />
+                <ScalarProperty Name="SosyalAktiviteler" ColumnName="SosyalAktiviteler" />
+                <ScalarProperty Name="OkulOlanaklari" ColumnName="OkulOlanaklari" />
+                <ScalarProperty Name="KonaklamaTurleri" ColumnName="KonaklamaTurleri" />
+                <ScalarProperty Name="SinifKapasitesi" ColumnName="SinifKapasitesi" />
+                <ScalarProperty Name="OkulKapasitesi" ColumnName="OkulKapasitesi" />
+                <ScalarProperty Name="OkulTipi" ColumnName="OkulTipi" />
+                <ScalarProperty Name="Seo_Descriptions" ColumnName="Seo_Descriptions" />
+                <ScalarProperty Name="Seo_Keywords" ColumnName="Seo_Keywords" />
+                <ScalarProperty Name="Baslik" ColumnName="Baslik" />
+                <ScalarProperty Name="SehirId" ColumnName="SehirId" />
+                <ScalarProperty Name="UlkeId" ColumnName="UlkeId" />
+                <ScalarProperty Name="DilId" ColumnName="DilId" />
+                <ScalarProperty Name="MerkezId" ColumnName="MerkezId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DilOkulu_KonaklamaTipiEkUcretleri">
+            <EntityTypeMapping TypeName="DB110129183811Model.DilOkulu_KonaklamaTipiEkUcretleri">
+              <MappingFragment StoreEntitySet="DilOkulu_KonaklamaTipiEkUcretleri">
+                <ScalarProperty Name="MaksimumHafta" ColumnName="MaksimumHafta" />
+                <ScalarProperty Name="Durumu" ColumnName="Durumu" />
+                <ScalarProperty Name="KayitTarihi" ColumnName="KayitTarihi" />
+                <ScalarProperty Name="Fiyat" ColumnName="Fiyat" />
+                <ScalarProperty Name="BititisTarihi" ColumnName="BititisTarihi" />
+                <ScalarProperty Name="BaslangicTarihi" ColumnName="BaslangicTarihi" />
+                <ScalarProperty Name="KonaklamaTipId" ColumnName="KonaklamaTipId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DilOkulu_KursTipiEkUcretleri">
+            <EntityTypeMapping TypeName="DB110129183811Model.DilOkulu_KursTipiEkUcretleri">
+              <MappingFragment StoreEntitySet="DilOkulu_KursTipiEkUcretleri">
+                <ScalarProperty Name="MaksimumHafta" ColumnName="MaksimumHafta" />
+                <ScalarProperty Name="Durumu" ColumnName="Durumu" />
+                <ScalarProperty Name="KayitTarihi" ColumnName="KayitTarihi" />
+                <ScalarProperty Name="Fiyat" ColumnName="Fiyat" />
+                <ScalarProperty Name="BititisTarihi" ColumnName="BititisTarihi" />
+                <ScalarProperty Name="BaslangicTarihi" ColumnName="BaslangicTarihi" />
+                <ScalarProperty Name="KursTipId" ColumnName="KursTipId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DilOkulu_KursKategorileri">
+            <EntityTypeMapping TypeName="DB110129183811Model.DilOkulu_KursKategorileri">
+              <MappingFragment StoreEntitySet="DilOkulu_KursKategorileri">
+                <ScalarProperty Name="Durumu" ColumnName="Durumu" />
+                <ScalarProperty Name="KayitTarihi" ColumnName="KayitTarihi" />
+                <ScalarProperty Name="DilId" ColumnName="DilId" />
+                <ScalarProperty Name="Baslik" ColumnName="Baslik" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DilOkulu_KursTipiKargoHaricler">
+            <EntityTypeMapping TypeName="DB110129183811Model.DilOkulu_KursTipiKargoHaricler">
+              <MappingFragment StoreEntitySet="DilOkulu_KursTipiKargoHaricler">
+                <ScalarProperty Name="KursTipiId" ColumnName="KursTipiId" />
+                <ScalarProperty Name="OkulId" ColumnName="OkulId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer>
+    <edmx:Connection>
+      <edmx:DesignerInfoPropertySet>
+        <edmx:DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </edmx:DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <edmx:DesignerInfoPropertySet>
+        <edmx:DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <edmx:DesignerProperty Name="EnablePluralization" Value="False" />
+        <edmx:DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <edmx:DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+        <edmx:DesignerProperty Name="UseLegacyProvider" Value="True" />
+      </edmx:DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams />
+  </edmx:Designer>
+</edmx:Edmx>

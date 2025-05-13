@@ -1,0 +1,458 @@
+﻿@model WebApp.Models.DilOkulu_Okullar
+@{
+    ViewBag.Title = "Okul Detay | dilokulu cms";
+    Layout = "~/Areas/cms/Views/Shared/_CMSLayout.cshtml";
+}
+
+@section HeaderWithContentPage{
+    <script src="@Url.Content("~/Areas/cms/Assets/ckeditor/ckeditor.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Areas/cms/Assets/ckeditor/adapters/jquery.js")" type="text/javascript"></script>
+
+    <script src="~/Areas/cms/Assets/js/dilokulu.js"></script>
+    <script type="text/javascript">
+        $(function () {
+
+            var ProcessStatus = '@Html.Raw(ViewBag.Status)';
+
+            if (ProcessStatus == "ok") {
+                GeneralObj.DilokuluMessageBox.init({ status: 'ok', message: 'Kayıt Güncellendi.' });
+            }
+
+            $('#btnSave').click(function () {
+                Loader();
+
+                $("html, body").animate({ scrollTop: "0px" });
+
+                var baslik = $('#Baslik').val();
+                var merkezId = $('#SelectMerkez').val();
+                var SehirId = $('#SehirId').val();
+
+                $.ajax({
+                    type: "POST",
+                    url: "@Url.Action("OkulVarMiUpdate", "Ajax")",
+                    data: { baslik: baslik, merkezId: merkezId, SehirId: SehirId },
+                    dataType: "json",
+                    success: function (data) {
+                        if (data.status == "ok") {
+                            $('#submit').trigger("click");
+                        } else {
+
+                            GeneralObj.DilokuluMessageBox.init({ status: 'error', message: data.mesaj });
+                            closeModal();
+                        }
+                    }
+                });
+                return false;
+            })
+        })
+
+
+    </script>
+}
+
+<script language="javascript" type="text/javascript">
+    $(document).ready(function () {
+        var config = {
+            height: 500,
+            width: 800,
+            toolbar: [
+                   ['Source', 'Paste', 'PasteText', 'PasteFromWord', 'Bold', 'Italic', 'Underline', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock', 'Font', 'FontSize', 'NumberedList', 'BulletedList', 'Undo', 'Redo', 'Link', 'Unlink', 'TextColor', 'BGColor', 'Image', 'NewPage', 'Preview']
+            ]
+            , filebrowserUploadUrl: '/FileUpload/ImageUpload'
+        };
+        $(".adminRichText").ckeditor(config);
+    });
+</script>
+
+
+@section SectionBeforeWrapper{
+    @Html.Partial("_Modals")
+}
+<div id="divStatusBox" style="">
+    <span id="spanMessageText"></span>
+</div>
+<table cellpadding="0" cellspacing="0" style="width: 100%;">
+    <tr>
+        <td class="MasterRow3_Column1">
+            @Html.Partial("_OkullarMunu")
+        </td>
+        <td class="MasterRow3_Column2">
+            <table cellpadding="0" cellspacing="0" class="OrtaMenu">
+                <tr>
+                    <td class="OrtaMenuRowTitle">
+                        <img src="@Url.Content("~/areas/CMS/assets/Images/Genel/b-settings.png")" style="width: 18px; height: 18px"
+                             align="absmiddle" />Okul Detay
+                    </td>
+                </tr>
+                <tr>
+                    <td class="OrtaMenuRow">
+                        @using (Html.BeginForm("detay", "okullar", FormMethod.Post, new { id = "form1", enctype = "multipart/form-data" }))
+                        {
+                            <table cellpadding="0" cellspacing="0" style="width: 100%;">
+                                <tr>
+                                    <td class="OrtaMenuRowC1">
+                                        Okul Merkezleri<span class="SpanZorunluAlan">*</span>
+                                    </td>
+                                    <td class="OrtaMenuRowC2">
+                                        <select id="SelectMerkez" name="SelectMerkez" class="DropDownList" style="width: 300px;">
+                                            <option value="0">Seçin...</option>
+                                            @if (ViewBag.Merkezler != null)
+                                            {
+                                                var merkezler = (List<WebApp.Models.DilOkulu_Merkez>)ViewBag.Merkezler;
+                                                if (merkezler != null && merkezler.Count > 0)
+                                                {
+                                                    foreach (var item in merkezler)
+                                                    {
+                                                        <option value="@item.Id" @(Model.MerkezId == item.Id ? "selected" : "")>@item.Baslik</option>
+                                                    }
+                                                }
+                                            }
+                                        </select>
+                                    </td>
+                                </tr>
+                                @Html.Action("DilUlkeSehir", "partial")
+                                <tr>
+                                    <td class="OrtaMenuRowC1">
+                                        Başlık<span class="SpanZorunluAlan">*</span>
+                                    </td>
+                                    <td class="OrtaMenuRowC2">
+                                        <input class="TextBox" id="Baslik" name="Baslik" value="@Model.Baslik" style="width: 300px">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="OrtaMenuRowC1">
+                                        Seo Keywords
+                                    </td>
+                                    <td class="OrtaMenuRowC2">
+                                        <input class="TextBox" id="Seo_Keywords" name="Seo_Keywords" value="@Model.Seo_Keywords" style="width: 300px">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="OrtaMenuRowC1">
+                                        Seo Description
+                                    </td>
+                                    <td class="OrtaMenuRowC2">
+                                        <textarea name="Seo_Descriptions" id="Seo_Descriptions" class="TextBox" style="width: 300px; height: 40px;">@Model.Seo_Descriptions</textarea>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="OrtaMenuRowC1">
+                                        Okul Tipi
+                                    </td>
+                                    <td class="OrtaMenuRowC2">
+                                        @{
+
+                                            string[] arrOkultipi = new string[] { "Şehir Merkezi", "Kampüs", "Şehir Dışı" };
+                                            for (int i = 0; i < arrOkultipi.Length; i++)
+                                            {
+                                                <input type="checkbox" name="chk_Okultipi" value="@(arrOkultipi[i])" @(Model.OkulTipi != null && Model.OkulTipi.IndexOf(arrOkultipi[i]) != -1 ? "checked" : "") id="cbx@(i)" /><label for="cbx@(i)">@(arrOkultipi[i])</label>
+                                            }
+
+                                        }
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="OrtaMenuRowC1">
+                                        Okul Kapasitesi
+                                    </td>
+                                    <td class="OrtaMenuRowC2">
+                                        <input class="TextBox" id="OkulKapasitesi" name="OkulKapasitesi" value="@Model.OkulKapasitesi" style="width: 300px">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="OrtaMenuRowC1">
+                                        Sınıf Kapasitesi
+                                    </td>
+                                    <td class="OrtaMenuRowC2">
+                                        <input class="TextBox" id="SinifKapasitesi" name="SinifKapasitesi" value="@Model.SinifKapasitesi" style="width: 300px">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="OrtaMenuRowC1" style="border: none;">
+                                        İçerik
+                                    </td>
+                                    <td class="OrtaMenuRowC2" style="border: none;"></td>
+                                </tr>
+                                <tr>
+                                    <td class="OrtaMenuRowC2" colspan="2" style="border: none;">
+                                        <textarea col="80" rows="25" width="500" name="Icerik" id="Icerik" class="adminRichText">@Model.Icerik</textarea>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td class="OrtaMenuRowC1">
+                                        Konaklama Türleri
+                                    </td>
+                                    <td class="OrtaMenuRowC2">
+                                        @{
+
+                                            string[] arrKonaklamaTurleri = new string[] { "Aile Yanında", "Yurt", "Öğrenci Evleri", "Öğrenci Rezidansları", "Hotel" };
+                                            for (int i = 0; i < arrKonaklamaTurleri.Length; i++)
+                                            {
+                                                <input type="checkbox" name="chk_KonaklamaTurleri" value="@(arrKonaklamaTurleri[i])" @(Model.KonaklamaTurleri != null && Model.KonaklamaTurleri.IndexOf(arrKonaklamaTurleri[i]) != -1 ? "checked" : "") id="cbxKonak@(i)" /><label for="cbxKonak@(i)">@(arrKonaklamaTurleri[i])</label>
+                                            }
+
+                                        }
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="OrtaMenuRowC1">
+                                        Okul Olanakları
+                                    </td>
+                                    <td class="OrtaMenuRowC2">
+                                        <input class="TextBox" id="OkulOlanaklari" name="OkulOlanaklari" value="@Model.OkulOlanaklari" style="width: 300px">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="OrtaMenuRowC1">
+                                        Sosyal Aktiviteler
+                                    </td>
+                                    <td class="OrtaMenuRowC2">
+                                        <input class="TextBox" id="SosyalAktiviteler" name="SosyalAktiviteler" value="@Model.SosyalAktiviteler" style="width: 300px">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="OrtaMenuRowC1">
+                                        Sunulan Programlar
+                                    </td>
+                                    <td class="OrtaMenuRowC2">
+                                        @{
+                                            var sunulanProgramlar = (List<WebApp.Models.DilOkulu_SunulanProgramlar>)ViewBag.SunulanProgramlar;
+                                            int counter = 0;
+                                            string replacedBaslik = "";
+                                            string findBaslik = "";
+                                            foreach (var item in sunulanProgramlar.Where(sp => sp.UstProgramId == 0))
+                                            {
+                                                <div><strong>@(Html.Raw(item.Baslik))</strong></div>
+
+                                                foreach (var itemProgram in sunulanProgramlar.Where(sp => sp.UstProgramId == item.Id))
+                                                {
+                                                    counter++;
+                                                    replacedBaslik = WebApp.Core.Tools.ReplaceTitle(itemProgram.Baslik);
+                                                    findBaslik = itemProgram.UstProgramId.ToString() + "|" + itemProgram.Baslik;
+                                                    <input type="checkbox" name="chk_SunulanProgramlar" value="@(itemProgram.UstProgramId+"|"+itemProgram.Baslik)" id="cbx@(replacedBaslik + "_" + counter.ToString())" @(Model.SunulanProgramlar != null && Model.SunulanProgramlar.IndexOf(findBaslik) != -1 ? "checked" : "") /><label for="cbx@(replacedBaslik + "_" + counter.ToString())">@(itemProgram.Baslik)</label>
+                                                }
+
+                                                counter = 0;
+                                            }
+                                        }
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="OrtaMenuRowC1">
+                                        Harita
+                                    </td>
+                                    <td class="OrtaMenuRowC2">
+                                        <textarea name="Harita" id="Harita" class="TextBox" style="width: 300px; height: 40px;">@Model.Harita</textarea>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="OrtaMenuRowC1">
+                                        Street View
+                                    </td>
+                                    <td class="OrtaMenuRowC2">
+                                        <textarea name="StreetView" id="StreetView" class="TextBox" style="width: 300px; height: 40px;">@Model.StreetView</textarea>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="OrtaMenuRowC1">
+                                        Video
+                                    </td>
+                                    <td class="OrtaMenuRowC2">
+                                        <textarea name="VideoUrl" id="VideoUrl" class="TextBox" style="width: 300px; height: 40px;">@Model.VideoUrl</textarea>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="OrtaMenuRowC1">
+                                        Öneçıkan Okul
+                                        <br />
+                                        Olarak Seç
+                                    </td>
+                                    <td class="OrtaMenuRowC2">
+                                        <input id="cbOnecikanOkul" name="cbOnecikanOkul" class="CheckBox" @(Model.OnecikanOkul == true ? "checked" : "") type="checkbox" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="OrtaMenuRowC1">
+                                        Etiketler
+                                    </td>
+                                    <td class="OrtaMenuRowC2">
+                                        <select id="selectEtiketler" name="selectEtiketler" class="DropDownList">
+                                            <option value="0">Seçin</option>
+                                            @if (ViewBag.Etiketler != null)
+                                            {
+                                                var etiketler = (List<WebApp.Models.DilOkulu_Etiketler>)ViewBag.Etiketler;
+                                                if (etiketler != null && etiketler.Count > 0)
+                                                {
+                                                    foreach (var item in etiketler)
+                                                    {
+                                                        <option value="@item.Id">@item.Baslik</option>
+                                                    }
+                                                }
+                                            }
+                                        </select>
+                                        <input class="TextBox" id="YeniEtiket" name="YeniEtiket" value="" style="width: 150px" />
+                                        <input type="button" id="btnEtiketEkle" name="btnEtiketEkle" value="Ekle" />
+                                        <br />
+                                        <div id="etiketHolder">
+
+                                        </div>
+                                        <script type="text/javascript">
+                                            //Database e kayıt etmesi kaldı
+                                            var varolanEtiketler = '@Html.Raw(ViewBag.IlislikiEtiketler)';
+                                            var etiketler = [];
+                                            var mevcutEtiketler = [];
+
+                                            $(function () {
+
+                                                $('#selectEtiketler').on('change', function () {
+                                                    var selectEtiket = $('#selectEtiketler option:selected').text();
+                                                    $('#YeniEtiket').val(selectEtiket);
+                                                    $(this).val('0');
+                                                })
+
+                                                $('#btnEtiketEkle').on('click', function () {
+                                                    var etiket = $('#YeniEtiket').val();
+                                                    if (etiket != '') {
+                                                        EtiketEkle(etiket)
+                                                    }
+                                                })
+
+                                                if (varolanEtiketler.length > 0) {
+                                                    etiketler = JSON.parse(varolanEtiketler);
+                                                    EtiketleriDoldur();
+                                                }
+
+                                            })
+
+                                            function EtiketEkle(etiket) {
+                                                var isAvailable = false;
+                                                if (etiketler.length > 0) {
+                                                    for (var i = 0; i < etiketler.length; i++) {
+
+                                                        if (etiketler[i].etiket == etiket && etiketler[i].deleted == false) {
+                                                            isAvailable = true;
+                                                            break;
+                                                        }
+                                                    }
+                                                }
+                                                if (!isAvailable) {
+                                                    etiketler.push({ 'etiket': etiket, 'deleted': false });
+                                                    $('#hfEtiketler').val(JSON.stringify(etiketler));
+                                                    EtiketleriDoldur();
+                                                }
+
+                                                $('#YeniEtiket').val('');
+                                            }
+
+                                            function EtiketSil(control) {
+                                                var etiket = $(control).attr('data-item');
+                                                if (etiketler.length > 0) {
+                                                    for (var i = 0; i < etiketler.length; i++) {
+
+                                                        if (etiketler[i].etiket == etiket) {
+                                                            etiketler[i].deleted = true;
+                                                        }
+                                                    }
+                                                    $('#hfEtiketler').val(JSON.stringify(etiketler));
+                                                    EtiketleriDoldur();
+                                                }
+
+                                            }
+
+                                            function EtiketleriDoldur() {
+                                                $('#etiketHolder').html('');
+                                                var template = '';
+                                                if (etiketler.length > 0) {
+                                                    for (var i = 0; i < etiketler.length; i++) {
+                                                        if (etiketler[i].deleted == false) {
+                                                            template += '<div style="float: left; height: 10px; padding: 5px; margin-right: 5px;font-weight:bold;">' + etiketler[i].etiket + ' <a href="javascript:void(0)" onclick="EtiketSil(this)" data-item="' + etiketler[i].etiket + '">[X]</a></div>';
+                                                        }
+                                                    }
+                                                }
+
+                                                if (template != '') {
+                                                    $('#etiketHolder').html(template);
+                                                }
+                                            }
+                                        </script>
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="OrtaMenuRowC1">
+                                        Foto Galeri
+                                    </td>
+                                    <td class="OrtaMenuRowC2">
+                                        <select id="selectGaleri" name="selectGaleri" class="DropDownList">
+                                            <option value="0" selected="selected">Seçin...</option>
+                                            @if (ViewBag.GaleriListesi != null)
+                                            {
+                                                List<WebApp.Models.DilOkulu_Galeriler> galeriler = (List<WebApp.Models.DilOkulu_Galeriler>)ViewBag.GaleriListesi;
+                                                foreach (var item in galeriler)
+                                                {
+                                                    <option value="@(item.Id)" @(item.Id == Model.GaleriId ? "selected" : "")>@item.Baslik</option>
+                                                }
+                                            }
+
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="OrtaMenuRowC1">
+                                        Yayın durumu?
+                                    </td>
+                                    <td class="OrtaMenuRowC2">
+                                        <select id="selectDurum" name="selectDurum" class="DropDownList">
+                                            <option value="1" @(Model.Durumu == 1 ? "selected" : "")>Evet</option>
+                                            <option value="0" @(Model.Durumu == 0 ? "selected" : "")>Hayır</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="OrtaMenuRowC1" style="border: none;">
+                                        &nbsp;
+                                    </td>
+                                    <td class="OrtaMenuRowC2" style="border: none;">
+                                        <div class="error validation-summary-errors" style="display: none; padding: 5px;">
+                                        </div>
+                                        <input id="btnSave" type="submit" class="Button" value="Kaydet" />
+                                        <input id="submit" type="submit" value="Kaydet" style="display: none" />
+                                        <input id="Id" name="Id" value="@Model.Id" type="hidden" />
+                                        <input id="hfEtiketler" name="hfEtiketler" value="" type="hidden" />
+                                    </td>
+                                </tr>
+                            </table>
+                            <i><strong>Not: (<span class="SpanZorunluAlan">*</span> ) alanlar zorunludur!</strong></i>
+
+                            <script type="text/javascript">
+                                $(function () {
+                                    GetOkulUlkeSehirBilgileri();
+
+                                })
+
+                                function GetOkulUlkeSehirBilgileri() {
+
+                                    Loader();
+
+                                    var dilId = '@(Html.Raw(Model.DilId))';
+                                    var ulkeId = '@(Html.Raw(Model.UlkeId))'
+                                    var sehirId = '@(Html.Raw(Model.SehirId))'
+
+                                    //alert(dilId + "-" + ulkeId + "-" + sehirId);
+
+                                    //Select Box Controls
+                                    var DilId = $('#DilId');
+                                    //Set DilId
+                                    DilId.val(dilId);
+                                    //Set Ulke ve Sehir ID controlleri
+                                    DilId.trigger("change", [ulkeId, sehirId]);
+                                }
+                            </script>
+                        }
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>

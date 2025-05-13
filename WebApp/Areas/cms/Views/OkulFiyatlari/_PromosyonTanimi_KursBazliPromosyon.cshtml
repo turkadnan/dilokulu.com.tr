@@ -1,0 +1,48 @@
+﻿@model List<WebApp.Models.DilOkulu_KursTipiPromosyonTanimlari>
+<table id="standartHafta">
+    <tr><td class="baslik">Hafta Sayısı</td><td class="baslik">İndirimli Fiyat</td><td class="baslik">Promosyon Bitiş Tarihi</td></tr>
+    <tr>
+        <td><input type="text" class="TextBox" id="KursBazli_Hafta" style="width:110px;" /></td>
+        <td><input type="text" class="TextBox" id="KursBazli_Fiyat" style="width:110px;" /></td>
+        <td><input type="text" class="TextBox promosyonBitisTarihi" id="PromosyonBitisTarihi" style="width:110px;" /></td>
+        <td>
+            <input type="button" id="btnKursBazli_Ekle" data-promosyontipiid="3" value="Ekle" />
+
+            @if (Model != null && Model.Count > 0)
+            {
+                <input type="button" id="btnKursBazliPromosyon_Kopyala" href="@Url.Action("PromosyonKopyala", "OkulFiyatlari", new { kursTipiId = Model[0].DilOkulu_KursTipleri.Id, merkezId = Model[0].DilOkulu_KursTipleri.DilOkulu_Okullar.MerkezId, okulId = Model[0].DilOkulu_KursTipleri.OkulId, promosyonTipiId = 3 })" class="fancybox fancybox.iframe" data-promosyontipiid="3" value="Kopyala" />
+            }
+        </td>
+    </tr>
+    @if (Model != null && Model.Count > 0)
+    {
+        foreach (var item in Model)
+        {
+            <tr class="fieldset">                
+                <td><input type="text" class="TextBox" id="txtKursBazli_Hafta" value="@item.KursBazli_Hafta" style="width:110px;" /></td>
+                <td><input type="text" class="TextBox" id="txtKursBazli_Fiyat" value="@item.KursBazli_Fiyat" style="width:110px;" /></td>
+                <td><input type="text" class="TextBox" id="txtPromosyonBitisTarihi" value="@(string.Format("{0:dd.MM.yyyy}", item.PromosyonBitisTarihi))" style="width:110px;" /></td>
+
+                <td>
+                    <input id="hfId" value="@item.Id" type="hidden" />
+                    <a href="javascript:;" onclick="KursTipiPromosyonSil(this)" data-promosyontipiid="3" data-fiyatid="@item.Id">
+                        <img src="/areas/CMS/assets/Images/delete_icon.png" style="width: 16px; height: 16px;" />
+                    </a>
+                </td>
+            </tr>
+        }
+        <tr>
+            <td colspan="4">
+                <input type="button" id="btnFiyatBazliIndirimPromosyonu_Guncelle" data-promosyontipiid="3" value="Güncelle" />
+            </td>
+        </tr>
+
+    }
+    else
+    {
+        <tr><td colspan="3"><strong>Henüz tanımlama yapılmamış!</strong></td></tr>
+    }
+</table>
+<hr />
+<b>Nasıl Kullanılır?</b><br />
+Bu promosyon modelinde belirli bir hafta için ya da standart süreli semester ve akademik yıl programları için belirlenmiş sabit indirimli fiyatlar için kullanılmalıdır. Örneğin; 24 haftalık semester abroad programı indirimli ücreti 4800 USD gibi …

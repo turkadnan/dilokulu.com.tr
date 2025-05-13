@@ -1,0 +1,93 @@
+﻿@{
+    ViewBag.Title = "Banner300x350";
+    Layout = "~/Areas/cms/Views/Shared/_CMSLayout.cshtml";
+}
+
+@section HeaderWithContentPage{
+
+}
+
+@section SectionBeforeWrapper{
+    @Html.Partial("_Modals")
+
+}
+<div id="divStatusBox" style="">
+    <span id="spanMessageText"></span>
+</div>
+<table cellpadding="0" cellspacing="0" style="width: 100%;">
+    <tr>
+        <td class="MasterRow3_Column1">
+            @Html.Partial("_SliderMunu")
+        </td>
+        <td class="MasterRow3_Column2">
+
+            <table cellpadding="0" cellspacing="0" class="OrtaMenu">
+                <tr>
+                    <td class="OrtaMenuRowTitle">
+                        <img src="@Url.Content("~/areas/CMS/assets/Images/Genel/b-settings.png")" style="width: 18px; height: 18px"
+                             align="absmiddle" />Banner 300x350
+                    </td>
+                </tr>
+                <tr>
+                    <td class="OrtaMenuRow">
+                        @using (Html.BeginForm("Banner300x350", "Banners", FormMethod.Post, new { id = "form1", enctype = "multipart/form-data" }))
+                        {
+                            <table cellpadding="0" cellspacing="0" style="width: 100%;">
+                                <tr>
+                                    <td class="OrtaMenuRowC1">
+                                        SWF Dosya
+                                    </td>
+                                    <td class="OrtaMenuRowC2">
+                                        <input id="FileSWF" name="FileSWF" type="file" class="TextBox" style="width: 300px;" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="OrtaMenuRowC1" style="border: none;">
+                                        &nbsp;
+                                    </td>
+                                    <td class="OrtaMenuRowC2" style="border: none;">
+                                        <div class="error validation-summary-errors" style="display: none; padding: 5px;">
+                                        </div>
+                                        <input id="btnSave" type="submit" value="Kaydet" style="" />
+                                        <input id="submit" type="submit" value="Kaydet" style="display: none" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="OrtaMenuRowC1">
+                                        SWF Dosya
+                                    </td>
+                                    <td class="OrtaMenuRowC2">
+                                        <object id="FlashID" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="300" height="350">
+                                            <param name="movie" value="/assets/Banners/300x350.swf">
+                                            <param name="quality" value="high">
+                                            <param name="wmode" value="opaque">
+                                            <param name="swfversion" value="9.0.45.0">
+                                            <!-- This param tag prompts users with Flash Player 6.0 r65 and higher to download the latest version of Flash Player. Delete it if you don’t want users to see the prompt. -->
+                                            <param name="expressinstall" value="Scripts/expressInstall.swf">
+                                            <!-- Next object tag is for non-IE browsers. So hide it from IE using IECC. -->
+                                            <!--[if !IE]>-->
+                                            <object type="application/x-shockwave-flash" data="/assets/Banners/300x350.swf" width="300" height="350">
+                                                <!--<![endif]-->
+                                                <param name="quality" value="high">
+                                                <param name="wmode" value="opaque">
+                                                <param name="swfversion" value="9.0.45.0">
+                                                <param name="expressinstall" value="/assets/js/expressInstall.swf">
+                                                <!-- The browser displays the following alternative content for users with Flash Player 6.0 and older. -->
+                                                <div>
+                                                    <h4>Content on this page requires a newer version of Adobe Flash Player.</h4>
+                                                    <p><a href="http://www.adobe.com/go/getflashplayer"><img src="http://www.adobe.com/images/shared/download_buttons/get_flash_player.gif" alt="Get Adobe Flash player" width="112" height="33"></a></p>
+                                                </div>
+                                                <!--[if !IE]>-->
+                                            </object>
+                                            <!--<![endif]-->
+                                        </object>
+                                    </td>
+                                </tr>
+                            </table>
+                        }
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>

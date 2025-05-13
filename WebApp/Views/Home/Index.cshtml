@@ -1,0 +1,168 @@
+﻿@model List<WebApp.Models.DilOkulu_Haberler>
+@{
+    ViewBag.Title = ViewBag.SeoTitle;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section metatags{
+    <meta name="keywords" content="@ViewBag.SeoKeywords" />
+    <meta name="description" content="@ViewBag.Description" />
+}
+
+@section HomePageSlider
+{
+    @Html.Action("AnasayfaSlider", "partial")
+}
+
+@*Anasayfa haberler*@
+
+
+
+<div class="searchCourse searchCourseHome column c-33 clearfix mobilustarama" style="display:none;">
+    <script type="text/javascript">
+        $(function () {
+
+            var $window = $(window);
+            if ($window.width() <= 740) {
+                getMobileSearch();
+            }
+
+            function checkWidth() {
+                var windowsize = $window.width();
+                if (windowsize <= 740) {
+
+                    getMobileSearch()
+
+                } else {
+                    $('#aramaMobile').html('');
+                }
+            }
+
+            $(window).resize(checkWidth);
+        })
+
+        function getMobileSearch() {
+            var clnArama = $("#aramaClone").clone();
+            $('#aramaMobile').html(clnArama);
+            $('#Merkezler').trigger('change');
+        }
+
+    </script>
+    <div id="aramaMobile"></div>
+</div>
+
+<div class="welcome column c-67 clearfix">
+
+    <div class="welcome clearfix">
+        <div class="populeraramalar">
+            @Html.Action("StatikLinkler", "partial")
+        </div>
+    </div>
+
+    <div class="welcome  clearfix">
+
+        <h2 class="anahaberbaslik">
+            Yurtdışı Dil Okulu Haberleri
+        </h2>
+
+
+        <div class="haberlerana">
+            <div class="clearfix rotator">
+                <ul class="slides">
+
+                    @if (Model != null && Model.Count > 0)
+                    {
+
+                        int recordCount = Model.Count;
+                        int pagination = recordCount / 10;
+
+                        for (int i = 0; i < pagination; i++)
+                        {
+                            var haberler = Model.Skip(10 * i).Take(10);
+
+                    <li>
+
+                        @foreach (var item in haberler)
+                                {
+                        <div style="border: 1px solid #E0E0E0; width:95%; padding: 10px 10px 0px 10px; float: left; margin-bottom: 10px;min-height:126px;">
+                            <h3><a href="@Url.Action("detay", "haberler", new { title = item.Url })" style="color:#6f6b6b !important;" title="@item.Baslik">@item.Baslik</a></h3>
+                            <div class="cContent clearfix" style="margin-top:5px;">
+                                @if (!string.IsNullOrEmpty(@item.ResimThumbUrl))
+                                            {
+                                        <div style="max-height: 85px; overflow: hidden; float: left;">
+                                            <a href="@Url.Action("detay", "haberler", new { title = item.Url })" title="@item.Baslik">
+                                                <img src="@Url.Content(item.ResimThumbUrl)" width="135" style="margin-right: 15px !important;" alt="@item.Baslik">
+                                            </a>
+                                        </div>
+                                            }
+                                <div>
+                                    <p>
+                                        @item.Ozet
+                                        <a href="@Url.Action("detay", "haberler", new { title=item.Url})" title="@item.Baslik" style="color: #9bb70d !important;"> Devamı için tıklayın.</a>
+                                    </p>
+                                </div>
+                            </div>
+
+                        </div>
+                                }
+
+                    </li>
+
+                        }
+                    }
+                </ul>
+            </div>
+            <div class="arrows" style="margin:20px 7px 0 0"></div>
+        </div>
+    </div>
+
+</div>
+
+@*Anasayfa haberler end*@
+<div class="searchCourse searchCourseHome column clearfix populeraramalarRightColumn" style="width:32.8%">
+    <div id="aramaClone">
+        @Html.Action("arama", "partial")
+    </div>
+</div>
+
+
+<div class="news column c-33 clearfix">
+    <iframe src="//www.facebook.com/plugins/likebox.php?href=https%3A%2F%2Fwww.facebook.com%2Fdilokulucomtr&amp;width=300&amp;height=300&amp;colorscheme=light&amp;show_faces=true&amp;header=false&amp;stream=false&amp;show_border=true&amp;appId=228197437216572" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:300px; height:300px;" allowtransparency="true"></iframe>
+</div>
+
+
+@Html.Action("AnasayfaAcademixMakaleler", "partial")
+
+@Html.Action("AnasayfaOgrenciMakaleler", "partial")
+
+
+
+<div id="home_ad">
+    @Html.Partial("_Banner300x250")
+
+</div>
+
+
+    @Html.Action("AnasayfaEnSonZiyaretEdilenOkullar", "partial")
+
+<div class="clear"></div>
+
+
+<div class="clear"></div>
+@*Öneçıkan okullar*@
+@Html.Raw(ViewBag.Cookie)
+<div class="event column c-67 clearfix" style="width: 100%;">
+    @Html.Action("OnecikanOkullar", "partial")
+</div>
+<div class="event column c-67 clearfix" style="width: 100%;">
+    <h2 class="oncecikanokullarbaslik">Akreditasyonlar ve Üyelikler</h2>
+    <img style="width:100%" alt="Akreditasyonlar ve Üyelikler" src="@Url.Content("~/Assets/img/akreditasyonlar.jpg")" />
+</div>
+
+@*Öneçıkan okullar son*@
+<div class="clear"></div>
+<script type="text/javascript">
+    $(function () {
+        $(".overlay").hide();
+    });
+</script>

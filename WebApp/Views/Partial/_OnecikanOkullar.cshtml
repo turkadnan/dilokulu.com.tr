@@ -1,0 +1,32 @@
+﻿@model List<WebApp.Models.DilOkulu_Okullar>
+
+<h2 class="oncecikanokullarbaslik">Öne Çıkan Okullar</h2>
+<div class="event c-67 clearfix ambiti" style="width: 100%; margin-bottom: 0px !important; margin-top: 5px !important;height: 140px !important;">
+    <div class="arrows" style="margin-right: 22px;"></div>
+    <div class="cContent clearfix rotator" style="width: 100%; margin-bottom:0px !important">
+        @if (Model != null && Model.Count > 0)
+        {
+            string merkezBaslik = "";
+            string okulBaslik = "";
+
+            <ul class="slides" style="height: 95px !important">
+                @*<li style="display:none !important;">
+
+                </li>*@
+                @foreach (var item in Model)
+                {
+                    merkezBaslik = WebApp.Core.Tools.ReplaceTitle(item.DilOkulu_Merkez.Baslik);
+                    okulBaslik = WebApp.Core.Tools.ReplaceTitle(item.Baslik);
+
+                    <li>
+                        <a href="@Url.Action("detay", "okullar", new { merkez = merkezBaslik, url = okulBaslik })" title="@(item.DilOkulu_Merkez.Baslik + " - " + item.Baslik)" class="grayColor">
+                            <img src="@Url.Content("~/content/uploads/" + item.DilOkulu_Merkez.Logo)" alt="@(item.DilOkulu_Merkez.Baslik + " - " + item.Baslik)" style="width:100px;max-height:100px;" />
+                            <span class="essekSpaniOkulDetaySlider">@(item.DilOkulu_Merkez.Baslik)</span>
+                        </a>
+                    </li>
+                }
+
+            </ul>
+        }
+    </div>
+</div>

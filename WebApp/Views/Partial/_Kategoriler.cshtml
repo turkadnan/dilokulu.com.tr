@@ -1,0 +1,12 @@
+﻿@model List<WebApp.Models.DilOkulu_Kategoriler>
+<h3>Kategoriler</h3>
+<ul class="cContent clearfix">
+    @if (Model != null && Model.Count > 0)
+    {
+        foreach (var item in Model)
+        {
+            <li><a href="@Url.Action("kategori", "makaleler", new { id = item.Id })" title="@item.Baslik">@item.Baslik</a></li>
+        }
+    }
+
+</ul>

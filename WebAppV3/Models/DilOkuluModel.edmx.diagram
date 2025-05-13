@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="d0f44ddfe7fe4ffda6b25e318ebe7897" Name="Diagram1">
+        <EntityTypeShape EntityType="DilOkuluModel.DilOkulu_Diller" Width="1.5" PointX="0.75" PointY="15.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DilOkuluModel.DilOkulu_EtiketIliskileri" Width="1.5" PointX="17" PointY="11" IsExpanded="true" />
+        <EntityTypeShape EntityType="DilOkuluModel.DilOkulu_Etiketler" Width="1.5" PointX="14.75" PointY="11.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DilOkuluModel.DilOkulu_GaleriDosyalari" Width="1.5" PointX="15" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DilOkuluModel.DilOkulu_Galeriler" Width="1.5" PointX="12.75" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="DilOkuluModel.DilOkulu_Haberler" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DilOkuluModel.DilOkulu_KonaklamaKategorileri" Width="1.5" PointX="8" PointY="6.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DilOkuluModel.DilOkulu_KonaklamaTipiEkUcretleri" Width="1.5" PointX="12.5" PointY="11.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DilOkuluModel.DilOkulu_KonaklamaTipiFiyatlandirmalari" Width="1.5" PointX="12.5" PointY="14.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DilOkuluModel.DilOkulu_KonaklamaTipiPromosyonTanimlari" Width="1.5" PointX="12.5" PointY="18.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DilOkuluModel.DilOkulu_KonaklamaTipleri" Width="1.5" PointX="10.25" PointY="15.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DilOkuluModel.DilOkulu_Kullanicilar" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DilOkuluModel.DilOkulu_KursKategorileri" Width="1.5" PointX="3" PointY="15.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DilOkuluModel.DilOkulu_KursTipiEkUcretleri" Width="1.5" PointX="7.5" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DilOkuluModel.DilOkulu_KursTipiFiyatlandirmalari" Width="1.5" PointX="7.5" PointY="22" IsExpanded="true" />
+        <EntityTypeShape EntityType="DilOkuluModel.DilOkulu_KursTipiPromosyonTanimlari" Width="1.5" PointX="7.5" PointY="25.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DilOkuluModel.DilOkulu_KursTipleri" Width="1.5" PointX="5.25" PointY="15.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DilOkuluModel.DilOkulu_Makaleler" Width="1.5" PointX="10" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="DilOkuluModel.DilOkulu_Merkez" Width="1.5" PointX="5.75" PointY="2.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DilOkuluModel.DilOkulu_Okullar" Width="1.5" PointX="8" PointY="13.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DilOkuluModel.DilOkulu_ParaBirimleri" Width="1.5" PointX="0.75" PointY="10.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DilOkuluModel.DilOkulu_Sehirler" Width="1.5" PointX="5.25" PointY="9.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DilOkuluModel.DilOkulu_Slider" Width="1.5" PointX="2.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DilOkuluModel.DilOkulu_StatikLinkler" Width="1.5" PointX="14.75" PointY="14.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DilOkuluModel.DilOkulu_StatikSayfalar" Width="1.5" PointX="15.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DilOkuluModel.DilOkulu_Subeler" Width="1.5" PointX="10.75" PointY="6" IsExpanded="true" />
+        <EntityTypeShape EntityType="DilOkuluModel.DilOkulu_SubeSayfalar" Width="1.5" PointX="13" PointY="6.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DilOkuluModel.DilOkulu_SunulanProgramlar" Width="1.5" PointX="16.75" PointY="14.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DilOkuluModel.DilOkulu_Ulkeler" Width="1.5" PointX="3" PointY="8" IsExpanded="true" />
+        <EntityTypeShape EntityType="DilOkuluModel.DilOkulu_VizeRehberi" Width="1.5" PointX="17.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DilOkuluModel.DilOkulu_Yazarlar" Width="1.5" PointX="7.75" PointY="1.25" IsExpanded="true" />
+        <AssociationConnector Association="DilOkuluModel.FK_DilOkulu_KursKategorileri_DilOkulu_Diller" ManuallyRouted="false" />
+        <AssociationConnector Association="DilOkuluModel.FK_DilOkulu_Okullar_DilOkulu_Diller" ManuallyRouted="false" />
+        <AssociationConnector Association="DilOkuluModel.FK_DilOkulu_Ulkeler_DilOkulu_Diller" ManuallyRouted="false" />
+        <AssociationConnector Association="DilOkuluModel.FK_DilOkulu_EtiketIliskileri_DilOkulu_Etiketler" ManuallyRouted="false" />
+        <AssociationConnector Association="DilOkuluModel.FK_DilOkulu_GaleriDosyalari_DilOkulu_Galeriler" ManuallyRouted="false" />
+        <AssociationConnector Association="DilOkuluModel.FK_DilOkulu_KonaklamaTipleri_DilOkulu_KonaklamaKategorileri" ManuallyRouted="false" />
+        <AssociationConnector Association="DilOkuluModel.FK_DilOkulu_KonaklamaTipiEkUcretleri_DilOkulu_KonaklamaTipleri" ManuallyRouted="false" />
+        <AssociationConnector Association="DilOkuluModel.FK_DilOkulu_KonaklamaTipiFiyatlandirmalari_DilOkulu_KonaklamaTipleri" ManuallyRouted="false" />
+        <AssociationConnector Association="DilOkuluModel.FK_DilOkulu_KonaklamaTipiPromosyonTanimlari_DilOkulu_KonaklamaTipleri" ManuallyRouted="false" />
+        <AssociationConnector Association="DilOkuluModel.FK_DilOkulu_KonaklamaTipleri_DilOkulu_Okullar" ManuallyRouted="false" />
+        <AssociationConnector Association="DilOkuluModel.FK_DilOkulu_KursTipleri_DilOkulu_KursKategorileri" ManuallyRouted="false" />
+        <AssociationConnector Association="DilOkuluModel.FK_DilOkulu_KursTipiEkUcretleri_DilOkulu_KursTipleri" ManuallyRouted="false" />
+        <AssociationConnector Association="DilOkuluModel.FK_DilOkulu_KursTipiFiyatlandirmalari_DilOkulu_KursTipleri" ManuallyRouted="false" />
+        <AssociationConnector Association="DilOkuluModel.FK_DilOkulu_KursTipiPromosyonTanimlari_DilOkulu_KursTipleri" ManuallyRouted="false" />
+        <AssociationConnector Association="DilOkuluModel.FK_DilOkulu_KursTipleri_DilOkulu_Okullar" ManuallyRouted="false" />
+        <AssociationConnector Association="DilOkuluModel.FK_DilOkulu_Makaleler_DilOkulu_Yazarlar" ManuallyRouted="false" />
+        <AssociationConnector Association="DilOkuluModel.FK_DilOkulu_Okullar_DilOkulu_Merkez" ManuallyRouted="false" />
+        <AssociationConnector Association="DilOkuluModel.FK_DilOkulu_Okullar_DilOkulu_Sehirler" ManuallyRouted="false" />
+        <AssociationConnector Association="DilOkuluModel.FK_DilOkulu_Okullar_DilOkulu_Ulkeler" ManuallyRouted="false" />
+        <AssociationConnector Association="DilOkuluModel.FK_DilOkulu_Ulkeler_DilOkulu_ParaBirimleri" ManuallyRouted="false" />
+        <AssociationConnector Association="DilOkuluModel.FK_DilOkulu_Sehirler_DilOkulu_Ulkeler" ManuallyRouted="false" />
+        <AssociationConnector Association="DilOkuluModel.FK_DilOkulu_SubeSayfalar_DilOkulu_Subeler" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

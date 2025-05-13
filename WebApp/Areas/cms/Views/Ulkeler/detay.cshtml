@@ -1,0 +1,360 @@
+﻿@model WebApp.Models.DilOkulu_Ulkeler
+@{
+    ViewBag.Title = "Ülke Detay | dilokulu cms";
+    Layout = "~/Areas/cms/Views/Shared/_CMSLayout.cshtml";
+}
+@section HeaderWithContentPage{
+    <script src="@Url.Content("~/Areas/cms/Assets/ckeditor/ckeditor.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Areas/cms/Assets/ckeditor/adapters/jquery.js")" type="text/javascript"></script>
+
+    <script src="~/Areas/cms/Assets/js/dilokulu.js"></script>
+    <script type="text/javascript">
+        $(function () {
+
+            var ProcessStatus = '@Html.Raw(ViewBag.Status)';
+
+            if (ProcessStatus == "ok") {
+                GeneralObj.DilokuluMessageBox.init({ status: 'ok', message: 'Kayıt güncellendi.' });
+            } else if (ProcessStatus == "err") {
+                GeneralObj.DilokuluMessageBox.init({ status: 'error', message: 'Bir hata oluştu. Daha sonra tekrar deneyin.' });
+            }
+
+            $('#btnSave').click(function () {
+                Loader();
+
+                $("html, body").animate({ scrollTop: "0px" });
+
+                var ErrorCount = 0;
+                var ErrorMessage = "";
+                var Baslik = $('#Baslik').val();
+                var ParaBirimleri = $('#ParaBirimleri').val();
+                var VizeUcreti1 = $('#VizeUcreti1').val();
+                var KacAyaKadar1 = $('#KacAyaKadar1').val();
+
+                //alert(ParaBirimleri);
+
+                if ($.trim(Baslik).length == 0) {
+                    ErrorCount++;
+                    ErrorMessage += "Başlık alanı boş olamaz!</br>";
+                }
+
+                if ($.trim(ParaBirimleri).length == 0) {
+                    ErrorCount++;
+                    ErrorMessage += "Para birimi alanı boş olamaz!</br>";
+                }
+
+                if ($.trim(VizeUcreti1).length == 0) {
+                    ErrorCount++;
+                    ErrorMessage += "Vize ücreti 1 alanı boş olamaz!</br>";
+                }
+
+                if (KacAyaKadar1 == '0') {
+                    ErrorCount++;
+                    ErrorMessage += "Kaç haftaya kadar 1 alanı boş olamaz!</br>";
+                }
+
+                if (ErrorCount > 0) {
+
+                    GeneralObj.DilokuluMessageBox.init({ status: 'error', message: ErrorMessage });
+                    closeModal();
+                } else {
+                    $('#submit').trigger("click");
+                }
+
+                return false;
+            })
+        })
+    </script>
+}
+
+<script language="javascript" type="text/javascript">
+    $(document).ready(function () {
+        var config = {
+            height: 200,
+            width: 800,
+            toolbar: [
+                   ['Source', 'Paste', 'PasteText', 'PasteFromWord', 'Bold', 'Italic', 'Underline', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock', 'Font', 'FontSize', 'NumberedList', 'BulletedList', 'Undo', 'Redo', 'Link', 'Unlink', 'TextColor', 'BGColor', 'Image', 'NewPage', 'Preview']
+            ]
+            , filebrowserUploadUrl: '/FileUpload/ImageUpload'
+        };
+        $(".adminRichText").ckeditor(config);
+    });
+</script>
+<div id="divStatusBox" style="">
+    <span id="spanMessageText"></span>
+</div>
+<table cellpadding="0" cellspacing="0" style="width: 100%;">
+    <tr>
+        <td class="MasterRow3_Column1">
+            @Html.Partial("_UlkelerMunu")
+        </td>
+        <td class="MasterRow3_Column2">
+            <table cellpadding="0" cellspacing="0" class="OrtaMenu">
+                <tr>
+                    <td class="OrtaMenuRowTitle">
+                        <img src="@Url.Content("~/areas/CMS/assets/Images/Genel/b-settings.png")" style="width: 18px; height: 18px"
+                             align="absmiddle" />Ülke Detay
+                    </td>
+                </tr>
+                <tr>
+                    <td class="OrtaMenuRow">
+                        @using (Html.BeginForm("detay", "ulkeler", FormMethod.Post, new { id = "form1", enctype = "multipart/form-data" }))
+                        {
+                            <table cellpadding="0" cellspacing="0" style="width: 100%;">
+                                <tr>
+                                    <td class="OrtaMenuRowC1">
+                                        Dil<span class="SpanZorunluAlan">*</span>
+                                    </td>
+                                    <td class="OrtaMenuRowC2">
+                                        <select class="DropDownList" id="DilId" name="DilId">
+                                            <option value="0">Seçin...</option>
+                                            @{
+                            if (ViewBag.Diller != null)
+                            {
+                                var diller = (List<WebApp.Models.DilOkulu_Diller>)ViewBag.Diller;
+                                if (diller != null && diller.Count > 0)
+                                {
+                                    foreach (var item in diller)
+                                    {
+                                            <option value="@item.Id" @(Model.DilId == item.Id ? "selected" : "")>@item.Baslik</option>
+                                    }
+                                }
+                            }
+                                            }
+                                        </select>
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="OrtaMenuRowC1">
+                                        Başlık<span class="SpanZorunluAlan">*</span>
+                                    </td>
+                                    <td class="OrtaMenuRowC2">
+                                        <input class="TextBox" id="Baslik" name="Baslik" value="@Model.Baslik" style="width: 300px">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="OrtaMenuRowC1">
+                                        Seo Keywords
+                                    </td>
+                                    <td class="OrtaMenuRowC2">
+                                        <input class="TextBox" id="Seo_Keywords" name="Seo_Keywords" value="@Model.Seo_Keywords" style="width: 300px">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="OrtaMenuRowC1">
+                                        Seo Description
+                                    </td>
+                                    <td class="OrtaMenuRowC2">
+                                        <textarea name="Seo_Descriptions" id="Seo_Descriptions" class="TextBox" style="width: 300px; height: 40px;">@Model.Seo_Descriptions</textarea>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="OrtaMenuRowC1">
+                                        Resim
+                                    </td>
+                                    <td class="OrtaMenuRowC2">
+                                        <input id="FileResim" name="fileResim" type="file" accept="image/png, image/gif, image/jpeg" class="TextBox" style="width: 300px;" />
+                                        <div>
+                                            @if (!string.IsNullOrEmpty(Model.Resim))
+                                            {
+                                            <a href="@Url.Content(Model.Resim)" target="_blank">
+                                                <img src="@Url.Content(Model.Resim)" style="width:100px;" />
+                                            </a>
+                                            }
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="OrtaMenuRowC1">
+                                        Para Birimi<span class="SpanZorunluAlan">*</span>
+                                    </td>
+                                    <td class="OrtaMenuRowC2">
+                                        <select class="DropDownList" id="ParaBirimleri" name="ParaBirimleri">
+                                            <option value="">Seçin...</option>
+                                            @{
+                            if (ViewBag.ParaBirimleri != null)
+                            {
+                                var paraBirimleri = (List<WebApp.Models.DilOkulu_ParaBirimleri>)ViewBag.ParaBirimleri;
+                                if (paraBirimleri != null && paraBirimleri.Count > 0)
+                                {
+                                    foreach (var item in paraBirimleri)
+                                    {
+                                            <option value="@item.Id" @(Model.ParaBirimId == item.Id ? "selected" : "")>@item.Birim</option>
+                                    }
+                                }
+                            }
+                                            }
+                                        </select>
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">
+                                        <table style="width:50%">
+                                            <tr>
+                                                <td class="OrtaMenuRowC1">Vize Ücreti 1<span class="SpanZorunluAlan">*</span></td>
+                                                <td class="OrtaMenuRowC2"><input class="TextBox" id="VizeUcreti1" name="VizeUcreti1" value="@Model.VizeUcreti1" style="width: 60px;text-align:right" /></td>
+                                                <td class="OrtaMenuRowC1" style="margin-left:5px;width:150px;">&nbsp;&nbsp;Kaç Haftaya Kadar?<span class="SpanZorunluAlan">*</span></td>
+                                                <td class="OrtaMenuRowC2">
+                                                    <select class="DropDownList" id="KacAyaKadar1" name="KacAyaKadar1">
+                                                        <option value="0">Seçin...</option>
+                                                        @for (int i = 1; i <= 52; i++)
+                                                        {
+                                                        <option value="@i" @(Model.KacAyaKadar1 == i ? "selected" : "")>@i</option>
+                                                        }
+
+                                                    </select>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">
+                                        <table style="width:50%">
+                                            <tr>
+                                                <td class="OrtaMenuRowC1">Vize Ücreti 2</td>
+                                                <td class="OrtaMenuRowC2"><input class="TextBox" id="VizeUcreti2" name="VizeUcreti2" value="@Model.VizeUcreti2" style="width: 60px;text-align:right" /></td>
+                                                <td class="OrtaMenuRowC1" style="margin-left:5px;width:150px;">&nbsp;&nbsp;Kaç Haftaya Kadar?</td>
+                                                <td class="OrtaMenuRowC2">
+                                                    <select class="DropDownList" id="KacAyaKadar2" name="KacAyaKadar2">
+                                                        <option value="0">Seçin...</option>
+                                                        @for (int i = 1; i <= 52; i++)
+                                                        {
+                                                        <option value="@i" @(Model.KacAyaKadar2 == i ? "selected" : "")>@i</option>
+                                                        }
+
+                                                    </select>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">
+                                        <table style="width:50%">
+                                            <tr>
+                                                <td class="OrtaMenuRowC1">Vize Ücreti 3</td>
+                                                <td class="OrtaMenuRowC2"><input class="TextBox" id="VizeUcreti3" name="VizeUcreti3" value="@Model.VizeUcreti3" style="width: 60px;text-align:right" /></td>
+                                                <td class="OrtaMenuRowC1" style="margin-left:5px;width:150px;">&nbsp;&nbsp;Kaç Haftaya Kadar?</td>
+                                                <td class="OrtaMenuRowC2">
+                                                    <select class="DropDownList" id="KacAyaKadar3" name="KacAyaKadar3">
+                                                        <option value="0">Seçin...</option>
+                                                        @for (int i = 1; i <= 52; i++)
+                                                        {
+                                                            <option value="@i" @(Model.KacAyaKadar3 == i ? "selected" : "")>@i</option>
+                                                        }
+
+                                                    </select>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="OrtaMenuRowC1" style="border: none;">
+                                        Genel Bilgi
+                                    </td>
+                                    <td class="OrtaMenuRowC2" style="border: none;"></td>
+                                </tr>
+                                <tr>
+                                    <td class="OrtaMenuRowC2" colspan="2" style="border: none;">
+                                        <textarea col="80" rows="15" width="500" name="Aciklama" id="Aciklama" class="adminRichText">@Model.Aciklama</textarea>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="OrtaMenuRowC1" style="border: none;">
+                                        Vize Bilgileri
+                                    </td>
+                                    <td class="OrtaMenuRowC2" style="border: none;"></td>
+                                </tr>
+                                <tr>
+                                    <td class="OrtaMenuRowC2" colspan="2" style="border: none;">
+                                        <textarea col="80" rows="15" width="500" name="VizeBilgileri" id="VizeBilgileri" class="adminRichText">@Model.VizeBilgileri</textarea>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="OrtaMenuRowC1" style="border: none;">
+                                        Çalişma İzni
+                                    </td>
+                                    <td class="OrtaMenuRowC2" style="border: none;"></td>
+                                </tr>
+                                <tr>
+                                    <td class="OrtaMenuRowC2" colspan="2" style="border: none;">
+                                        <textarea col="80" rows="15" width="500" name="CalismaIzni" id="CalismaIzni" class="adminRichText">@Model.CalismaIzni</textarea>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="OrtaMenuRowC1" style="border: none;">
+                                        Yaşam Giderleri
+                                    </td>
+                                    <td class="OrtaMenuRowC2" style="border: none;"></td>
+                                </tr>
+                                <tr>
+                                    <td class="OrtaMenuRowC2" colspan="2" style="border: none;">
+                                        <textarea col="80" rows="15" width="500" name="YasamGiderleri" id="YasamGiderleri" class="adminRichText">@Model.YasamGiderleri</textarea>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="OrtaMenuRowC1" style="border: none;">
+                                        Ulaşım
+                                    </td>
+                                    <td class="OrtaMenuRowC2" style="border: none;"></td>
+                                </tr>
+                                <tr>
+                                    <td class="OrtaMenuRowC2" colspan="2" style="border: none;">
+                                        <textarea col="80" rows="15" width="500" name="Ulasim" id="Ulasim" class="adminRichText">@Model.Ulasim</textarea>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="OrtaMenuRowC1" style="border: none;">
+                                        Sağlık Sistemi
+                                    </td>
+                                    <td class="OrtaMenuRowC2" style="border: none;"></td>
+                                </tr>
+                                <tr>
+                                    <td class="OrtaMenuRowC2" colspan="2" style="border: none;">
+                                        <textarea col="80" rows="15" width="500" name="SaglikSistemi" id="SaglikSistemi" class="adminRichText">@Model.SaglikSistemi</textarea>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="OrtaMenuRowC1">
+                                        Yayın durumu?
+                                    </td>
+                                    <td class="OrtaMenuRowC2">
+                                        <select id="selectDurum" name="selectDurum" class="DropDownList">
+                                            <option value="1" @(Model.Durumu == 1 ? "selected" : "")>Evet</option>
+                                            <option value="0" @(Model.Durumu == 0 ? "selected" : "")>Hayır</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="OrtaMenuRowC1">
+                                        Oncelik
+                                    </td>
+                                    <td class="OrtaMenuRowC2">
+                                        <input class="TextBox" id="Oncelik" name="Oncelik" value="@Model.Oncelik" style="width: 60px">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="OrtaMenuRowC1" style="border: none;">
+                                        &nbsp;
+                                    </td>
+                                    <td class="OrtaMenuRowC2" style="border: none;">
+                                        <div class="error validation-summary-errors" style="display: none; padding: 5px;">
+                                        </div>
+                                        <input id="btnSave" type="submit" value="Kaydet" style="" />
+                                        <input id="submit" type="submit" value="Kaydet" style="display: none" />
+                                        <input id="Id" name="Id" value="@Model.Id" type="hidden" />
+                                    </td>
+                                </tr>
+                            </table>
+                            <i><strong>Not: (<span class="SpanZorunluAlan">*</span> ) alanlar zorunludur!</strong></i>
+                        }
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>

@@ -1,0 +1,145 @@
+﻿@model WebApp.Models.DilOkulu_Ulkeler
+
+@{
+
+    string seo_Keywords = "";
+    string seo_Descriptions = "";
+
+    if (Model != null)
+    {
+        seo_Descriptions = Model.Seo_Descriptions;
+        seo_Keywords = Model.Seo_Keywords;
+    }
+}
+
+@{
+    ViewBag.Title = "Ülke Rehberi - " + Model.Baslik;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section metatags{
+    <meta name="keywords" content="@seo_Keywords" />
+    <meta name="description" content="@seo_Descriptions" />
+}
+
+@section PageTitle{
+    <div class="topImg clearfix">
+        <img src="@Url.Content("~/Assets/img/headers/header_2.jpg")" alt="Vize Rehberi" />
+        <h1><p><strong>@Model.Baslik Ülke Rehberi</strong></p></h1>
+    </div>
+}
+
+<div class="blog column c-67 clearfix">
+    @if (Model != null)
+    {
+        <div class="box detaybox">
+
+            <div class="boxInfo examInfo">
+                <ul class="breadcrumb">
+                    <li class="exm"><a href="@Url.Action("index","home")">Anasayfa</a></li>
+                    <li class="exm">></li>
+                    <li class="exm">@Model.Baslik Ülke Rehberi</li>
+                </ul>
+                <div>
+                    @if (!string.IsNullOrEmpty(Model.Resim))
+                    {
+                        <img class="fwidth2" src="@Url.Content(Model.Resim.Replace("tn_",""))" alt="@Model.Baslik">
+                    }
+                    <p>
+                        @Html.Raw(Model.Aciklama)
+                    </p>
+
+                </div>
+
+                <div class="accordion">
+                    <div class="box">
+                        <h2><a href="#"><strong>Vize Bilgileri</strong></a></h2> 
+                        <div class="boxInfo">
+                            <p>
+                                @Html.Raw(Model.VizeBilgileri)
+                            </p>
+                        </div>
+                    </div>
+                    <div class="box">
+                        <h2><a href="#"><strong>Çalişma İzni</strong></a></h2>
+                        <div class="boxInfo">
+                            <p>
+                                @Html.Raw(Model.CalismaIzni)
+                            </p>
+                        </div>
+                    </div>
+                    <div class="box">
+                        <h2><a href="#"><strong>Yaşam Giderleri</strong></a></h2>
+                        <div class="boxInfo">
+                            <p>
+                                @Html.Raw(Model.YasamGiderleri)
+                            </p>
+                        </div>
+                    </div>
+                    <div class="box">
+                        <h2> <a href="#"><strong>Ulaşım</strong></a></h2>
+                        <div class="boxInfo">
+                            <p>
+                                @Html.Raw(Model.Ulasim)
+                            </p>
+                        </div>
+                    </div>
+                    <div class="box">
+                        <h2><a href="#"><strong>Sağlık Sistemi</strong></a></h2> 
+                        <div class="boxInfo">
+                            <p>
+                                @Html.Raw(Model.SaglikSistemi)
+                            </p>
+                        </div>
+                    </div>
+                    <div class="box">
+                        <h2> <a href="#" class="headA"><strong>@Model.Baslik Dil Okulları</strong></a></h2>
+                        <div class="boxInfo">
+                            <p>
+                                @{
+        if (ViewBag.Okullar != null)
+        {
+            var okullar = (List<WebApp.Models.DilOkulu_Okullar>)ViewBag.Okullar;
+
+            var sehirler = okullar.Select(o => o.DilOkulu_Sehirler).OrderBy(s => s.Baslik).ToList().Distinct();
+            foreach (var item in sehirler)
+            {
+                <div class="okulsubeleri">
+                    <h3><span class="okulsubebaslik">@item.Baslik</span></h3>
+                    @{
+                string merkezBaslik = "";
+                string okulBaslik = "";
+                var sehirOkullar = okullar.Where(o => o.SehirId == item.Id).ToList();
+                if (sehirOkullar != null && sehirOkullar.Count > 0)
+                {
+
+                    <ul>
+                        @foreach (var itemOkul in sehirOkullar)
+{
+    merkezBaslik = WebApp.Core.Tools.ReplaceTitle(itemOkul.DilOkulu_Merkez.Baslik);
+    okulBaslik = WebApp.Core.Tools.ReplaceTitle(itemOkul.Baslik);
+    <li class="icdekili"><a href="@Url.Action("detay", "okullar", new { merkez = merkezBaslik, url = okulBaslik })">@itemOkul.DilOkulu_Merkez.Baslik - @itemOkul.Baslik</a></li>
+}
+                        <li class="sonlibg" style="height: 14px !important; margin: -14px 0 0 -10px !important;"></li> 
+                    </ul>
+                }
+                    }
+                </div>
+            }
+
+        }
+
+
+                                }
+
+
+
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+@Html.Partial("_RightColumn")

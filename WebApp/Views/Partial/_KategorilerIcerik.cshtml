@@ -1,0 +1,18 @@
+﻿@model List<WebApp.Models.DilOkulu_Kategoriler>
+
+<div class="links clearfix">
+    <div class="box">
+        <h4><strong>Kategoriler</strong></h4>
+        <div class="boxInfo">
+            <ul>
+                @if (Model != null && Model.Count > 0)
+                {
+                    foreach (var item in Model)
+                    {
+                        <li><a href="@Url.Action("kategori", "makaleler", new { id = item.Id })" title="@item.Baslik">@item.Baslik</a></li>
+                    }
+                }
+            </ul>
+        </div>
+    </div>
+</div>

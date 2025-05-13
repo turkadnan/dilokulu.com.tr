@@ -1,0 +1,18 @@
+﻿@{
+    string MenuAdi = Request.RawUrl.ToString().ToLower();
+}
+
+<div class="MenuWindow" style="font-size: 9px !important;">
+    <li id="Menu"><a class="@(MenuAdi.IndexOf("/slider") != -1 ? "Aktif" : "Pasif")" href="@Url.Action("index", "slider")">Tanımlamalar</a></li>
+    <li id="Menu"><a class="@(MenuAdi.IndexOf("/diller") != -1 ? "Aktif" : "Pasif")" href="@Url.Action("index", "diller")">Diller</a></li>
+    <li id="Menu"><a class="@(MenuAdi.IndexOf("/ulkeler") != -1 ? "Aktif" : "Pasif")" href="@Url.Action("index", "ulkeler")">Ülkeler</a></li>
+    <li id="Menu"><a class="@(MenuAdi.IndexOf("/sehirler") != -1 ? "Aktif" : "Pasif")" href="@Url.Action("index", "sehirler")">Şehirler</a></li>
+    <li id="Menu"><a class="@(MenuAdi.IndexOf("/merkez") != -1 ? "Aktif" : "Pasif")" href="@Url.Action("index", "merkez")">Okul Merkezleri</a></li>
+    <li id="Menu"><a class="@(MenuAdi.IndexOf("/okullar") != -1 ? "Aktif" : "Pasif")" href="@Url.Action("index", "okullar")">Okullar</a></li>
+    <li id="Menu"><a class="@(MenuAdi.IndexOf("/haberler") != -1 ? "Aktif" : "Pasif")" href="@Url.Action("index", "haberler")">Haberler</a></li>
+    <li id="Menu"><a class="@(MenuAdi.IndexOf("/yazar") != -1 ? "Aktif" : "Pasif")" href="@Url.Action("index", "yazar")">Yazarlar</a></li>
+    <li id="Menu"><a class="@(MenuAdi.IndexOf("/makale") != -1 ? "Aktif" : "Pasif")" href="@Url.Action("makaleAcademix", "makale")">Makaleler</a></li>    
+    <li id="Menu"><a class="@(MenuAdi.IndexOf("/galeri") != -1 ? "Aktif" : "Pasif")" href="@Url.Action("index", "Galeri")">Galeri</a></li>    
+    <li id="Menu"><a class="@(MenuAdi.IndexOf("/vizerehberi") != -1 ? "Aktif" : "Pasif")" href="@Url.Action("index", "VizeRehberi")">Vize Rehberi</a></li>    
+    <li id="Menu"><a class="Pasif" href="@Url.Action("signout", "login")">Signout</a></li>
+</div>

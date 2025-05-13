@@ -1,0 +1,79 @@
+﻿@model List<WebApp.Models.DilOkulu_SunulanProgramlar>
+@{
+    ViewBag.Title = "Sunulan Program Kategorileri | dilokulu cms";
+    Layout = "~/Areas/cms/Views/Shared/_CMSLayout.cshtml";
+}
+
+<table cellpadding="0" cellspacing="0" style="width: 100%;">
+    <tr>
+        <td class="MasterRow3_Column1">
+            @Html.Partial("_SliderMunu")
+        </td>
+        <td class="MasterRow3_Column2">
+            <table cellpadding="0" cellspacing="0" class="OrtaMenu">
+                <tr>
+                    <td class="OrtaMenuRowTitle">
+                        <img src="@Url.Content("~/areas/CMS/assets/Images/Genel/b-settings.png")" style="width: 18px; height: 18px"
+                             align="absmiddle" />SUNULAN PROGRAM DİLLER LİSTESİ
+                    </td>
+                </tr>
+                <tr>
+                    <td class="OrtaMenuRow">
+
+                        <table id="hor-zebra" style="width: 780px; margin: 0px;">
+                            <thead>
+                                <tr>
+                                    <th scope="col">
+                                        BAŞLIK
+                                    </th>
+                                    <th scope="col">
+                                        DURUMU
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @{int Counter = 2;}
+                                @if (Model != null && Model != null && Model.Count > 0)
+                                {
+                                    foreach (var item in Model)
+                                    {
+                                        <tr @(Counter % 2 == 0 ? "class=odd" : "")>
+                                            <td>
+                                                <a href="@Url.Action("detaykategori", "SunulanProgramlar", new { @id = item.Id })">@item.Baslik</a>
+                                            </td>
+                                            <td>
+                                                @if (item.Durumu == 1)
+                                                {
+                                                    <img src="@Url.Content("~/areas/CMS/assets/Images/ok.png")" style="width: 16px; height: 16px;cursor:pointer;" />
+                                                }
+                                                else
+                                                {
+                                                    <img src="@Url.Content("~/areas/CMS/assets/Images/delete_icon.png")" style="width: 16px; height: 16px;cursor:pointer;" />
+                                                }
+                                            </td>
+                                        </tr>
+                                                Counter++;
+                                    }
+                                }
+                                else
+                                {
+                                    <tr><td colspan="3"><strong>Kayıt bulunamadı...</strong></td></tr>
+                                }
+                            </tbody>
+                        </table>
+                        <div class="pager">
+                        </div>
+
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="OrtaMenuRow">
+                        <b>Not:</b>: Bu bölümde tanımlanan diller okul detaylarında kullanılmaktadır. Arama kriterlerindeki dil listesi üst menüdeki diller kısmındadır.
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>
+

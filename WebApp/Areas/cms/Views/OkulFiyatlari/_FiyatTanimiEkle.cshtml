@@ -1,0 +1,52 @@
+﻿@{
+
+    List<WebApp.Models.DilOkulu_KursTipleri> kursTipleri = null;
+    if (ViewBag.KursTipleri != null)
+    {
+        kursTipleri = (List<WebApp.Models.DilOkulu_KursTipleri>)ViewBag.KursTipleri;
+    }
+}
+<table cellpadding="0" cellspacing="0" class="OrtaMenu">
+    <tr>
+        <td class="OrtaMenuRow">
+            <table cellpadding="0" cellspacing="0" class="fiyatTable">
+                <tr>
+                    <td class="baslik">
+                        Kurs Tipleri<span class="SpanZorunluAlan">*</span>
+                    </td>
+                    <td colspan="2">
+                        <select id="kursTipi" name="kursTipi" class="DropDownList">
+                            <option value="">Seçin...</option>
+                            @foreach (var item in kursTipleri)
+                            {
+                                <option value="@item.Id" @(ViewBag.KursTipiId == item.Id ? "selected" : "")>@item.Baslik</option>
+                            }
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="baslik">
+                        Fiyatlandırma Modelleri<span class="SpanZorunluAlan">*</span>
+                    </td>
+                    <td colspan="2">
+                        <select id="fiyatlandirmaTipi" name="fiyatlandirmaTipi" class="DropDownList">
+                            <option value="">Seçin...</option>
+                            <option value="1">Standart Hafta & Tek Fiyat</option>
+                            @*<option value="2">Her Haftaya Özel Fiyat</option>*@
+                            <option value="3">Hafta Bazlı & Birim Fiyatlı</option>
+
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        <!--Ajax ile dolacak ( fiyatTanimi.init();)-->
+                        <div id="fiyatTanimiHaftaTanimlari"></div>
+
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>

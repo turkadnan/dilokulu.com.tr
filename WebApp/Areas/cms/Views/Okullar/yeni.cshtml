@@ -1,0 +1,321 @@
+﻿@model  WebApp.Models.DilOkulu_Okullar
+@{
+    ViewBag.Title = "Yeni Okul | dilokulu cms";
+    Layout = "~/Areas/cms/Views/Shared/_CMSLayout.cshtml";
+}
+
+@section HeaderWithContentPage{
+    <script src="@Url.Content("~/Areas/cms/Assets/ckeditor/ckeditor.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Areas/cms/Assets/ckeditor/adapters/jquery.js")" type="text/javascript"></script>
+
+    <script src="~/Areas/cms/Assets/js/dilokulu.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            var ProcessStatus = '@Html.Raw(ViewBag.Status)';
+
+            if (ProcessStatus == "ok") {
+                GeneralObj.DilokuluMessageBox.init({ status: 'ok', message: 'Kayıt yapıldı.' });
+            }
+
+            $('#btnSave').click(function () {
+                Loader();
+
+                $("html, body").animate({ scrollTop: "0px" });
+
+                var baslik = $('#Baslik').val();
+                var merkezId = $('#SelectMerkez').val();
+                var dilId = $('#DilId').val();
+                var ulkeId = $('#UlkeId').val();
+                var sehirId = $('#SehirId').val();
+
+                $.ajax({
+                    type: "POST",
+                    url: "@Url.Action("OkulVarMi", "Ajax")",
+                    data: { baslik: baslik, merkezId: merkezId, dilId: dilId, ulkeId: ulkeId, sehirId: sehirId },
+                    dataType: "json",
+                    success: function (data) {
+                        if (data.status == "ok") {
+                            $('#submit').trigger("click");
+                        } else {
+
+                            GeneralObj.DilokuluMessageBox.init({ status: 'error', message: data.mesaj });
+                            closeModal();
+                        }
+                    }
+                });
+                return false;
+            })
+        })
+    </script>
+}
+
+<script language="javascript" type="text/javascript">
+    $(document).ready(function () {
+        var config = {
+            height: 500,
+            width: 800,
+            toolbar: [
+                   ['Source', 'Paste', 'PasteText', 'PasteFromWord', 'Bold', 'Italic', 'Underline', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock', 'Font', 'FontSize', 'NumberedList', 'BulletedList', 'Undo', 'Redo', 'Link', 'Unlink', 'TextColor', 'BGColor', 'Image', 'NewPage', 'Preview']
+            ]
+            , filebrowserUploadUrl: '/FileUpload/ImageUpload'
+        };
+        $(".adminRichText").ckeditor(config);
+    });
+</script>
+
+
+@section SectionBeforeWrapper{
+    @Html.Partial("_Modals")
+
+}
+<div id="divStatusBox" style="">
+    <span id="spanMessageText"></span>
+</div>
+<table cellpadding="0" cellspacing="0" style="width: 100%;">
+    <tr>
+        <td class="MasterRow3_Column1">
+            @Html.Partial("_OkullarMunu")
+        </td>
+        <td class="MasterRow3_Column2">
+            <table cellpadding="0" cellspacing="0" class="OrtaMenu">
+                <tr>
+                    <td class="OrtaMenuRowTitle">
+                        <img src="@Url.Content("~/areas/CMS/assets/Images/Genel/b-settings.png")" style="width: 18px; height: 18px"
+                             align="absmiddle" />Yeni Okul Merkezi
+                    </td>
+                </tr>
+                <tr>
+                    <td class="OrtaMenuRow">
+                        @using (Html.BeginForm("yeni", "okullar", FormMethod.Post, new { id = "form1", enctype = "multipart/form-data" }))
+                        {
+                            <table cellpadding="0" cellspacing="0" style="width: 100%;">
+                                <tr>
+                                    <td class="OrtaMenuRowC1">
+                                        Okul Merkezleri<span class="SpanZorunluAlan">*</span>
+                                    </td>
+                                    <td class="OrtaMenuRowC2">
+                                        <select id="SelectMerkez" name="SelectMerkez" class="DropDownList" style="width: 300px;">
+                                            <option value="0">Seçin...</option>
+                                            @if (ViewBag.Merkezler != null)
+                                            {
+                                                var merkezler = (List<WebApp.Models.DilOkulu_Merkez>)ViewBag.Merkezler;
+                                                if (merkezler != null && merkezler.Count > 0)
+                                                {
+                                                    foreach (var item in merkezler)
+                                                    {
+                                                        <option value="@item.Id">@item.Baslik</option>
+                                                    }
+                                                }
+                                            }
+                                        </select>
+                                    </td>
+                                </tr>
+                                @Html.Action("DilUlkeSehir", "partial")
+                                <tr>
+                                    <td class="OrtaMenuRowC1">
+                                        Başlık<span class="SpanZorunluAlan">*</span>
+                                    </td>
+                                    <td class="OrtaMenuRowC2">
+                                        <input class="TextBox" id="Baslik" name="Baslik" style="width: 300px">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="OrtaMenuRowC1">
+                                        Seo Keywords
+                                    </td>
+                                    <td class="OrtaMenuRowC2">
+                                        <input class="TextBox" id="Seo_Keywords" name="Seo_Keywords" style="width: 300px">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="OrtaMenuRowC1">
+                                        Seo Description
+                                    </td>
+                                    <td class="OrtaMenuRowC2">
+                                        <textarea name="Seo_Descriptions" id="Seo_Descriptions" class="TextBox" style="width: 300px; height: 40px;"></textarea>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="OrtaMenuRowC1">
+                                        Okul Tipi
+                                    </td>
+                                    <td class="OrtaMenuRowC2">
+                                        @{
+
+                                            string[] arrOkultipi = new string[] { "Şehir Merkezi", "Kampüs", "Şehir Dışı" };
+                                            for (int i = 0; i < arrOkultipi.Length; i++)
+                                            {
+                                                <input type="checkbox" name="chk_Okultipi" value="@(arrOkultipi[i])" id="cbx@(i)" /><label for="cbx@(i)">@(arrOkultipi[i])</label>
+                                            }
+
+                                        }
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="OrtaMenuRowC1">
+                                        Okul Kapasitesi
+                                    </td>
+                                    <td class="OrtaMenuRowC2">
+                                        <input class="TextBox" id="OkulKapasitesi" name="OkulKapasitesi" style="width: 300px">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="OrtaMenuRowC1">
+                                        Sınıf Kapasitesi
+                                    </td>
+                                    <td class="OrtaMenuRowC2">
+                                        <input class="TextBox" id="SinifKapasitesi" name="SinifKapasitesi" style="width: 300px">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="OrtaMenuRowC1" style="border: none;">
+                                        İçerik
+                                    </td>
+                                    <td class="OrtaMenuRowC2" style="border: none;"></td>
+                                </tr>
+                                <tr>
+                                    <td class="OrtaMenuRowC2" colspan="2" style="border: none;">
+                                        <textarea col="80" rows="25" width="500" name="Icerik" id="Icerik" class="adminRichText"></textarea>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="OrtaMenuRowC1">
+                                        Konaklama Türleri
+                                    </td>
+                                    <td class="OrtaMenuRowC2">
+                                        @{
+
+                                            string[] arrKonaklamaTurleri = new string[] { "Aile Yanında", "Yurt", "Öğrenci Evleri", "Öğrenci Rezidansları", "Hotel" };
+                                            for (int i = 0; i < arrKonaklamaTurleri.Length; i++)
+                                            {
+                                                <input type="checkbox" name="chk_KonaklamaTurleri" value="@(arrKonaklamaTurleri[i])" id="cbxKonak@(i)" /><label for="cbxKonak@(i)">@(arrKonaklamaTurleri[i])</label>
+                                            }
+
+                                        }
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="OrtaMenuRowC1">
+                                        Okul Olanakları
+                                    </td>
+                                    <td class="OrtaMenuRowC2">
+                                        <input class="TextBox" id="OkulOlanaklari" name="OkulOlanaklari" style="width: 300px">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="OrtaMenuRowC1">
+                                        Sosyal Aktiviteler
+                                    </td>
+                                    <td class="OrtaMenuRowC2">
+                                        <input class="TextBox" id="SosyalAktiviteler" name="SosyalAktiviteler" style="width: 300px">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="OrtaMenuRowC1">
+                                        Sunulan Programlar
+                                    </td>
+                                    <td class="OrtaMenuRowC2">
+                                        @{
+                                            var sunulanProgramlar = (List<WebApp.Models.DilOkulu_SunulanProgramlar>)ViewBag.SunulanProgramlar;
+                                            int counter = 0;
+                                            string replacedBaslik = "";
+                                            foreach (var item in sunulanProgramlar.Where(sp => sp.UstProgramId == 0))
+                                            {
+                                                <div><strong>@(Html.Raw(item.Baslik))</strong></div>
+
+                                                foreach (var itemProgram in sunulanProgramlar.Where(sp => sp.UstProgramId == item.Id))
+                                                {
+                                                    counter++;
+                                                    replacedBaslik = WebApp.Core.Tools.ReplaceTitle(itemProgram.Baslik);
+                                                    <input type="checkbox" name="chk_SunulanProgramlar" value="@(itemProgram.UstProgramId + "|" + itemProgram.Baslik)" id="cbx@(replacedBaslik + "_" + counter.ToString())" /><label for="cbx@(replacedBaslik + "_" + counter.ToString())">@(itemProgram.Baslik)</label>
+                                                }
+
+                                                counter = 0;
+                                            }
+                                        }
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="OrtaMenuRowC1">
+                                        Harita
+                                    </td>
+                                    <td class="OrtaMenuRowC2">
+                                        <textarea name="Harita" id="Harita" class="TextBox" style="width: 300px; height: 40px;"></textarea>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="OrtaMenuRowC1">
+                                        Street View
+                                    </td>
+                                    <td class="OrtaMenuRowC2">
+                                        <textarea name="StreetView" id="StreetView" class="TextBox" style="width: 300px; height: 40px;"></textarea>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="OrtaMenuRowC1">
+                                        Video
+                                    </td>
+                                    <td class="OrtaMenuRowC2">
+                                        <textarea name="VideoUrl" id="VideoUrl" class="TextBox" style="width: 300px; height: 40px;"></textarea>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="OrtaMenuRowC1">
+                                        Öneçıkan Okul
+                                        <br />
+                                        Olarak Seç
+                                    </td>
+                                    <td class="OrtaMenuRowC2">
+                                        <input id="cbOnecikanOkul" name="cbOnecikanOkul" class="CheckBox" type="checkbox" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="OrtaMenuRowC1">
+                                        Foto Galeri
+                                    </td>
+                                    <td class="OrtaMenuRowC2">
+                                        <select id="selectGaleri" name="selectGaleri" class="DropDownList">
+                                            <option value="0" selected="selected">Seçin...</option>
+                                            @if (ViewBag.GaleriListesi != null)
+                                            {
+                                                List<WebApp.Models.DilOkulu_Galeriler> galeriler = (List<WebApp.Models.DilOkulu_Galeriler>)ViewBag.GaleriListesi;
+                                                foreach (var item in galeriler)
+                                                {
+                                                    <option value="@item.Id">@item.Baslik</option>
+                                                }
+                                            }
+
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="OrtaMenuRowC1">
+                                        Yayın durumu?
+                                    </td>
+                                    <td class="OrtaMenuRowC2">
+                                        <select id="selectDurum" name="selectDurum" class="DropDownList">
+                                            <option value="1" selected="selected">Evet</option>
+                                            <option value="0">Hayır</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="OrtaMenuRowC1" style="border: none;">
+                                        &nbsp;
+                                    </td>
+                                    <td class="OrtaMenuRowC2" style="border: none;">
+                                        <div class="error validation-summary-errors" style="display: none; padding: 5px;">
+                                        </div>
+                                        <input id="btnSave" type="submit" class="Button" value="Kaydet" />
+                                        <input id="submit" type="submit" value="Kaydet" style="display: none" />
+                                    </td>
+                                </tr>
+                            </table>
+                            <i><strong>Not: (<span class="SpanZorunluAlan">*</span> ) alanlar zorunludur!</strong></i>
+                        }
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>

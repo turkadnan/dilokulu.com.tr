@@ -1,0 +1,76 @@
+﻿@model List<WebApp.Models.DilOkulu_Okullar>
+
+@{
+    string baslik = (!string.IsNullOrEmpty(ViewBag.Baslik) ? ViewBag.Baslik : "");
+    string merkezBaslik = "";
+    string okulBaslik = "";
+}
+
+@{
+    ViewBag.Title = baslik;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section PageTitle{
+    <div class="topImg clearfix">
+        <img src="@Url.Content("~/Assets/img/headers/header_3.jpg")" alt="About Us" />
+        <h1><p><strong>"@(baslik)" Etiketine <br /> Ait Sonuçlar</strong></p></h1>
+    </div>
+}
+
+<div class="course column c-67 clearfix">
+
+    @if (Model != null && Model.Count > 0)
+    {
+
+
+        foreach (var item in Model)
+        {
+            merkezBaslik = WebApp.Core.Tools.ReplaceTitle(item.DilOkulu_Merkez.Baslik);
+            okulBaslik = WebApp.Core.Tools.ReplaceTitle(item.Baslik);
+            <div class="box">
+                <ul class="courseId">
+                    <li><a href="@Url.Action("detay", "okullar", new { merkez = merkezBaslik, url = okulBaslik })" title="@(item.DilOkulu_Merkez.Baslik + " - " + item.Baslik)">@(item.DilOkulu_Merkez.Baslik + " - " + item.Baslik)</a></li>
+                    <li></li>
+                </ul>
+                <div class="boxInfo">
+                    <p id="arama_list">
+                        <a href="@Url.Action("detay", "okullar", new { merkez = merkezBaslik, url = okulBaslik })" title="@(item.DilOkulu_Merkez.Baslik + " - " + item.Baslik)"><img class="fwidth3" src="@Url.Content("~/content/uploads/" + item.DilOkulu_Merkez.Logo)" alt="@item.Baslik" /></a>
+                        @Html.Raw(item.DilOkulu_Merkez.Ozet)
+                    </p>
+                </div>
+                <div class="courseInfo">
+                    <p class="courseTime">&nbsp;</p>
+                    <ul>
+                        <li>
+                            <a href="@Url.Action("detay", "okullar", new { merkez = merkezBaslik, url = okulBaslik })"><strong>Detaylı Bilgi</strong></a>
+                        </li>
+                        @if (!string.IsNullOrEmpty(item.DilOkulu_Merkez.FiyatListesi))
+                        {
+                            <li class="courseRoom"><a href="@Url.Content("~/content/uploads/" + item.DilOkulu_Merkez.FiyatListesi)" target="_blank"><strong>Fiyat Listesi</strong></a></li>
+                        }
+
+                        @if (!string.IsNullOrEmpty(item.DilOkulu_Merkez.Promosyonlar))
+                        {
+                            <li class="courseInstructor"><a href="@Url.Content("~/content/uploads/" + item.DilOkulu_Merkez.Promosyonlar)" target="_blank"><strong>Promosyonlar</strong></a></li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        }
+        @*<ul class="pgNr">
+                <li><a href="#"> 1</a></li>
+                <li><a href="#"> 2</a></li>
+                <li><a href="#"> 3</a></li>
+                <li><a href="#"> 4</a></li>
+                <li><a href="#"> ></a></li>
+            </ul>*@
+
+    }
+    else
+    {
+        <strong>İçerik bulunamadı...</strong>
+    }
+</div>
+
+@Html.Partial("_RightColumn")

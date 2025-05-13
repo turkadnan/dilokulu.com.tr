@@ -1,0 +1,10 @@
+﻿@{
+    string pageUrl = Request.RawUrl.ToString();
+    string okulId = Request.QueryString["okulId"];
+}
+<div class="fiyatTab">
+    <a href="@Url.Action("KonaklamaTipi", "KonaklamaFiyatlari", new { okulId = okulId })" class="@(pageUrl.Contains("KonaklamaTipi") ? "active" : "")">Konaklama Tipleri</a>
+    <a href="@Url.Action("FiyatTanimlari", "KonaklamaFiyatlari", new { okulId = okulId })" class="@(pageUrl.Contains("FiyatTanimlari") ? "active" : "")">Fiyat Tanımları</a>
+    <a href="@Url.Action("PromosyonTanimlari", "KonaklamaFiyatlari", new { okulId = okulId })" class="@(pageUrl.Contains("PromosyonTanimlari") ? "active" : "")">K. Promosyonları</a>   
+    <a href="@Url.Action("KonaklamaEkUcretler", "KonaklamaFiyatlari", new { okulId = okulId })" class="@(pageUrl.Contains("KonaklamaEkUcretler") ? "active" : "")">Konaklama Ek Ücretler</a>   
+</div>

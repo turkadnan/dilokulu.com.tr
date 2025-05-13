@@ -1,0 +1,13 @@
+﻿
+<div class="searchCourse searchCourseHome column c-33 clearfix" style="margin: 19px -10px 0 10px !important;">
+    @Html.Action("arama", "partial")
+</div>
+
+<div id="sidebar" class="column c-33 clearfix">
+
+    @Html.Partial("_SizeUlasalimFormu")
+
+    @Html.Action("EnSonZiyaretEdilenOkullar", "partial")
+
+    @*@Html.Action("etiketler", "partial")*@
+</div>

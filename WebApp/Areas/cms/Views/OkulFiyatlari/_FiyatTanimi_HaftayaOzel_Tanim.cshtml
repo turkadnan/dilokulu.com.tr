@@ -1,0 +1,37 @@
+﻿@model List<WebApp.Models.DilOkulu_KursTipiFiyatlandirmalari>
+@{
+    Dictionary<string, KeyValuePair<int, decimal?>> list = new Dictionary<string, KeyValuePair<int, decimal?>>();
+    if (Model != null && Model.Count > 0)
+    {
+        for (int i = 0; i < Model.Count; i++)
+        {
+            list.Add(Model[i].HerHaftayaOzel_Hafta.ToString(), new KeyValuePair<int, decimal?>(Model[i].Id, Model[i].Fiyat));
+        }
+    }
+}
+<table cellpadding="0" cellspacing="0" id="haftayaOzel">
+    <tr><td class="baslik">Haftalar</td><td class="baslik">Fiyat</td><td></tr>
+    @for (int i = 1; i <= 36; i++)
+    {
+        var value = (list.Keys.Contains(i.ToString()) ? list.First(k => k.Key == i.ToString()).Value.Value.ToString() : "");
+        var id = (list.Keys.Contains(i.ToString()) ? list.First(k => k.Key == i.ToString()).Value.Key.ToString() : "");
+        <tr>
+            <td class="baslik">@(i). Hafta</td>
+            <td>
+
+                <input type="text" class="TextBox haftayaOzelInput" data-hafta="@(i)" value="@value" style="width:40px;" />
+                @if (!string.IsNullOrEmpty(value) && value != "0")
+                {
+                    <a href="javascript:;" onclick="KursTipiFiyatSil(this)" data-fiyatlandirmatipiid="2" data-fiyatid="@id">
+                        <img src="/areas/CMS/assets/Images/delete_icon.png" style="width: 16px; height: 16px;cursor:pointer;" alt="Sil" />
+                    </a>
+                }
+
+            </td>
+        </tr>
+    }
+    <tr><td colspan="2" align="right"><input type="button" id="btnHaftayaOzel_Ekle" data-fiyatlandirmatipiid="2" value="Kaydet" /></td></tr>
+</table>
+<hr />
+<b>Nasıl Kullanılır?</b><br />
+Bu fiyatlandırma modeli fiyatları arasında orantısal bir ilişki olmayan programlarda kullanılmalıdır. 1 haftadan 52 haftaya kadar her hafta için fiyat girilmelidir. 

@@ -1,0 +1,49 @@
+﻿@model List<WebApp.Models.DilOkulu_KonaklamaTipiPromosyonTanimlari>
+<table id="standartHafta">
+    <tr>
+        <td class="baslik">Hafta Sayısı</td>
+        <td class="baslik">İndirimli Fiyat</td>
+        <td class="baslik">Bitiş Tarihi</td>
+        <td class="baslik">Kalış Tarihi Baş.</td>
+        <td class="baslik">Kalış Tarihi Bit.</td>
+    </tr>
+    <tr>
+        <td><input type="text" class="TextBox" id="KonaklamaBazli_Hafta" style="width:80px;" /></td>
+        <td><input type="text" class="TextBox" id="KonaklamaBazli_Fiyat" style="width:80px;" /></td>
+        <td><input type="text" class="TextBox promosyonBitisTarihi" id="PromosyonBitisTarihi" style="width:80px;" /></td>
+        <td><input type="text" class="TextBox promosyonBitisTarihi" id="KalisTarihiBaslangic" style="width:80px;" /></td>
+        <td><input type="text" class="TextBox promosyonBitisTarihi" id="KalisTarihiBitis" style="width:80px;" /></td>
+        <td>
+        <input type="button" id="btnKonaklamaBazli_Ekle" data-promosyontipiid="3" value="Ekle" />
+            @if (Model != null && Model.Count > 0)
+            {
+                <input type="button" id="btnKonaklamaBazliPromosyon_Kopyala" href="@Url.Action("PromosyonKopyala", "KonaklamaFiyatlari", new { konaklamaTipiId = Model[0].DilOkulu_KonaklamaTipleri.Id, merkezId = Model[0].DilOkulu_KonaklamaTipleri.DilOkulu_Okullar.MerkezId, okulId = Model[0].DilOkulu_KonaklamaTipleri.OkulId, promosyonTipiId = 3 })" class="fancybox fancybox.iframe" data-promosyontipiid="3" value="Kopyala" />
+            }
+        
+        </td>
+    </tr>
+    @if (Model != null && Model.Count > 0)
+    {
+        foreach (var item in Model)
+        {
+            <tr>
+                <td><div class="TextBox" style="width:80px;">@item.KonaklamaBazli_Hafta</div> </td>
+                <td><div class="TextBox" style="width:80px;">@item.KonaklamaBazli_Fiyat</div></td>
+                <td><div class="TextBox" style="width:80px;">@(string.Format("{0:dd.MM.yyyy}", item.PromosyonBitisTarihi))</div></td>
+                <td><div class="TextBox" style="width:80px;height:17px;">@(string.Format("{0:dd.MM.yyyy}", item.KalisTarihiBaslangic))</div></td>
+                <td><div class="TextBox" style="width:80px;height:17px;">@(string.Format("{0:dd.MM.yyyy}", item.KalisTarihiBitis))</div></td>
+                <td><a href="javascript:;" onclick="KonaklamaTipiPromosyonSil(this)" data-promosyontipiid="3" data-fiyatid="@item.Id">
+                        <img src="/areas/CMS/assets/Images/delete_icon.png" style="width: 16px; height: 16px;" />
+                    </a></td>
+            </tr>
+        }
+
+    }
+    else
+    {
+        <tr><td colspan="3"><strong>Henüz tanımlama yapılmamış!</strong></td></tr>
+    }
+</table>
+<hr />
+<b>Nasıl Kullanılır?</b><br />
+Bu promosyon modeli belirli bir hafta için ya da standart süreli semester ve akademik yıl konaklamaları için belirlenmiş sabit indirimli fiyatlar için kullanılmalıdır. Örneğin; 24 haftalık semester abroad programı konaklaması indirimli ücreti 4800 USD gibi …

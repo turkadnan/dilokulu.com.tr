@@ -1,0 +1,221 @@
+﻿@model WebApp.Models.SubeListViewModel
+@{
+    ViewBag.Title = "Yeni Şehir | dilokulu cms";
+    Layout = "~/Areas/cms/Views/Shared/_CMSLayout.cshtml";
+}
+
+@section HeaderWithContentPage{
+    <script src="@Url.Content("~/Areas/cms/Assets/ckeditor/ckeditor.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Areas/cms/Assets/ckeditor/adapters/jquery.js")" type="text/javascript"></script>
+
+    <script src="~/Areas/cms/Assets/js/dilokulu.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            var ProcessStatus = '@Html.Raw(ViewBag.Status)';
+
+            if (ProcessStatus == "ok") {
+                GeneralObj.DilokuluMessageBox.init({ status: 'ok', message: 'Kayıt yapıldı.' });
+            } else if (ProcessStatus == "err") {
+                GeneralObj.DilokuluMessageBox.init({ status: 'error', message: 'İşlem sırasında bir problem oluştu!' });
+            }
+
+            $('#btnSave').click(function () {
+                Loader();
+
+                $("html, body").animate({ scrollTop: "0px" });
+
+                var subeId = $('#SubeId').val();
+                var baslik = $('#Baslik').val();
+                var icerik = $('#Icerik').val();
+
+                var errMessage = "";
+                var errorCount = 0;
+
+                if ($.trim(baslik).length <= 0) {
+                    errorCount++;
+                    errMessage = "Şube adını kontrol edin!";
+
+
+                }
+                if (errorCount > 0) {
+                    GeneralObj.DilokuluMessageBox.init({ status: 'error', message: errMessage });
+                } else {
+
+                    if (subeId == 0)
+                        $('#Islem').val('new');
+                    else
+                        $('#Islem').val('update');
+
+                    $('#hfIcerik').val(icerik);
+
+                    document.forms[0].submit();
+
+                    //$('#submit').trigger("click");
+                }
+
+                closeModal();
+                return false;
+            })
+        })
+    </script>
+}
+
+<script language="javascript" type="text/javascript">
+    $(document).ready(function () {
+        var config = {
+            height: 200,
+            width: 800,
+            toolbar: [
+                   ['Source', 'Paste', 'PasteText', 'PasteFromWord', 'Bold', 'Italic', 'Underline', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock', 'Font', 'FontSize', 'NumberedList', 'BulletedList', 'Undo', 'Redo', 'Link', 'Unlink', 'TextColor', 'BGColor', 'Image', 'NewPage', 'Preview']
+            ]
+            , filebrowserUploadUrl: '/FileUpload/ImageUpload'
+        };
+        $(".adminRichText").ckeditor(config);
+    });
+</script>
+
+
+@section SectionBeforeWrapper{
+    @Html.Partial("_Modals")
+}
+<div id="divStatusBox" style="">
+    <span id="spanMessageText"></span>
+</div>
+<table cellpadding="0" cellspacing="0" style="width: 100%;">
+    <tr>
+        <td class="MasterRow3_Column1">
+            @Html.Partial("_SliderMunu")
+        </td>
+        <td class="MasterRow3_Column2">
+            <table cellpadding="0" cellspacing="0" class="OrtaMenu">
+                <tr>
+                    <td class="OrtaMenuRowTitle">
+                        <img src="@Url.Content("~/areas/CMS/assets/Images/Genel/b-settings.png")" style="width: 18px; height: 18px"
+                             align="absmiddle" />Şube İşlemleri
+                    </td>
+                </tr>
+                <tr>
+                    <td class="OrtaMenuRow">
+                        <!--Select box farklı bir form kontrol altına alınacak.  -->
+                        @using (Html.BeginForm("index", "sube", FormMethod.Post, new { id = "frmSube" }))
+                        {
+                            <table cellpadding="0" cellspacing="0" style="width: 100%;">
+                                <tr>
+                                    <td class="OrtaMenuRowC1">
+                                        Şubeler<span class="SpanZorunluAlan">*</span>
+                                    </td>
+                                    <td class="OrtaMenuRowC2">
+                                        <select class="DropDownList" id="SubeId" name="SubeId" onchange="document.forms[0].submit();">
+                                            <option value="0">[Yeni Şube]</option>
+                                            @if (Model != null && Model.SubelerShortList != null && Model.SubelerShortList.Count() > 0)
+                                            {
+                                                foreach (var item in Model.SubelerShortList)
+                                                {
+                                                    <option value="@item.Key" @(item.Key == Model.SubeSelectedValue ? "selected" : "")>@item.Value</option>
+                                                }
+                                            }
+                                        </select>
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="OrtaMenuRowC1">
+                                        Şube Adı<span class="SpanZorunluAlan">*</span>
+                                    </td>
+                                    <td class="OrtaMenuRowC2">
+                                        <input class="TextBox" id="Baslik" name="Baslik" value="@Model.Sube.Baslik" style="width: 300px">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="OrtaMenuRowC1">
+                                        E-Posta
+                                    </td>
+                                    <td class="OrtaMenuRowC2">
+                                        <input class="TextBox" id="EPosta" name="EPosta" value="@Model.Sube.EPosta" style="width: 300px">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="OrtaMenuRowC1">
+                                        Telefon
+                                    </td>
+                                    <td class="OrtaMenuRowC2">
+                                        <input class="TextBox" id="Telefon" name="Telefon" value="@Model.Sube.Telefon" style="width: 300px" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="OrtaMenuRowC1">
+                                        Fax
+                                    </td>
+                                    <td class="OrtaMenuRowC2">
+                                        <input class="TextBox" id="Fax" name="Fax" value="@Model.Sube.Fax" style="width: 300px" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="OrtaMenuRowC1">
+                                        Adres
+                                    </td>
+                                    <td class="OrtaMenuRowC2">
+                                        <textarea name="Adres" id="Adres" class="TextBox" style="width: 300px; height: 40px;">@Model.Sube.Adres</textarea>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="OrtaMenuRowC1">
+                                        Kroki (Google Map)
+                                    </td>
+                                    <td class="OrtaMenuRowC2">
+                                        <textarea name="KrokiLink" id="KrokiLink" class="TextBox" style="width: 300px; height: 80px;">@Model.Sube.KrokiLink</textarea>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="OrtaMenuRowC1" style="border: none;">
+                                        Diğer Bilgileri
+                                    </td>
+                                    <td class="OrtaMenuRowC2" style="border: none;"></td>
+                                </tr>
+                                <tr>
+                                    <td class="OrtaMenuRowC2" colspan="2" style="border: none;">
+                                        <textarea rows="15" name="Icerik" id="Icerik" class="adminRichText">@Html.Raw(Model.Sube.Icerik)</textarea>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="OrtaMenuRowC1">
+                                        Öncelik
+                                    </td>
+                                    <td class="OrtaMenuRowC2">
+                                        <input class="TextBox" id="Oncelik" name="Oncelik" value="@Model.Sube.Oncelik" style="width: 50px" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="OrtaMenuRowC1">
+                                        Yayın durumu?
+                                    </td>
+                                    <td class="OrtaMenuRowC2">
+                                        <select id="selectDurum" name="selectDurum" class="DropDownList">
+                                            <option value="1" @(Model.Sube.Durumu == 1 ? "selected" : "")>Evet</option>
+                                            <option value="0" @(Model.Sube.Durumu == 0 ? "selected" : "")>Hayır</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="OrtaMenuRowC1" style="border: none;">
+                                        &nbsp;
+                                    </td>
+                                    <td class="OrtaMenuRowC2" style="border: none;">
+                                        <div class="error validation-summary-errors" style="display: none; padding: 5px;">
+                                        </div>
+                                        <input id="btnSave" type="submit" class="Button" value="Kaydet" />
+                                        @*<input id="submit" type="submit" value="Kaydet" style="display: none" />*@
+                                    </td>
+                                </tr>
+                            </table>
+                            <i><strong>Not: (<span class="SpanZorunluAlan">*</span> ) alanlar zorunludur!</strong></i>
+                            <input id="Id" name="" value="@Model.Sube.Id" type="hidden" />
+                            <input id="Islem" name="Islem" value="" type="hidden" />
+                            <input id="hfIcerik" name="hfIcerik" value="" type="hidden" />
+                        }
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>

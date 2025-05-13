@@ -1,0 +1,81 @@
+﻿@model List<WebApp.Models.DilOkulu_Okullar>
+
+@{
+    string baslik = (!string.IsNullOrEmpty(ViewBag.Baslik) ? ViewBag.Baslik : "");
+    string aciklama = (!string.IsNullOrEmpty(ViewBag.Aciklama) ? ViewBag.Aciklama : "");
+    string resim = (!string.IsNullOrEmpty(ViewBag.Resim) ? ViewBag.Resim : "");
+}
+
+@{
+    ViewBag.Title = "Dil Eğitimi";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section metatags{
+<meta name="keywords" content="@ViewBag.SeoKeywords" />
+<meta name="description" content="@ViewBag.Description" />
+}
+
+@section PageTitle{
+    <div class="topImg clearfix">
+        <img src="@Url.Content("~/Assets/img/headers/header_3.jpg")" alt="About Us" />
+        <h1><p><strong>@(baslik) Dil Eğitimi</strong></p></h1>
+    </div>
+}
+
+<div class="course column c-67 clearfix">
+    
+    @if (!string.IsNullOrEmpty(aciklama))
+    {
+        <div class="box detaybox">
+            <div class="boxInfo examInfo">
+                <ul class="breadcrumb">
+                    <li class="exm"><a href="@Url.Action("index","home")">Anasayfa</a></li>
+                    <li class="exm">></li>
+                    <li class="exm">@(baslik) Dil Eğitimi</li>
+                </ul>
+                <h2 class="title"><strong>@(baslik) Dil Eğitimi Hakkında Genel Bilgi</strong></h2>
+                <div>
+                    @if (!string.IsNullOrEmpty(resim))
+                    {
+                        <img class="fwidth2" src="@Url.Content(resim).Replace("tn_","")" alt="@(baslik) Dil Eğitimi" />
+                    }
+                    @Html.Raw(aciklama)
+                </div>
+
+                @if (Model != null && Model.Count > 0)
+                {
+
+                    var ulkeler = Model.Select(u => u.DilOkulu_Ulkeler).Distinct().OrderBy(u => u.Baslik).ToList();
+
+
+                    <div class="okulsubeleri">
+                        <h2><span class="okulsubebaslik">@(baslik) Dil Eğitimi Alabileceğiniz Ülkeler</span></h2>
+                        @{
+                    if (ulkeler != null && ulkeler.Count > 0)
+                    {
+
+                        <ul>
+                            @foreach (var itemUlke in ulkeler)
+{
+    <li class="icdekili"><a href="@Url.Action("UlkeSehir", "okullar", new { url = itemUlke.Url })">@itemUlke.Baslik</a></li>
+}
+                            <li class="sonlibg"></li>
+                        </ul>
+                    }
+
+                        }
+                    </div>
+                }
+                else
+                {
+                    <strong>İçerik bulunamadı...</strong>
+                }
+            </div>
+        </div>
+    }
+
+    
+</div>
+
+@Html.Partial("_RightColumn")

@@ -1,0 +1,66 @@
+﻿@model List<WebApp.Models.DilOkulu_KursTipiPromosyonTanimlari>
+<table id="standartHafta">
+    <tr>
+        <td class="baslik">Min.<br />  Hafta</td>
+        <td class="baslik">Max.<br />  Hafta</td>
+        <td class="baslik">İndirimli<br />  Birim Fiyatı</td>
+        <td class="baslik">Promosyon<br /> Bitiş Tarihi</td>
+        <td class="baslik">Kurs Baş.<br />  Tarihi</td>
+        <td class="baslik">Kurs Bit.<br /> Tarihi </td>
+    </tr>
+    <tr>
+        <td><input type="text" class="TextBox" id="IndirimPromosyonu_Hafta" style="width:30px;" /></td>
+        <td><input type="text" class="TextBox" id="IndirimPromosyonu_HaftaMax" style="width:30px;" /></td>
+        <td><input type="text" class="TextBox" id="IndirimPromosyonu_BirimFiyat" style="width:60px;" /></td>
+        <td><input type="text" class="TextBox promosyonBitisTarihi" id="PromosyonBitisTarihi" style="width:60px;" /></td>
+        <td><input type="text" class="TextBox promosyonBitisTarihi" id="KursTarihiBaslangic" style="width:60px;" /></td>
+        <td><input type="text" class="TextBox promosyonBitisTarihi" id="KursTarihiBitis" style="width:60px;" /></td>
+        <td>
+            <input type="button" id="btnIndirimliBirimFiyatPromosyonu_Ekle" data-promosyontipiid="4" value="Ekle" />
+
+            @if (Model != null && Model.Count > 0)
+            {
+                <input type="button" id="btnIndirimPromosyonu_Kopyala" href="@Url.Action("PromosyonKopyala", "OkulFiyatlari", new { kursTipiId = Model[0].DilOkulu_KursTipleri.Id, merkezId = Model[0].DilOkulu_KursTipleri.DilOkulu_Okullar.MerkezId, okulId = Model[0].DilOkulu_KursTipleri.OkulId, promosyonTipiId = 4 })" class="fancybox fancybox.iframe" data-promosyontipiid="4" value="Kopyala" />
+            }
+        </td>
+    </tr>
+    @if (Model != null && Model.Count > 0)
+    {
+        foreach (var item in Model)
+        {
+    <tr class="fieldset">
+        <td><input type="text" class="TextBox" id="txtIndirimPromosyonu_Hafta" value="@item.IndirimPromosyonu_Hafta" style="width:30px;" /></td>
+        <td><input type="text" class="TextBox" id="txtIndirimPromosyonu_HaftaMax" value="@item.IndirimPromosyonu_HaftaMax" style="width:30px;" /></td>
+        <td><input type="text" class="TextBox" id="txtIndirimPromosyonu_BirimFiyat" value="@item.IndirimPromosyonu_BirimFiyat" style="width:60px;" /></td>
+        <td><input type="text" class="TextBox" id="txtPromosyonBitisTarihi" value="@(string.Format("{0:dd.MM.yyyy}", item.PromosyonBitisTarihi))" style="width:60px;" /></td>
+        <td><input type="text" class="TextBox" id="txtKursTarihiBaslangic" value="@(string.Format("{0:dd.MM.yyyy}", item.KursTarihiBaslangic))" style="width:60px;" /></td>
+        <td><input type="text" class="TextBox" id="txtKursTarihiBitis" value="@(string.Format("{0:dd.MM.yyyy}", item.KursTarihiBitis))" style="width:60px;" /></td>
+        <td>
+            <input id="hfId" value="@item.Id" type="hidden" />
+            <a href="javascript:;" onclick="KursTipiPromosyonSil(this)" data-promosyontipiid="4" data-fiyatid="@item.Id">
+                <img src="/areas/CMS/assets/Images/delete_icon.png" style="width: 16px; height: 16px;" />
+            </a>
+        </td>
+    </tr>
+        }
+        <tr>
+            <td colspan="7">
+                <input type="button" id="btnIndirimliBirimFiyatPromosyonu_Guncelle" data-promosyontipiid="4" value="Güncelle" />
+            </td>
+        </tr>
+    }
+    else
+    {
+        <tr><td colspan="3"><strong>Henüz tanımlama yapılmamış!</strong></td></tr>
+    }
+</table>
+<hr />
+<b>Nasıl Kullanılır?</b><br />
+Bu promosyon modeli belirli hafta aralıkları için belirlenmiş olan indirimli birim fiyatlar için kullanılmalıdır. Örneğin; 0-12 hafta arası 130 GBP (140 GBP yerine), 13-24 hafta arası 100 GBP (120 GBP yerine) gibi…
+<br /><br />
+<ul>
+    <li>Eğer promosyon belirli bir tarihten önce başlayan konaklamalara uygulanacaksa yalnızca Kurs Baş.Tarihi alanına ilgili tarih girilir.</li>
+    <li>Eğer promosyon belirli bir tarihten sonra başlayan konaklamalara uygulanacaksa yalnızca Kurs Bit.Tarihi alanına ilgili tarih girilir. </li>
+    <li>Eğer promosyon belirli iki tarih arasına uygulanacaksa Kurs Baş.Tarihi ve Kurs Bit. Tarihi alanlarına ilgili tarihler girilir.</li>
+
+</ul>

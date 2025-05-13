@@ -1,0 +1,86 @@
+﻿@using WebApp.Models
+@{
+    ViewBag.Title = "Summer Supplement Kopyalama";
+    Layout = "~/Areas/cms/Views/Shared/_CMSLayout.cshtml";
+
+    List<DilOkulu_Okullar> okullar = null;
+    if (ViewBag.Okullar != null)
+    {
+        okullar = (List<DilOkulu_Okullar>)ViewBag.Okullar;
+    }
+
+}
+
+@section SectionBeforeWrapper{
+    @Html.Partial("_Modals")
+}
+
+@section HeaderWithContentPage{
+    <script src="~/Areas/cms/Assets/js/dilokulu.js"></script>
+    <script src="@Url.Content("~/Areas/cms/Assets/js/fiyat_girisleri.js")"></script>
+    <style>
+        .promotionList {
+            list-style-type: none;
+            padding: 0px;
+            margin: 0px;
+        }
+
+            .promotionList h4 {
+                margin: 2px;
+                font-size: 12px !important;
+            }
+
+            .promotionList ol {
+                margin: 0px 0px 0px -35px;
+            }
+    </style>
+}
+
+<h2>Summer Supplement Kopyalama</h2>
+@{
+    var routeValues = new RouteValueDictionary();
+    routeValues.Add("kursTipiId", ViewBag.KursTipiId);
+    routeValues.Add("merkezId", ViewBag.MerkezId);
+    routeValues.Add("okulId", ViewBag.OkulId);
+
+}
+@using (Html.BeginForm("SummerSupplementKopyala", "OkulFiyatlari", routeValues, FormMethod.Post, null))
+{
+    if (okullar != null && okullar.Count > 0)
+    {
+        <ul class="promotionList">
+            @foreach (var item in okullar)
+            {
+                <li>
+                    <h4>@item.Baslik</h4>
+                    @if (item.DilOkulu_KursTipleri.Count > 0)
+                    {
+                        foreach (var itemKursTipi in item.DilOkulu_KursTipleri)
+                        {
+                            if (ViewBag.KursTipiId != itemKursTipi.Id)
+                            {
+                                <ol><input id="cbxKursTipi_@itemKursTipi.Id" name="kursTipleri" value="@itemKursTipi.Id" class="kursTipleri" type="checkbox" /><label for="cbxKursTipi_@itemKursTipi.Id">@itemKursTipi.Baslik</label></ol>
+                            }
+
+                        }
+                    }
+                    else
+                    {
+                        <ol><b style="color:red">Empty</b></ol>
+                    }
+
+
+                </li>
+            }
+        </ul>
+        <input id="btnsummerSupplimentKopyala" type="submit" value="Kopyalama İşlemine Başla!" />
+        <input id="btnSubmit" type="submit" value="" style="display:none" />
+    }
+    <input id="hfSecilenKursTipiId" value="@ViewBag.KursTipiId" type="hidden" />
+}
+<script type="text/javascript">
+    $(function () {
+        summerSupplementKopyalama.init();
+    })
+
+</script>

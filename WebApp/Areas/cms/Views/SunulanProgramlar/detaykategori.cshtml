@@ -1,0 +1,112 @@
+﻿@model WebApp.Models.DilOkulu_SunulanProgramlar
+@{
+    ViewBag.Title = "Yeni Program Kategorisi | dilokulu cms";
+    Layout = "~/Areas/cms/Views/Shared/_CMSLayout.cshtml";
+}
+@section HeaderWithContentPage{
+    <script src="@Url.Content("~/Areas/cms/Assets/ckeditor/ckeditor.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Areas/cms/Assets/ckeditor/adapters/jquery.js")" type="text/javascript"></script>
+
+    <script src="~/Areas/cms/Assets/js/dilokulu.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            var ProcessStatus = '@Html.Raw(ViewBag.Status)';
+
+            if (ProcessStatus == "ok") {
+                GeneralObj.DilokuluMessageBox.init({ status: 'ok', message: 'Kayıt yapıldı.' });
+            }
+
+
+            $('#btnSave').click(function () {
+                Loader();
+
+                $("html, body").animate({ scrollTop: "0px" });
+
+                var errorCount = 0;
+                var errorMessage = "";
+                var baslik = $('#Baslik').val();
+
+                if ($.trim(baslik).length == 0) {
+                    errorCount++;
+                    errorMessage += "Başlık alanı boş olamaz!";
+                }
+
+                if (errorCount > 0) {
+
+                    GeneralObj.DilokuluMessageBox.init({ status: 'error', message: errorMessage });
+                    closeModal();
+                } else {
+                    $('#submit').trigger("click");
+                }
+
+                return false;
+            })
+        })
+    </script>
+}
+
+@section SectionBeforeWrapper{
+    @Html.Partial("_Modals")
+
+}
+<div id="divStatusBox" style="">
+    <span id="spanMessageText"></span>
+</div>
+<table cellpadding="0" cellspacing="0" style="width: 100%;">
+    <tr>
+        <td class="MasterRow3_Column1">
+            @Html.Partial("_SliderMunu")
+        </td>
+        <td class="MasterRow3_Column2">
+            <table cellpadding="0" cellspacing="0" class="OrtaMenu">
+                <tr>
+                    <td class="OrtaMenuRowTitle">
+                        <img src="@Url.Content("~/areas/CMS/assets/Images/Genel/b-settings.png")" style="width: 18px; height: 18px"
+                             align="absmiddle" />PROGRAM DİL DÜZENLEME
+                    </td>
+                </tr>
+                <tr>
+                    <td class="OrtaMenuRow">
+                        @using (Html.BeginForm())
+                        {
+                            <table cellpadding="0" cellspacing="0" style="width: 100%;">
+                                <tr>
+                                    <td class="OrtaMenuRowC1">
+                                        Başlık<span class="SpanZorunluAlan">*</span>
+                                    </td>
+                                    <td class="OrtaMenuRowC2">
+                                        <input class="TextBox" id="Baslik" name="Baslik" value="@Model.Baslik" style="width: 300px">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="OrtaMenuRowC1">
+                                        Yayın durumu?
+                                    </td>
+                                    <td class="OrtaMenuRowC2">
+                                        <select id="selectDurum" name="selectDurum" class="DropDownList">
+                                            <option value="1" @(Model.Durumu == 1 ? "selected" : "")>Evet</option>
+                                            <option value="0" @(Model.Durumu == 0 ? "selected" : "")>Hayır</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="OrtaMenuRowC1" style="border: none;">
+                                        &nbsp;
+                                    </td>
+                                    <td class="OrtaMenuRowC2" style="border: none;">
+                                        <div class="error validation-summary-errors" style="display: none; padding: 5px;">
+                                        </div>
+                                        <input type="hidden" id="Id" name="Id" value="@Model.Id" />
+                                        <input id="btnSave" type="button" class="Button" value="Kaydet" />
+                                        <input id="submit" type="submit" value="Kaydet" style="display: none" />
+                                    </td>
+                                </tr>
+                            </table>
+                            <i><strong>Not: (<span class="SpanZorunluAlan">*</span> ) alanlar zorunludur!</strong></i>
+                        }
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>

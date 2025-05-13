@@ -1,0 +1,40 @@
+﻿@{
+    ViewBag.Title = "Online Dil Testi";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@{
+
+    string seo_Keywords = "";
+    string seo_Descriptions = "";
+
+}
+
+@section metatags{
+    <meta name="keywords" content="@seo_Keywords" />
+    <meta name="description" content="@seo_Descriptions" />
+}
+
+@section PageTitle{
+    <div class="topImg clearfix">
+        <img src="@Url.Content("~/Assets/img/headers/header_2.jpg")" alt="Vize Rehberi" />
+        <p><strong>Online Dil Testi</strong></p>
+    </div>
+}
+
+
+<div class="blog column c-67 clearfix" style="min-height: 400px;">
+    <div class="box">
+        <div class="boxInfo examInfo" style="border:none;">
+            <div>
+                <p style="margin-bottom:100px;">
+                    Cok yakında...
+                </p>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+@Html.Partial("_RightColumn")

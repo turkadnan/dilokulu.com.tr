@@ -1,0 +1,32 @@
+﻿@model WebApp.Models.DilOkulu_Okullar
+<table cellpadding="0" cellspacing="0" class="OrtaMenu">
+    <tr>
+        <td class="OrtaMenuRowTitle">
+            <img src="@Url.Content("~/areas/CMS/assets/Images/Genel/b-settings.png")" style="width: 18px; height: 18px"
+                 align="absmiddle" /><span class="islemBaslik">Kurs Tipi Fiyat Girişleri</span>
+        </td>
+    </tr>
+    <tr>
+        <td class="OrtaMenuRow">
+            <table cellpadding="0" cellspacing="0" style="width: 100%;">
+                <tr>
+                    <td class="OrtaMenuRowC1">
+                        Mrkz-Dil-Ülke-Şehir
+                    </td>
+                    <td class="OrtaMenuRowC2">
+                        <span class="TextBox" style="width: 400px;display:block;">@Model.DilOkulu_Merkez.Baslik / @Model.DilOkulu_Diller.Baslik / @Model.DilOkulu_Ulkeler.Baslik / @Model.DilOkulu_Sehirler.Baslik</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="OrtaMenuRowC1" style="border:none;">
+                        Okul
+                    </td>
+                    <td class="OrtaMenuRowC2" style="border:none;">
+                        <span class="TextBox" style="width: 300px;display:block" id="spanOzelBilgiOkul">@Model.Baslik</span>
+                    </td>
+                </tr>
+
+            </table>
+        </td>
+    </tr>
+</table>

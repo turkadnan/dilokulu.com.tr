@@ -1,0 +1,48 @@
+﻿@model List<WebApp.Models.DilOkulu_Makaleler>
+<div class="news column clearfix" style="padding: 13px; border: 1px solid #E0E0E0; width: 29.8%; margin-left: 10px; margin-top:10px">
+    <h2 class="colonbaslik"><a href="@Url.Action("index", "OgrenciYorumlari")" title="Yurtdışı dil eğitimi öğrenci yorumları">Öğrenci Yorumları</a></h2>
+    <div class="arrows"></div>
+    <div class="cContent clearfix rotator">
+        @if (Model != null && Model.Count > 0)
+        {
+
+            @Html.Raw("<ul class=\"slides\">")
+
+            for (int i = 1; i <= Model.Count; i++)
+            {
+                if (i == 1)
+                {
+                    @Html.Raw("<li>")
+                }
+
+                <div class="post" style="margin-top:10px;">
+                    @if (!string.IsNullOrEmpty(@Model[i - 1].ResimThumbUrl))
+                    {
+                        <div style="max-height:49px;overflow:hidden;float:left;">
+                            <a href="@Url.Action("detay", "OgrenciYorumlari", new { title = Model[i - 1].Url })" title="@Model[i-1].Baslik">
+                                <img src="@Url.Content(Model[i-1].ResimThumbUrl)" style="width:84px;height:auto;" alt="@Model[i-1].Baslik">
+                            </a>
+                        </div>
+                    }
+                    <div class="info" style="@(string.IsNullOrEmpty(@Model[i - 1].ResimThumbUrl) ? "margin: -5px 0 0 0px" : "")">
+                        <a href="@Url.Action("detay", "OgrenciYorumlari", new { title = Model[i - 1].Url })" title="@Model[i-1].Baslik">
+                            <h5>@Model[i - 1].Baslik</h5>
+                        </a>
+                        <p style="margin-top:8px;">@WebApp.Core.Tools.HtmlTemizle(@Model[i - 1].Ozet, 50)</p>
+                    </div>
+                </div>
+                if (i % 2 == 0 || i == Model.Count)
+                {
+                    @Html.Raw("</li>")
+                }
+
+                if (i % 2 == 0 && i < Model.Count)
+                {
+                    @Html.Raw("<li>")
+                }
+
+            }
+            @Html.Raw("</ul>")
+        }
+    </div>
+</div>

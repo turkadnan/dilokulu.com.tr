@@ -1,0 +1,54 @@
+﻿@model WebApp.Models.DilOkulu_Haberler
+@{
+    string pageTitle = "Haberler";
+    string seo_Keywords = "";
+    string seo_Descriptions = "";
+
+    if (Model != null)
+    {
+        pageTitle += " - " + Model.Baslik;
+        seo_Descriptions = Model.Seo_Descriptions;
+        seo_Keywords = Model.Seo_Keywords;
+    }
+
+}
+@{
+    ViewBag.Title = pageTitle;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section metatags{
+    <meta name="keywords" content="@seo_Keywords" />
+    <meta name="description" content="@seo_Descriptions" />
+}
+
+@section PageTitle{
+    <div class="topImg clearfix">
+        <img src="@Url.Content("~/Assets/img/headers/header_2.jpg")" alt="About Us" />
+        <p><strong>Haber</strong></p>
+    </div>
+}
+
+@if (Model != null)
+{
+    <div class="blog column c-67 clearfix">
+
+        <div class="box">
+            <h4>@Model.Baslik</h4>
+            <div class="boxInfo examInfo">
+                <div>
+                    @if (!string.IsNullOrEmpty(Model.ResimUrl))
+                    {
+                        <img class="fwidth2" src="@Url.Content(Model.ResimUrl)" alt="@Model.Baslik">
+                    }
+                    <p>
+                        @Html.Raw(Model.Icerik)
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    @Html.Partial("_RightColumn")
+
+}
+

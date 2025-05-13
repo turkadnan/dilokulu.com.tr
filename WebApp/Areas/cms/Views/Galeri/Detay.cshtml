@@ -1,0 +1,189 @@
+﻿@model  WebApp.Models.DilOkulu_Galeriler
+@{
+    ViewBag.Title = "Galeri | dilokulu cms";
+    Layout = "~/Areas/cms/Views/Shared/_CMSLayout.cshtml";
+}
+
+@using WebApp.Helpers
+
+@section HeaderWithContentPage{
+
+    <script src="~/Areas/cms/Assets/js/dilokulu.js"></script>
+    <script type="text/javascript">
+        $(function () {
+
+            GetPhotoList();
+
+            var ProcessStatus = '@Html.Raw(ViewBag.Status)';
+
+            if (ProcessStatus == "ok") {
+                GeneralObj.DilokuluMessageBox.init({ status: 'ok', message: 'Kayıt yapıldı.' });
+            }
+
+            $('#btnSave').click(function () {
+                Loader();
+
+                $("html, body").animate({ scrollTop: "0px" });
+
+                var ErrorCount = 0;
+                var ErrorMessage = "";
+                var Baslik = $('#Baslik').val();
+
+                if ($.trim(Baslik).length == 0) {
+                    ErrorCount++;
+                    ErrorMessage += "Başlık alanını kontrol edin!";
+                }
+
+                if (ErrorCount > 0) {
+
+                    GeneralObj.DilokuluMessageBox.init({ status: 'error', message: ErrorMessage });
+                    closeModal();
+                } else {
+                    $('#submit').trigger("click");
+                }
+
+                return false;
+            })
+        })
+    </script>
+
+    <!--GetFileNames-->
+    <script type="text/javascript">
+        function GetFileNames(files) {
+            var hfPhotoNames = $('#hfPhotoNames');
+            var CurrentFiles = hfPhotoNames.val();
+            CurrentFiles = CurrentFiles + ";" + files;
+            hfPhotoNames.val(CurrentFiles);
+            GetPhotoList();
+        }
+    </script>
+    <!--DeletePhoto-->
+    <script type="text/javascript">
+        function DeletePhoto(FileName) {
+            var RemovePhotoNames = $('#hfRemovePhotoNames').val();
+
+            $('#hfRemovePhotoNames').val(RemovePhotoNames + FileName + ";");
+            GetPhotoList();
+        }
+    </script>
+    <!--GetPhotoList-->
+    <script type="text/javascript">
+        function GetPhotoList() {
+            var RemovePhotoNames = $('#hfRemovePhotoNames').val();
+            var PhotoNames = $('#hfPhotoNames').val();
+
+            $("#divImageList > img").remove()
+            $("#divImageList > br").remove()
+            $("#divImageList > a").remove()
+            var arrFile = PhotoNames.split(";")
+            var arrRemoveFile = RemovePhotoNames.split(";")
+            var Find = "";
+
+
+            for (var i = 0; i < arrFile.length ; i++) {
+
+                if (arrRemoveFile.length > 0) {
+                    for (var r = 0; r < arrRemoveFile.length - 1; r++) {
+                        if (arrFile[i] == arrRemoveFile[r]) {
+                            Find = arrRemoveFile[r];
+                        }
+                    }
+                }
+
+                if (Find == arrFile[i]) {
+                    Find = "";
+
+                } else {
+                    var htmlImg = $("<img src='/content/galeri/tn_" + arrFile[i] + "' style='margin-bottom:8px;' />");
+                    $('#divImageList').append(htmlImg);
+                    $('#divImageList').append("<br>");
+                    $('#divImageList').append("<a href='javascript:void(0)'  onclick='DeletePhoto(\"" + arrFile[i] + "\")' >delete</a>");
+                    $('#divImageList').append("<br>");
+                }
+            }
+        }
+    </script>
+
+}
+
+@section SectionBeforeWrapper{
+    @Html.Partial("_Modals")
+}
+<div id="divStatusBox" style="">
+    <span id="spanMessageText"></span>
+</div>
+<table cellpadding="0" cellspacing="0" style="width: 100%;">
+    <tr>
+        <td class="MasterRow3_Column1">
+            @Html.Partial("_GaleriMunu")
+        </td>
+        <td class="MasterRow3_Column2">
+            <table cellpadding="0" cellspacing="0" class="OrtaMenu">
+                <tr>
+                    <td class="OrtaMenuRowTitle">
+                        <img src="@Url.Content("~/areas/CMS/assets/Images/Genel/b-settings.png")" style="width: 18px; height: 18px"
+                             align="absmiddle" />Galeri Detay
+                    </td>
+                </tr>
+                <tr>
+                    <td class="OrtaMenuRow">
+                        @using (Html.BeginForm("detay", "galeri", FormMethod.Post, new { id = "form1", enctype = "multipart/form-data" }))
+                        {
+                            <table cellpadding="0" cellspacing="0" style="width: 100%;">
+                                <tr>
+                                    <td class="OrtaMenuRowC1">
+                                        Başlık<span class="SpanZorunluAlan">*</span>
+                                    </td>
+                                    <td class="OrtaMenuRowC2">
+                                        <input class="TextBox" id="Baslik" name="Baslik" value="@Model.Baslik" style="width: 300px">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="OrtaMenuRowC1">
+                                        Yayın durumu?
+                                    </td>
+                                    <td class="OrtaMenuRowC2">
+                                        <select id="selectDurum" name="selectDurum" class="DropDownList">
+                                            <option value="1" @(Model.Durumu == 1 ? "selected" : "")>Evet</option>
+                                            <option value="0" @(Model.Durumu == 0 ? "selected" : "")>Hayır</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="OrtaMenuRowC1">
+                                        Resimler
+                                    </td>
+                                    <td class="OrtaMenuRowC2">
+                                        <div style="width: 330px; height: 420px; border: 1px solid silver; float: left;">
+                                            @Html.Raw(Html.CreateSWF("/assets/PhotoUpload.swf", 330, 420, "XMLLink=/assets/xml/galeri_settings.xml"))
+                                        </div>
+                                        <div id="divImageList" style="width: 140px; height: 420px; border: 1px solid silver;
+             overflow: auto; margin-left: 335px;">
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="OrtaMenuRowC1" style="border: none;">
+                                        &nbsp;
+                                    </td>
+                                    <td class="OrtaMenuRowC2" style="border: none;">
+                                        <div class="error validation-summary-errors" style="display: none; padding: 5px;">
+                                        </div>
+                                        <input id="hfPhotoNames" name="hfPhotoNames" type="hidden" value="@ViewBag.PhotoNames" />
+                                        <input id="hfRemovePhotoNames" name="hfRemovePhotoNames" type="hidden" />
+                                        <input id="hfGuncellemeDurum" name="hfGuncellemeDurum" type="hidden" />
+                                        <input id="Id" name="Id" value="@Model.Id" type="hidden" />
+                                        <input id="KayitTarihi" name="KayitTarihi" value="@Model.KayitTarihi" type="hidden" />
+                                        <input id="btnSave" type="button" class="Button" value="Kaydet" />
+                                        <input id="submit" type="submit" value="Kaydet" style="display: none" />
+                                    </td>
+                                </tr>
+                            </table>
+                            <i><strong>Not: (<span class="SpanZorunluAlan">*</span> ) alanlar zorunludur!</strong></i>
+                        }
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>

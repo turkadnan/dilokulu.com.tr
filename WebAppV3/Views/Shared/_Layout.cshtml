@@ -1,0 +1,46 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <link rel="stylesheet" href="@Url.Content("~/assets/css/style.css")" type="text/css" media="screen,projection,print" />
+    <link rel="stylesheet" href="@Url.Content("~/assets/css/prettyPhoto.css")" type="text/css" media="screen" />
+    <link rel="shortcut icon" href="@Url.Content("~/assets/images/favicon.ico")" />
+    <link rel="stylesheet" href="@Url.Content("~/assets/css/font-awesome.min.css")" type="text/css" media="screen,projection,print" />
+
+    <title>Yurtdışı Dil Okulları - @ViewBag.Title</title>
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <!--header-->
+    @Html.Partial("_Header")
+    <!--//header-->
+    <!--main-->
+    @RenderSection("beforeMainLayout", false);
+    <div class="main" role="main">
+        <div class="wrap clearfix">
+            @RenderBody()
+        </div>
+    </div>
+    <!--footer-->
+    @Html.Partial("_Footer")
+    <!--//footer-->
+
+
+    <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="@Url.Content("~/assets/js/sequence.jquery-min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/assets/js/sequence.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/assets/js/selectnav.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/assets/js/jquery.uniform.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/assets/js/jquery.prettyPhoto.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/assets/js/modernizr.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/assets/js/scripts.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/main.js")"></script>
+
+    <script>selectnav('nav'); </script>
+    @RenderSection("scripts", required: false)
+</body>
+</html>

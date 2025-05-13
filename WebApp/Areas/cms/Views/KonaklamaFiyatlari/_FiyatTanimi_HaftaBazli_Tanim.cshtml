@@ -1,0 +1,57 @@
+﻿@model List<WebApp.Models.DilOkulu_KonaklamaTipiFiyatlandirmalari>
+<table id="haftaBazli" cellpadding="0" cellspacing="0">
+
+    <tr>
+        <td class="baslik">H. Başlangıç</td>
+        <td class="baslik">H. Bitiş</td>
+        <td class="baslik">Birim Fiyatı</td>
+    </tr>
+    <tr>
+        <td>
+            <input type="text" class="TextBox focusField" id="HaftaBazli_HaftaBaslangic" style="width: 60px;" /></td>
+        <td>
+            <input type="text" class="TextBox" id="HaftaBazli_HaftaBitis" style="width: 60px;" /></td>
+        <td>
+            <input type="text" class="TextBox" id="HaftaBazli_Fiyat" style="width: 60px;" />
+
+        </td>
+        <td>
+            <input type="button" id="btnHaftaBazli_Ekle" data-fiyatlandirmatipiid="3" value="Ekle" /></td>
+    </tr>
+    @if (Model != null && Model.Count > 0)
+    {
+        foreach (var item in Model)
+        {
+        <tr class="fieldset">
+            <td>
+                <input type="text" id="txtHaftaBazliBirimFiyatli_HaftaBaslangic" class="TextBox" value="@item.HaftaBazliBirimFiyatli_HaftaBaslangic" style="width:60px;" /></td>
+            <td>
+                <input type="text" id="txtHaftaBazliBirimFiyatli_HaftaBitis" class="TextBox" value="@item.HaftaBazliBirimFiyatli_HaftaBitis" style="width:60px;" /></td>
+            <td>
+                <input type="text" id="txtFiyat" class="TextBox" value="@item.Fiyat" style="width:60px;" /></td>
+            <td>
+                <input id="hfId" value="@item.Id" type="hidden" />
+                <a href="javascript:;" onclick="KonaklamaTipiFiyatSil(this)" data-fiyatlandirmatipiid="3" data-fiyatid="@item.Id">
+                    <img src="/areas/CMS/assets/Images/delete_icon.png" style="width: 16px; height: 16px; cursor: pointer;" alt="Sil" />
+                </a>
+            </td>
+        </tr>
+        }
+
+        <tr>
+            <td colspan="4">
+                <input type="button" id="btnHaftaBazli_Guncelle" data-fiyatlandirmatipiid="3" value="Güncelle" /></td>
+        </tr>
+
+    }
+    else
+    {
+        <tr>
+            <td colspan="3"><strong>Henüz tanımlama yapılmamış!</strong></td>
+        </tr>
+    }
+</table>
+
+<hr />
+<b>Nasıl Kullanılır?</b><br />
+Bu fiyatlandırma modeli belirli hafta aralıkları için belirlenmiş birim fiyatları olan konaklama tipleri için kullanılmalıdır. Örneğin 1-4 hafta arası 200 GBP, 5-12 hafta arası 190 GBP, 13-24 hafta arası 180 GBP ya da 0-52 hafta 150 GBP gibi….

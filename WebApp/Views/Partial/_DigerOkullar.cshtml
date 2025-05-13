@@ -1,0 +1,24 @@
+﻿@model List<WebApp.Models.DilOkulu_Merkez>
+@if (Model != null && Model.Count > 0)
+{
+    string merkezUrl = "";
+    <div class="event c-67 clearfix ambiti" style="width: 100%; margin-bottom: 0px !important; margin-top: 5px !important;height: 140px !important;border-top: 1px solid #e8eaee;">
+        <h4 style="margin-left:0px !important;margin-top:15px !important;"><strong>Diğer Okullar</strong></h4>
+        <div class="arrows"></div>
+        <div class="cContent clearfix rotator" style="width: 100%; margin-bottom:0px !important">
+            <ul class="slides" style="height: 95px !important">
+                @foreach (var item in Model)
+                {
+                    merkezUrl = WebApp.Core.Tools.ReplaceTitle(item.Baslik) + "-dil-okulu";
+                    <li>
+                        <a href="@Url.Action("MerkezDetay", "Okullar", new { url = item.Url })" title="@item.Baslik" class="grayColor">
+                            <img src="@Url.Content("~/content/uploads/" + item.Logo)" alt="@item.Baslik" style="width:100px;max-height:100px;" />
+                            <span class="essekSpaniOkulDetaySlider">@(item.Baslik)</span>
+                        </a>
+                    </li>
+                }
+            </ul>
+
+        </div>
+    </div>
+}

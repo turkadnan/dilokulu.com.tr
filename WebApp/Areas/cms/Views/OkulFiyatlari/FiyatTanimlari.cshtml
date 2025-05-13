@@ -1,0 +1,49 @@
+﻿@{
+    ViewBag.Title = "Fiyat Tanımları";
+    Layout = "~/Areas/cms/Views/Shared/_CMSLayout.cshtml";
+}
+
+@section HeaderWithContentPage{
+    <link href="@Url.Content("~/Areas/cms/Assets/css/smoothness/jquery-ui-1.11.4.css")" rel="stylesheet" />
+    <script src="@Url.Content("~/Areas/cms/Assets/js/jquery-1.10.2.js")"></script>
+    <script src="@Url.Content("~/Areas/cms/Assets/js/jquery-ui-1.11.4.js")"></script>
+    <script src="@Url.Content("~/Areas/cms/Assets/js/datepicker-tr.js")"></script>
+    <script src="~/Areas/cms/Assets/js/dilokulu.js"></script>
+    <script src="@Url.Content("~/Areas/cms/Assets/js/fiyat_girisleri.js")"></script>
+
+    <!-- Add mousewheel plugin (this is optional) -->
+    <script src="@Url.Content("~/Areas/cms/Assets/fancybox/lib/jquery.mousewheel-3.0.6.pack.js")"></script>
+    <!-- Add fancyBox -->
+    <link rel="stylesheet" href="@Url.Content("~/Areas/cms/Assets/fancybox/source/jquery.fancybox.css?v=2.1.5")" type="text/css" media="screen" />
+    <script type="text/javascript" src="@Url.Content("~/Areas/cms/Assets/fancybox/source/jquery.fancybox.pack.js?v=2.1.5")"></script>
+}
+
+
+@section SectionBeforeWrapper{
+    @Html.Partial("_Modals")
+}
+
+
+<div id="divStatusBox" style="">
+    <span id="spanMessageText"></span>
+</div>
+<table cellpadding="0" cellspacing="0" style="width: 100%;">
+    <tr>
+        <td class="MasterRow3_Column1">
+            @Html.Partial("_OkullarMunu")
+        </td>
+
+        <td class="MasterRow3_Column2">
+            @Html.Action("_OkulOzetBilgileri")
+            @Html.Partial("_FiyatMenu")
+            @Html.Partial("_FiyatTanimiEkle")
+        </td>
+    </tr>
+</table>
+
+<script type="text/javascript">
+    $(function () {
+        fiyatTanimi.init();
+    })
+
+</script>

@@ -1,0 +1,38 @@
+﻿@model List<WebApp.Models.DilOkulu_StatikLinkler>
+
+
+    @if (Model != null && Model.Count > 0)
+    {
+        var PopulerUlkeler = Model.Where(s => s.LinkTipi == WebApp.Core.GeneralVariables.StatikLinkler.PopulerUlkeler.ToString());
+        var PopulerSehirler = Model.Where(s => s.LinkTipi == WebApp.Core.GeneralVariables.StatikLinkler.PopulerSehirler.ToString());
+        var PopulerDilOkullari = Model.Where(s => s.LinkTipi == WebApp.Core.GeneralVariables.StatikLinkler.PopulerDilOkullari.ToString());
+
+        <div class="popcol1">
+            <span class="popbaslik"><h2>Popüler Ülkeler</h2></span>
+            <ul>
+                @foreach (var item in PopulerUlkeler)
+                {
+                    <li><a href="@item.Link">@item.Baslik</a></li>
+                }
+            </ul>
+        </div>
+
+        <div class="popcol2">
+            <span class="popbaslik"><h2>Popüler Şehirler</h2></span>
+            <ul>
+                @foreach (var item in PopulerSehirler)
+                {
+                    <li><a href="@item.Link">@item.Baslik</a></li>
+                }
+            </ul>
+        </div>
+        <div class="popcol3">
+            <span class="popbaslik"><h2>Popüler Dil Okulları</h2></span>
+            <ul>
+                @foreach (var item in PopulerDilOkullari)
+                {
+                    <li><a href="@item.Link">@item.Baslik</a></li>
+                }
+            </ul>
+        </div>
+    }

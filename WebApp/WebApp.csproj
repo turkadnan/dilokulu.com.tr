@@ -1,0 +1,1231 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{86DE9877-8FD1-45DD-A931-C8B213A7AF10}</ProjectGuid>
+    <ProjectTypeGuids>{E3E379DF-F4C6-4180-9B81-6769533ABE47};{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>WebApp</RootNamespace>
+    <AssemblyName>WebApp</AssemblyName>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+    <MvcProjectUpgradeChecked>true</MvcProjectUpgradeChecked>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>4.0</OldToolsVersion>
+    <UseGlobalApplicationHostFile />
+    <Use64BitIISExpress />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>true</UseVSHostingProcess>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AntiXssLibrary">
+      <HintPath>..\packages\AntiXSS.4.3.0\lib\net40\AntiXssLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=4.4.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EntityFramework.5.0.0\lib\net40\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="HtmlSanitizationLibrary">
+      <HintPath>..\packages\AntiXSS.4.3.0\lib\net40\HtmlSanitizationLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="LowercaseRoutesMVC">
+      <HintPath>..\packages\LowercaseRoutesMVC.1.0.3\lib\LowercaseRoutesMVC.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.8.0.3\lib\net40\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Mvc.FixedDisplayModes, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.FixedDisplayModes.1.0.0\lib\net40\Microsoft.Web.Mvc.FixedDisplayModes.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http">
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+    </Reference>
+    <Reference Include="System.Web.Helpers, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.4.0.20710.0\lib\net40\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.2.0.20715.0\lib\net40\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Areas\cms\cmsAreaRegistration.cs" />
+    <Compile Include="Areas\cms\Controllers\AjaxController.cs" />
+    <Compile Include="Areas\cms\Controllers\BannersController.cs" />
+    <Compile Include="Areas\cms\Controllers\BaseController.cs" />
+    <Compile Include="Areas\cms\Controllers\DillerController.cs" />
+    <Compile Include="Areas\cms\Controllers\FileUploadController.cs" />
+    <Compile Include="Areas\cms\Controllers\GaleriController.cs" />
+    <Compile Include="Areas\cms\Controllers\HaberlerController.cs" />
+    <Compile Include="Areas\cms\Controllers\HomeController.cs" />
+    <Compile Include="Areas\cms\Controllers\KategorilerController.cs" />
+    <Compile Include="Areas\cms\Controllers\KonaklamaFiyatlariController.cs" />
+    <Compile Include="Areas\cms\Controllers\LoginController.cs" />
+    <Compile Include="Areas\cms\Controllers\MakaleController.cs" />
+    <Compile Include="Areas\cms\Controllers\MerkezController.cs" />
+    <Compile Include="Areas\cms\Controllers\OkullarController.cs" />
+    <Compile Include="Areas\cms\Controllers\OkulFiyatlariController.cs" />
+    <Compile Include="Areas\cms\Controllers\PartialController.cs" />
+    <Compile Include="Areas\cms\Controllers\SayfalarController.cs" />
+    <Compile Include="Areas\cms\Controllers\SehirlerController.cs" />
+    <Compile Include="Areas\cms\Controllers\SliderController.cs" />
+    <Compile Include="Areas\cms\Controllers\SubeController.cs" />
+    <Compile Include="Areas\cms\Controllers\SunulanProgramlarController.cs" />
+    <Compile Include="Areas\cms\Controllers\UlkelerController.cs" />
+    <Compile Include="Areas\cms\Controllers\UploadController.cs" />
+    <Compile Include="Areas\cms\Controllers\VizeRehberiController.cs" />
+    <Compile Include="Areas\cms\Controllers\YazarController.cs" />
+    <Compile Include="Controllers\AcentaController.cs" />
+    <Compile Include="Controllers\AjaxController.cs" />
+    <Compile Include="Controllers\BilgiIstekFormuController.cs" />
+    <Compile Include="Controllers\DilTestiController.cs" />
+    <Compile Include="Controllers\EtiketController.cs" />
+    <Compile Include="Controllers\FiyatListesiController.cs" />
+    <Compile Include="Controllers\haberlerController.cs" />
+    <Compile Include="Controllers\HakkimizdaController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\IletisimController.cs" />
+    <Compile Include="Controllers\MakalelerController.cs" />
+    <Compile Include="Controllers\OgrenciYorumlariController.cs" />
+    <Compile Include="Controllers\OkullarController.cs" />
+    <Compile Include="Controllers\PageNotFoundController.cs" />
+    <Compile Include="Controllers\PartialController.cs" />
+    <Compile Include="Controllers\ProgramTipiController.cs" />
+    <Compile Include="Controllers\UlkeRehberiController.cs" />
+    <Compile Include="Controllers\VizeRehberiController.cs" />
+    <Compile Include="Controllers\XMLController.cs" />
+    <Compile Include="Core\GeneralVariables.cs" />
+    <Compile Include="Core\ImageHandler.cs" />
+    <Compile Include="Core\Tools.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Helpers\CookieHelper.cs" />
+    <Compile Include="Helpers\HtmlHelpers.cs" />
+    <Compile Include="Models\AramaViewModel.cs" />
+    <Compile Include="Models\DilOkulu_Diller.cs">
+      <DependentUpon>DilOkuluModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DilOkulu_EtiketIliskileri.cs">
+      <DependentUpon>DilOkuluModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DilOkulu_Etiketler.cs">
+      <DependentUpon>DilOkuluModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DilOkulu_GaleriDosyalari.cs">
+      <DependentUpon>DilOkuluModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DilOkulu_Galeriler.cs">
+      <DependentUpon>DilOkuluModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DilOkulu_Haberler.cs">
+      <DependentUpon>DilOkuluModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DilOkulu_KonaklamaKategorileri.cs">
+      <DependentUpon>DilOkuluModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DilOkulu_KonaklamaTipiEkUcretleri.cs">
+      <DependentUpon>DilOkuluModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DilOkulu_KonaklamaTipiFiyatlandirmalari.cs">
+      <DependentUpon>DilOkuluModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DilOkulu_KonaklamaTipiPromosyonTanimlari.cs">
+      <DependentUpon>DilOkuluModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DilOkulu_KonaklamaTipleri.cs">
+      <DependentUpon>DilOkuluModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DilOkulu_KursKategorileri.cs">
+      <DependentUpon>DilOkuluModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DilOkulu_KursTipiEkUcretleri.cs">
+      <DependentUpon>DilOkuluModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DilOkulu_KursTipiFiyatlandirmalari.cs">
+      <DependentUpon>DilOkuluModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DilOkulu_KursTipiKargoHaricler.cs">
+      <DependentUpon>DilOkuluModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DilOkulu_KursTipiPromosyonTanimlari.cs">
+      <DependentUpon>DilOkuluModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DilOkulu_KursTipleri.cs">
+      <DependentUpon>DilOkuluModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DilOkulu_Merkez.cs">
+      <DependentUpon>DilOkuluModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DilOkulu_Okullar.cs">
+      <DependentUpon>DilOkuluModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DilOkulu_ParaBirimleri.cs">
+      <DependentUpon>DilOkuluModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DilOkulu_Sehirler.cs">
+      <DependentUpon>DilOkuluModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DilOkulu_Slider.cs">
+      <DependentUpon>DilOkuluModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DilOkulu_StatikLinkler.cs">
+      <DependentUpon>DilOkuluModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DilOkulu_StatikSayfalar.cs">
+      <DependentUpon>DilOkuluModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DilOkulu_Subeler.cs">
+      <DependentUpon>DilOkuluModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DilOkulu_SubeSayfalar.cs">
+      <DependentUpon>DilOkuluModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DilOkulu_SunulanProgramlar.cs">
+      <DependentUpon>DilOkuluModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DilOkulu_Ulkeler.cs">
+      <DependentUpon>DilOkuluModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DilOkulu_VizeRehberi.cs">
+      <DependentUpon>DilOkuluModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GeneralListObject.cs" />
+    <Compile Include="Models\JsonEtiketItems.cs" />
+    <Compile Include="Models\jsonKargoHaricKursTipleri.cs" />
+    <Compile Include="Models\MakaleKategoriViewModel.cs" />
+    <Compile Include="Models\DilOkuluModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DilOkuluModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DilOkuluModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DilOkuluModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DilOkuluModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DilOkuluModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DilOkulu_Kullanicilar.cs">
+      <DependentUpon>DilOkuluModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DilOkulu_Makaleler.cs">
+      <DependentUpon>DilOkuluModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DilOkulu_Yazarlar.cs">
+      <DependentUpon>DilOkuluModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MerkezOkullarViewModel.cs" />
+    <Compile Include="Models\Repositories\KonaklamaKategoriRepository.cs" />
+    <Compile Include="Models\Repositories\KursTipiEkUcretleriRepository.cs" />
+    <Compile Include="Models\Repositories\KonaklamaTipiEkUcretleriRepository.cs" />
+    <Compile Include="Models\Repositories\KursKategoriRepository.cs" />
+    <Compile Include="Models\Repositories\KonaklamaTipiFiyatlandirmalariRepository.cs" />
+    <Compile Include="Models\Repositories\KursTipiFiyatlandirmalariRepository.cs" />
+    <Compile Include="Models\Repositories\KonaklamaTipiPromosyonTanimlariRepository.cs" />
+    <Compile Include="Models\Repositories\KursTipiKargoHariclerRepository.cs" />
+    <Compile Include="Models\Repositories\KursTipiPromosyonTanimlariRepository.cs" />
+    <Compile Include="Models\Repositories\KursTipiRepository.cs" />
+    <Compile Include="Models\Repositories\KonaklamaTipiRepository.cs" />
+    <Compile Include="Models\Repositories\ParaBirimiRepository.cs" />
+    <Compile Include="Models\Repositories\SubeSayfaRepository.cs" />
+    <Compile Include="Models\Repositories\SubeRepository.cs" />
+    <Compile Include="Models\Repositories\EtiketIliskileriRepository.cs" />
+    <Compile Include="Models\Repositories\EtiketRepository.cs" />
+    <Compile Include="Models\Repositories\MerkezRepository.cs" />
+    <Compile Include="Models\Repositories\GaleriRepository.cs" />
+    <Compile Include="Models\Repositories\SunulanProgramRepository.cs" />
+    <Compile Include="Models\Repositories\StatikLinkRepository.cs" />
+    <Compile Include="Models\Repositories\StatikSayfaRepository.cs" />
+    <Compile Include="Models\Repositories\VizeRehberiRepository.cs" />
+    <Compile Include="Models\Repositories\SliderRepository.cs" />
+    <Compile Include="Models\Repositories\HaberRepository.cs" />
+    <Compile Include="Models\Repositories\MakaleRepository.cs" />
+    <Compile Include="Models\Repositories\OkulRepository.cs" />
+    <Compile Include="Models\Repositories\DilRepository.cs" />
+    <Compile Include="Models\Repositories\GenericRepository.cs" />
+    <Compile Include="Models\Repositories\KullaniciRepository.cs" />
+    <Compile Include="Models\Repositories\SehirRepository.cs" />
+    <Compile Include="Models\Repositories\UlkeRepository.cs" />
+    <Compile Include="Models\Repositories\YazarRepository.cs" />
+    <Compile Include="Models\SubeListViewModel.cs" />
+    <Compile Include="Models\UlkeSehirViewModel.cs" />
+    <Compile Include="Models\XMLSitemapItem.cs" />
+    <Compile Include="Models\XMLSitemapResult.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Content Include="Areas\cms\Assets\ckeditor\adapters\jquery.js" />
+    <Content Include="Areas\cms\Assets\ckeditor\CHANGES.html" />
+    <Content Include="Areas\cms\Assets\ckeditor\ckeditor.asp" />
+    <Content Include="Areas\cms\Assets\ckeditor\ckeditor.js" />
+    <Content Include="Areas\cms\Assets\ckeditor\ckeditor_basic.js" />
+    <Content Include="Areas\cms\Assets\ckeditor\ckeditor_basic_source.js" />
+    <Content Include="Areas\cms\Assets\ckeditor\ckeditor_source.js" />
+    <Content Include="Areas\cms\Assets\ckeditor\config.js" />
+    <Content Include="Areas\cms\Assets\ckeditor\contents.css" />
+    <Content Include="Areas\cms\Assets\ckeditor\images\spacer.gif" />
+    <Content Include="Areas\cms\Assets\ckeditor\INSTALL.html" />
+    <Content Include="Areas\cms\Assets\ckeditor\lang\af.js" />
+    <Content Include="Areas\cms\Assets\ckeditor\lang\ar.js" />
+    <Content Include="Areas\cms\Assets\ckeditor\lang\bg.js" />
+    <Content Include="Areas\cms\Assets\ckeditor\lang\bn.js" />
+    <Content Include="Areas\cms\Assets\ckeditor\lang\bs.js" />
+    <Content Include="Areas\cms\Assets\ckeditor\lang\ca.js" />
+    <Content Include="Areas\cms\Assets\ckeditor\lang\cs.js" />
+    <Content Include="Areas\cms\Assets\ckeditor\lang\cy.js" />
+    <Content Include="Areas\cms\Assets\ckeditor\lang\da.js" />
+    <Content Include="Areas\cms\Assets\ckeditor\lang\de.js" />
+    <Content Include="Areas\cms\Assets\ckeditor\lang\el.js" />
+    <Content Include="Areas\cms\Assets\ckeditor\lang\en-au.js" />
+    <Content Include="Areas\cms\Assets\ckeditor\lang\en-ca.js" />
+    <Content Include="Areas\cms\Assets\ckeditor\lang\en-gb.js" />
+    <Content Include="Areas\cms\Assets\ckeditor\lang\en.js" />
+    <Content Include="Areas\cms\Assets\ckeditor\lang\eo.js" />
+    <Content Include="Areas\cms\Assets\ckeditor\lang\es.js" />
+    <Content Include="Areas\cms\Assets\ckeditor\lang\et.js" />
+    <Content Include="Areas\cms\Assets\ckeditor\lang\eu.js" />
+    <Content Include="Areas\cms\Assets\ckeditor\lang\fa.js" />
+    <Content Include="Areas\cms\Assets\ckeditor\lang\fi.js" />
+    <Content Include="Areas\cms\Assets\ckeditor\lang\fo.js" />
+    <Content Include="Areas\cms\Assets\ckeditor\lang\fr-ca.js" />
+    <Content Include="Areas\cms\Assets\ckeditor\lang\fr.js" />
+    <Content Include="Areas\cms\Assets\ckeditor\lang\gl.js" />
+    <Content Include="Areas\cms\Assets\ckeditor\lang\gu.js" />
+    <Content Include="Areas\cms\Assets\ckeditor\lang\he.js" />
+    <Content Include="Areas\cms\Assets\ckeditor\lang\hi.js" />
+    <Content Include="Areas\cms\Assets\ckeditor\lang\hr.js" />
+    <Content Include="Areas\cms\Assets\ckeditor\lang\hu.js" />
+    <Content Include="Areas\cms\Assets\ckeditor\lang\is.js" />
+    <Content Include="Areas\cms\Assets\ckeditor\lang\it.js" />
+    <Content Include="Areas\cms\Assets\ckeditor\lang\ja.js" />
+    <Content Include="Areas\cms\Assets\ckeditor\lang\ka.js" />
+    <Content Include="Areas\cms\Assets\ckeditor\lang\km.js" />
+    <Content Include="Areas\cms\Assets\ckeditor\lang\ko.js" />
+    <Content Include="Areas\cms\Assets\ckeditor\lang\lt.js" />
+    <Content Include="Areas\cms\Assets\ckeditor\lang\lv.js" />
+    <Content Include="Areas\cms\Assets\ckeditor\lang\mn.js" />
+    <Content Include="Areas\cms\Assets\ckeditor\lang\ms.js" />
+    <Content Include="Areas\cms\Assets\ckeditor\lang\nb.js" />
+    <Content Include="Areas\cms\Assets\ckeditor\lang\nl.js" />
+    <Content Include="Areas\cms\Assets\ckeditor\lang\no.js" />
+    <Content Include="Areas\cms\Assets\ckeditor\lang\pl.js" />
+    <Content Include="Areas\cms\Assets\ckeditor\lang\pt-br.js" />
+    <Content Include="Areas\cms\Assets\ckeditor\lang\pt.js" />
+    <Content Include="Areas\cms\Assets\ckeditor\lang\ro.js" />
+    <Content Include="Areas\cms\Assets\ckeditor\lang\ru.js" />
+    <Content Include="Areas\cms\Assets\ckeditor\lang\sk.js" />
+    <Content Include="Areas\cms\Assets\ckeditor\lang\sl.js" />
+    <Content Include="Areas\cms\Assets\ckeditor\lang\sr-latn.js" />
+    <Content Include="Areas\cms\Assets\ckeditor\lang\sr.js" />
+    <Content Include="Areas\cms\Assets\ckeditor\lang\sv.js" />
+    <Content Include="Areas\cms\Assets\ckeditor\lang\th.js" />
+    <Content Include="Areas\cms\Assets\ckeditor\lang\tr.js" />
+    <Content Include="Areas\cms\Assets\ckeditor\lang\uk.js" />
+    <Content Include="Areas\cms\Assets\ckeditor\lang\vi.js" />
+    <Content Include="Areas\cms\Assets\ckeditor\lang\zh-cn.js" />
+    <Content Include="Areas\cms\Assets\ckeditor\lang\zh.js" />
+    <Content Include="Areas\cms\Assets\ckeditor\lang\_languages.js" />
+    <Content Include="Areas\cms\Assets\ckeditor\lang\_translationstatus.txt" />
+    <Content Include="Areas\cms\Assets\ckeditor\LICENSE.html" />
+    <Content Include="Areas\cms\Assets\ckeditor\plugins\a11yhelp\dialogs\a11yhelp.js" />
+    <Content Include="Areas\cms\Assets\ckeditor\plugins\a11yhelp\lang\en.js" />
+    <Content Include="Areas\cms\Assets\ckeditor\plugins\a11yhelp\lang\he.js" />
+    <Content Include="Areas\cms\Assets\ckeditor\plugins\about\dialogs\about.js" />
+    <Content Include="Areas\cms\Assets\ckeditor\plugins\about\dialogs\logo_ckeditor.png" />
+    <Content Include="Areas\cms\Assets\ckeditor\plugins\adobeair\plugin.js" />
+    <Content Include="Areas\cms\Assets\ckeditor\plugins\ajax\plugin.js" />
+    <Content Include="Areas\cms\Assets\ckeditor\plugins\autogrow\plugin.js" />
+    <Content Include="Areas\cms\Assets\ckeditor\plugins\bbcode\plugin.js" />
+    <Content Include="Areas\cms\Assets\ckeditor\plugins\clipboard\dialogs\paste.js" />
+    <Content Include="Areas\cms\Assets\ckeditor\plugins\colordialog\dialogs\colordialog.js" />
+    <Content Include="Areas\cms\Assets\ckeditor\plugins\devtools\lang\en.js" />
+    <Content Include="Areas\cms\Assets\ckeditor\plugins\devtools\plugin.js" />
+    <Content Include="Areas\cms\Assets\ckeditor\plugins\dialog\dialogDefinition.js" />
+    <Content Include="Areas\cms\Assets\ckeditor\plugins\div\dialogs\div.js" />
+    <Content Include="Areas\cms\Assets\ckeditor\plugins\docprops\dialogs\docprops.js" />
+    <Content Include="Areas\cms\Assets\ckeditor\plugins\docprops\plugin.js" />
+    <Content Include="Areas\cms\Assets\ckeditor\plugins\find\dialogs\find.js" />
+    <Content Include="Areas\cms\Assets\ckeditor\plugins\flash\dialogs\flash.js" />
+    <Content Include="Areas\cms\Assets\ckeditor\plugins\flash\images\placeholder.png" />
+    <Content Include="Areas\cms\Assets\ckeditor\plugins\forms\dialogs\button.js" />
+    <Content Include="Areas\cms\Assets\ckeditor\plugins\forms\dialogs\checkbox.js" />
+    <Content Include="Areas\cms\Assets\ckeditor\plugins\forms\dialogs\form.js" />
+    <Content Include="Areas\cms\Assets\ckeditor\plugins\forms\dialogs\hiddenfield.js" />
+    <Content Include="Areas\cms\Assets\ckeditor\plugins\forms\dialogs\radio.js" />
+    <Content Include="Areas\cms\Assets\ckeditor\plugins\forms\dialogs\select.js" />
+    <Content Include="Areas\cms\Assets\ckeditor\plugins\forms\dialogs\textarea.js" />
+    <Content Include="Areas\cms\Assets\ckeditor\plugins\forms\dialogs\textfield.js" />
+    <Content Include="Areas\cms\Assets\ckeditor\plugins\forms\images\hiddenfield.gif" />
+    <Content Include="Areas\cms\Assets\ckeditor\plugins\iframedialog\plugin.js" />
+    <Content Include="Areas\cms\Assets\ckeditor\plugins\iframe\dialogs\iframe.js" />
+    <Content Include="Areas\cms\Assets\ckeditor\plugins\iframe\images\placeholder.png" />
+    <Content Include="Areas\cms\Assets\ckeditor\plugins\image\dialogs\image.js" />
+    <Content Include="Areas\cms\Assets\ckeditor\plugins\link\dialogs\anchor.js" />
+    <Content Include="Areas\cms\Assets\ckeditor\plugins\link\dialogs\link.js" />
+    <Content Include="Areas\cms\Assets\ckeditor\plugins\link\images\anchor.gif" />
+    <Content Include="Areas\cms\Assets\ckeditor\plugins\liststyle\dialogs\liststyle.js" />
+    <Content Include="Areas\cms\Assets\ckeditor\plugins\pagebreak\images\pagebreak.gif" />
+    <Content Include="Areas\cms\Assets\ckeditor\plugins\pastefromword\filter\default.js" />
+    <Content Include="Areas\cms\Assets\ckeditor\plugins\pastetext\dialogs\pastetext.js" />
+    <Content Include="Areas\cms\Assets\ckeditor\plugins\placeholder\dialogs\placeholder.js" />
+    <Content Include="Areas\cms\Assets\ckeditor\plugins\placeholder\lang\en.js" />
+    <Content Include="Areas\cms\Assets\ckeditor\plugins\placeholder\lang\he.js" />
+    <Content Include="Areas\cms\Assets\ckeditor\plugins\placeholder\placeholder.gif" />
+    <Content Include="Areas\cms\Assets\ckeditor\plugins\placeholder\plugin.js" />
+    <Content Include="Areas\cms\Assets\ckeditor\plugins\scayt\dialogs\options.js" />
+    <Content Include="Areas\cms\Assets\ckeditor\plugins\scayt\dialogs\toolbar.css" />
+    <Content Include="Areas\cms\Assets\ckeditor\plugins\showblocks\images\block_address.png" />
+    <Content Include="Areas\cms\Assets\ckeditor\plugins\showblocks\images\block_blockquote.png" />
+    <Content Include="Areas\cms\Assets\ckeditor\plugins\showblocks\images\block_div.png" />
+    <Content Include="Areas\cms\Assets\ckeditor\plugins\showblocks\images\block_h1.png" />
+    <Content Include="Areas\cms\Assets\ckeditor\plugins\showblocks\images\block_h2.png" />
+    <Content Include="Areas\cms\Assets\ckeditor\plugins\showblocks\images\block_h3.png" />
+    <Content Include="Areas\cms\Assets\ckeditor\plugins\showblocks\images\block_h4.png" />
+    <Content Include="Areas\cms\Assets\ckeditor\plugins\showblocks\images\block_h5.png" />
+    <Content Include="Areas\cms\Assets\ckeditor\plugins\showblocks\images\block_h6.png" />
+    <Content Include="Areas\cms\Assets\ckeditor\plugins\showblocks\images\block_p.png" />
+    <Content Include="Areas\cms\Assets\ckeditor\plugins\showblocks\images\block_pre.png" />
+    <Content Include="Areas\cms\Assets\ckeditor\plugins\smiley\dialogs\smiley.js" />
+    <Content Include="Areas\cms\Assets\ckeditor\plugins\smiley\images\angel_smile.gif" />
+    <Content Include="Areas\cms\Assets\ckeditor\plugins\smiley\images\angry_smile.gif" />
+    <Content Include="Areas\cms\Assets\ckeditor\plugins\smiley\images\broken_heart.gif" />
+    <Content Include="Areas\cms\Assets\ckeditor\plugins\smiley\images\confused_smile.gif" />
+    <Content Include="Areas\cms\Assets\ckeditor\plugins\smiley\images\cry_smile.gif" />
+    <Content Include="Areas\cms\Assets\ckeditor\plugins\smiley\images\devil_smile.gif" />
+    <Content Include="Areas\cms\Assets\ckeditor\plugins\smiley\images\embaressed_smile.gif" />
+    <Content Include="Areas\cms\Assets\ckeditor\plugins\smiley\images\envelope.gif" />
+    <Content Include="Areas\cms\Assets\ckeditor\plugins\smiley\images\heart.gif" />
+    <Content Include="Areas\cms\Assets\ckeditor\plugins\smiley\images\kiss.gif" />
+    <Content Include="Areas\cms\Assets\ckeditor\plugins\smiley\images\lightbulb.gif" />
+    <Content Include="Areas\cms\Assets\ckeditor\plugins\smiley\images\omg_smile.gif" />
+    <Content Include="Areas\cms\Assets\ckeditor\plugins\smiley\images\regular_smile.gif" />
+    <Content Include="Areas\cms\Assets\ckeditor\plugins\smiley\images\sad_smile.gif" />
+    <Content Include="Areas\cms\Assets\ckeditor\plugins\smiley\images\shades_smile.gif" />
+    <Content Include="Areas\cms\Assets\ckeditor\plugins\smiley\images\teeth_smile.gif" />
+    <Content Include="Areas\cms\Assets\ckeditor\plugins\smiley\images\thumbs_down.gif" />
+    <Content Include="Areas\cms\Assets\ckeditor\plugins\smiley\images\thumbs_up.gif" />
+    <Content Include="Areas\cms\Assets\ckeditor\plugins\smiley\images\tounge_smile.gif" />
+    <Content Include="Areas\cms\Assets\ckeditor\plugins\smiley\images\whatchutalkingabout_smile.gif" />
+    <Content Include="Areas\cms\Assets\ckeditor\plugins\smiley\images\wink_smile.gif" />
+    <Content Include="Areas\cms\Assets\ckeditor\plugins\specialchar\dialogs\specialchar.js" />
+    <Content Include="Areas\cms\Assets\ckeditor\plugins\specialchar\lang\en.js" />
+    <Content Include="Areas\cms\Assets\ckeditor\plugins\stylesheetparser\plugin.js" />
+    <Content Include="Areas\cms\Assets\ckeditor\plugins\styles\styles\default.js" />
+    <Content Include="Areas\cms\Assets\ckeditor\plugins\tableresize\plugin.js" />
+    <Content Include="Areas\cms\Assets\ckeditor\plugins\tabletools\dialogs\tableCell.js" />
+    <Content Include="Areas\cms\Assets\ckeditor\plugins\table\dialogs\table.js" />
+    <Content Include="Areas\cms\Assets\ckeditor\plugins\templates\dialogs\templates.js" />
+    <Content Include="Areas\cms\Assets\ckeditor\plugins\templates\templates\default.js" />
+    <Content Include="Areas\cms\Assets\ckeditor\plugins\templates\templates\images\template1.gif" />
+    <Content Include="Areas\cms\Assets\ckeditor\plugins\templates\templates\images\template2.gif" />
+    <Content Include="Areas\cms\Assets\ckeditor\plugins\templates\templates\images\template3.gif" />
+    <Content Include="Areas\cms\Assets\ckeditor\plugins\uicolor\dialogs\uicolor.js" />
+    <Content Include="Areas\cms\Assets\ckeditor\plugins\uicolor\lang\en.js" />
+    <Content Include="Areas\cms\Assets\ckeditor\plugins\uicolor\lang\he.js" />
+    <Content Include="Areas\cms\Assets\ckeditor\plugins\uicolor\plugin.js" />
+    <Content Include="Areas\cms\Assets\ckeditor\plugins\uicolor\uicolor.gif" />
+    <Content Include="Areas\cms\Assets\ckeditor\plugins\uicolor\yui\assets\hue_bg.png" />
+    <Content Include="Areas\cms\Assets\ckeditor\plugins\uicolor\yui\assets\hue_thumb.png" />
+    <Content Include="Areas\cms\Assets\ckeditor\plugins\uicolor\yui\assets\picker_mask.png" />
+    <Content Include="Areas\cms\Assets\ckeditor\plugins\uicolor\yui\assets\picker_thumb.png" />
+    <Content Include="Areas\cms\Assets\ckeditor\plugins\uicolor\yui\assets\yui.css" />
+    <Content Include="Areas\cms\Assets\ckeditor\plugins\uicolor\yui\yui.js" />
+    <Content Include="Areas\cms\Assets\ckeditor\plugins\wsc\dialogs\ciframe.html" />
+    <Content Include="Areas\cms\Assets\ckeditor\plugins\wsc\dialogs\tmpFrameset.html" />
+    <Content Include="Areas\cms\Assets\ckeditor\plugins\wsc\dialogs\wsc.css" />
+    <Content Include="Areas\cms\Assets\ckeditor\plugins\wsc\dialogs\wsc.js" />
+    <Content Include="Areas\cms\Assets\ckeditor\plugins\xml\plugin.js" />
+    <Content Include="Areas\cms\Assets\ckeditor\skins\kama\dialog.css" />
+    <Content Include="Areas\cms\Assets\ckeditor\skins\kama\editor.css" />
+    <Content Include="Areas\cms\Assets\ckeditor\skins\kama\icons.png" />
+    <Content Include="Areas\cms\Assets\ckeditor\skins\kama\icons_rtl.png" />
+    <Content Include="Areas\cms\Assets\ckeditor\skins\kama\images\dialog_sides.gif" />
+    <Content Include="Areas\cms\Assets\ckeditor\skins\kama\images\dialog_sides.png" />
+    <Content Include="Areas\cms\Assets\ckeditor\skins\kama\images\dialog_sides_rtl.png" />
+    <Content Include="Areas\cms\Assets\ckeditor\skins\kama\images\mini.gif" />
+    <Content Include="Areas\cms\Assets\ckeditor\skins\kama\images\noimage.png" />
+    <Content Include="Areas\cms\Assets\ckeditor\skins\kama\images\sprites.png" />
+    <Content Include="Areas\cms\Assets\ckeditor\skins\kama\images\sprites_ie6.png" />
+    <Content Include="Areas\cms\Assets\ckeditor\skins\kama\images\toolbar_start.gif" />
+    <Content Include="Areas\cms\Assets\ckeditor\skins\kama\skin.js" />
+    <Content Include="Areas\cms\Assets\ckeditor\skins\kama\templates.css" />
+    <Content Include="Areas\cms\Assets\ckeditor\skins\office2003\dialog.css" />
+    <Content Include="Areas\cms\Assets\ckeditor\skins\office2003\editor.css" />
+    <Content Include="Areas\cms\Assets\ckeditor\skins\office2003\icons.png" />
+    <Content Include="Areas\cms\Assets\ckeditor\skins\office2003\icons_rtl.png" />
+    <Content Include="Areas\cms\Assets\ckeditor\skins\office2003\images\dialog_sides.gif" />
+    <Content Include="Areas\cms\Assets\ckeditor\skins\office2003\images\dialog_sides.png" />
+    <Content Include="Areas\cms\Assets\ckeditor\skins\office2003\images\dialog_sides_rtl.png" />
+    <Content Include="Areas\cms\Assets\ckeditor\skins\office2003\images\mini.gif" />
+    <Content Include="Areas\cms\Assets\ckeditor\skins\office2003\images\noimage.png" />
+    <Content Include="Areas\cms\Assets\ckeditor\skins\office2003\images\sprites.png" />
+    <Content Include="Areas\cms\Assets\ckeditor\skins\office2003\images\sprites_ie6.png" />
+    <Content Include="Areas\cms\Assets\ckeditor\skins\office2003\skin.js" />
+    <Content Include="Areas\cms\Assets\ckeditor\skins\office2003\templates.css" />
+    <Content Include="Areas\cms\Assets\ckeditor\skins\v2\dialog.css" />
+    <Content Include="Areas\cms\Assets\ckeditor\skins\v2\editor.css" />
+    <Content Include="Areas\cms\Assets\ckeditor\skins\v2\icons.png" />
+    <Content Include="Areas\cms\Assets\ckeditor\skins\v2\icons_rtl.png" />
+    <Content Include="Areas\cms\Assets\ckeditor\skins\v2\images\dialog_sides.gif" />
+    <Content Include="Areas\cms\Assets\ckeditor\skins\v2\images\dialog_sides.png" />
+    <Content Include="Areas\cms\Assets\ckeditor\skins\v2\images\dialog_sides_rtl.png" />
+    <Content Include="Areas\cms\Assets\ckeditor\skins\v2\images\mini.gif" />
+    <Content Include="Areas\cms\Assets\ckeditor\skins\v2\images\noimage.png" />
+    <Content Include="Areas\cms\Assets\ckeditor\skins\v2\images\sprites.png" />
+    <Content Include="Areas\cms\Assets\ckeditor\skins\v2\images\sprites_ie6.png" />
+    <Content Include="Areas\cms\Assets\ckeditor\skins\v2\images\toolbar_start.gif" />
+    <Content Include="Areas\cms\Assets\ckeditor\skins\v2\skin.js" />
+    <Content Include="Areas\cms\Assets\ckeditor\skins\v2\templates.css" />
+    <Content Include="Areas\cms\Assets\ckeditor\themes\default\theme.js" />
+    <Content Include="Areas\cms\Assets\css\Ajax.css" />
+    <Content Include="Areas\cms\Assets\css\Login.css" />
+    <Content Include="Areas\cms\Assets\css\Page.css" />
+    <Content Include="Areas\cms\Assets\css\smoothness\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Areas\cms\Assets\css\smoothness\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="Areas\cms\Assets\css\smoothness\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="Areas\cms\Assets\css\smoothness\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Areas\cms\Assets\css\smoothness\images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="Areas\cms\Assets\css\smoothness\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="Areas\cms\Assets\css\smoothness\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Areas\cms\Assets\css\smoothness\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="Areas\cms\Assets\css\smoothness\images\ui-icons_222222_256x240.png" />
+    <Content Include="Areas\cms\Assets\css\smoothness\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Areas\cms\Assets\css\smoothness\images\ui-icons_454545_256x240.png" />
+    <Content Include="Areas\cms\Assets\css\smoothness\images\ui-icons_888888_256x240.png" />
+    <Content Include="Areas\cms\Assets\css\smoothness\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Areas\cms\Assets\css\smoothness\jquery-ui-1.9.2.custom.css" />
+    <Content Include="Areas\cms\Assets\css\smoothness\jquery-ui-1.9.2.custom.min.css" />
+    <Content Include="Areas\cms\Assets\css\smoothness\jquery-ui-1.11.4.css" />
+    <Content Include="Areas\cms\Assets\css\TableDesign.css" />
+    <Content Include="Areas\cms\Assets\fancybox\lib\jquery-1.10.1.min.js" />
+    <Content Include="Areas\cms\Assets\fancybox\lib\jquery-1.9.0.min.js" />
+    <Content Include="Areas\cms\Assets\fancybox\lib\jquery.mousewheel-3.0.6.pack.js" />
+    <Content Include="Areas\cms\Assets\fancybox\source\blank.gif" />
+    <Content Include="Areas\cms\Assets\fancybox\source\fancybox_loading%402x.gif" />
+    <Content Include="Areas\cms\Assets\fancybox\source\fancybox_loading.gif" />
+    <Content Include="Areas\cms\Assets\fancybox\source\fancybox_overlay.png" />
+    <Content Include="Areas\cms\Assets\fancybox\source\fancybox_sprite%402x.png" />
+    <Content Include="Areas\cms\Assets\fancybox\source\fancybox_sprite.png" />
+    <Content Include="Areas\cms\Assets\fancybox\source\helpers\fancybox_buttons.png" />
+    <Content Include="Areas\cms\Assets\fancybox\source\helpers\jquery.fancybox-buttons.css" />
+    <Content Include="Areas\cms\Assets\fancybox\source\helpers\jquery.fancybox-buttons.js" />
+    <Content Include="Areas\cms\Assets\fancybox\source\helpers\jquery.fancybox-media.js" />
+    <Content Include="Areas\cms\Assets\fancybox\source\helpers\jquery.fancybox-thumbs.css" />
+    <Content Include="Areas\cms\Assets\fancybox\source\helpers\jquery.fancybox-thumbs.js" />
+    <Content Include="Areas\cms\Assets\fancybox\source\jquery.fancybox.css" />
+    <Content Include="Areas\cms\Assets\fancybox\source\jquery.fancybox.js" />
+    <Content Include="Areas\cms\Assets\fancybox\source\jquery.fancybox.pack.js" />
+    <Content Include="Areas\cms\Assets\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Areas\cms\Assets\Images\ajax-loader.gif" />
+    <Content Include="Areas\cms\Assets\Images\arrow.gif" />
+    <Content Include="Areas\cms\Assets\Images\button.png" />
+    <Content Include="Areas\cms\Assets\Images\calculator.png" />
+    <Content Include="Areas\cms\Assets\Images\cancel.png" />
+    <Content Include="Areas\cms\Assets\Images\comment.gif" />
+    <Content Include="Areas\cms\Assets\Images\contentbg.gif" />
+    <Content Include="Areas\cms\Assets\Images\delete.png" />
+    <Content Include="Areas\cms\Assets\Images\delete_icon.png" />
+    <Content Include="Areas\cms\Assets\Images\edit_icon.png" />
+    <Content Include="Areas\cms\Assets\Images\file_browse_hover.png" />
+    <Content Include="Areas\cms\Assets\Images\file_browse_normal.png" />
+    <Content Include="Areas\cms\Assets\Images\file_browse_pressed.png" />
+    <Content Include="Areas\cms\Assets\Images\Genel\Asagi.png" />
+    <Content Include="Areas\cms\Assets\Images\Genel\b-settings.png" />
+    <Content Include="Areas\cms\Assets\Images\Genel\delete.gif" />
+    <Content Include="Areas\cms\Assets\Images\Genel\g-settings.png" />
+    <Content Include="Areas\cms\Assets\Images\Genel\point.jpg" />
+    <Content Include="Areas\cms\Assets\Images\Genel\Yukari.png" />
+    <Content Include="Areas\cms\Assets\Images\h2bg.gif" />
+    <Content Include="Areas\cms\Assets\Images\h2bghover.gif" />
+    <Content Include="Areas\cms\Assets\Images\header.gif" />
+    <Content Include="Areas\cms\Assets\Images\Kapat.gif" />
+    <Content Include="Areas\cms\Assets\Images\linksbg.gif" />
+    <Content Include="Areas\cms\Assets\Images\mail.png" />
+    <Content Include="Areas\cms\Assets\Images\MasterPages\deneme.png" />
+    <Content Include="Areas\cms\Assets\Images\MasterPages\logo.png" />
+    <Content Include="Areas\cms\Assets\Images\MasterPages\YanBack.jpg" />
+    <Content Include="Areas\cms\Assets\Images\menuBG.jpg" />
+    <Content Include="Areas\cms\Assets\Images\more.gif" />
+    <Content Include="Areas\cms\Assets\Images\ok.png" />
+    <Content Include="Areas\cms\Assets\Images\question.png" />
+    <Content Include="Areas\cms\Assets\Images\Sil.gif" />
+    <Content Include="Areas\cms\Assets\Images\sprite.png" />
+    <Content Include="Areas\cms\Assets\Images\takvim.gif" />
+    <Content Include="Areas\cms\Assets\Images\timeicon.gif" />
+    <Content Include="Areas\cms\Assets\Images\transparent.png" />
+    <Content Include="Areas\cms\Assets\Images\vmenuarrowhover.gif" />
+    <Content Include="Areas\cms\Assets\js\datepicker-tr.js" />
+    <Content Include="Areas\cms\Assets\js\konaklama_girisleri.js" />
+    <Content Include="Areas\cms\Assets\js\fiyat_girisleri.js" />
+    <Content Include="Areas\cms\Assets\js\jquery-1.10.2.js" />
+    <Content Include="Areas\cms\Assets\js\jquery-1.8.2.js" />
+    <Content Include="Areas\cms\Assets\js\jquery-1.8.2.min.js" />
+    <Content Include="Areas\cms\Assets\js\jquery-ui-1.9.2.custom.js" />
+    <Content Include="Areas\cms\Assets\js\jquery-ui-1.9.2.custom.min.js" />
+    <Content Include="Areas\cms\Assets\js\jquery.form.js" />
+    <Content Include="Areas\cms\Assets\js\jquery.Jcrop.js" />
+    <Content Include="Areas\cms\Assets\js\jquery.Jcrop.min.js" />
+    <Content Include="Areas\cms\Assets\js\jquery.nivo.slider.pack.js" />
+    <Content Include="Areas\cms\Assets\js\jquery.tools.min.js" />
+    <Content Include="Areas\cms\Assets\js\json2.js" />
+    <Content Include="Areas\cms\Assets\js\json_parse.js" />
+    <Content Include="Areas\cms\Assets\js\register.js" />
+    <Content Include="Areas\cms\Assets\js\dilokulu.js" />
+    <Content Include="Assets\Banners\300x350.swf" />
+    <Content Include="Assets\css\main.css" />
+    <Content Include="Assets\FancyBox\blank.gif" />
+    <Content Include="Assets\FancyBox\fancybox_buttons.png" />
+    <Content Include="Assets\FancyBox\fancybox_loading%402x.gif" />
+    <Content Include="Assets\FancyBox\fancybox_loading.gif" />
+    <Content Include="Assets\FancyBox\fancybox_overlay.png" />
+    <Content Include="Assets\FancyBox\fancybox_sprite%402x.png" />
+    <Content Include="Assets\FancyBox\fancybox_sprite.png" />
+    <Content Include="Assets\FancyBox\jquery.fancybox-buttons.css" />
+    <Content Include="Assets\FancyBox\jquery.fancybox-buttons.js" />
+    <Content Include="Assets\FancyBox\jquery.fancybox-media.js" />
+    <Content Include="Assets\FancyBox\jquery.fancybox-thumbs.css" />
+    <Content Include="Assets\FancyBox\jquery.fancybox-thumbs.js" />
+    <Content Include="Assets\FancyBox\jquery.fancybox.css" />
+    <Content Include="Assets\FancyBox\jquery.fancybox.js" />
+    <Content Include="Assets\FancyBox\jquery.fancybox.pack.js" />
+    <Content Include="Assets\img\accordionArrow.png" />
+    <Content Include="Assets\img\akreditasyonlar.jpg" />
+    <Content Include="Assets\img\arrow.png" />
+    <Content Include="Assets\img\arrow13.png" />
+    <Content Include="Assets\img\arrows1.png" />
+    <Content Include="Assets\img\blockquote1.png" />
+    <Content Include="Assets\img\blockquote2.png" />
+    <Content Include="Assets\img\blog\avatar.jpg" />
+    <Content Include="Assets\img\blog\avatar2.jpg" />
+    <Content Include="Assets\img\blog\img2.jpg" />
+    <Content Include="Assets\img\blog\img3.jpg" />
+    <Content Include="Assets\img\blog\img33.jpg" />
+    <Content Include="Assets\img\canlidestek.png" />
+    <Content Include="Assets\img\cc.png" />
+    <Content Include="Assets\img\check.png" />
+    <Content Include="Assets\img\events\e1.jpg" />
+    <Content Include="Assets\img\events\e1_gray.jpg" />
+    <Content Include="Assets\img\events\e1_large.jpg" />
+    <Content Include="Assets\img\events\e1_large_gallery.jpg" />
+    <Content Include="Assets\img\events\e2.jpg" />
+    <Content Include="Assets\img\events\e2_gray.jpg" />
+    <Content Include="Assets\img\events\e2_large.jpg" />
+    <Content Include="Assets\img\events\e2_large_gallery.jpg" />
+    <Content Include="Assets\img\events\e3.jpg" />
+    <Content Include="Assets\img\events\e3_gray.jpg" />
+    <Content Include="Assets\img\events\e3_large.jpg" />
+    <Content Include="Assets\img\events\e3_large_gallery.jpg" />
+    <Content Include="Assets\img\events\e4.jpg" />
+    <Content Include="Assets\img\events\e4_gray.jpg" />
+    <Content Include="Assets\img\events\e4_large.jpg" />
+    <Content Include="Assets\img\events\e4_large_gallery.jpg" />
+    <Content Include="Assets\img\events\e5.jpg" />
+    <Content Include="Assets\img\events\e5_gray.jpg" />
+    <Content Include="Assets\img\events\e5_large.jpg" />
+    <Content Include="Assets\img\events\e5_large_gallery.jpg" />
+    <Content Include="Assets\img\events\e6.jpg" />
+    <Content Include="Assets\img\events\e6_gray.jpg" />
+    <Content Include="Assets\img\events\e6_large.jpg" />
+    <Content Include="Assets\img\events\e7_large_gallery.png" />
+    <Content Include="Assets\img\facebook.png" />
+    <Content Include="Assets\img\favicon.ico" />
+    <Content Include="Assets\img\headers\header_1.jpg" />
+    <Content Include="Assets\img\headers\header_2.jpg" />
+    <Content Include="Assets\img\headers\header_3.jpg" />
+    <Content Include="Assets\img\kampanya-banner.jpg" />
+    <Content Include="Assets\img\kampanya.jpg" />
+    <Content Include="Assets\img\lightbox\close.png" />
+    <Content Include="Assets\img\lightbox\loading.gif" />
+    <Content Include="Assets\img\lightbox\next.png" />
+    <Content Include="Assets\img\lightbox\prev.png" />
+    <Content Include="Assets\img\linkImg.png" />
+    <Content Include="Assets\img\listIcons.png" />
+    <Content Include="Assets\img\listIcons2.png" />
+    <Content Include="Assets\img\logo.png" />
+    <Content Include="Assets\img\mail.png" />
+    <Content Include="Assets\img\okulsubeicon.png" />
+    <Content Include="Assets\img\okulsubeiconcizgi.png" />
+    <Content Include="Assets\img\other\indexad.jpg" />
+    <Content Include="Assets\img\other\news.png" />
+    <Content Include="Assets\img\other\welcome.jpg" />
+    <Content Include="Assets\img\pdf_icon.png" />
+    <Content Include="Assets\img\pdf_icon_sb.png" />
+    <Content Include="Assets\img\pgNr.png" />
+    <Content Include="Assets\img\phone.png" />
+    <Content Include="Assets\img\phonee.png" />
+    <Content Include="Assets\img\point.png" />
+    <Content Include="Assets\img\postTime.png" />
+    <Content Include="Assets\img\preloader.gif" />
+    <Content Include="Assets\img\recentPost.png" />
+    <Content Include="Assets\img\sliderArrows1.png" />
+    <Content Include="Assets\img\sliderArrows2.png" />
+    <Content Include="Assets\img\slider\1st.jpg" />
+    <Content Include="Assets\img\slider\1st_thumb.jpg" />
+    <Content Include="Assets\img\slider\2nd.jpg" />
+    <Content Include="Assets\img\slider\2nd_thumb.jpg" />
+    <Content Include="Assets\img\slider\3rd.jpg" />
+    <Content Include="Assets\img\slider\3rd_thumb.jpg" />
+    <Content Include="Assets\img\slider\4th.jpg" />
+    <Content Include="Assets\img\slider\4th_thumb.jpg" />
+    <Content Include="Assets\img\socialButton.png" />
+    <Content Include="Assets\img\socialImg.png" />
+    <Content Include="Assets\img\socialtop.png" />
+    <Content Include="Assets\img\toggleArrow.png" />
+    <Content Include="Assets\img\toggleArrow2.png" />
+    <Content Include="Assets\img\twitter.png" />
+    <Content Include="Assets\img\twitter2.png" />
+    <Content Include="Assets\img\website.png" />
+    <Content Include="Assets\img\youtube.png" />
+    <Content Include="Assets\js\DilOkulu.js" />
+    <Content Include="Assets\js\expressInstall.swf" />
+    <Content Include="Assets\js\html5shiv.js" />
+    <Content Include="Assets\js\jquery.flexslider-min.js" />
+    <Content Include="Assets\js\lightbox.js" />
+    <Content Include="Assets\js\scripts.js" />
+    <Content Include="Assets\js\swfobject_modified.js" />
+    <Content Include="Assets\PhotoUpload.swf" />
+    <Content Include="Assets\xml\galeri_settings.xml" />
+    <Content Include="Content\Images\Haberler\haber-basligi-120140104134642178.jpg" />
+    <Content Include="Content\Images\Haberler\tn_haber-basligi-120140104134642178.jpg" />
+    <Content Include="Content\Images\Makaleler\haber-basligi-120140104122555415.jpg" />
+    <Content Include="Content\Images\Makaleler\haber-basligi-120140104134432446.jpg" />
+    <Content Include="Content\Images\Makaleler\tn_haber-basligi-120140104122555415.jpg" />
+    <Content Include="Content\Images\Makaleler\tn_haber-basligi-120140104134432446.jpg" />
+    <Content Include="Content\Images\Slider\-a-student-reading20140104173442555.jpg" />
+    <Content Include="Content\Images\Slider\90-of-the-people-have-back-issues20140104173337499.jpg" />
+    <Content Include="Content\Images\Slider\just-a-different-perspective-over-this-new-issue20140104173611463.jpg" />
+    <Content Include="Content\Images\Slider\tn_-a-student-reading20140104173442555.jpg" />
+    <Content Include="Content\Images\Slider\tn_90-of-the-people-have-back-issues20140104173337499.jpg" />
+    <Content Include="Content\Images\Slider\tn_just-a-different-perspective-over-this-new-issue20140104173611463.jpg" />
+    <Content Include="Content\Uploads\anglo continental.png" />
+    <Content Include="Content\Uploads\FLS International.png" />
+    <Content Include="Content\Uploads\kaplan_ international_logo.png" />
+    <Content Include="Global.asax" />
+    <Content Include="robots.txt" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Views\Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="Areas\cms\Models\" />
+    <Folder Include="Content\Galeri\Thumb\" />
+    <Folder Include="Content\Images\Dil\" />
+    <Folder Include="Content\Images\Okul\" />
+    <Folder Include="Content\Images\Sehir\" />
+    <Folder Include="Content\Images\Ulke\" />
+    <Folder Include="Content\Images\VizeRehberi\" />
+    <Folder Include="Content\Images\Yazarlar\" />
+    <Folder Include="Content\Uploads\Editor\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_Layout.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Home\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\cms\Views\Web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\cms\Views\Login\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EntityDeploy Include="Models\DilOkuluModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>DilOkuluModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Models\DilOkuluModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>DilOkuluModel.edmx</DependentUpon>
+      <LastGenOutput>DilOkuluModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\DilOkuluModel.edmx.diagram">
+      <DependentUpon>DilOkuluModel.edmx</DependentUpon>
+    </Content>
+    <Content Include="Models\DilOkuluModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>DilOkuluModel.edmx</DependentUpon>
+      <LastGenOutput>DilOkuluModel.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\cms\Views\Shared\_CMSLayout.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\cms\Views\Home\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\cms\Views\Shared\_cmsMenu.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Assets\img\blog\Thumbs.db" />
+    <Content Include="Assets\img\events\Thumbs.db" />
+    <Content Include="Assets\img\headers\header_3.psd" />
+    <Content Include="Assets\img\headers\Thumbs.db" />
+    <Content Include="Assets\img\lightbox\Thumbs.db" />
+    <Content Include="Assets\img\other\Thumbs.db" />
+    <Content Include="Assets\img\slider\Thumbs.db" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\cms\Views\Sehirler\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\cms\Views\Shared\_SehirlerMunu.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\cms\Views\Sehirler\yeni.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\cms\Views\Shared\_UlkelerMunu.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\cms\Views\Ulkeler\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\cms\Views\Ulkeler\yeni.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\cms\Assets\ckeditor\.htaccess" />
+    <Content Include="Areas\cms\Assets\ckeditor\ckeditor.pack" />
+    <Content Include="Areas\cms\Assets\ckeditor\ckeditor.php" />
+    <Content Include="Areas\cms\Assets\ckeditor\ckeditor_php4.php" />
+    <Content Include="Areas\cms\Assets\ckeditor\ckeditor_php5.php" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\cms\Views\Ulkeler\detay.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\cms\Views\Diller\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\cms\Views\Shared\_DillerMunu.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\cms\Views\Diller\yeni.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\cms\Views\Shared\_Modals.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\cms\Views\Diller\detay.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\cms\Views\Sehirler\detay.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\cms\Views\Okullar\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\cms\Views\Okullar\yeni.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\cms\Views\Okullar\detay.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\cms\Views\Shared\_OkullarMunu.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\cms\Views\Partial\DilUlkeSehir.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\cms\Views\Yazar\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\cms\Views\Makale\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\cms\Views\Shared\_YazarlarMunu.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\cms\Views\Yazar\yeni.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\cms\Views\Yazar\detay.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\cms\Views\Shared\_MakalelerMunu.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\cms\Views\Shared\_KategorilerMunu.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\cms\Views\Makale\MakaleOgrenci.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\cms\Views\Makale\MakaleAcademix.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\cms\Views\Makale\MakaleYeniOgrenci.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\cms\Views\Makale\MakaleYeniAcademix.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\cms\Views\Makale\MakaleAcademixDetay.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\cms\Views\Makale\MakaleOgrenciDetay.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Partial\_MainMenu.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Makaleler\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Partial\_Arama.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Partial\_Kategoriler.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Partial\_KategorilerIcerik.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Makaleler\Detay.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\cms\Views\Haberler\detay.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\cms\Views\Haberler\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\cms\Views\Haberler\yeni.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\cms\Views\Shared\_HaberlerMunu.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\haberler\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\haberler\Detay.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Partial\_AnasayfaAcademixMakaleler.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Partial\_AnasayfaOgrenciMakaleler.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\cms\Views\Shared\_SliderMunu.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\cms\Views\Slider\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\cms\Views\Slider\yeni.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\cms\Views\Slider\detay.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Partial\_AnasayfaSlider.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\cms\Views\Shared\_VizeRehberiMenu.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\cms\Views\VizeRehberi\detay.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\cms\Views\VizeRehberi\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\cms\Views\VizeRehberi\yeni.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\VizeRehberi\detay.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\UlkeRehberi\detay.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\OgrenciYorumlari\Detay.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\cms\Views\Shared\_MerkezMunu.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\cms\Views\Merkez\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\cms\Views\Merkez\Yeni.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\cms\Views\Merkez\Detay.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\cms\Views\Galeri\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\cms\Views\Galeri\Yeni.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\cms\Views\Galeri\Detay.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\cms\Views\Shared\_OtherContentEntries.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Okullar\Dil.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Okullar\UlkeSehir.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Okullar\Detay.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_RightColumn.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Partial\_Etiketler.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Etiket\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\cms\Views\Sayfalar\hakkimizda.cshtml" />
+    <Content Include="Areas\cms\Views\Sayfalar\iletisim.cshtml" />
+    <Content Include="Areas\cms\Views\Shared\_GaleriMunu.cshtml" />
+    <Content Include="Areas\cms\Views\Sayfalar\StatikLinkler.cshtml" />
+    <Content Include="Areas\cms\Views\SunulanProgramlar\kategoriler.cshtml" />
+    <Content Include="Areas\cms\Views\SunulanProgramlar\Index.cshtml" />
+    <Content Include="Areas\cms\Views\SunulanProgramlar\yeni.cshtml" />
+    <Content Include="Areas\cms\Views\SunulanProgramlar\detay.cshtml" />
+    <Content Include="Areas\cms\Views\SunulanProgramlar\yenikategori.cshtml" />
+    <Content Include="Areas\cms\Views\SunulanProgramlar\detaykategori.cshtml" />
+    <Content Include="Areas\cms\Views\Sayfalar\AnasayfaSeo.cshtml" />
+    <Content Include="Areas\cms\Views\Banners\Banner300x350.cshtml" />
+    <Content Include="Areas\cms\Views\Sayfalar\acenta.cshtml" />
+    <Content Include="Areas\cms\Views\Sube\Index.cshtml" />
+    <Content Include="Areas\cms\Views\Sube\Sayfalar.cshtml" />
+    <Content Include="Areas\cms\Views\Kategoriler\KursKategorileri.cshtml" />
+    <Content Include="Areas\cms\Views\Kategoriler\YeniKursKategorisi.cshtml" />
+    <Content Include="Areas\cms\Views\Kategoriler\KursKategorisiDetay.cshtml" />
+    <Content Include="Areas\cms\Views\Kategoriler\KonaklamaKategorileri.cshtml" />
+    <Content Include="Areas\cms\Views\Kategoriler\YeniKonaklamaKategorisi.cshtml" />
+    <Content Include="Areas\cms\Views\Kategoriler\KonaklamaKategorisiDetay.cshtml" />
+    <Content Include="Areas\cms\Views\OkulFiyatlari\KursTipi.cshtml" />
+    <Content Include="Areas\cms\Views\OkulFiyatlari\_KursTipiEkle.cshtml" />
+    <Content Include="Areas\cms\Assets\js\jquery-ui-1.11.4.js" />
+    <Content Include="Areas\cms\Assets\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Areas\cms\Assets\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Areas\cms\Assets\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Areas\cms\Assets\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="Areas\cms\Views\OkulFiyatlari\_FiyatMenu.cshtml" />
+    <Content Include="Areas\cms\Views\OkulFiyatlari\_OkulOzetBilgileri.cshtml" />
+    <Content Include="Areas\cms\Views\OkulFiyatlari\FiyatTanimlari.cshtml" />
+    <Content Include="Areas\cms\Views\OkulFiyatlari\PromosyonTanimlari.cshtml" />
+    <Content Include="Areas\cms\Views\OkulFiyatlari\KonaklamaTanimlari.cshtml" />
+    <Content Include="Areas\cms\Views\OkulFiyatlari\_FiyatTanimiEkle.cshtml" />
+    <Content Include="Areas\cms\Views\OkulFiyatlari\_FiyatTanimi_StandartHafta_Tanim.cshtml" />
+    <Content Include="Areas\cms\Views\OkulFiyatlari\_FiyatTanimi_HaftaBazli_Tanim.cshtml" />
+    <Content Include="Areas\cms\Views\OkulFiyatlari\_FiyatTanimi_HaftayaOzel_Tanim.cshtml" />
+    <Content Include="Areas\cms\Views\OkulFiyatlari\_PromosyonTanimiEkle.cshtml" />
+    <Content Include="Areas\cms\Views\OkulFiyatlari\_PromosyonTanimi_IndirimPromosyonu.cshtml" />
+    <Content Include="Areas\cms\Views\OkulFiyatlari\_PromosyonTanimi_ExtraHaftaPromosyonu.cshtml" />
+    <Content Include="Areas\cms\Views\OkulFiyatlari\_PromosyonTanimi_KursBazliPromosyon.cshtml" />
+    <Content Include="Areas\cms\Views\KonaklamaFiyatlari\_KonaklamaMenu.cshtml" />
+    <Content Include="Areas\cms\Views\KonaklamaFiyatlari\_FiyatTanimi_HaftaBazli_Tanim.cshtml" />
+    <Content Include="Areas\cms\Views\KonaklamaFiyatlari\_FiyatTanimi_HaftayaOzel_Tanim.cshtml" />
+    <Content Include="Areas\cms\Views\KonaklamaFiyatlari\_FiyatTanimi_StandartHafta_Tanim.cshtml" />
+    <Content Include="Areas\cms\Views\KonaklamaFiyatlari\_FiyatTanimiEkle.cshtml" />
+    <Content Include="Areas\cms\Views\KonaklamaFiyatlari\_KonaklamaTipiEkle.cshtml" />
+    <Content Include="Areas\cms\Views\KonaklamaFiyatlari\_OkulOzetBilgileri.cshtml" />
+    <Content Include="Areas\cms\Views\KonaklamaFiyatlari\_PromosyonTanimi_ExtraHaftaPromosyonu.cshtml" />
+    <Content Include="Areas\cms\Views\KonaklamaFiyatlari\_PromosyonTanimi_IndirimPromosyonu.cshtml" />
+    <Content Include="Areas\cms\Views\KonaklamaFiyatlari\_PromosyonTanimi_KonaklamaBazliPromosyon.cshtml" />
+    <Content Include="Areas\cms\Views\KonaklamaFiyatlari\_PromosyonTanimiEkle.cshtml" />
+    <Content Include="Areas\cms\Views\KonaklamaFiyatlari\FiyatTanimlari.cshtml" />
+    <Content Include="Areas\cms\Views\KonaklamaFiyatlari\KonaklamaTanimlari.cshtml" />
+    <Content Include="Areas\cms\Views\KonaklamaFiyatlari\KonaklamaTipi.cshtml" />
+    <Content Include="Areas\cms\Views\KonaklamaFiyatlari\PromosyonTanimlari.cshtml" />
+    <Content Include="Areas\cms\Views\OkulFiyatlari\OkulEkUcretler.cshtml" />
+    <Content Include="Areas\cms\Views\KonaklamaFiyatlari\KonaklamaEkUcretler.cshtml" />
+    <Content Include="Areas\cms\Views\OkulFiyatlari\SummerSupplement.cshtml" />
+    <Content Include="Areas\cms\Views\OkulFiyatlari\KursTipiEdit.cshtml" />
+    <Content Include="Areas\cms\Views\OkulFiyatlari\Kopyala.cshtml" />
+    <Content Include="Areas\cms\Views\OkulFiyatlari\PromosyonKopyala.cshtml" />
+    <Content Include="Areas\cms\Views\OkulFiyatlari\_PromosyonTanimi_IndirimliBirimFiyatPromosyonu.cshtml" />
+    <Content Include="Areas\cms\Views\OkulFiyatlari\PromosyonKopyalaTesekkur.cshtml" />
+    <Content Include="Areas\cms\Views\KonaklamaFiyatlari\KonaklamaTipiEdit.cshtml" />
+    <Content Include="Areas\cms\Views\KonaklamaFiyatlari\_PromosyonTanimi_IndirimliBirimFiyatPromosyonu.cshtml" />
+    <Content Include="Areas\cms\Views\OkulFiyatlari\SummerSupplementKopyala.cshtml" />
+    <Content Include="Areas\cms\Views\OkulFiyatlari\SummerSupplementKopyalaTesekkur.cshtml" />
+    <Content Include="Areas\cms\Views\KonaklamaFiyatlari\KonaklamaEkUcretKopyalaTesekkur.cshtml" />
+    <Content Include="Areas\cms\Views\KonaklamaFiyatlari\KonaklamaEkUcretKopyala.cshtml" />
+    <Content Include="Areas\cms\Views\KonaklamaFiyatlari\PromosyonKopyala.cshtml" />
+    <Content Include="Areas\cms\Views\KonaklamaFiyatlari\PromosyonKopyalaTesekkur.cshtml" />
+    <Content Include="Areas\cms\Views\OkulFiyatlari\PromosyonPaketPDFKopyala.cshtml" />
+    <Content Include="Areas\cms\Views\OkulFiyatlari\PromosyonPaketPDFKopyalaTesekkur.cshtml" />
+    <None Include="Properties\PublishProfiles\DilokuluComTr.pubxml" />
+    <Content Include="Views\Partial\_OnecikanOkullar.cshtml" />
+    <Content Include="Views\Hakkimizda\Index.cshtml" />
+    <Content Include="Views\Iletisim\Index.cshtml" />
+    <Content Include="Views\DilTesti\Index.cshtml" />
+    <Content Include="Views\BilgiIstekFormu\Index.cshtml" />
+    <Content Include="Views\Shared\_SizeUlasalimFormu.cshtml" />
+    <Content Include="Views\Okullar\MerkezDetay.cshtml" />
+    <Content Include="Views\Partial\_DigerOkullar.cshtml" />
+    <Content Include="Views\Partial\_ResimGalerisi.cshtml" />
+    <Content Include="Views\Partial\_StatikLinkler.cshtml" />
+    <Content Include="Views\FiyatListesi\Index.cshtml" />
+    <Content Include="Views\ProgramTipi\Index.cshtml" />
+    <Content Include="Views\Shared\_Banner300x250.cshtml" />
+    <Content Include="Views\OgrenciYorumlari\Index.cshtml" />
+    <Content Include="Views\PageNotFound\Index.cshtml" />
+    <Content Include="Views\Acenta\Index.cshtml" />
+    <Content Include="Views\Partial\_EnSonZiyaretEdilenOkullar.cshtml" />
+    <Content Include="Views\Partial\_AnasayfaEnSonZiyaretEdilenOkullar.cshtml" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>0</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:62728/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>

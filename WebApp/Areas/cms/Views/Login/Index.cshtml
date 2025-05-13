@@ -1,0 +1,42 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Dilokulu CMS | Login</title>
+    <link href="@Url.Content("~/areas/cms/assets/css/Login.css")" rel="stylesheet" />
+</head>
+<body>
+    <div style="text-align: center;">
+    </div>
+    @using (Html.BeginForm("index", "login", FormMethod.Post))
+    {
+        <div id="stylized" class="myform">
+            <h1>Dil Okulu - İçerik Yönetim Sistemi
+            </h1>
+            <p>
+            </p>
+            <label>
+                Kullanıcı Adı
+            </label>
+            <input type="text" name="KullaniciAdi" id="KullaniciAdi" />
+            <label>
+                Şifre
+            </label>
+            <input type="password" name="Sifre" id="Sifre" />
+            <input type="image" name="btnLogin" id="btnLogin" class="button" src="@Url.Content("~/areas/cms/assets/images/button.png")" />
+            <div class="spacer">
+            </div>
+            @if (!string.IsNullOrEmpty(ViewBag.AuthStatus))
+            {
+                <div id="divMsg" runat="server" style="color: red;">@ViewBag.AuthStatus</div>    
+            }
+        </div> 
+        <input id="ReturnUrl" name="ReturnUrl" type="hidden" value="@ViewBag.ReturnUrl" />
+    }
+</body>
+</html>

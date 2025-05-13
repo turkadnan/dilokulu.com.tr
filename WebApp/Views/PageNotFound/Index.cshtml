@@ -1,0 +1,35 @@
+﻿@{
+    ViewBag.Title = "404 Sayfa BUlunamadı.";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section PageTitle{
+    <div class="topImg clearfix">
+        <img src="@Url.Content("~/Assets/img/headers/header_2.jpg")" alt="Vize Rehberi" />
+        <p><strong>Sayfa Bulunamadı</strong></p>
+    </div>
+}
+
+
+<div class="blog column c-67 clearfix" style="min-height: 400px;">
+    <div class="box" style="min-height:500px;">
+        <div class="boxInfo examInfo" style="border:none;">
+            <div style="width:100%; text-align:center; margin-top: 55px;">
+               <span style="font-size:175px; color:#808080; ">404</span>
+                <br /><br />
+                <span style="font-size:30px; color:#808080; ">Sayfa Bulunamadı!</span>
+            </div>
+        </div>
+        <div class="clear"></div>
+        @*Öneçıkan okullar*@
+
+        <div class="event column c-67 clearfix" style="width: 100%;">
+            @Html.Action("OnecikanOkullar", "partial")
+        </div>
+    </div>
+
+</div>
+
+
+
+@Html.Partial("_RightColumn")

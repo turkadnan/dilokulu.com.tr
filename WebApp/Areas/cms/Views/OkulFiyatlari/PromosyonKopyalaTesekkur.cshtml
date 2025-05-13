@@ -1,0 +1,19 @@
+﻿@{
+    ViewBag.Title = "Promosyon Kopyala Tesekkur";
+    Layout = "~/Areas/cms/Views/Shared/_CMSLayout.cshtml";
+}
+
+@section HeaderWithContentPage{
+    <script src="~/Areas/cms/Assets/js/dilokulu.js"></script>
+    <script src="@Url.Content("~/Areas/cms/Assets/js/fiyat_girisleri.js")"></script>
+}
+
+<br /><br /><br /><br /><br /><br />
+<center><h2>Kopyalama işlemi tamamlandı!</h2></center>
+
+<script type="text/javascript">
+    $(function () {
+        promosyonKopyalama.init();
+    })
+
+</script>

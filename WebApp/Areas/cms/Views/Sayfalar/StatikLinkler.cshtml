@@ -1,0 +1,277 @@
+﻿@model List<WebApp.Models.DilOkulu_StatikLinkler>
+
+@{
+    ViewBag.Title = "Anasayfa Linkleri | dilokulu cms";
+    Layout = "~/Areas/cms/Views/Shared/_CMSLayout.cshtml";
+}
+
+@section HeaderWithContentPage{
+    <script src="~/Areas/cms/Assets/js/dilokulu.js"></script>
+    <script type="text/javascript">
+        $(function () {
+
+            var ProcessStatus = '@Html.Raw(ViewBag.Status)';
+
+            if (ProcessStatus == "ok") {
+                GeneralObj.DilokuluMessageBox.init({ status: 'ok', message: 'Kayıt Yapıldı.' });
+            } else if (ProcessStatus == "err") {
+                GeneralObj.DilokuluMessageBox.init({ status: 'error', message: 'Bir hata oluştu. Daha sonra tekrar deneyin.' });
+            }
+
+            $('#btnSave').click(function () {
+                Loader();
+
+                $("html, body").animate({ scrollTop: "0px" });
+
+                var errorCount = 0;
+                var errorMessage = "";
+
+                var baslik = $('#Baslik').val();
+                var link = $('#Link').val();
+
+                if ($.trim(baslik).length == 0) {
+                    errorCount++;
+                    errorMessage += "Başlık alanlanını kontrol edin!";
+                }
+
+                if ($.trim(link).length == 0) {
+                    errorCount++;
+                    errorMessage += "<br/>Link alanlanını kontrol edin!";
+                }
+
+                if (errorCount > 0) {
+
+                    GeneralObj.DilokuluMessageBox.init({ status: 'error', message: errorMessage });
+                    closeModal();
+                } else {
+                    $('#submit').trigger("click");
+                }
+
+                return false;
+            })
+        })
+    </script>
+}
+
+@section SectionBeforeWrapper{
+    @Html.Partial("_Modals")
+}
+
+<div id="divStatusBox" style="">
+    <span id="spanMessageText"></span>
+</div>
+<table cellpadding="0" cellspacing="0" style="width: 100%;">
+    <tr>
+        <td class="MasterRow3_Column1">
+            @Html.Partial("_SliderMunu")
+        </td>
+        <td class="MasterRow3_Column2">
+            <table cellpadding="0" cellspacing="0" class="OrtaMenu">
+                <tr>
+                    <td class="OrtaMenuRowTitle">
+                        <img src="@Url.Content("~/areas/CMS/assets/Images/Genel/b-settings.png")" style="width: 18px; height: 18px"
+                             align="absmiddle" />Statik Link Girişi
+                    </td>
+                </tr>
+                <tr>
+                    <td class="OrtaMenuRow">
+                        @using (Html.BeginForm())
+                        {
+                            <table cellpadding="0" cellspacing="0" style="width: 100%;">
+                                <tr>
+                                    <td class="OrtaMenuRowC1">
+                                        Başlık
+                                    </td>
+                                    <td class="OrtaMenuRowC2">
+                                        <input class="TextBox" id="Baslik" name="Baslik" style="width: 300px" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="OrtaMenuRowC1">
+                                        Link
+                                    </td>
+                                    <td class="OrtaMenuRowC2">
+                                        <input class="TextBox" id="Link" name="Link" style="width: 300px" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="OrtaMenuRowC1">
+                                        Öncelik
+                                    </td>
+                                    <td class="OrtaMenuRowC2">
+                                        <input class="TextBox" id="Oncelik" name="Oncelik" value="0" style="width: 30px;text-align:right" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="OrtaMenuRowC1">
+                                        Tip
+                                    </td>
+                                    <td class="OrtaMenuRowC2">
+                                        <select name="Tip" id="Tip" class="DropDownList" style="width: 300px;">
+                                            <option value="PopulerUlkeler">Popüler Ülkeler</option>
+                                            <option value="PopulerSehirler">Popüler Şehirler</option>
+                                            <option value="PopulerDilOkullari">Popüler Dil Okulları</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="OrtaMenuRowC1" style="border: none;">
+                                        &nbsp;
+                                    </td>
+                                    <td class="OrtaMenuRowC2" style="border: none;">
+                                        <div class="error validation-summary-errors" style="display: none; padding: 5px;">
+                                        </div>
+                                        @*<input id="btnSave" type="button" class="Button" value="Kaydet" />*@
+                                        <input id="submit" type="submit" value="Kaydet" style="display: none" />
+                                        <input id="btnSave" type="submit" class="Button" value="Kaydet" />
+                                        <i><strong>Not: (<span class="SpanZorunluAlan">*</span> ) alanlar zorunludur!</strong></i>
+                                    </td>
+                                </tr>
+                            </table>
+                        }
+                    </td>
+                </tr>
+                <tr>
+                    <td class="OrtaMenuRowTitle">
+                        <br />
+                        <img src="@Url.Content("~/areas/CMS/assets/Images/Genel/b-settings.png")" style="width: 18px; height: 18px"
+                             align="absmiddle" />Statik Linkler Listesi
+                    </td>
+                </tr>
+                <tr>
+                    <td class="OrtaMenuRow">
+                        @{
+
+                            string populerUlkeler = "";
+                            string populerSehirler = "";
+                            string populerDilOkullari = "";
+                        }
+
+                        <table id="hor-zebra" style="width: 800px; margin: 0px;">
+                            <thead>
+                                <tr>
+                                    <th scope="col">
+                                        Başlık
+                                    </th>
+                                    <th scope="col">Link</th>
+                                    <th scope="col">Öncelik</th>
+                                    <th scope="col"></th>
+                                </tr>
+                            </thead>
+                            @if (Model != null && Model != null && Model.Count > 0)
+                            {
+
+                                foreach (var item in Model)
+                                {
+                                    switch (item.LinkTipi)
+                                    {
+                                        case "PopulerUlkeler":
+                                            populerUlkeler += "<tr>";
+                                            populerUlkeler += "<td>" + item.Baslik + "</td>";
+                                            populerUlkeler += "<td><a href=\"" + item.Link + "\" target=\"_blank\">" + item.Link + "</a></td>";
+                                            populerUlkeler += "<td><input class=\"TextBox Oncelik\" value=\"" + item.Oncelik + "\" style=\"width: 30px;text-align:right\" data-item=\"" + item.Id + "\" /></td>";
+                                            populerUlkeler += "<td><img class=\"linkSil\" src=\"" + Url.Content("~/areas/CMS/assets/Images/delete_icon.png") + "\" style=\"width: 16px; height: 16px;cursor:pointer;\" data-item=\"" + item.Id + "\" /></td>";
+                                            populerUlkeler += "</tr>";
+                                            break;
+                                        case "PopulerSehirler":
+                                            populerSehirler += "<tr>";
+                                            populerSehirler += "<td>" + item.Baslik + "</td>";
+                                            populerSehirler += "<td><a href=\"" + item.Link + "\" target=\"_blank\">" + item.Link + "</a></td>";
+                                            populerSehirler += "<td><input class=\"TextBox Oncelik\" value=\"" + item.Oncelik + "\" style=\"width: 30px;text-align:right\" data-item=\"" + item.Id + "\" /></td>";
+                                            populerSehirler += "<td><img class=\"linkSil\" src=\"" + Url.Content("~/areas/CMS/assets/Images/delete_icon.png") + "\" style=\"width: 16px; height: 16px;cursor:pointer;\" data-item=\"" + item.Id + "\" /></td>";
+                                            populerSehirler += "</tr>";
+                                            break;
+                                        case "PopulerDilOkullari":
+                                            populerDilOkullari += "<tr>";
+                                            populerDilOkullari += "<td>" + item.Baslik + "</td>";
+                                            populerDilOkullari += "<td><a href=\"" + item.Link + "\" target=\"_blank\">" + item.Link + "</a></td>";
+                                            populerDilOkullari += "<td><input class=\"TextBox Oncelik\" value=\"" + item.Oncelik + "\" style=\"width: 30px;text-align:right\" data-item=\"" + item.Id + "\" /></td>";
+                                            populerDilOkullari += "<td><img class=\"linkSil\" src=\"" + Url.Content("~/areas/CMS/assets/Images/delete_icon.png") + "\" style=\"width: 16px; height: 16px;cursor:pointer;\" data-item=\"" + item.Id + "\" /></td>";
+                                            populerDilOkullari += "</tr>";
+                                            break;
+                                    }
+                                }
+
+                                Html.Raw(populerUlkeler);
+                            }
+                            else
+                            {
+                                <tr><td colspan="3"><strong>Kayıt bulunamadı...</strong></td></tr>
+                            }
+                            @if (populerUlkeler.Length > 0 || populerSehirler.Length > 0 || populerDilOkullari.Length > 0)
+                            {
+                                @Html.Raw(populerUlkeler.Length > 0 ? "<tr><td colspan=\"3\"><strong>Popüler Ülkeler</strong></td></tr>" + populerUlkeler : "")
+                                @Html.Raw(populerSehirler.Length > 0 ? "<tr><td colspan=\"3\"><strong>Popüler Şehirler</strong></td></tr>" + populerSehirler : "")
+                                @Html.Raw(populerDilOkullari.Length > 0 ? "<tr><td colspan=\"3\"><strong>Popüler Dil Okulları</strong></td></tr>" + populerDilOkullari : "")
+                                @Html.Raw("<tr><td></td><td colspan=\"2\"><input id=\"btnSiralama\" type=\"button\" value=\"Sıralamayı Düzenle\" /></td></tr>");
+                            }
+
+                        </table>
+                        <script type="text/javascript">
+                            $(function () {
+
+                                //Link Silme
+                                $('.linkSil').on('click', function () {
+                                    var cfr = confirm('Silmek istediğinize emin misiniz?');
+                                    if (cfr) {
+                                        var id = $(this).attr('data-item');
+
+                                        Loader();
+                                        //Ajax Start
+                                        $.ajax({
+                                            type: "POST",
+                                            url: "@Url.Action("StatikLinkSil", "Ajax")",
+                                            data: { id: id },
+                                            dataType: "json",
+                                            success: function (data) {
+                                                if (data.status == "ok") {
+                                                    location.reload();
+                                                } else {
+                                                    GeneralObj.DilokuluMessageBox.init({ status: 'error', message: data.mesaj });
+                                                    closeModal();
+                                                }
+                                            }
+                                        });
+                                        //Ajax End
+                                    }
+                                });
+                                //Link Silme Son
+
+                                //Sıralama güncelleme
+                                $('#btnSiralama').on('click', function () {
+                                    var orderList = '';
+                                    $('.Oncelik').each(function (index) {
+                                        orderList += $(this).attr('data-item') + '|' + $(this).val() + ';';
+                                    })
+
+                                    if (orderList.length > 0) {
+                                        orderList = orderList.substring(0, orderList.length - 1);
+                                        Loader();
+                                        //Ajax Start
+                                        $.ajax({
+                                            type: "POST",
+                                            url: "@Url.Action("StatikLinkSirala", "Ajax")",
+                                            data: { orderList: orderList },
+                                            dataType: "json",
+                                            success: function (data) {
+                                                if (data.status == "ok") {
+                                                    location.reload();
+                                                } else {
+                                                    GeneralObj.DilokuluMessageBox.init({ status: 'error', message: data.mesaj });
+                                                    closeModal();
+                                                }
+                                            }
+                                        });
+                                        //Ajax End
+                                    }
+                                });
+                                //Sıralama güncelleme Son
+
+                            })
+                        </script>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>

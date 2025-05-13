@@ -1,0 +1,69 @@
+﻿@model List<WebApp.Models.DilOkulu_Makaleler>
+@{
+    ViewBag.Title = "Öğrenci Yorumları";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section metatags{
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+}
+
+@section PageTitle{
+    <div class="topImg clearfix">
+        <img src="@Url.Content("~/assets/img/headers/header_2.jpg")" alt="About Us">
+        <p><strong>MAKALELER</strong></p>
+    </div>
+}
+
+<div class="course column c-67 clearfix">
+
+    @if (Model != null && Model.Count > 0)
+    {
+
+
+        foreach (var item in Model)
+        {
+            <div class="box">
+                <ul class="courseId">
+                    <li><a href="@Url.Action("detay", "OgrenciYorumlari", new { title = item.Url })" title="@(item.Baslik)">@(item.Baslik)</a></li>
+                    <li></li>
+                </ul>
+                <div class="boxInfo">
+                    <p id="arama_list">
+                        <a href="@Url.Action("detay", "OgrenciYorumlari", new { title = item.Url })" title="@item.Baslik">
+                            @if (!string.IsNullOrEmpty(item.ResimThumbUrl))
+                            {
+                                <img class="fwidth3" src="@Url.Content(item.ResimThumbUrl)" alt="@item.Baslik" />
+                            }
+
+                        </a>
+                        @Html.Raw(item.Ozet)
+                    </p>
+                </div>
+                <div class="courseInfo">
+                    <p class="courseTime">&nbsp;</p>
+                    <ul>
+                        <li>
+                            <a href="@Url.Action("detay", "OgrenciYorumlari", new { title = item.Url })" title="@item.Baslik"><strong>Detaylı Bilgi</strong></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        }
+        @*<ul class="pgNr">
+                <li><a href="#"> 1</a></li>
+                <li><a href="#"> 2</a></li>
+                <li><a href="#"> 3</a></li>
+                <li><a href="#"> 4</a></li>
+                <li><a href="#"> ></a></li>
+            </ul>*@
+
+    }
+    else
+    {
+        <strong>İçerik bulunamadı...</strong>
+    }
+</div>
+
+@Html.Partial("_RightColumn")

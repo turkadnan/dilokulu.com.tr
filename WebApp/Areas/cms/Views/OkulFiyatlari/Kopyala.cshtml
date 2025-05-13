@@ -1,0 +1,84 @@
+﻿@using WebApp.Models
+@{
+    ViewBag.Title = "Kopyala";
+    Layout = "~/Areas/cms/Views/Shared/_CMSLayout.cshtml";
+
+    List<DilOkulu_Merkez> merkezler = null;
+    if (ViewBag.Merkezler != null)
+    {
+        merkezler = (List<DilOkulu_Merkez>)ViewBag.Merkezler;
+    }
+}
+
+@section SectionBeforeWrapper{
+    @Html.Partial("_Modals")
+}
+
+
+@section HeaderWithContentPage{
+<script src="~/Areas/cms/Assets/js/dilokulu.js"></script>
+<script src="@Url.Content("~/Areas/cms/Assets/js/fiyat_girisleri.js")"></script>
+}
+
+@*@Html.Action("_OkulOzetBilgileri")*@
+
+
+<table cellpadding="0" cellspacing="0" class="OrtaMenu">
+    <tbody>
+        <tr>
+            <td class="OrtaMenuRowTitle">
+                Okul Seçin
+            </td>
+        </tr>
+        <tr>
+            <td class="OrtaMenuRow">
+                <table cellpadding="0" cellspacing="0" style="width: 100%;">
+                    <tbody>
+                        <tr>
+                            <td class="OrtaMenuRowC1">
+                                <span class="baslik">Merkez</span>
+                            </td>
+                            <td class="OrtaMenuRowC1">
+                                <span class="baslik">Okul</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="OrtaMenuRowC1" style="border:none;">
+                                <select id="merkez" name="merkez" class="DropDownList" style="width:280px;">
+                                    <option value="0">Seçin...</option>
+                                    @if (merkezler != null && merkezler.Count > 0)
+                                    {
+                                        foreach (var item in merkezler)
+                                        {
+                                            <option value="@item.Id">@item.Baslik</option>
+                                        }
+                                    }
+                                </select>
+                            </td>
+                            <td class="OrtaMenuRowC1" style="border:none;">
+                                <select id="okul" name="okul" class="DropDownList" style="width:280px;">
+                                    <option value="0">Seçin...</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <br />
+                                <input id="btnKopyala" type="button" value="Kaydet" />
+                                <input id="OkulId" name="OkulId" value="@ViewBag.OkulId" type="hidden" />
+                            </td>
+                    </tbody>
+                </table>
+
+
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<script type="text/javascript">
+    $(function () {
+        kurstipiKopyalama.init();
+    })
+
+</script>
